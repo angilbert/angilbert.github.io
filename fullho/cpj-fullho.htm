@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Erich's full-house puzzles</h2><p>
+          These clever puzzles by <a href="https://erich-friedman.github.io">Erich
+            Friedman</a> were first show-cased at <a href="http://www.mathpuzzle.com/">mathpuzzle.com</a>
+            in July 2004, where I fell in love with them immediately. Erich
+            kindly provided me with another fifteen puzzles to feature here
+            at clickmazes in interactive form.
+        </p>
+      </div>
+      <div>
+        <p>
+          For each puzzle first find the correct start square and then draw a path 
+          moving horizontally and vertically that passes through each open square
+          exactly once. At each move the blue runner will always run in a 
+          straight line, as far as possible, stopping only when blocked by 
+          the edge of the grid, a black square, or a square already visited.</p>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p>Sample puzzle<br>
+          Click button to start</p>
+          <p><img src="egfh.gif" width="113"></p>
+          <p>
+            <cheerpj-applet archive="../jars/new-fullho.jar"
+              code="puzzlePresenter/puzzlePresenter.class"
+              width="150" height="30">
+              <param name="class" value="fullho.fullho">
+                <param name="puzzle0" value="55400102342">
+                <param name="title0" value="5x5 No.1">
+                <param name="puzzle1" value="55400214234">
+                <param name="title1" value="5x5 No.2">
+                <param name="puzzle2" value="5550001024344">
+                <param name="title2" value="5x5 No.3">
+                <param name="puzzle3" value="66400213305">
+                <param name="title3" value="6x6 No.1">
+                <param name="puzzle4" value="6650012524405">
+                <param name="title4" value="6x6 No.2">
+                <param name="puzzle5" value="666112142432555">
+                <param name="title5" value="6x6 No.3">
+                <param name="puzzle6" value="7755122322445">
+                <param name="title6" value="7x7 No.1">
+                <param name="puzzle7" value="7750001133325">
+                <param name="title7" value="7x7 No.2">
+                <param name="puzzle8" value="7753144544566">
+                <param name="title8" value="7x7 No.3">
+                <param name="puzzle9" value="8853152532607">
+                <param name="title9" value="8x8 No.1">
+                <param name="puzzle10" value="8850021451637">
+                <param name="title10" value="8x8 No.2">
+                <param name="puzzle11" value="8853040025214">
+                <param name="title11" value="8x8 No.3">
+                <param name="puzzle12" value="9955071132566">
+                <param name="title12" value="9x9 No.1">
+                <param name="puzzle13" value="996414262437486">
+                <param name="title13" value="9x9 No.2">
+                <param name="puzzle14" value="996111262447475">
+                <param name="title14" value="9x9 No.3">
+          </cheerpj-applet>
+        </p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Aim</h4><p>
+            Fill the grid using a single continuous path.</p>
+          <h4>Controls</h4><p>
+            Use the <b>puzzle</b> drop-list to select a puzzle.<br>
+            Use <b>restart </b>(action) or the <b>space</b> key to reset.<br>
+            </p>
+          <h4>Movement</h4><p>
+            Click on the grid to mark your start position.<br>
+            Click on the grid to move (or use the cursor keys).<br>
+            Click on the start-mark to reset current puzzle.<br>
+            Click on any path corner to unwind to that point.
+          </p>
+        </div>
+      </div>  
+      <div class="page-note">
+        <h4>Links & related pages</h4><p>
+          Erich's <a href="https://erich-friedman.github.io/puzzle/full/">
+            Full-House</a> puzzle collection<br>
+          Erich's <a href="https://erich-friedman.github.io/puzzle/full/">
+            Full-Hex</a> puzzle collection<br>
+        </p>
+      </div>
+      <hr>
+      <div class="page-credits"><p>
+        <b>applet</b> - &COPY; Andrea Gilbert 2004<br>
+        <b>concept & puzzle-set</b> - &COPY; Erich Friedman 2004<br>
+        <b>hosted with permission from Erich Friedman</b><br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

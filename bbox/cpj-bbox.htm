@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <HEAD>
+    <TITLE>Clickmazes applet collection - 2020</TITLE>
+    <LINK REL="stylesheet" HREF="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </HEAD>
+  <BODY>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+    
+    <div class="mainbody">
+      <div class="page-intro">
+        <H2>BlackBox</H2><p>
+        Blackbox is a two-player deductive game invented
+        by <A HREF="http://www.ericsolomon.co.uk/">Eric Solomon</A> in the 1970s. 
+        Your goal is to discover the whereabouts of five atoms in a black box by sending 
+        rays of light into the box and observing if and where the rays emerge. An atom 
+        will either absorb a ray if the ray hits it head on, or deflect a ray through 90&deg;
+        if it comes close (passes through an adjacent row or column). Two deflections can 
+        occur at the same time forcing a ray to return and emerge at its entry point, this 
+        is referred to as reflection.</p>
+      </div>
+      <div><p>
+        The challenge is to pin point the location of all atoms using the least number of rays. 
+        If you wish to commit your solution and to discover your score you must have 
+        <B>exactly</B> five guesses marked, then click on <B>Reveal</B>. The five hidden
+        atoms will appear marked as <B>@</B></p>
+      </div>
+      <div class="std-flex-block">        
+        <div class="puzzle-area">
+          <cheerpj-applet archive="new-bbox.jar" code="blackbox.class" 
+              width="230" height="270" align="left"></cheerpj-applet>
+        </div>
+        <div class="puzzle-info">
+          <H4>Controls</H4><p>
+            Click <B>New Game</B> to generate another arrangement of hidden atoms.<BR>
+            Click <B>Reveal</B> to check your guesses and display the position of the atoms.</p>
+          <H4>Play</H4><p>
+            To <B>activate</B> a ray click on one of the edge buttons marked with a <B>#</B>.<BR>
+            To <B>mark</B> your guesses with a <B>?</B> click on the unmarked central buttons.<BR>
+            To <B>undo</B> a guess just click on it again.
+          </p>
+          <H4>Scoring</H4><p>
+            Your score will be 36 (the total number of ray buttons) minus the number of ray buttons 
+            used, minus 5 for each incorrect guess. Any score in <B>double figures</B> is good!
+          </p>
+        </div>
+      </div> 
+      <div><p>
+          The diagram below illustrates how rays sent into the box interact with the atoms. 
+          Absorbed rays are labelled <B>A</B>. Reflected rays are labelled <B>R</B> 
+          (note that the two types of reflection, brown and green, are indistinguishable). 
+          Rays which propagate through the box from one point to another, as with the red ray,
+          have their entry and exit points marked with a unique number.
+          Note that rays may be deflected several times before emerging from the box, or 
+          before being absorbed or reflected.</p> 
+      </div>
+      <div class="std-flex-block">
+        <div class="photo-area">
+          <IMG SRC="bbox.gif" WIDTH="193">
+        </div>
+        <div class="photo-info">
+          <ul>
+            <li><b>Red</b>: Deflected by atom <B>a</B>.</li>
+            <li><b>Purple</b>: Absorbed by atom <B>a</B> (direct hit).</li>
+            <li><b>Blue</b>: Absorbed by atom <B>d</B> rather than deflected by <B>b</B> (absorption
+              overrides deflection when two atoms sit side by side).</li>
+            <li><b>Brown</b>: Reflected by atoms <B>a</B> and <B>b</B> (the ray is deflected
+              by both atoms in turn so that its path turns back on itself and emerges where it went in).</li>
+            <li><b>Green</b>: Reflected before entry by atom <B>c</B> (this is a special case
+              of reflection).</li>
+          </ul>
+        </div>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>game design</b> -  Eric Solomon (marketed by Waddingtons Games - 1976)<br>
+        <b>applet</b> - &COPY; Andrea Gilbert 1997<br>
+        <!-- LT -->
+        </p>
+      </div>
+    </div>  <!-- mainbody -->
+  </BODY>
+</HTML>
