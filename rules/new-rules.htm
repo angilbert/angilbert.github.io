@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+
+      <div class="page-intro">
+        <h2>NEWS and RULES</h2><p>
+          This page introduces a range of related puzzles based
+          on arrays of <i>operators</i>. Each operator enforces a simple,
+          logical motion through an array cell, and onward into an adjacent
+          cell. Each cell contains a maximum of one operator selected from
+          a small, pre-defined set. The combined effect across the breadth
+          of the array is often a complex interwoven network of pathways,
+          ordered in one sense yet chaotic in another. Just the sort of
+          behaviour that lends itself to some interesting puzzles and mazes.
+        </p>
+      </div>
+      <div><p>
+        Each sub-section below explores a different operator set and
+        presents a range of puzzle variations:</p>
+        <p><ul>
+          <li><a href="#news">NEWS mazes</a></li>
+          <li><a href="#rules">RULES mazes</a></li>
+          <li><a href="#mrules">Multi-RULES mazes</a></li>
+          <li><a href="#colour">Colour-box puzzles</a></li>
+          <li><a href="#lattice">Lattice puzzles</a></li>
+        </ul></p>
+      </div>
+      <hr>   
+      <div>
+        <a name="news"></a>
+        <h2>NEWS maze</h2>
+        <p>The NEWS maze is based on a grid of <b>absolute</b> directional
+        operators (<b>N</b>/<b>E</b>/<b>W</b>/<b>S</b>), along with <b>+</b>
+        that indicates a junction point, and <b><i>blank</i></b> that
+        acts as a bridge. This combination of operators allows for some
+        note-worthy mazes, here follows an example. Try far left to far
+        right to begin with, and then try the reverse.</p>
+
+        <div class="table-block">
+          <p><img src="grid1.gif" width="484"></p>
+          <table class="rules-table">
+              <tr><th colspan="2">Operators</th></tr>
+              <tr><td>N</td><td>North only</td></tr>
+              <tr><td>E</td><td>East only</td></tr>
+              <tr><td>W</td><td>West only</td></tr>
+              <tr><td>S</td><td>South only</td></tr>
+              <tr><td>+</td><td>Everyway (NEWS)</td></tr>
+              <tr><td>blank</td><td>Straight only</td></tr>
+            </table>
+        </div>
+        <p>This maze has been carefully designed to offer two distinct
+        yet equally difficult challenges, one in each direction. More
+        often than not the reverse route will be either trivial or impossible,
+        but this <b>non-reversability</b> (or <b>implicit arrow</b>)
+        is a common feature of many puzzle-mazes, and certainly all puzzles
+        on this page. Note that due to the absolute nature of the NEWS
+        operators it would be quite possible to present NEWS using arrows
+        instead of letters.</p>
+        <p>It is also worth noting that, without <b><i>blank</i></b>,
+        NEWS would be significantly less complex since it would not be
+        possible for paths to cross under and over each other. NEWS is
+        the only operator set that relies entirely on <b><i>blank</i></b>
+        for bridging but, that said, <b><i>blank</i></b> (or equivalent)
+        will often still be present. A simple bridge is one of those
+        fundamental maze building blocks that it is difficult to live
+        without.</p>
+      </div> <!-- news -->
+      <hr>   
+      <div>
+        <a name="rules"></a>
+        <h2>RULES maze</h2>
+        <p>RULES is much like NEWS, but based on the set of <b>relative</b>
+          rather than absolute operators. If you think about it <b>R</b>,
+          <b>U</b>, <b>L</b> and <b>S</b> (relative) are the natural equivalents
+          of <b>N</b>, <b>E</b>, <b>W</b> and <b>S</b> (absolute). The
+          <b>S</b> (in RULES) however is also equivalent to <b><i>blank</i></b>
+          (in NEWS) so we automatically drop the need for one operator.
+          <b>+</b> is retained as a four-way junction point. 
+          Here is a small example:</p> 
+          <div class="table-block">
+              <p><img src="grid2.gif" width="172"></p>
+              <table class="rules-table">
+                <tr><th colspan="2">Operators</th></tr>
+                <tr><td>R</td><td>Right only</td></tr>
+                <tr><td>U</td><td>U-turn only</td></tr>
+                <tr><td>L</td><td>Left only</td></tr>
+                <tr><td>+</td><td>Everyway (RULS)</td></tr>
+                <tr><td>S</td><td>Straight only</td></tr>
+              </table>
+          </div>  
+        <p>Note that in these mazes I make no attempt to eliminate the
+          false exits around the perimeter of the grid, so it is quite
+          possible to drop out of the maze at the wrong place. A dead-end
+          of this sort is often called a <b>black hole</b> since the implicit
+          arrow prevents you simply turning around and retracing your steps.
+          With RULES, unlike NEWS, it seems a tad difficult to construct
+          a maze with no false exits. A complete outer ring of <b>L</b>,
+          <b>R</b> or <b>U</b> operators (with one <b>S</b> to allow entry/exit)
+          would suffice, but is not particularly pleasing. I leave it as
+          a challenge for the reader to construct a RULES maze (or simple
+          RULS grid) with only one perimeter entry/exit point. Note that
+          it is also possible to construct mazes with internal black holes
+          (typically a loop with one or more entrance points, but no exit).
+          The RULES mazes here have no internal black holes but the earlier
+          NEWS maze did contain a small internal black hole, did you spot
+          it?</p>
+        <p>Here is a slightly larger maze that illustrates RULES in full
+          glory. In this maze you will have to visit some cells up to three
+          times. The <b>U</b> operator is also used here, which is missing
+          from the smaller example above.</p>
+          <div class="table-block">
+              <p><img src="grid3.gif" width="220"></p>
+              <table class="rules-table">
+                <tr><th colspan="2">Operators</th></tr>
+                <tr><td>R</td><td>Right only</td></tr>
+                <tr><td>U</td><td>U-turn only</td></tr>
+                <tr><td>L</td><td>Left only</td></tr>
+                <tr><td>+</td><td>Everyway (RULS)</td></tr>
+                <tr><td>S</td><td>Straight only</td></tr>
+              </table>
+          </div>
+      </div> <!-- rules -->
+      <hr>   
+      <div>
+        <a name="mrules"></a>
+        <h2>Multi-RULES maze</h2>
+        <p>Multi-RULES is an extension of RULES that doubles up the meaning
+          of each operator, turning each cell into a potential junction
+          point (and dropping the need for <b>+</b>). The connectivity
+          between cells gets a little unmanageable at this stage so <b>U</b>
+          has been dropped completely (U-turns are never permitted) and
+          <i>blank</i> (straight only) has been reinstated.</p>
+          <p>One of the aims of multi-RULES was to find an operator set
+          that was 100% multi-state. NEWS is approx 20% multi-state and
+          RULES 80% (by cell count) but significantly the decision points
+          in both NEWS and RULES are always single-state. Multi-RULES,
+          in contrast, is fully multi-state. This multi-RULES operator
+          set is the smallest yet, but is also the most powerful. It turns
+          out there is little need to use all the operators, all at the
+          same time. Here is a maze based on just <b>T</b> and <b><i>blank</i></b>.
+          It is a smaller example of my <b>Left and right only</b> maze
+          (found in the gallery).</p>
+          <div class="table-block">
+              <p><img src="grid4.gif" width="191"></p>
+              <table class="rules-table">
+                <tr><th colspan="2">Operators</th></tr>
+                <tr><td>R</td><td>Right or straight</td></tr>
+                <tr><td>L</td><td>Left or straight</td></tr>
+                <tr><td>T</td><td>T-junction (left or right)</td></tr>
+                <tr><td>blank</td><td>Straight only</td></tr>
+              </table>
+          </div>  
+          <p>
+            And just to prove it is possible, here is a maze created entirely
+            of <b>R</b>, <b>L</b> and <b>T</b> operators. If helpful, think
+            of <b>R</b> as <i>may go right</i> and <b>L</b> as <i>may go left</i>.
+            In this maze you always have two choices, so being forced out
+            of the maze by accident is relatively easy to avoid, but beware,
+            it can still happen. Oh, and beware of the central black hole.
+          </p>
+          <div class="table-block">
+            <p><img src="grid5.gif" width="172"></p>
+            <table class="rules-table">
+              <tr><th colspan="2">Operators</th></tr>
+              <tr><td>R</td><td>Right or straight</td></tr>
+              <tr><td>L</td><td>Left or straight</td></tr>
+              <tr><td>T</td><td>T-junction (left or right)</td></tr>
+              <tr><td>blank</td><td>Straight only</td></tr>
+            </table>
+          </div>
+        </div> <!-- multi-RULES -->
+        <hr>   
+        <div>
+          <a name="colour"></a>
+          <h2>Colour-box puzzles</h2>
+          <p>This puzzle returns to the traditional set of RULES operators
+            but drops the <b>+</b> (junction) operator and thus moves away
+            from the concept of a pure maze.</p>
+            <p>The best introduction to the colour-box puzzles is to try
+            constructing your own. Take a 4 &times; 4 grid and fill it randomly
+            with <b>RULS</b> operators, then trace through every possible
+            pathway (sixteen in total). You will find that none of the paths
+            converge, each exit point is used just once, and every cell is
+            used exactly four times (unless you happen to have some internal
+            black-holes). Most of the paths will be short but one or two
+            will probably turn out extra long and twisty. Now, to create
+            the puzzle simply take your <b>RULS</b> grid and redraw it using
+            colours instead of letters. Finally mark in one or two entry/exit
+            points, from your original sketch, and challenge someone to work
+            out which colour maps to which operator.</p>
+          <p>Here is an example colour-box puzzle with a single, unique
+            solution. This is the hardest of four puzzles that appeared on
+            my <b>Gathering For Gardner IV</b> exchange handout. 
+            <!--If this example proves rather tricky for starters,
+            see my <a href="new-g4g4.htm">full handout</a>.-->
+          </p>
+          <div class="table-block">
+              <p><img src="colour1.gif" width="148"></p>
+          </div>  
+          <p>These puzzles are limited by the fact there are basically
+            only 24 operator/key permutations to think about and process
+            of elimination exhausts the options quite quickly. To increase
+            the number of permutations (from 24 to 256) it was suggested
+            I could simply drop the one-to-one relationship between operator
+            and key. Some operators may be used more than once, some not
+            at all. Here is one example of a 256-permutation colour-box puzzle.
+            One trivial solution to this puzzle is <b>red = yellow = blue
+            = green = S</b>, but can you find the 
+            <b>one and only</b> alternative solution?</p>
+          <div class="table-block">
+            <p><img src="colour2.gif" width="148"></p>
+          </div>  
+        </div> <!-- colour box -->
+        <hr>   
+        <div>
+          <a name="lattice"></a>
+          <h2>Lattice puzzles</h2>
+          <p>The <a href="http://www.henleymob.co.uk/Lattice/Lattice.html">lattice
+            puzzles</a> are a mind-boggling extension of the colour-box
+            puzzles. Devised, developed and presented in native applet form 
+            by <a href="http://www.henleymob.co.uk/">Graham</a>.
+            These puzzles will test your spatial awareness,
+            as well as your powers of logical deduction. Graham replaced
+            my 2D (4x4) <b>grid</b> with a 3D (3x3x3) <b>lattice</b> and
+            selected seven of the available operators. Note that using three
+            dimensions allows for a much broader range of operators; this
+            increases the number of key/operator permutations and allows
+            the one-to-one relationship to be retained.</p>
+            <div class="table-block">
+              <div class="photo-area">
+                <img src="lattice-puzz.png" width="553">
+                <p>screen-shot of a 3x3x3 lattice-puzzle</p>
+              </div>
+              <div class="table-block">
+                <table class="rules-table">
+                  <tr><th colspan="2">Operators</th></tr>
+                  <tr><td>Left</td><td>Left turn</td></tr>
+                  <tr><td>Right</td><td>Right turn</td></tr>
+                  <tr><td>Up</td><td>Nose up</td></tr>
+                  <tr><td>Down</td><td>Nose down</td></tr>
+                  <tr><td>Clock</td><td>Clockwise roll</td></tr>
+                  <tr><td>Anti</td><td>Anticlockwise roll</td></tr>
+                  <tr><td>Null</td><td>No turn or roll</td></tr>
+                </table>
+              </div>
+            </div>
+
+            <p>Note that <b>Anti</b> and <b>Clock</b> are <i>roll</i> operations 
+            that rotate you ninety degrees. They do not affect your direction
+            only your orientation (<b>Null</b> affects neither direction
+            nor orientation). I find it helpful to imagine myself in a fighter
+            plane, or spaceship, flying through a network of tunnels. Click
+            <a href="http://www.henleymob.co.uk/Lattice/Lattice.html">here</a>
+            to try the lattice puzzles (native java applet support required)
+          </p>
+        </div> <!-- lattice -->
+      <hr>   
+      <div class="page-credits"><p>
+        <b>maze designs</b> - &COPY; Andrea Gilbert 2000<br>
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>
