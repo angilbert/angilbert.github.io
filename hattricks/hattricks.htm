@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../index-ps.htm">ps</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Hat-tricks</h2><p>
+          Think wand-like and try to escape a box of magical hats, but where exactly is the escape hat(ch)? 
+        </p>
+      </div>
+      <div><p>
+          If you are unfamiliar with puzzlescript games then be prepared for a lack of instruction. The goal 
+          and underlying mechanic are not always stated, they need to be discovered. In this instance however the 
+          unknowns should reveal themselves pretty quickly. Just go explore...
+        </p>
+    </div>
+      <div>
+        <p><iframe frameborder="0" src="https://itch.io/embed/1701940?linkback=true" width="552" height="167">
+          <a href="https://clickmazes.itch.io/hat-tricks">Hat-tricks by clickmazes</a></iframe></p>
+      </div>  
+
+      <div class="page-note">
+        <h4>Development notes</h4>
+        <div>
+          <img src="./sprite_defn.png" width="180" style="float:right; padding:5px" >
+
+          <p>
+            This puzzle concept was conceived in July 2022 after discovering the theme of 
+            <a href="https://itch.io/jam/thinky-puzzle-game-jam-2">Thinky Puzzle Game Jam No.2</a>. 
+            It became very clear, very quickly, that I was never going to hit the submission 
+            dead-line but I liked the idea too much to abandon it. In the end it turned 
+            into an all-consuming project, thanks to a decision to implement 
+            it in an unfamiliar fork of puzzlescript called 
+            <a href="https://github.com/ClementSparrow/Pattern-Script/wiki">Pattern:Script</a> (P:S)
+            maintained by <a href="https://clement-sparrow.itch.io">Clement Sparrow</a>.
+          </p>
+          <p>
+            P:S was chosen in this instance because I realised it would vastly 
+            reduce the overall code size. To illustrate just one aspect of the
+            reduction, the 30 lines of code on the right suffices for defining 16 different 
+            9x9 graphical sprites (one for each of the four decorated hats in each of its 
+            four possible orientations). And thus 300+ lines of sprite definitions collapsed 
+            down to 30 lines. To explore the full source
+            <a href="https://clementsparrow.github.io/Pattern-Script/src/editor.html?hack=b81a790a66fda61d8192888ca2da072d">
+            click here</a>.
+          </p>  
+          <p>
+            So yes, this is sokoban... of sorts. Each pushable object (hat) has one open side that acts 
+            as a portal linked to another hat. 
+            The pusher is now a two-unit object which has two distinct states, horizontal and vertical. 
+            Passing through the portal (pointy end first) is referred to as a hat-trick and
+            hat-tricks are the only way to facilitate a change of orientation. 
+            Thus, the state-space you can reach at any point in time depends on your current orientation, 
+            the pushable objects around you and the accessible open hats. Several interesting 
+            interactions can occur if you enter a hat where the exit path is partially blocked.
+          </p>
+        </div> 
+      </div>
+
+      <div class="page-note">
+        <h4>Links &amp; related pages</h4>
+        <ul>
+          <!--<li><a href="https://clementsparrow.github.io/Pattern-Script/src/play.html?p=de91e8874be05124b00e75aa2399ce4a">
+            Hat-tricks Final level (No.16)</a></li>-->
+          <li><a href="https://itch.io/jam/thinky-puzzle-game-jam-2">
+            TPG Jam No.2</a> (July 2022)</li>
+          <li><a href="https://itch.io/jam/thinky-puzzle-game-jam">
+            TPG Jam No.1</a> (June/July 2021)</li>
+          <li><a href="https://itch.io/c/2090437/games-made-with-patternscript">
+            ClementSparrow's collection of Pattern:Script games</a></li>
+          </ul>
+      </div>
+
+      <hr>   
+      <div class="page-credits"><p>
+        <b>concept &amp; puzzle set</b> - &COPY; Andrea Gilbert 2022<br>
+        <b>pattern:script implementation</b> - &COPY; Andrea Gilbert - 2022<br>
+        <b>pattern:script fork</b> - maintained by Clement Sparrow<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>
