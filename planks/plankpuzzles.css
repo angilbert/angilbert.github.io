@@ -1,0 +1,113 @@
+x-plank-puzzle-window
+{
+	position: relative;
+	display: block;
+	/*background-color: #00a3cc;*/
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+
+	color: black;
+	font-size: 12pt;
+}
+x-plank-puzzle-window.small_txt{font-size: .75em;}
+x-plank-puzzle-window.small_txt button{font-size: .75em;}
+x-plank-puzzle-window.small_txt .copybox button{font-size: .75em;}
+x-plank-puzzle-window div.top
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	display: block;
+	text-align: center;
+	z-index: 5;
+
+	background-color: #aaaaaa;
+}
+button{background-color: #aaaaaa}
+x-plank-puzzle-window div.top *
+{
+	width: 33.33%;
+	margin: none;
+	display: inline-block;
+}
+
+/*Light: #66e0ff Dark: #00a3cc*/
+x-plank-puzzle-window div.bottom
+{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 5;
+}
+x-plank-puzzle-window div.bottom *
+{
+	width: 16.66%;
+	display: inline-block;
+}
+x-plank-puzzle-window canvas
+{
+	position: absolute;
+	top:0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+x-plank-puzzle-window .backCanvas{z-index: 0;}
+x-plank-puzzle-window .frontCanvas{z-index: 1;}
+
+x-plank-puzzle-window .copybox
+{
+	position: absolute;
+	top:0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+
+	background-color: rgba(200,200,200,.8);
+	z-index: 6;
+}
+
+x-plank-puzzle-window .copybox .body
+{
+	text-align: center;
+	/*overflow-y: scroll;*/
+	position: absolute;
+	top: 15%;
+	bottom: 15%;
+	left: 10%;
+	right: 10%;
+}
+x-plank-puzzle-window .copybox textarea
+{
+	height: 65%;
+	width: 100%;		
+}
+
+x-plank-puzzle-window .copybox button
+{
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: inherit;
+}
+
+x-plank-puzzle-window .title
+{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	vertical-align: top;
+}
+x-plank-puzzle-window .title:hover
+{
+	white-space: normal;
+}
+
+x-plank-puzzle-window h2
+{
+	color: black;
+	text-align: center;
+}

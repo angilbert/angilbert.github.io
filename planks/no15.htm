@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+  <TITLE>clickmazes</TITLE>
+  <LINK REL="stylesheet" HREF="../style.css" TYPE="text/css">
+</HEAD>
+<BODY MARGINWIDTH="0" MARGINHEIGHT="0" STYLE="margin: 0" BACKGROUND="../_site/site_tilethin.gif">
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+  <TR>
+    <TD VALIGN="TOP" WIDTH="90">
+    <P><IMG SRC="../_site/site_cornersmall.gif" WIDTH="90" HEIGHT="75"
+    ALIGN="BOTTOM" BORDER="0" > <IMG SRC="../_site/logo_side.gif"
+    WIDTH="57" HEIGHT="218" ALIGN="BOTTOM" BORDER="0" ></P>
+
+    <P CLASS="links"><A HREF="../index.htm" CLASS="s">home</A><BR>
+    <A HREF="../_applets.htm" CLASS="s">applets</A><BR>
+    <A HREF="../_history.htm" CLASS="s">history</A><BR>
+    <A HREF="../_links.htm" CLASS="s">links</A><BR>
+    <A HREF="ixplanks.htm" CLASS="s">planks</A><BR>
+    &nbsp;</TD> 
+    <TD VALIGN="TOP">
+    <H2><BR>
+    Plank Puzzle No.15 - Fiendish</H2>
+
+    <P><B>Cross the swamp from left to right using the available
+    tree-stumps (fixed) and planks (moveable). Full rules can be
+    found <A HREF="ixplanks.htm">here</A>. The complete set of all
+    15 puzzles can be found <A HREF="http://www.henleymob.co.uk/Planks/planks.html">here</A>,
+    which may work better for some browsers.</B></P>
+
+    <P><TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+      <TR>
+        <TD VALIGN="TOP">
+        <P><CENTER><!--NOEDIT-->
+            <applet archive=planks.jar
+           codebase=http://www.henleymob.co.uk/Planks
+           code=planks.class
+           name="planks" width="340" height="370" align="center">
+          <param name=titles value="Fiendish">
+          <param name="positions" value="A801960121132336765787">
+          <param name="nodes" value="6124578302551346841267153248423793158">
+          Sorry, this is a Java applet.
+        </applet>
+        <!--/NOEDIT--></CENTER></TD>
+        <TD WIDTH="5%">
+        &nbsp;</TD> 
+        <TD VALIGN="TOP">
+        <P>&nbsp;</P>
+
+        <P><FONT CLASS="title">Controls</FONT><BR>
+        Click on <B>Restart</B> to restart.<BR>
+        Click on <B>Undo </B>&amp; <B>Redo</B> to step through previous
+        moves.<BR>
+        Click on <B>Replay</B> to restart with redo active.<BR>
+        Click on <B>Load/Save</B> to restore/capture a move sequence.<BR>
+<BR>
+        <FONT CLASS="title">Movement</FONT><BR>
+        Click on the play area to pick up or put down a plank. Accessible
+        stumps will be automatically highlighted for you.</TD> 
+      </TR>
+    </TABLE></P>
+
+    <P><HR ALIGN=LEFT><FONT CLASS="title">Notes</FONT></P>
+
+    <P>The optimum solution to Fiendish can be found <B><A HREF="soln15.txt">here</A></B>.<I></I></P>
+
+    <P><I>Fiendish</I> was devised by hand, over a period of several
+    days. My sole aim was to improve on my previous best (<I>Route-66</I>)
+    which I had stumbled on more by luck than judgement, and was
+    a huge leap forward in its time. A nifty windows-based (C++)
+    plank-puzzle editor/solver (by applet author - Graham Rogers)
+    was used to verify the solution. <I>Fiendish</I> is actually
+    shorter than <I>Route-66</I>, but more complex and compact, as
+    (hopefully) illustrated in the following table. Note I (used
+    to*) measure plank puzzle complexity by <I>move-over-span ratio
+    </I>which is why I rank <I>Fiendish </I>above <I>Route-66</I>.
+    <I>Fiendish</I> and <I>Route-66</I> are the only puzzles to date
+    (03/03/01*) with a <B>move-over-span ratio greater than 1</B>
+    (meaning the number of moves actually exceeds the number of possible
+    plank positions).</P>
+
+    <P><CENTER><TABLE WIDTH="400" BORDER="1" CELLSPACING="0" CELLPADDING="2">
+      <TR>
+        <TD WIDTH="40%">
+        &nbsp;</TD> 
+        <TD WIDTH="30%">
+        &nbsp;<B>Route-66</B></TD> 
+        <TD WIDTH="30%">
+        &nbsp;<B>Fiendish</B></TD> 
+      </TR>
+      <TR>
+        <TD>
+        <B>Grid</B></TD> 
+        <TD>
+        &nbsp;9x9 (square)</TD> 
+        <TD>
+        &nbsp;8x8 (square)</TD> 
+      </TR>
+      <TR>
+        <TD>
+        <B>Planks</B></TD> 
+        <TD>
+        &nbsp;3 (1+2+3)</TD> 
+        <TD>
+        &nbsp;4 (1+2+3+4)</TD> 
+      </TR>
+      <TR>
+        <TD>
+        <B>Shortest solution</B></TD> 
+        <TD>
+        &nbsp;66 moves</TD> 
+        <TD>
+        &nbsp;57 moves</TD> 
+      </TR>
+      <TR>
+        <TD>
+        <B>Span count</B></TD> 
+        <TD>
+        &nbsp;54</TD> 
+        <TD>
+        &nbsp;40</TD> 
+      </TR>
+      <TR>
+        <TD>
+        <B>Move/span ratio</B></TD> 
+        <TD>
+        &nbsp;1.22</TD> 
+        <TD>
+        &nbsp;1.42</TD> 
+      </TR>
+    </TABLE></CENTER></P>
+
+    <P>(*) In late March 2001 Pascal Wassong well and truely smashed
+    my <I>move-over-span ratio </I>record with a plank-puzzle of
+    his own invention entitled <I>The Centrifugal Force</I>. This
+    puzzle requires an incredible <B>342</B> moves and has a move-over-span
+    ratio of <B>4.62</B>. <B><A HREF="tcf.htm">Try it here</A></B>.</P>
+
+    <P><HR ALIGN=LEFT><FONT CLASS="note"><B>concept &amp; puzzle
+    design</B> &#150; &COPY; Andrea Gilbert 2000-01<BR>
+    <B>applet</B> &#150; &COPY; Graham Rogers 2000-01</FONT><BR>
+    &nbsp;</TD> 
+    <TD>
+    <IMG SRC="../_site/site_spacer.gif" WIDTH="15" HEIGHT="1" ALIGN="BOTTOM"
+    BORDER="0" >
+</TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

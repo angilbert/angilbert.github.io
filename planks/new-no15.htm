@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - planks</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <link rel="stylesheet" type="text/css" href="plankpuzzles.css">
+    <script src="plankpuzzles.js"></script>
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-indexp.htm">planks</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      
+      <h2>Plank Puzzle No.15 - Fiendish</h2>
+
+      <div class="std-flex-block single-item">
+        <div class="puzzle-area">
+          <x-plank-puzzle-window width="520" height="470">
+            <x-plank-puzzle 
+                    name="Fiendish" fmt="1" 
+                    positions = "A801960121132336765787" 
+                    nodes = "6124578302551346841267153248423793158"></x-plank-puzzle>
+            </x-plank-puzzle-window>
+          <script>PlankPuzzles.appInitialize()</script>
+        </div>  
+      </div>
+
+      <div class="page-note">
+        <h4>History (2000/2001)</h4>
+        <p><i>Fiendish</i> was devised by hand over a period of several
+        days. My sole aim was to improve on my previous best (<i>Route-66</i>)
+        which I had stumbled on more by luck than judgement and was
+        a big leap forward in its time. A nifty windows-based (C++)
+        plank-puzzle editor/solver (by applet author, Graham) was used to 
+        verify the solution. <i>Fiendish</i> is actually shorter than 
+        <i>Route-66</i>, but more complex and compact, as (hopefully) 
+        illustrated in the following table. </p>
+
+        <p>During the first few heady months of plank puzzle exploration I 
+        fixed on the notion that the best way to measure plank puzzle complexity 
+        was by <i>move-over-span ratio</i> which is why I initially ranked 
+        <i>Fiendish</i> above <i>Route-66</i>. Until March 2001 <i>Fiendish</i> 
+        and <i>Route-66</i> were the only two puzzles with a <b>move-over-span 
+        ratio greater than 1</b> (meaning the number of moves actually exceeds 
+        the number of possible plank positions).</p>
+
+        <div class="table-block">
+          <table class="std-table">
+          <tr> 
+            <th width="150px">&nbsp;</th> 
+            <th width="120px">Route-66</th> 
+            <th width="120px">Fiendish</th> 
+          </tr>
+          <tr><td><b>Grid</b></td> <td>9x9 (square)</td> <td>8x8 (square)</td> </tr>
+          <tr><td><b>Planks</b></td> <td>3 (1+2+3)</td> <td>4 (1+2+3+4)</td> </tr>
+          <tr><td><b>Shortest solution</b></td> <td>66 moves</td> <td>57 moves</td> </tr> 
+          <tr><td><b>Span count</b></td> <td>54</td> <td>40</td> </tr>
+          <tr><td><b>Move/span ratio</b></td> <td>1.22</td> <td>1.42</td> </tr>
+        </table>
+        </div>
+        <p>However... In March 2001 Pascal Wassong well and truly smashed my 
+        <i>move-over-span ratio</i> record with a plank-puzzle of his own 
+        design entitled <a href="new-tcf.htm">The Centrifugal Force</a> 
+        (TCF for short). TCF requires an incredible <b>342</b> moves and has a 
+        move-over-span ratio of <b>4.62</b>.</p>
+      </div>
+
+      <hr>   
+      <div class="page-credits"><p>
+        <b>concept &amp; maze design</b> - &COPY; Andrea Gilbert 2000-2001<br>
+        <b>HTML5 implementation</b> - &COPY; Jeremy D. Miller - 2017<br>
+        <b>hosted with permission from Jeremy D. Miller</b>
+      </div>  
+    </div>
+  </body>
+</html>
