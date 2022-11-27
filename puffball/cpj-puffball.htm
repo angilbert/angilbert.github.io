@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>The puff-ball puzzles</h2><p>
+        Welcome to the puff-ball puzzles. Lots of hot-air on offer here ... but 
+        use it wisely. You can only move a puff-ball indirectly, by targeting it 
+        with jets-of-air from another puff-ball. So it will take cunning and forward-planning 
+        to achieve the goal.</p>
+      </div>
+      <div>
+        <p>The goal is to find the correct sequence of <i>puffs</i> to push all 
+        the puff-balls onto the pale-pink target squares. Click on any red puff-ball 
+        to trigger a single puff. All other puff-balls directly in line, horizontally 
+        or vertically, with the active puff-ball will get pushed away by one square 
+        (unless otherwise blocked). Note, you can't push a puff-ball off the grid, 
+        so once it reaches an edge it is stuck there, you might be able to push 
+        it along the edge, but never pull it back from the edge. So if you end 
+        up with more puff-balls than target-squares on any one edge, well ... 
+        you might want to start again.
+        </p>
+      </div>
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p>Sample puzzle<br>
+          Click below to play</p>
+          <p><img src="puffball_ex.PNG" width="141"></p>
+          <p><cheerpj-applet archive="../jars/new-puffa.jar" 
+              code="puzzlePresenter/puzzlePresenter.class" 
+              width="180" height="30" >
+          <param name="class" value="puffa.puffa2">
+          <param name="solve"  value="disable">
+          <param name="puzzle0" value="44,,TP,;TP,P,P,;,T,,TP;,T,,;">
+          <param name="title0" value="Trainee #1">
+          <param name="soln0" value="153215">
+          <param name="puzzle1" value="44T,P,T,T;P,P,P,T;T,P,P,P;T,T,P,T">
+          <param name="title1" value="Trainee #2">
+          <param name="soln1" value="611832118">
+          <param name="puzzle2" value="44,,,;T,,P,T;,P,P,;T,P,,T">
+          <param name="title2" value="Trainee #3">
+          <param name="soln2" value="14132">
+          <param name="puzzle3" value="44,T,,T;,P,P,;,P,P,;TP,,T,T">
+          <param name="title3" value="Tricky #1">
+          <param name="soln3" value="1533532445">
+          <param name="puzzle4" value="44T,,,;,P,P,T;TP,P,P,T;T,,,">
+          <param name="title4" value="Tricky #2">
+          <param name="soln4" value="3523155341">
+          <param name="puzzle5" value="44T,P,,T;P,T,P,;,P,,TP;T,,P,T">
+          <param name="title5" value="Tricky #3">
+          <param name="soln5" value="14654221">
+          <param name="puzzle6" value="44T,,TP,;,P,P,;P,P,P,;T,T,T,T">
+          <param name="title6" value="Troublesome #1">
+          <param name="soln6" value="1261541561">
+          <param name="puzzle7" value="44,T,T,T;,P,P,;TP,P,P,P;,T,,T">
+          <param name="title7" value="Troublesome #2">
+          <param name="soln7" value="523516423556">
+          <param name="puzzle8" value="44T,P,TP,T;P,T,P,;TP,P,P,;T,,,T">
+          <param name="title8" value="Troublesome #3 ">
+          <param name="soln8" value="253757471">
+          <param name="puzzle9" value="55T,,,,T;T,P,,P,;,P,,P,;,P,P,P,T;T,T,T,,">
+          <param name="title9" value="Torture #1">
+          <param name="soln9" value="51775247536322177763">
+          <param name="puzzle10" value="55,T,,,;T,P,P,,T;T,P,P,P,T;,,P,P,T;T,,,,">
+          <param name="title10" value="Torture #2">
+          <param name="soln10" value="7671543157747213336">
+          <param name="puzzle11" value="55,,,T,;T,P,P,,;,P,T,P,TP;,P,P,,T;T,,,T,">
+          <param name="title11" value="Torture #3">
+          <param name="soln11" value="152636411254766112227">
+          </cheerpj-applet> </p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Aim</h4><p>
+            Find the correct sequence of <i>puffs</i> to push all the puff-balls 
+            onto the pale-pink target squares. The puzzle is solved<i> if 
+            and only if</i> all targets are occupied. </p>
+          <h4>Controls</h4><p>
+            Use the <b>Puzzles</b> drop-list to select a puzzle. <br>
+            Use <b>Restart</b> (Action) or hit the s<b>pace-bar</b> to reset 
+            a puzzle.<br>
+            Press <b>"u"</b> (undo) to reverse the last puff.</p>
+          <h4>Movement</h4><p>
+            <b>Click</b> on a red puff-ball to trigger a puff. 
+          </p>
+        </div>   
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>applet, concept &amp; puzzle set </b> - &COPY; Andrea Gilbert 2012-2013<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

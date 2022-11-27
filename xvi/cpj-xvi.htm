@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>XL-up maze</h2><p>
+          Way back in 2005 I turned the grand old age of 40 and designed
+          a maze to mark the passing of the years. Starting from the
+          central square, step out the roman number sequence from I to
+          XL (1 to 40), starting I, II, III, IV etc. The roman-numeral
+          sequence doesn't stop at 40 however, so as a secondary challenge
+          why not see how much further you can go... 50? 60? 70?
+        </p>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="photo-info">
+          <p><b>New January 2021</b>: 
+          <a href="https://www.puzzlescript.net/play.html?p=537878634acb9aa4cfbd5298856ea1ef">
+          XL-Plan</a> is a surprisingly tricky twist on original 
+          XL-up, implemented in puzzlescript (credit: Mark Richardson).
+          There is also a puzzlescript implementation of original XL-up 
+          playable <a href="https://www.puzzlescript.net/play.html?p=10738349b5a06c8dd54f1ffa39f21a58">
+          here</a> (credit: Guilherme Tows) which works very nicely on touch 
+          sensitive devices.</p>
+          <p>New to puzzlescript? <a href="../index-ps.htm">Discover more!</a></p>
+        </div> 
+        <div class="photo-area">
+          <p><a href="https://pedropsi.github.io/game-console.html?game=537878634acb9aa4cfbd5298856ea1ef">
+            <img src="XL-plan.png"></a></p>
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p>XL-up maze<br>Click below to play</p>
+          <p><img src="xvi_eg.gif" width="131"></p>
+          <p>
+            <cheerpj-applet archive="../jars/new-xvi.jar"
+                code="puzzlePresenter/puzzlePresenter.class" width="180" height="30">
+              <param name="class" value="xvi.playxvi">
+              <param name="puzzle0" value="7733IIXV LXXL IXVI IVIX XLIX VIXX XIXI LIVL XXVI XIXL">
+              <param name="title0" value="XL-up maze">
+              <param name="puzzle1" value="7734VL IILV IVL XLXX XIL VIIXLIXI V VILVXXII XII VIVL">
+              <param name="title1" value="Ben's Challenge">
+            </cheerpj-applet>
+          </p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Aim</h4><p>
+            Step out the roman numeral sequence from I to XL (1 to 40) using
+            grey squares to punctuate the sequence. So that's I,II,III,IV,V
+            etc using a grey square to mark each comma. Hint: keep an eye
+            on the rolling ticker-tape underneath the grid if you can't remember
+            how to count in roman numerals.</p>
+          <h4>Controls</h4><p>
+            Use <b>Restart </b>(Action), or hit <b>space,</b> to reset the
+            puzzle.<br>
+            Hit <b>'u' </b>to unwind the move-sequence to last grey-square
+            (can be repeated to unwind as far as desired).</p>
+          <h4>Movement</h4><p>
+            Use the <b>cursor</b> <b>keys </b>to move. At each move you can
+            step to any adjacent square (left, right, up, down). Note, the
+            same letter can be used many times, even within the same numeric.
+          </p>
+        </div>
+      </div>   
+
+      <div class="page-note">
+        <h4>Footnotes</h4><p>
+        Back in 2005 I asked the question... is it possible to construct an 
+        alternative 7x7 grid where the sequence can run even deeper? 
+        In September 2006 Ben Small did just this and found a maze that runs 
+        even deeper than my original maze. Ben's grid was thus added to the
+        applet in 2006, as a second challenge.
+        </p>
+      </div>
+
+      <hr>   
+      <div class="page-credits"><p>
+        <b>applet, concept &amp; maze design</b> - &COPY; Andrea Gilbert - 2005<br>
+        <b>Ben's challenge maze</b> - &COPY; Ben Small - 2006<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>
