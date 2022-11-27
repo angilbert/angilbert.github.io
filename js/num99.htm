@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.2">
+    <link rel="stylesheet" href="./js-shared.css">
+    <link rel="stylesheet" href="./num99.css">
+    <script type="text/javascript" src="./num99.js"></script>
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Number scramble</h2>
+        <p>The goal is to place letters in a 5x5 square to create a wordsearch 
+          style grid containing a target set of words. To solve each level it 
+          must be possible to spell all the target words using horizontal and 
+          vertical jumps between letters, the words don't need to chain together.
+          The target words are always integer numbers (for example 
+          SIX, ELEVEN, TWENTYTWO). The more words you have to try and make fit, 
+          the harder the puzzle!
+        </p>
+      </div>
+      <div><p>
+        Before you start on the first challenge
+        notice you can spell <b>ELEVEN</b> by bouncing up and down in the first 
+        column (repeatedly using the same E). You can also spell <b>TWO</b> starting 
+        in the top corner, stepping left to W and down to O. Now satisfy yourself 
+        you can also spell <b>THREE</b> and <b>FOUR</b>. Note that a single E can be 
+        used to spell eleven, but not three (consecutive letters require a jump).
+       </p>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area-stack">
+          <p id="p-level">Level 1</p>
+          <div class="num99-puzzle-grid">
+            <button id="M00" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M10" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M20" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M30" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M40" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M01" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M11" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M21" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M31" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M41" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M02" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M12" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M22" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M32" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M42" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M03" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M13" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M23" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M33" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M43" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M04" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M14" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M24" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M34" class="PZ empty" onclick="clickPuzzGrid(this)">?</button> 
+            <button id="M44" class="PZ empty" onclick="clickPuzzGrid(this)">?</button>  
+          </div>
+          &nbsp;
+          <p id="p-availableletters">Available letters:</p>
+          <div class="num99-letter-grid">
+            <button id="D" class="LT avail" onclick="clickLetterGrid(this)">D</button>
+            <button id="E" class="LT avail" onclick="clickLetterGrid(this)">E</button>
+            <button id="F" class="LT avail" onclick="clickLetterGrid(this)">F</button>
+            <button id="G" class="LT avail" onclick="clickLetterGrid(this)">G</button>
+            <button id="H" class="LT avail" onclick="clickLetterGrid(this)">H</button>
+            <button id="I" class="LT avail" onclick="clickLetterGrid(this)">I</button>
+            <button id="L" class="LT avail" onclick="clickLetterGrid(this)">L</button>
+            <button id="N" class="LT avail" onclick="clickLetterGrid(this)">N</button>
+            <button id="O" class="LT avail" onclick="clickLetterGrid(this)">O</button>
+            <button id="R" class="LT avail" onclick="clickLetterGrid(this)">R</button>
+            <button id="S" class="LT avail" onclick="clickLetterGrid(this)">S</button>
+            <button id="T" class="LT avail" onclick="clickLetterGrid(this)">T</button>
+            <button id="U" class="LT avail" onclick="clickLetterGrid(this)">U</button>
+            <button id="V" class="LT avail" onclick="clickLetterGrid(this)">V</button>
+            <button id="W" class="LT avail" onclick="clickLetterGrid(this)">W</button>
+            <button id="X" class="LT avail" onclick="clickLetterGrid(this)">X</button>
+            <button id="Y" class="LT avail" onclick="clickLetterGrid(this)">Y</button>
+            <button id="Z" class="LT avail" onclick="clickLetterGrid(this)">Z</button>
+          </div> 
+        </div>
+
+        <div class="puzzle-info">
+          <h4 id="h-currentgoal">Current goal</h4>
+          <p id="p-currentgoal">No current rule</p>
+          <h4>Controls</h4><p>
+            <b>Click on the top grid</b> to add and remove letters.<br>
+            <b>Click on the bottom grid</b> to select an available letter.<br>
+            Click on <b>Level-Up</b> to progress to the next level.<br>
+          </p>  
+          <h4 id="h-found">Found:</h4>
+          <p><textarea id="numlistSolved" readonly></textarea></p>
+          <h4 id="h-missing">Missing:</h4>
+          <p><textarea id="numlistToDo" readonly></textarea></p>
+          <div>
+           <p><button disabled class="levelup" id="LevelUp" 
+                onclick="clickLevelUp()">Level-Up</button></p>
+          </div> 
+        </div> 
+      </div> 
+
+      <script>initGrid()</script>
+
+      <div class="page-note">
+        <h4>Shortcuts and spoilers</h4>
+        <ul>
+          <li>Load or refresh: 
+              <button onclick="jumpToLevel(3)">Level 3</button> /
+              <button onclick="jumpToLevel(4)">Level 4</button> /
+              <button onclick="jumpToLevel(5)">Level 5</button> </li>
+          <li>Reveal a hint for level 4: 
+              <button onclick="showHint()">click here</button></li>
+          <li>Reveal design notes (spoiler): 
+              <button onclick="revealByClass('spoiler')">click here</button></li> 
+        </ul>
+      </div>
+
+      <div class="page-note spoiler">
+        <h4>Puzzle design notes</h4><p>
+        This puzzle was born out of the 
+        <a href="./abra.htm">ABRACADABRA</a> maze which is 
+        a single challenge on a fixed grid. Following on from this I was 
+        looking to design a second puzzle with more depth and multiple 
+        challenges. First I needed a set of related words with a good
+        distribution of repeat letters. The integer number series was 
+        perfect, but with an infinite number of words to play with I had 
+        then to decide what subset to focus on. 
+        I started toying with numbers 1-99 on a 6x6 grid and quickly realised 
+        it was theoretically possible to make all the words fit. Furthermore, 
+        the same would be true on 5x5. Plausible but unlikely, I thought. 
+        </p><p>
+        Well, that wasn't quite the puzzle I had in mind. 
+        But hey, the meta-puzzle might be a better one. 
+        </p><p>
+        Thus I started to explore the meta-puzzle using pencil and paper, not 
+        knowing if there was a solution or not. Initially my goal was 
+        limited to 20-99, because to satisfy 11-19 I would not only have to 
+        find space for an L (just to spell ELEVEN and TWELVE) but somehow 
+        also squeeze in the tricky TEENs.
+        Well, I eventually solved the grid for 20-99 and lo-and-behold I 
+        had a spare cell left that might accommodate that pesky L. 
+        Thus several hours (and much head-scratching) later I had the
+        full monty... 1-99. 
+        </p><p>
+        With thanks to the members of the <i>Thinky-Puzzle-Games discord</i> 
+        for play-testing, feedback and suggestions for extra levels. 
+        For anyone curious to know if 0-99 is the limit on 5x5, well,
+        we don't know. There is at least one solution to level 4 (1-99) 
+        which leaves 2 grid squares empty. So it remains a tantalising 
+        open question whether ONEHUNDRED might also be possible.
+        </p>
+      </div>
+
+      <hr>   
+      <div class="page-credits"><p>
+        <b>puzzle design</b> - &COPY; Andrea Gilbert - 2020<br>
+        <b>HTML5 implementation</b> - &COPY; Andrea Gilbert - 2020<br>
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

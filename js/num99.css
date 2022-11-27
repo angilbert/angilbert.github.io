@@ -1,0 +1,77 @@
+.num99-puzzle-grid {
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 4px;
+    padding: 4px;
+}
+.num99-letter-grid {
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 4px;
+    padding: 4px;
+}
+
+.num99-puzzle-grid button { 
+    background-color: lightblue;
+    border-width: 4px;
+    border-color: gray;
+    font-size: 24px;
+    font-weight: normal;
+    color: black;
+    width: 40px; 
+    height: 40px;
+    padding: 2px;
+}
+
+.num99-letter-grid button { 
+    background-color: pink;
+    border-width: 4px;
+    border-color: gray;
+    font-size: 16px;
+    font-weight: normal;
+    color: black;
+    width: 30px; 
+    height: 30px;
+    padding: 2px;
+}
+
+.num99-puzzle-grid button:hover { text-decoration: none; }
+.num99-letter-grid button:hover { text-decoration: none; }
+
+.num99-puzzle-grid button:disabled { 
+    border-width: 0px; 
+}
+.num99-letter-grid button:disabled { 
+    background-color: gainsboro;
+    border-width: 0px; 
+    color: gray;
+}
+.num99-puzzle-grid button.PZ.empty { 
+    background-color: gainsboro;
+    border-width: 0px; 
+    color: transparent;
+}
+.num99-letter-grid button.LT.inhand { 
+    background-color: pink;
+    border-width: 0px; 
+    color: black;
+}
+.num99-letter-grid button.LT.inplay { 
+    background-color: gainsboro;
+    border-width: 0px; 
+    color: gray;
+}
+
+.levelup { 
+    background-color: #993399;
+    color: white;
+    border-width: 2px;
+    padding: 6px;
+}
+.levelup:disabled { 
+    background-color: gainsboro;
+    color: grey;
+    opacity: 50%;
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta property="og:title" content="X-marks-the-spot">
+    <meta property="og:description" content="A puzzle game about discovering long-lost treasure">
+    <meta name="description" content="A puzzle game about discovering long-lost treasure">
+    <meta property="og:image" content="http://www.clickmazes.com/js/ct3-splash.png">
+    <meta property="og:url" content="http://www.clickmazes.com/js/ct3.htm">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickmazes: X-marks-the-spot</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.6">
+    <link rel="stylesheet" href="./js-shared.css?v=1.6">
+    <link rel="stylesheet" href="./ct3.css?v=1.7"> 
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>X-marks-the-spot</h2>
+        <p>
+          Sneaky-Pete the pirate has discovered a long-lost map indicating
+          sunken treasure in the shallow-waters close to treasure-island. 
+          Help Sneaky-Pete navigate to X and recover the sunken booty! He will 
+          need to position a strong wooden raft exactly on X to succeed.
+        </p>
+      </div>
+      <div><p>
+        But beware, the shallow waters are dangerous, so Sneaky-Pete must 
+        stay safe and dry. He can step freely between adjacent rafts 
+        and islands and can propel any raft in a straight-line (north, south, 
+        east or west) as long as there is something to aim for and
+        anchor against (head-on or side-on).
+      </p></div>
+    <script type="text/javascript" src="./ct3-puzz.js?v1.1"></script>
+    <script type="text/javascript" src="./ct3.js?v1.1"></script>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area-stack">
+          <div class="ct3-title-bar">  
+            <span>&nbsp;</span>
+            <span id="p-pack">Pack: none</span>
+            <span>&nbsp;</span>
+            <button class="levelD" onclick="levelSelect('-')">&#9194;</button> 
+            <span id="p-titleA">Puzzle: none</span>
+            <button class="levelU" onclick="levelSelect('+')">&#9193;</button>
+          </div>
+          <div class="ct3-puzzle-grid">
+            <button id="M00" onclick="aClick(this)" class="gc"></button> 
+            <button id="M10" onclick="aClick(this)" class="gc"></button> 
+            <button id="M20" onclick="aClick(this)" class="gc"></button> 
+            <button id="M30" onclick="aClick(this)" class="gc"></button> 
+            <button id="M01" onclick="aClick(this)" class="gc"></button> 
+            <button id="M11" onclick="aClick(this)" class="gc"></button> 
+            <button id="M21" onclick="aClick(this)" class="gc"></button> 
+            <button id="M31" onclick="aClick(this)" class="gc"></button> 
+            <button id="M02" onclick="aClick(this)" class="gc"></button> 
+            <button id="M12" onclick="aClick(this)" class="gc"></button> 
+            <button id="M22" onclick="aClick(this)" class="gc"></button> 
+            <button id="M32" onclick="aClick(this)" class="gc"></button> 
+            <button id="M03" onclick="aClick(this)" class="gc"></button> 
+            <button id="M13" onclick="aClick(this)" class="gc"></button> 
+            <button id="M23" onclick="aClick(this)" class="gc"></button> 
+            <button id="M33" onclick="aClick(this)" class="gc"></button> 
+          </div>
+          <p class="move-counter"> [<label id="moveCount">0</label>]</p>
+          <div class="ct3-undoredo-bar">
+              <button id="undo"   onclick="undoMove()">Undo</button>
+              <button id="redo"   onclick="redoMove()">Redo</button>
+              <button id="reload" onclick="reload()">Restart</button>    
+          </div>
+        </div>
+
+        <div class="puzzle-info">
+          <h4>Goal</h4>
+          <div class="ct3-goal-note">
+            <p>Guide the pirate to (X) to recover the hidden treasure.
+              The pirate must use the islands and rafts to move around. 
+            </p>  
+            &nbsp;
+            <p><img src="./_img/t-goal.png"></p>
+          </div>
+          <h4>Controls</h4><p>
+            <b>Click on the grid</b> to move the pirate. The pirate will 
+            move towards the click, if it is safe to do so.<br>
+          </p>
+          <p class="ct3-pack-select">
+            Puzzle pack selector: 
+            <button class="packD" onclick="packSelect('-')">&#128316;</button> 
+            <button class="packU" onclick="packSelect('+')">&#128317;</button> 
+          </p>
+            
+          <div class="dev-panel">
+            <p>Puzzle encoding:
+              <button class="ct3-dev" onclick="submitEnc()">load</button>
+              <textarea class="ct3-dev" id="puzzEnc"></textarea></p>
+            <p>Move sequence:
+                <button class="ct3-dev" onclick="submitMoves()">load</button>
+                <textarea class="ct3-dev" id="solnStr"></textarea></p>
+          </div>
+        </div> 
+      </div> 
+
+      <script>packSelect(1)</script>
+
+      <div class="page-note">
+        <h4>Shortcuts</h4>
+        <ul>
+          <li>Disable alerts: 
+            <button onclick="disableWarnings()">click here</button></li> 
+          <li>Enable cursor-keys: 
+              <button onclick="enableCK()">click here</button></li>
+          <li>Reveal dev-panel: 
+            <button onclick="devMode()">click here</button></li>
+        </ul>
+      </div>
+
+      <div class="page-note">
+        <h4>Puzzle design notes</h4><p>
+        This puzzle concept originated in a set of puzzles called <i>ConTact3</i> designed 
+        by Bob Henderson (USA) in 2012 and first featured on the 
+        <a href="https://www.zillions-of-games.com">zillions-of-games</a>
+        website in 2014. ConTact3 was the fourth variant in a range of puzzles all centered 
+        on the <i>contact</i> mechanic, where a cell could only be moved if it had at 
+        least one neighbour. All cells were potentially mobile cells (aka rafts) 
+        and were only locked-down when isolated. ConTact3 introduced the concept of an 
+        active 'baton' (aka pirate) that meant only one group of cells could be mobile 
+        at a time. The original puzzle sets featured goals in one or both of the 
+        SE/SW corners and included zero, one, and two red cells (aka wood rafts).  
+        </p><p>
+        Only a handful of ConTact3 puzzles on the 5x5 grid (or smaller) existed until  
+        this new set was developed in late 2020. Varying the goal location (X) and 
+        introducing two types of new fixed cells (safe islands and blocking 
+        whirlpools) significantly increased the scope of the puzzle-space resulting 
+        in both improved variety and deeper complexity on smaller grids, ultimately 
+        allowing us to focus solely on the results for the 4x4 grid 
+        leaving 5x5 aside (for now). 
+        </p>
+        <p>The puzzle collection above is a mix of hand-crafted and curated 
+        computer-generated puzzles supplied by Bob Henderson. Bob's search
+        algorithm finds puzzles that maximise the number of raft moves 
+        for each given grid configuration. 
+        For this reason almost all puzzles have a unique signature in 
+        terms of artifacts on the grid (wood-rafts, grass-rafts, islands, whirlpools 
+        and X-marks-the-spot locations). The harder puzzles typically require 20 or 
+        so raft moves, with a handful in the range 40+.  
+      </p>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>ConTact3 concept</b> - &COPY; Bob Henderson - 2012<br>
+        <b>Puzzle designs</b> - &COPY; Bob Henderson &amp; Andrea Gilbert - 2014-2021<br>
+        <b>HTML5 implementation</b> - &COPY; Andrea Gilbert - 2021<br>
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

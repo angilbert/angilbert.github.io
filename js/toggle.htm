@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.1">
+    <link rel="stylesheet" href="./js-shared.css">
+    <link rel="stylesheet" href="./toggle.css">
+    <script type="text/javascript" src="./toggle.js"></script>
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>The toggle button maze </h2><p>
+        Use the arrow buttons to guide the central square around the 5x5 grid   
+        and collect the goals in all four corners. But beware you can only use 
+        each button once until you can find a way to toggle it back on again 
+        and each button either toggles or disables another pair of buttons.
+        Can you find a safe route without disabling all the buttons?</p>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area-stack">
+          <div class="maze55-grid">
+            <img id="M00" src="_img/goal.png"> 
+            <img id="M10" src="_img/w2424.png"> 
+            <img id="M20" src="_img/w2424.png"> 
+            <img id="M30" src="_img/w2424.png"> 
+            <img id="M40" src="_img/goal.png">
+            <img id="M01" src="_img/w2424.png"> 
+            <img id="M11" src="_img/w2424.png"> 
+            <img id="M21" src="_img/w2424.png"> 
+            <img id="M31" src="_img/w2424.png"> 
+            <img id="M41" src="_img/w2424.png"> 
+            <img id="M02" src="_img/w2424.png"> 
+            <img id="M12" src="_img/w2424.png"> 
+            <img id="M22" src="_img/mover.png"> 
+            <img id="M32" src="_img/w2424.png"> 
+            <img id="M42" src="_img/w2424.png"> 
+            <img id="M03" src="_img/w2424.png"> 
+            <img id="M13" src="_img/w2424.png"> 
+            <img id="M23" src="_img/w2424.png"> 
+            <img id="M33" src="_img/w2424.png"> 
+            <img id="M43" src="_img/w2424.png"> 
+            <img id="M04" src="_img/goal.png"> 
+            <img id="M14" src="_img/w2424.png"> 
+            <img id="M24" src="_img/w2424.png"> 
+            <img id="M34" src="_img/w2424.png"> 
+            <img id="M44" src="_img/goal.png"> 
+          </div>
+          &nbsp;
+          <div class="compass-grid">
+            <button class="red NW" id="B00" onclick="clickNW(this.id)">disable<br>blue</button>       
+            <button class="yel NN" id="B10" onclick="clickN(this.id)">toggle<br>red</button>      
+            <button class="gre NE" id="B20" onclick="clickNE(this.id)">disable<br>yellow</button>
+            <button class="blu WW" id="B01" onclick="clickW(this.id)">toggle<br>yellow</button>     
+            <button disabled id="B11" onclick="click0(this.id)">OFF</button>    
+            <button class="red EE" id="B21" onclick="clickE(this.id)">toggle<br>green</button>
+            <button class="yel SW" id="B02" onclick="clickSW(this.id)">disable<br>green</button>   
+            <button class="gre SS" id="B12" onclick="clickS(this.id)">toggle<br>blue</button>   
+            <button class="blu SE" id="B22" onclick="clickSE(this.id)">disable<br>red</button>
+          </div>
+          <script>initToggleMaze(2,2,4)</script>
+        </div> <!-- puzzle-area-stack  -->
+
+        <div class="puzzle-info">
+          <h4>Aim</h4><p>
+            Guide the central square around the 5x5 grid
+            and collect all four corner goals.</p>
+          <h4>Controls</h4><p>
+            Use the <b>big coloured buttons</b> to move the square.<br>
+            You can only use the <b>enabled</b> buttons.<br>
+            <b>Reload</b> the page to restart.
+          </p>
+          <h4>Hint</h4><p>
+            Don't disable all the <b>toggle buttons</b> at the 
+            same time!<br>
+            </p>
+        </div> 
+      </div> 
+
+      <hr>   
+      <div class="page-credits"><p>
+        <b>maze design</b> - &COPY; Andrea Gilbert - 2020<br>
+        <b>HTML5 implementation</b> - &COPY; Andrea Gilbert - 2020<br>
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

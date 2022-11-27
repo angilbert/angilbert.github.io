@@ -1,0 +1,34 @@
+
+.compass-grid button { 
+    background-color: white;
+    border-color: gainsboro;
+    border-radius: 5px;
+    border-width: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    color: black;
+    text-align: center;
+    height: 70px;
+    width: 70px;
+    padding: 2px;
+}
+
+.compass-grid button.gre { background-color: #66FF66; }
+.compass-grid button.red { background-color: #FF6666; }
+.compass-grid button.blu { background-color: #6699FF; }
+.compass-grid button.yel { background-color: #FFFF66; }
+
+.compass-grid button.NW { background-image: url('./_img/aNW.png'); }
+.compass-grid button.NN { background-image: url('./_img/aN.png'); }
+.compass-grid button.NE { background-image: url('./_img/aNE.png'); }
+.compass-grid button.WW { background-image: url('./_img/aW.png'); }
+.compass-grid button.EE { background-image: url('./_img/aE.png'); }
+.compass-grid button.SW { background-image: url('./_img/aSW.png'); }
+.compass-grid button.SS { background-image: url('./_img/aS.png'); }
+.compass-grid button.SE { background-image: url('./_img/aSE.png'); }
+
+.compass-grid button:hover:enabled { font-weight: bold; text-decoration: none; } 
+.compass-grid button:disabled { color: grey; opacity: 50%; }
+
+
+

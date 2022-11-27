@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script type="text/javascript" src="./jsmaze.js"></script>
+  </head>
+  <body onload="imgLoad('','_next','_1','_2','_3','_4','_spin_1','_spin_2','_spin_3','_spin_4')">
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Jump-by-number maze </h2>
+        <p>The puzzles here originate from a little jump-by-number maze implemented 
+          by my brother <a href="http://55cards.com">Brett</a> in his web-designer days.
+          The first featured on his home website back in 2003, now relegated to the 
+          archives. It was implemented in newfangled javascript (well before HTML5 
+          was defined) so the implementation is somewhat unconventional but 
+          it has stood the test of time.
+        </p> 
+      </div>
+      <div>
+        <p>In the first two mazes the goal is to find way from the spinning start square 
+        (top left) to the finish square (bottom right). The spinning number indicates 
+        your current location and also the distance you must jump to a new square. 
+        For the final challenge you have to visit every square (turn the grid red).
+      </p>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="photo-area" style="min-width:180px">
+            <div>
+              <a href="#" onclick="clickA(0,0)"><img id="mazeA00" src="./gifs/red_spin_2.gif" alt="" /></a>
+              <a href="#" onclick="clickA(0,1)"><img id="mazeA01" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#" onclick="clickA(0,2)"><img id="mazeA02" src="./gifs/blank_next.gif" alt="" /></a>
+              <a href="#" onclick="clickA(0,3)"><img id="mazeA03" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#" onclick="clickA(0,4)"><img id="mazeA04" src="./gifs/blank.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#1" onclick="clickA(1,0)"><img id="mazeA10" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(1,1)"><img id="mazeA11" src="./gifs/blank.gif" alt="" /></a> 
+              <a href="#1" onclick="clickA(1,2)"><img id="mazeA12" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(1,3)"><img id="mazeA13" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(1,4)"><img id="mazeA14" src="./gifs/blank.gif" alt="" /></a> 
+            </div>
+            <div>
+              <a href="#1" onclick="clickA(2,0)"><img id="mazeA20" src="./gifs/blank_next.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(2,1)"><img id="mazeA21" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(2,2)"><img id="mazeA22" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(2,3)"><img id="mazeA23" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(2,4)"><img id="mazeA24" src="./gifs/blank.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#1" onclick="clickA(3,0)"><img id="mazeA30" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(3,1)"><img id="mazeA31" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(3,2)"><img id="mazeA32" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(3,3)"><img id="mazeA33" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(3,4)"><img id="mazeA34" src="./gifs/blank.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#1" onclick="clickA(4,0)"><img id="mazeA40" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(4,1)"><img id="mazeA41" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(4,2)"><img id="mazeA42" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(4,3)"><img id="mazeA43" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#1" onclick="clickA(4,4)"><img id="mazeA44" src="./gifs/goal.gif" alt="" /></a>
+            </div> 
+        </div>
+        <div class="puzzle-info">
+          <h4>Original 5x5 maze (2003)</h4>
+            <p>Jump-by-number and reach the target square</p>
+          <h4>Movement</h4><p>
+            <b>Click</b> on a square to jump to it<br>
+            Use horizontal and vertical jumps only
+          </p>
+          <h4>Controls</h4><p>
+            <b>Reload</b> page to restart</p>
+        </div>
+      </div>  
+
+     
+      <div class="std-flex-block">
+        <div class="puzzle-info">
+          <h4>Bonus 6x6 maze (2020)</h4>
+          <p>Jump-by-number and reach the target square</p>
+          <h4>Movement &amp; controls</h4>
+          <p>As above</p>
+        </div>
+        <div class="photo-area" style="min-width:225px">
+            <div>
+              <a href="#2" onclick="clickB(0,0)"><img id="mazeB00" src="./gifs/red_spin_2.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(0,1)"><img id="mazeB01" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(0,2)"><img id="mazeB02" src="./gifs/blank_next.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(0,3)"><img id="mazeB03" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(0,4)"><img id="mazeB04" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(0,5)"><img id="mazeB05" src="./gifs/blank.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#2" onclick="clickB(1,0)"><img id="mazeB10" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(1,1)"><img id="mazeB11" src="./gifs/blank.gif" alt="" /></a> 
+              <a href="#2" onclick="clickB(1,2)"><img id="mazeB12" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(1,3)"><img id="mazeB13" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(1,4)"><img id="mazeB14" src="./gifs/blank.gif" alt="" /></a> 
+              <a href="#2" onclick="clickB(1,5)"><img id="mazeB15" src="./gifs/blank.gif" alt="" /></a> 
+            </div>
+            <div>
+              <a href="#2" onclick="clickB(2,0)"><img id="mazeB20" src="./gifs/blank_next.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(2,1)"><img id="mazeB21" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(2,2)"><img id="mazeB22" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(2,3)"><img id="mazeB23" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(2,4)"><img id="mazeB24" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(2,5)"><img id="mazeB25" src="./gifs/blank.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#2" onclick="clickB(3,0)"><img id="mazeB30" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(3,1)"><img id="mazeB31" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(3,2)"><img id="mazeB32" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(3,3)"><img id="mazeB33" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(3,4)"><img id="mazeB34" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(3,5)"><img id="mazeB35" src="./gifs/blank.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#2" onclick="clickB(4,0)"><img id="mazeB40" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(4,1)"><img id="mazeB41" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(4,2)"><img id="mazeB42" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(4,3)"><img id="mazeB43" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(4,4)"><img id="mazeB44" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(4,5)"><img id="mazeB45" src="./gifs/blank.gif" alt="" /></a>
+            </div> 
+            <div>
+              <a href="#2" onclick="clickB(5,0)"><img id="mazeB50" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(5,1)"><img id="mazeB51" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(5,2)"><img id="mazeB52" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(5,3)"><img id="mazeB53" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(5,4)"><img id="mazeB54" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#2" onclick="clickB(5,5)"><img id="mazeB55" src="./gifs/goal.gif" alt="" /></a>
+            </div> 
+        </div>
+
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="photo-area" style="min-width:180px">
+            <div>
+              <a href="#3" onclick="clickC(0,0)"><img id="mazeC00" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(0,1)"><img id="mazeC01" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(0,2)"><img id="mazeC02" src="./gifs/blank_next.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(0,3)"><img id="mazeC03" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(0,4)"><img id="mazeC04" src="./gifs/blank.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#3" onclick="clickC(1,0)"><img id="mazeC10" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(1,1)"><img id="mazeC11" src="./gifs/blank.gif" alt="" /></a> 
+              <a href="#3" onclick="clickC(1,2)"><img id="mazeC12" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(1,3)"><img id="mazeC13" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(1,4)"><img id="mazeC14" src="./gifs/blank.gif" alt="" /></a> 
+            </div>
+            <div>
+              <a href="#3" onclick="clickC(2,0)"><img id="mazeC20" src="./gifs/blank_next.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(2,1)"><img id="mazeC21" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(2,2)"><img id="mazeC22" src="./gifs/red_spin_2.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(2,3)"><img id="mazeC23" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(2,4)"><img id="mazeC24" src="./gifs/blank_next.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#3" onclick="clickC(3,0)"><img id="mazeC30" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(3,1)"><img id="mazeC31" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(3,2)"><img id="mazeC32" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(3,3)"><img id="mazeC33" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(3,4)"><img id="mazeC34" src="./gifs/blank.gif" alt="" /></a>
+            </div>
+            <div>
+              <a href="#3" onclick="clickC(4,0)"><img id="mazeC40" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(4,1)"><img id="mazeC41" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(4,2)"><img id="mazeC42" src="./gifs/blank_next.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(4,3)"><img id="mazeC43" src="./gifs/blank.gif" alt="" /></a>
+              <a href="#3" onclick="clickC(4,4)"><img id="mazeC44" src="./gifs/blank.gif" alt="" /></a>
+            </div> 
+        </div>
+        <div class="puzzle-info">
+          <h4>Bonus 5x5 challenge (2020)</h4>
+          <p>Jump-by-number and turn the whole grid red</p>
+          <h4>Movement &amp; controls</h4>
+          <p>As above</p>
+        </div>
+      </div>
+
+      <div class="page-note">
+        <h4>Links &amp; related pages</h4>
+          <ul> 
+            <li><a href="http://55cards.com">55cards</a>:
+              Home site of Brett J. Gilbert (game designer)</li>  
+            <li><a href="https://www.logicmazes.com/n1mz.html">Logicmazes</a>: 
+              Robert Abbott's collection of number mazes</li>
+            <li><a href="http://www.mazelog.com/show?7">Mazelog</a>:
+              Jumping mazes (including toggle, no-U-turn and wildcard varieties) </li>     
+            <li><a href="../chain/new-chain.htm">Chain reaction</a>:
+              Another clickmazes puzzle based on a jumping rule</li>  
+            <li><a href="https://en.wikipedia.org/wiki/Back_from_the_Klondike">
+              Back from the Klondike</a>:
+              The first published jump-by-number maze (1898)</li>  
+
+          </ul>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>maze designs</b> - &COPY; Andrea Gilbert - 2003 &amp; 2020<br>
+        <b>JS implementation</b> - &COPY; Brett J. Gilbert - 2003<br>
+        <b>Hosted with permission from Brett J. Gilbert</b>
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

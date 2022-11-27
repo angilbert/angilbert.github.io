@@ -1,0 +1,299 @@
+
+var initComplete = false;
+
+////////////////////////////////////////////////////////////////////////////////////
+// Initialisation & puzzle loading functions
+////////////////////////////////////////////////////////////////////////////////////
+
+function revealByClass(cls) {    
+    var set = document.getElementsByClassName(cls);
+    Array.prototype.forEach.call(set, function(el) { 
+        el.style.visibility = "visible"; 
+        el.style.display = "block";
+    });
+}
+
+function updateButtonSet(boolVal, cls) {
+    var set = document.getElementsByClassName(cls);
+    Array.prototype.forEach.call(set, function(butt) 
+        { butt.disabled = boolVal; });
+}
+
+function loadlevel(n) {
+    level=n; 
+    //updateButtonSet(true, "XX");  
+    //document.getElementById("YY").disabled = false;
+}
+
+function reinit() {     
+    var set = document.getElementsByClassName("XXX");
+    Array.prototype.forEach.call(set, function(b) { 
+        b.className = "XXX"; 
+    });
+    updateButtonSet(false, "XX");   
+}
+
+function resetDraggable() 
+{
+  // reset whole board 
+  var items = document.querySelectorAll('.gc');
+  items.forEach(function(item) { 
+    item.classList.remove('over'); 
+    item.classList.remove('selected'); 
+    item.setAttribute('draggable',false); 
+  });
+
+  // set hiker(s) to draggable
+  items = document.querySelectorAll('.hiker');
+  items.forEach(function(item) { 
+    item.setAttribute('draggable',true); 
+  });
+
+  // add drag event handlers to all hiker(s)
+  items = document.querySelectorAll('.hiker');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', handleDragStart, false);
+    item.addEventListener('dragenter', handleDragEnter, false);
+    item.addEventListener('dragover', handleDragOver, false);
+    item.addEventListener('dragleave', handleDragLeave, false);
+    //item.addEventListener('drop', handleDrop, false);
+    item.addEventListener('dragend', handleDragEnd, false);
+  });
+
+  // set drop and drag-over handlers for:
+  // [1] adjacent rafts
+  // [2] open/reachable water cells in all 4 directions
+  hikers = document.querySelectorAll('.hiker');
+  hikers.forEach(function(hiker) {
+        var mx = parseInt(hiker.id.charAt(1));
+        var my = parseInt(hiker.id.charAt(2));
+        considerForDrop(mx+1,my,"raft");
+        considerForDrop(mx-1,my,"raft");
+        considerForDrop(mx,my+1,"raft");
+        considerForDrop(mx,my-1,"raft");
+        for (var i=mx; i--; i>=0) { if (! considerForDrop(i,my,"water")) { break; } }
+        for (var i=mx; i++; i<5) { if (! considerForDrop(i,my,"water")) { break; } }
+        for (var i=my; i--; i>=0) { if (! considerForDrop(mx,i,"water")) { break; } }
+        for (var i=my; i++; i<5) { if (! considerForDrop(mx,i,"water")) { break; } }
+  });
+}
+
+function initCT3Grid() {
+  resetDraggable();
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+// Event handling functions
+////////////////////////////////////////////////////////////////////////////////////
+
+var dragSrcEl = null;   
+
+function aClick(el)
+{
+  // confirm the hiker is in the same row/column
+  // scan forward from the hiker to find a raft or the next water cell adjacent to a raft
+  // if there is an immediate raft - step the hiker onto it
+  // if there is no candidate cell - alert and ignore
+  // otherwise move the hiker+raft (and content) to the first candidate water cell 
+
+  console.log("arrowClick: "+el.id);
+
+  var b = el.id.charAt(0);              // N/E/S/W button
+  var rc = parseInt(el.id.charAt(1));   // 0-5 (row or column)
+
+  var hiker = document.getElementByClass("hiker");  // assumes one hiker only
+  var hx = parseInt(hiker.id.charAt(1));
+  var hy = parseInt(hiker.id.charAt(2));
+
+  if ( rc!=hx && rc!=hy ) { return; }   // click does not match hiker row or column
+
+  // check for adjacent raft
+  var dx=0, dy=0;
+  if (b == 'N') { if (checkForRaft(hx+1,hy)) { dx=1; } }
+  if (b == 'S') { if (checkForRaft(hx-1,hy)) { dx=-1; } }
+  if (b == 'W') { if (checkForRaft(hx,hy+1)) { dy=1; } }
+  if (b == 'E') { if (checkForRaft(hx,hy-1)) { dy=-1; } }
+
+  if ( dx!=0 || dy!=0 ) {
+    moveHikerAndRaft(hx+dx, hy+dy, false);  // move hiker only
+    checkForWin();
+    return;
+  }
+
+  var nx=0,ny=0;
+  if (b == 'N') 
+    { for (var i=hy; i+=1; i<5)  { if (CheckForStop(rc,i)) { nx=rc;ny=i; } } }
+  else if (b == 'S') 
+    { for (var i=hy; i-=1; i>=0) { if (CheckForStop(rc,i)) { nx=rc;ny=i; } } }
+  else if (b == 'W') 
+    { for (var i=hx; i+=1; i<5)  { if (CheckForStop(i,rc)) { nx=i;ny=rc; } } }
+  else if (b == 'E') 
+    { for (var i=hy; i-=1; i>=0) { if (CheckForStop(i,rc)) { nx=i;ny=rc; } } }
+
+  if ( nx!=0 || ny!=0 ) {
+    moveHikerAndRaft(nx, ny, true);  // move hiker and raft
+    checkForWin();
+    return;
+  }
+}
+
+function handleDragStart(e) 
+{
+  console.log("DragStart: "+this.id+" "+this.classList);
+
+  this.style.opacity = '0.4';
+  this.classList.add('selected');
+  dragSrcEl = this;
+  e.dataTransfer.effectAllowed = 'move';
+  //e.dataTransfer.setData('text/html', this.innerHTML);
+}
+
+function handleDragOver(e) {
+  if (e.preventDefault) { e.preventDefault(); }
+  e.dataTransfer.dropEffect = 'move';
+  return false;
+}
+
+function handleDragEnter(e) { 
+  this.classList.add('over'); 
+}
+function handleDragLeave(e) { 
+  this.classList.remove('over'); 
+}
+
+function handleDrop(e)    // triggers on the target cell
+{
+  if (e.stopPropagation) { e.stopPropagation(); }
+  console.log("Drop: "+this.id+" "+this.classList);
+
+  if (dragSrcEl !== this) {
+    updateClassList(dragSrcEl,this);
+    updateKey(dragSrcEl);
+    updateKey(this);
+  }
+  //console.log("Drop[DONE]: "+this.id+" "+this.classList); 
+  return false;
+}
+
+function handleDragEnd(e)   // triggers in the source cell
+{
+  // console.log("DragEnd: "+this.id+" "+this.classList);
+  this.style.opacity = '1';
+  dragSrcEl = null;
+
+  //console.log("DragEnd[DONE]: "+this.id+" "+this.classList);
+  resetDraggable();  
+  //checkForWin(this);
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+// Game logic 
+////////////////////////////////////////////////////////////////////////////////////
+
+function checkForRaft(x,y) {
+  if (x<0 || x>=5 || y<0 || y>=5) { return false; }   // off grid
+  var el = document.getElementById("M"+x+y);
+  if ( el.classList.contains("raft")) { 
+    console.log("found RAFT at: "+x+y);
+    return true; 
+  }
+  return false;
+}
+
+function checkForStop(x,y) {
+  // we know x,y is on-grid and isn't a raft - check surrounding cells
+
+  raftAt=null;
+  if (checkForRaft(x+1,y)) { raftAt='S'; }
+  else if (checkForRaft(x-1,y)) { raftAt='N'; }
+  else if (checkForRaft(x,y+1)) { raftAt='E'; }
+  else if (checkForRaft(x,y-1)) { raftAt='W'; }
+
+  if ( raftAt != null ) {
+    console.log("STOP at: "+x+y+" :"+raftAt);
+    return true;
+  }
+  return false;
+}
+
+function considerForDrop(x,y,str) 
+{
+  if (x<0 || x>=5 || y<0 || y>=5) { return false; }   // off grid
+  var el = document.getElementById("M"+x+y);
+  if ( el.classList.contains(str) || el.classList.contains("goal")) { 
+    //console.log("found: "+str+" (or goal) at: "+x+y);
+    addDropTargetEventHandlers(el); 
+    return true; 
+  }
+  return false;
+}
+
+function addDropTargetEventHandlers(cell) {    // valid drop target
+    cell.addEventListener('dragenter', handleDragEnter, false);
+    cell.addEventListener('dragover', handleDragOver, false);
+    cell.addEventListener('dragleave', handleDragLeave, false);
+    cell.addEventListener('drop', handleDrop, false);
+}
+
+function updateClassList(srcEl,tgtEl) {
+  var tlist = tgtEl.classList;
+  var slist = srcEl.classList;
+  console.log("[1] s:"+slist+" t:"+tlist);
+
+  // move the hiker first
+  srcEl.classList.remove("hiker");
+  tgtEl.classList.add("hiker");
+  tgtEl.classList.remove("water");
+
+  // if not already on a raft - move the raft
+  // and move the tent also (if present)
+  if (!tlist.contains("raft")) { 
+    srcEl.classList.toggle("raft");
+    tgtEl.classList.toggle("raft");
+    if (slist.contains("tent")) { 
+      srcEl.classList.toggle("tent");
+      tgtEl.classList.toggle("tent");
+    }
+    if (!slist.contains("goal")) {
+      srcEl.classList.add("water");
+    }
+  }
+}
+
+function updateKey(el) {
+  var clist = el.classList;
+  console.log("UpdateKey: "+clist);
+  el.innerHTML="";
+  if (clist.contains("water")) { el.innerHTML+="W"; }
+  if (clist.contains("hiker")) { el.innerHTML+="H"; }
+  if (clist.contains("raft")) { el.innerHTML+="R"; }
+  if (clist.contains("tent")) { el.innerHTML+="T"; }
+  if (clist.contains("goal")) { el.innerHTML+="X"; }
+}
+
+function checkForWin(gridEl) 
+{ 
+    var classStr = gridEl.className;
+    var solved = false;
+    if (classStr == "hiker tent raft goal") { solved = true; } 
+
+    document.getElementById("LevelUp").disabled = true;
+
+    if ( solved ) setTimeout(function() { 
+        var msg="Congratulations!"
+        msg += "\nClick Level-Up to continue";
+        alert(msg);
+        if (level < 5) { document.getElementById("LevelUp").disabled = false; }
+    }, 100);
+}
+
+function clickLevelUp() {
+    level++;
+    loadLevel(level);
+    document.getElementById("LevelUp").disabled = true;
+}
+function jumpToLevel(n) {
+    level=n;
+    loadLevel(level);
+    document.getElementById("LevelUp").disabled = true;
+} 

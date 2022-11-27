@@ -1,0 +1,43 @@
+
+button {
+    /* styled to look like <a href...> */
+    background-color: transparent;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: bold;
+    border-width: 0px;
+    color: #993399;
+    padding: 0px;
+}
+button:hover { text-decoration: underline; }
+button:disabled { text-decoration: none; }
+
+.maze55-grid {
+    display: grid;
+    background-color: darkgray;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 4px;
+    padding: 4px;
+}
+.maze46-grid {
+    display: grid;
+    background-color: gainsboro;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2px;
+    padding: 0px;
+}
+.compass-grid {
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+    padding: 5px;
+}
+
+.selected { background-color: white; }
+.spoiler { display: none; }
+.dev-panel { display: none; }
+
+/* disable button-focus on chrome */
+*:focus { outline: none; }
+

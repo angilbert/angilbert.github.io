@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.1">
+    <link rel="stylesheet" href="./js-shared.css">
+    <script type="text/javascript" src="./abra.js"></script>
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>ABRACADABRA maze</h2><p>
+        <i>Hocus-pocus-obliviate-wordiness</i>... it looks like
+        someone cast a spell on this grid to make magical words hard
+        to spell. To remove the spell you have to work out a way to
+        spell the most magical word of all. Good luck!</p>
+      </div>
+      &nbsp;
+      <div class="std-flex-block">
+        <div class="puzzle-area-stack">
+          <div class="maze46-grid">
+            <img id="M00" onclick="touchImg(this.id)" src="_img/blank.png">
+            <img id="M10" onclick="touchImg(this.id)" src="_img/blank.png">
+            <img id="M20" onclick="touchImg(this.id)" src="_img/blank.png">
+            <img id="M30" onclick="touchImg(this.id)" src="_img/blank.png">
+            <img id="M01" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M11" onclick="touchImg(this.id)" src="_img/blank.png">
+            <img id="M21" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M31" onclick="touchImg(this.id)" src="_img/blank.png">  
+            <img id="M02" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M12" onclick="touchImg(this.id)" src="_img/blank.png">  
+            <img id="M22" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M32" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M03" onclick="touchImg(this.id)" src="_img/blank.png">  
+            <img id="M13" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M23" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M33" onclick="touchImg(this.id)" src="_img/blank.png">   
+            <img id="M04" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M14" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M24" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M34" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M05" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M15" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M25" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <img id="M35" onclick="touchImg(this.id)" src="_img/blank.png"> 
+            <script>initAbraMaze(6,4,1,0,2,5,
+              '-A--ABDCCDABDBRBCRRA--A-',
+              'ABRACADABRA')</script>
+          </div>
+        </div>
+
+        <div class="puzzle-info">
+          <h4>Aim</h4><p>
+            Starting at the <b>top A</b> 
+            and finishing at the <b>bottom A</b> 
+            spell the magic word ABRACADABRA.
+            </p><p>
+            You can <b>step any distance</b> in a <b>straight-line</b> 
+            (vertical or horizontal) between letters. 
+          </p>
+          <h4>Controls</h4><p>
+            <b>Click on the grid</b> to select the next letter.<br>
+            Restart: <button onclick="initAbraMaze(6,4,1,0,2,5,
+              '-A--ABDCCDABDBRBCRRA--A-', 'ABRACADABRA')">click here</button><br>
+              </p>
+          <h4>Hint</h4>
+            <p>Letters can be used more than once.</p>
+          <h4>More?</h4>
+            <p>If you enjoyed this puzzle then try
+              <a href="./num99.htm">number scramble</a> next.
+            </p>
+        </div> 
+      </div> 
+
+      <hr>   
+      <div class="page-credits"><p>
+        <b>maze design</b> - &COPY; Andrea Gilbert - 2017<br>
+        <b>HTML5 implementation</b> - &COPY; Andrea Gilbert - 2020<br>
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

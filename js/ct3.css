@@ -1,0 +1,137 @@
+.puzzle-area-stack {    
+    background-color: lightblue;
+}
+p.ct3-title { 
+    font-size: 16px; 
+    text-align: center; 
+}
+
+.ct3-puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 4px;
+    padding: 15px 30px 5px 30px;
+}
+
+.ct3-puzzle-grid button { 
+    font-weight: normal;
+    font-size: 36px;
+    color: black;
+    width: 60px; 
+    height: 60px;
+}
+
+.ct3-puzzle-grid button.water { 
+    background-color: lightblue;
+    border: 1px dashed lightcyan;
+    border-radius: 10px;
+} 
+
+.ct3-puzzle-grid button.danger {  
+    /* background-color: rgb(117, 189, 189);
+    border-radius: 30px; */
+    font-size: 50px;
+    border: 0px;
+}
+.ct3-puzzle-grid button.safe {  
+    background-color:lightyellow;
+    border-radius: 15px; 
+}
+
+.ct3-puzzle-grid button.raft { 
+    background-color:rgb(179, 179, 0);
+    border: 4px dotted lightblue; /* ?? */
+    border-radius: 0px;
+}
+.ct3-puzzle-grid button.strong {
+    background-color: darkgoldenrod;
+    border: 3px dashed lightblue; /* ?? */
+    border-radius: 0px; 
+}
+
+.ct3-puzzle-grid button.pirate  { padding: 5px; } 
+.ct3-puzzle-grid button:hover   { text-decoration: none; } 
+
+.ct3-goal-note {
+    display: grid;
+    grid-template-columns: 5fr 10px 80px;
+    padding: 0px;
+    grid-gap: 0px;
+}
+/* --------------------------------------------*/
+
+.move-counter { 
+    font-size: 12px;
+    text-align: right;
+    width: 100%;
+    padding: 2px;
+}
+
+.ct3-title-bar {
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    justify-items: center;  /* horizontal */
+    align-items: center;    /* vertical   */
+    grid-gap: 0px;
+    margin: 0px;
+    width: 100%;
+}
+.ct3-title-bar button { 
+    background-color: transparent;
+    color: black;
+    font-size: 25px;
+    border-width: 0px;
+    text-decoration: none;
+    padding: 0px;
+}
+.ct3-pack-select button {
+    text-decoration: none; 
+    font-size: 20px;
+}
+
+.ct3-pack-select button:disabled { opacity: 30%; }
+.ct3-title-bar button:disabled { opacity: 30%; }
+
+/* --------------------------------------------*/
+
+.ct3-undoredo-bar { /* undo redo restart */
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center; /* horizontal */
+    grid-gap: 1px;
+    width: 80%;
+}
+.ct3-undoredo-bar button { 
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    font-weight: normal;
+    width: 70px;
+    border-width: 2px;
+    padding: 4px;
+}
+.ct3-undoredo-bar button:disabled { opacity: 50%; }
+
+/* ------------------------------------------------------------------ */
+/* Dev sections */
+
+textarea.ct3-dev {     
+    width: 95%;
+    height: 32px;
+    resize: none;
+    color: black;
+}
+label.ct3-dev { color: black; }
+
+button.ct3-dev {
+    color: black;
+    font-size: 12px;
+    font-weight: normal;  
+    border-width: 2px;
+    width: 60px;
+    align-self: right;
+}
+
+/* ------------------------------------------------------------------ */
