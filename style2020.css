@@ -1,0 +1,371 @@
+body {
+    background: whitesmoke;
+    font-family: Verdana, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+  
+P, UL {
+    margin: 0px;
+    color: black;
+    text-align: left;
+    font-size: 16px; 
+    line-height: 1.4;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+H1, H2 {
+    margin: 0px;
+    color: #993399;
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+H3, H4 {
+    margin: 0px;
+    color: #993399;
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+H5 {
+    margin: 10px;
+    color: red;
+    text-align: center;
+    font-style: italic;
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+A {
+    font-weight: bold;
+    color: #993399;
+}
+
+textarea {     
+    width: 90%;
+    height: 64px;
+    color: black;
+}
+
+iframe {
+    margin: 0 auto;
+    display: block;
+}
+
+/* Side bar (wide) =============== */
+
+.sidenav-home {
+    height: 100%;
+    width: 170px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #993399;
+    display: block;
+    align-items: left;
+}
+
+.sidenav-home p {
+    color: white;
+    font-size: 12px;
+    text-align: right;
+    margin: 12px;
+}
+.sidenav-home img {
+    margin-bottom: 20px;
+    display: block;
+}
+.sidenav-home a.c1 {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    color: orange;
+    display: block;
+}
+.sidenav-home a.c2 {
+    text-decoration: none;
+    font-size: 12px;
+    color: orange;
+    display: block;
+}
+.sidenav-home a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Side bar (thin) =============== */
+
+.sidenav {
+    height: 100%;
+    width: 65px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #993399;
+    display: block;
+    align-items: right;
+}
+
+.sidenav p {
+    font-size: 12px;
+    text-align: right;
+    line-height: 1.8;
+    /* background-color:yellow; */
+}
+.sidenav img {
+    margin-bottom: 20px;
+    margin-right: 5px;
+    /* background-color:pink; */
+}
+.sidenav a {
+    font-weight: bold;
+    text-decoration: none;
+    color: orange;
+    display: block;
+    margin-right: 10px;
+}
+.sidenav a img {        /* cheerpj icon */
+    margin-top: 20px;
+    margin-left: 15px;
+}
+.sidenav a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Main page ==================== */
+
+.mainbody {
+  margin-left: 65px;
+  padding: 10px;
+  min-width: 600px;
+  max-width: 900px;
+  /* background: whitesmoke; */
+}
+
+.mainbody-home {
+    margin-left: 170px;
+    padding: 10px;
+    min-width:550px;
+    max-width: 900px;
+    /* background: whitesmoke; */
+}
+
+.page-intro p {
+    font-weight: bold;
+}
+.page-note p, ul {
+    font-size: 14px; 
+    /* font-style: italic; */
+}
+.page-footnote p {
+    font-size: 12px; 
+    font-style: italic; 
+    text-align: center;
+}
+.page-credits p {
+    font-size: 12px;
+    color: #FF3333;   
+}
+.page-history p {
+    font-size: 16px; 
+}
+.page-history p b {
+    font-size: 12px;
+    color: #FF3333;   
+}
+
+/* standard flex containers ======= */
+
+.std-flex-block {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start, stretch;
+}
+.single-item { justify-content: center; }
+
+.std-flex-block-wide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start, stretch;
+}
+.std-flex-block-multi {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start, stretch;
+    justify-content: space-evenly;
+}
+
+/* Puzzle sections =============== */
+
+.puzzle-area {
+    background: gainsboro;
+    padding: 10px;
+    margin: 5px;
+    align-items: center;
+}
+
+.puzzle-area-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: gainsboro;
+    padding: 10px;
+    margin: 5px;
+}
+
+.puzzle-info {
+    background: gainsboro;
+    padding: 10px;
+    margin: 5px;
+    flex-grow: 4; 
+}
+.puzzle-info-table {
+    background: whitesmoke;
+    padding: 10px;
+    margin: 5px;
+    align-items: center;
+}
+.puzzle-area p { font-size: 14px; text-align: center; }
+.puzzle-info p { font-size: 14px;  }
+.puzzle-info h4 { padding-top: 5px; }
+
+/* applet info sections ========= */
+
+.appinfo-icon {
+    background: white;
+    padding: 10px;
+    margin: 5px;
+    align-items: center;
+}
+.appinfo-txt {
+    background: white;
+    padding: 10px;
+    margin: 5px;
+    flex-grow: 4; 
+}
+.appinfo-txt p { font-size: 14px;  }
+
+/* Table sections =============== */
+
+.table-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+    margin: 5px;
+}
+.rules-table { background: whitesmoke; }
+.rules-table th { 
+    background: gainsboro;
+    font-size: 14px; 
+    color: red;
+    text-align: center; 
+    padding: 4px;
+}
+.rules-table td { 
+    background: gainsboro;
+    font-size: 14px; 
+    text-align: center; 
+    padding: 4px;
+}
+
+.std-table { background: whitesmoke; }
+.std-table th { 
+    background: gainsboro;
+    font-size: 14px; 
+    color: red;
+    text-align: left; 
+    padding: 6px;
+}
+.std-table td { 
+    background: gainsboro;
+    font-size: 14px; 
+    text-align: left; 
+    vertical-align: top;
+    padding: 6px;
+}
+
+.tbl { 
+    display: table; 
+    table-layout: fixed;
+    padding: 5px 0px 5px 0px;
+    margin-left: none;
+    margin-right: none;
+} 
+.tbl-tr { display: table-row; } 
+.tbl-th { display: table-header-group; } 
+
+.tbl-td, .tbl-th-td { 
+    display: table-cell; 
+    vertical-align: top;
+    border: 2px solid whitesmoke;
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+}
+
+/* Collection tables ========== */
+
+.co-ico { 
+    text-align: right;
+    vertical-align: middle;
+}
+.co-txt { 
+    background: gainsboro;
+    width: 40%; 
+    text-align: left; 
+}
+.co-gap {   /* empty */
+    background: whitesmoke;
+}
+.co-txt p { font-size: 14px; }
+
+/* Link section =============== */
+
+.link-block {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start, stretch;
+    justify-content: center;
+}
+.link-list {
+    background: whitesmoke;
+    padding: 5px;
+    margin: 5px;
+}
+.link-list ul { list-style-type: none; }
+
+/* Photo section =============== */
+
+.photo-area {
+    background: white;
+    padding: 10px;
+    margin: 5px;
+}
+.photo-info {
+    background: white; 
+    padding: 10px;
+    margin: 5px;
+    flex-grow: 4;   
+}
+.photo-info-alt {
+    background: white; 
+    padding: 10px;
+    margin: 5px;
+    flex-grow: 4;   
+}
+.photo-info-plain {
+    flex-grow: 4;   
+}
+
+.photo-area p { font-size: 12px; text-align: center; }
+.photo-info p { font-size: 16px; }
+.dinky p { font-size: 12px; }
+
+
+
+
+

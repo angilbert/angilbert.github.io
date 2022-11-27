@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickmazes - Wriggle collection</title>
+    <link rel="stylesheet" href="./style2020.css?v=1.3">
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="_site/site_cornersmall.gif">
+      <p>
+        <img src="_site/logo_white.png" height="250px">
+        <a href="index.htm">home</a>
+        <a href="./new-history.htm">history</a>
+        <a href="./new-applets.htm">applets</a>
+        <a href="new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Wriggle collection</h2><p>
+          This page introduces all the clickmazes puzzles that feature the 'wriggle' 
+          rule. The wriggle rule is related to the 
+          <i>restricted sliding-block rule</i> (where all blocks are one-unit width 
+          and can only slide in the direction defined by their longest edge). Perhaps 
+          the best known version of this is the very successful <i>Rush Hour</i> 
+          range of puzzles invented by renowned Japanese puzzle inventor 
+          Nob Yoshigahara and published by ThinkFun. Read more below.
+        </p>
+      </div>
+      <div>
+        <p>For many more puzzle games in this genre I can highly recommend Joel Fox's 
+          <a href="https://joelthefox.github.io/2019-08-21-Snake-Puzzle-Games/">
+            Snake Puzzle Game</a> blog. First published in 2019 and most recently
+            updated in April 2022.
+        </p>
+      </div>
+
+      <div class="tbl">
+
+        <div class="tbl-tr"> 
+          <div class="tbl-td co-ico">
+            <a href="wriggle/new-wriggle.htm">
+              <img src="_icons/icon_wi.gif"></a>
+          </div>
+          <div class="tbl-td co-txt"><p>
+            <a href="wriggle/new-wriggle.htm">Original wriggle</a>:
+            This puzzle is a real can of worms. Can you detangle them?</p>
+          </div>
+          <div class="tbl-td co-ico">
+          <a href="wrigc/new-wrigc.htm">
+            <img src="_icons/icon_w5b.GIF"></a>
+          </div>
+          <div class="tbl-td co-txt"><p>
+            <a href="wrigc/new-wrigc.htm">Colour-wriggle mazes</a>:
+            Juggle the colours while you wriggle.</p>
+          </div>
+        </div> <!-- tbl-tr -->
+
+        <div class="tbl-tr"> 
+          <div class="tbl-td co-ico">
+            <a href="tjwrig/new-jwrig.htm">
+              <img src="_icons/icon_tj.gif"></a>
+          </div>
+          <div class="tbl-td co-txt"><p>
+            <a href="tjwrig/new-jwrig.htm">TJ-wriggle</a>:
+            The now definitive wriggle variant. Co-developed with Tom Jolly.</p>
+          </div>
+          <div class="tbl-td co-ico">
+            <a href="tjwrig/new-bhwrig.htm">
+              <img src="_icons/icon_bh.gif"></a>
+          </div>
+          <div class="tbl-td co-txt"><p>
+            <a href="tjwrig/new-bhwrig.htm">Extreme TJ-wriggle</a>:
+            Maximising complexity in the smallest possible space.</p>
+          </div>
+        </div> <!-- tbl-tr -->
+
+      </div> <!-- tbl -->
+
+      <div class="page-note">
+        <h3>Observations on wriggle puzzles (added 2010)</h3><p>
+          The wriggle-rule relaxes the classic Rush-Hour rule just a little, by allowing 
+          the blocks to bend (and thus wriggle). You still cannot drag an object side-ways, 
+          only backwards or forwards, from one end or the other. 
+          It turns out this modest modification to the rule has a big impact on the 
+          puzzle behaviour. Most notably very long wriggles are possible and many 
+          more states are reachable, which in turn means even more complexity and 
+          variety can be packed into a small area.</p>
+          <p>For almost 8 years there was no methodical search of the wriggle-rule 
+          puzzle space so exactly was was achievable on the smaller grid (such as 5x5) 
+          was an unknown. During 2010 Bob Henderson (USA) decided it was time to find 
+          out and discovered that there was a huge wealth of untapped complexity, 
+          even on the 4x4 grid [<a href="tjwrig/new-bhwrig.htm">Read more</a>].
+          </p>
+      </div>
+
+      <div class="page-note">
+        <h3>Development notes (added 2022)</h3><p>
+          Somewhat surprisingly, my humble Wriggle app gets the accolade for being the  
+          <a href="https://joelthefox.github.io/2019-08-21-Snake-Puzzle-Games/#wriggle-by-andrea-gilbert"> 
+            first ever snake puzzle game</a>.
+          I keep waiting for something to sneak into the
+          <a href="https://joelthefox.github.io/2019-08-21-Snake-Puzzle-Games/#ultra-handy-quick-reference-table">
+            ultra-handy quick reference table</a>
+           ahead of Wriggle, but so far nothing has challenged it for top slot. 
+        </p><p>
+          <a href="https://joelthefox.github.io">Joel</a>
+          once asked me to write some background notes describing the inspiration behind Wriggle
+          and I never quite got around to that, although I have often pondered exactly what I would say.
+          The wording above suggests Wriggle might be inspired by Rush-Hour, but I know this not to 
+          be true. The parallel with Rush-Hour was an afterthought and simply a good way of describing 
+          how the mechanic worked in relation to something already familiar.
+          </p><p>
+          So, where did the inspiration come from? Let's try and rewind the clock...
+          </p><p>
+          Way back in 2003 I was pretty much at my peak, developing my puzzling ideas into applets. 
+          I had a solid core framework of classes which I was rapidly adding new interfaces to, in 
+          order to support new UI interactions.
+          Mouse click and drag were probably added on a wet Sunday afternoon, simply because they 
+          were next on the list (and I'd finally understood that chapter of the book!). 
+          I can clearly remember I did not have a puzzle concept in mind, but was hopeful that 
+          as soon as I could paint something on the screen and drag it around then inspiration 
+          would strike. 
+          Looking back now, after nearly 20 years, I think this pretty much summarises what 
+          happened next...</p>
+          <p><i>
+          Yay, it compiles and runs... and voila one circle is now a wobbly line of circles. 
+          Ok... that's too many circles, let's retain just the last few. Haha, that wriggles 
+          like a worm. Cute. Let's paint that one red and add a blue one (oops... I need a mouse-up 
+          handler also. Done). Yup - two worms. OK let's snap that to a grid and add collision 
+          detection. Done. OK so can I now swap red and blue by wriggling them. 
+          Nah... well maybe... oh yes! 
+          Hmmm... that was non-trivial, but why? And can I make it even harder? Oh!!!!
+          </i></p>
+          <p>And thus a puzzle (and puzzle genre) was born.
+            [<a href="https://joelthefox.github.io/2019-08-21-Snake-Puzzle-Games/">Discover more</a>]
+          </p> 
+      </div>
+
+      <hr>   
+      <div class="page-credits"><p>
+        &COPY; Andrea Gilbert - 2003-2022<br>
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

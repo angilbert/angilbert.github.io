@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickmazes applets</title>
+    <link rel="stylesheet" href="./style2020.css?v=1.3"> 
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="_site/site_cornersmall.gif">
+      <p>
+        <img src="_site/logo_white.png" height="250px">
+        <a href="index.htm">home</a>
+        <a href="./new-history.htm">history</a>
+        <a href="new-faq.htm">help</a>
+      </p>
+  </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>The clickmazes applets</h2>
+          <p>This page is an introduction and index to the clickmazes applets. 
+          The majority of the puzzles here are my own invention and 
+          implementation with special thanks to Graham Rogers, 
+          Jimmy Stephens and Oskar van Deventer for their many contributions.
+        </p>
+      </div>
+      <div><p>
+        <b>Update November 2021</b>: The original clickmazes applet are currently 
+        inaccessible in their original form, but many have already been ported to 
+        native HTML5/puzzlescript and yet more ports are in progress. 
+        If you are still waiting for a port of your favourite old clickmazes 
+        applet, please let me know.
+      </p>
+    </div>
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="bbox/new-bbox.htm"><img src="_icons/icon_bbox.gif"></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="bbox/new-bbox.htm">Blackbox</a>: 
+          is a clever two-player deductive game invented by Eric Solomon in 
+          the 1970s and is traditionally my first testing-ground for
+          any new programming language. In Java it proved a good introduction
+          to event handling, array handling, layout managers, random number
+          generation and a few other things besides. Perhaps, above all,
+          it taught me never to touch GridBagLayout again.
+          </p>
+        </div>
+      </div>  
+      
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="newtile/new-tile.htm"><img src="_icons/icon_tile.gif"></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="newtile/new-tile.htm">Tile puzzles</a>: 
+          This is an original home-grown puzzle, first published in
+          the Lubenham Village Newsletter (circa 1982). One of it's most
+          striking features is that it <b>isn't a maze</b> (not sure
+          how that happened). The original 10-piece tile set (introduced
+          December '97) was new at that time, and was refined and tested 
+          to ensure only a single solution.</p>
+          <p>Tile puzzle required reading several new chapters
+          on Java, including (several times over) one particularly baffling
+          section on how to control screen flicker. Image handling was
+          an easier section, but unfortunately also turned out to be the
+          wrong section, graphics handling would have been better since
+          the initial version of tile puzzle used forty gif files and could
+          be very slow to load. Tile puzzle was thus belatedly revamped
+          in February '98 to draw it's own graphics.</p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="ktour/new-ktour.htm">
+            <img src="_icons/icon_ktour.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="ktour/new-ktour.htm">Knight's tour</a>: 
+            The knight's tour is an old idea with a new twist.
+            I first experimented with mazes based on the knight's move 
+            as a child but this was the first to have a special moving
+            'peep-hole' through which the maze is viewed. 
+            The peep-hole principle
+            could be applied to any maze of course, but the knight's tour
+            also offered a test-bed for some simple Java graphics.</p>
+            <p>Implementing the knight's tour maze went remarkably
+            smoothly (for a change). It actually took longer to come up with
+            a satisfactory maze than write the Java. That said, I found fillRect()
+            rather troublesome; is it meant to include or exclude the width
+            of the border? I found I had to both draw and fill each
+            stepping stone to achieve consistent results across all browsers.</p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="newtilt/new-ixtilt2d.htm">
+            <img src="_icons/icon_tilt2d.gif" ></a><br>&nbsp;<br>
+            <a href="newtilt/new-ixtilt3d.htm">
+              <img src="_icons/icon_tilt3d.gif" ></a> 
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="new-indext.htm">Tilt mazes</a>:
+            The tilt mazes were the first new concept I explored with 
+            clickmazes specifically in mind. At the time (1997) they were my 
+            first new mazes for some years. Perversely, the more complex
+            3D tilt maze came first, it was only after implementation that
+            I decided the tilt behaviour was sufficiently interesting in
+            isolation to merit the development of a simple 2D version.</p>
+            <p>The tilt mazes as originally launched, required
+            little or no new knowledge of Java. I had a little trouble initially
+            getting the main panel (container) to redraw itself with a different
+            set of components (yes, yes... validate() - so obvious!?).
+            It did take somewhat longer than a Sunday afternoon this time,
+            but then so did the mazes.</p>
+            <p>In April '98 the tilt mazes were significantly
+            reworked to make use of the new base classes introduced by the
+            tilt puzzles (see below).</p>
+            <p>In October '99 the 2D tilt mazes were the subject
+            of further major rework. Many more mazes added (various sizes)
+            and a range of brand new multi-goal mazes were added.
+            The Java diverged here for this development (unfortunately) but
+            perhaps one day I'll bring it all back together again.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="newtilt/new-ixtilt.htm">
+            <img src="_icons/icon_tiltdb.gif" ></a> 
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="newtilt/new-ixtilt.htm">Tilt puzzles</a>: 
+            The tilt puzzles take the tilt behaviour one step further and
+            turn the basic 2D tilt maze into something more of a novelty.
+            Two sliding blocks now share the same tray and must reach their
+            own separate goals without coming into contact. Superficially
+            the puzzles are just two mini mazes in one, the challenge however
+            is the synchronisation.</p>
+            <p>The tilt puzzle Java could have been a simple
+            variation on what had come before, but the desire to implement
+            a realistic slide effect forced me to dabble with something new...
+            Java threads. Then, inevitably, my one small runnable
+            class not so much slid but snowballed into a major overhaul of
+            all the tilt-maze source. The tilt puzzles subsequently provided
+            the base classes from which all tilt-maze classes were derived. 
+            For an OO-impaired software engineer this turned out to be 
+            quite a voyage of discovery.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="roll/new-roll.htm">
+            <img src="_icons/icon_roll.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="roll/new-roll.htm">Colour-zone mazes</a>: 
+              This is a clickmazes original variation on the
+              <a href="https://www.logicmazes.com/rb/column.html">
+                rolling block puzzle</a> concept.</p>
+              <p>The Java here was nothing new (I shrugged off yet
+              again the pressure to leap to Java 2) and thus took only a few
+              hours to implement. The mazes however took a fair bit longer
+              to devise and, even so, turned out limited in complexity, 
+              there's just a little bit too much connectivity with 
+              no other rules to restrict movement.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="mtilt/new-mtilt.htm">
+            <img src="_icons/icon_marble.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="mtilt/new-mtilt.htm">Marble mazes</a>: 
+            The marble tilt mazes were my next foray into the tilt-maze
+            concept. This is the code I should have written for the original
+            tilt-puzzles (March '98) but found a little beyond me at the
+            time. Hence the original 'bang' effect as the blocks slid into
+            each other (which was more or less what my code did, the first
+            time I ran it). Some years later, and with a good deal more
+            practice at thread and vector handling behind me, things 
+            came together with slightly less explosive results.</p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="hk/new-hk.htm">
+            <img src="_icons/icon_oskar.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="hk/new-hk.htm">Oskar's hysteresis mazes</a>: 
+            The hysteresis mazes are inspired by 
+            an original mechanical puzzle by Oskar van Deventer.
+            Oskar kindly invited me to try implementing his puzzle in Java,
+            and this worked very well indeed, although somehow the resulting
+            mazes turned out not quite devious enough for either of us. So
+            we increased the size, threw in a black-hole or two and finally
+            sprinkled everything with strange yellow dots. 
+            Consider the yellow dots 'portals' into a strange inner dimension; 
+            the curious north&#150;south maze, that lurks behind every 
+            east&#150;west maze.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="life/new-life.htm">
+            <img src="_icons/icon_life.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="life/new-life.htm">Maze of life</a>: 
+              The maze of life is a puzzle based on John Conway's well known
+              Game of Life algorithm. An interactive Game of Life no less! So
+              hey, we should all be experts. However this 'game'
+              is about as unpredictable and uncontrollable as life itself.
+              Basic survival is soon mastered, but are you a true master of
+              your fate? Can you reach that ultimate goal? Fortunately in this
+              version you always have the undo option (oh how useful
+              that would be!).</p>
+              <p>Maze of life V2 was added in July 2000 and offers a means of 
+              saving and recording played sequences. Further enhancements
+              were added in April 2001 (V2.2) to provide unlimited redo and
+              preloading of size, start state and move sequence. In Jan 2002
+              (V2.4) the 'Undo all' option was added plus several fixes to
+              support much larger move sequences and play areas.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="new-indexp.htm">
+            <img src="_icons/icon_planks.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="new-indexp.htm">Plank puzzles</a>: 
+              This puzzle has become one of the best known and most
+              accoladed members of the clickmazes puzzle family. Famously 
+              designed on the back-of-an-envelope, while waiting in the A&amp;E dept 
+              of the Luton and Dunstable NHS hospital (it was a long wait and
+              I only had the contents of a hand-bag to amuse myself).</p> 
+              <p>The plank puzzle applet is the work of Graham Rogers and is 
+              an honorary member of the clickmazes applet family.
+              I also thank one Andy Williams who was the first to develop a
+              successful plank-puzzle solver.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="dragon/new-drag.htm">
+            <img src="_icons/icon_dragon.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="dragon/new-drag.htm">Oskar's dragon maze</a>: 
+            The dragon maze is an ingenious fractal maze design by Oskar
+            van Deventer. Use the applet to drag the layers of interwoven
+            lattice-work one at a time from left to right and watch the maze
+            develop. The secret is the white areas of each layer are transparent,
+            allowing underlying colours to show through.</p>
+            <p>This applet required a small diversion back to the theory books 
+            to discover how to create an image with transparent
+            areas. In fact you don't (well I didn't) you set up a filter
+            instead. Nothing is ever quite what it seems.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="noleft/new-noleft.htm">
+            <img src="_icons/icon_noleft.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="noleft/new-noleft.htm">No-left-turn maze</a>: 
+            Looks trivial until your realise you can't turn left
+            (or make U-turns). Some old Java here, but I thought it about
+            time it went on-line (maze No.2 was added new).
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="fourbit/new-4bit.htm">
+            <img src="_icons/icon_4bit.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="fourbit/new-4bit.htm">Oskar's Four-bit mazes</a>: 
+          Java2 at last (or should that be Java 1.3.0?). That wasn't so 
+          bad after all and it seems even GridBag layout can be
+          mastered, with sufficient time and patience.</p>
+          <p>I needed a small, non-graphical, challenge to
+          test my new found skills. Oskar's four-bit mazes were perfect.
+          If you manage to switch off all those lights just be careful
+          not to fall over the furniture.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="spin/new-spin.htm">
+            <img src="_icons/icon_spin.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="spin/new-spin.htm">HexaRoll</a>: 
+              Another great puzzle challenge from Oskar van Deventer, based
+              on a variation of the tilt theme. But oh, applets with hexagons
+              and rotating shapes?... that has to be one for Graham. With lots
+              of late night development consultancy from Louie the result was
+              sure to be another perfectly executed applet.</p>
+              <p>So what exactly was my contribution? Well I
+              did find the odd bug, and even tried to fix a couple, but my
+              main task was to encode up the mazes, which as you might see
+              from the HTML source took a little while to sort out. And then
+              having gone to all that trouble I really couldn't then resist
+              adding a couple more mazes of my own.</p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p>
+            <a href="magb/new-magb.htm"><img src="_icons/icon_magb.gif"></a>
+            <br>&nbsp;<br>
+            <a href="cups/new-cups.htm"><img src="_icons/icon_cup.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p>Two more exotic variations on the tilt theme made possible by
+            a multi-purpose applet developed by Graham which supported just
+            about all forms of tilt-puzzle dabbled with so far
+            and a few more yet to be invented.
+            So this list will probably grow and grow. So far we have...</p>
+          <p><a href="magb/new-magb.htm">The magnetic-block puzzles</a>: 
+            These puzzles were inspired by another web-app popular at 
+            the time called <i>Denki</i>.
+            Denki did not itself use the tilt-rule but adding it allowed 
+            creation of some really tiny, meany puzzles. Try them and see, 
+            or try something less mind-blowing...</p>
+          <p><a href="cups/new-cups.htm">The cup and pea puzzles</a>:
+            which were invented when Graham mis-understood an idea 
+            suggested by Andy Williams. A fortuitous accident that 
+            yielded the most exotic tilt-variation so far.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="orient/new-orient.htm">
+            <img src="_icons/icon_om.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="orient/new-orient.htm">Orientation mazes</a>:
+            Ooops I'm definitely slipping behind here... yet another applet
+            by a fellow designer and this time the puzzles aren't my own 
+            either. Well at least I thought up the concept. 
+            Nice applet by Jimmy Stephens of Atlanta, including elegant graphics. 
+            Puzzles are so tiny and yet so very, very mean, all thanks to 
+            OrientExpress (an extension of SwampBeast).
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="boxup/new-boxup.htm">
+            <img src="_icons/icon_boxup.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="boxup/new-boxup.htm">BoxUp</a>: 
+            At last some new java all of my own. A sort of evolution of Graham's
+            <i>magblock</i> code, but with all the standard stuff separated off
+            into its own class (puzzlePresenter) to enable rapid development
+            of new puzzles. The clever bit is puzzlePresenter dynamically
+            loads a second puzzle-specific class (<i>boxup</i> in this case) which
+            must implement the stdpuzz interface. Took a little while to
+            manage all the funny looking exceptions that can occur if things
+            go wrong.</p>
+            <p>An alternative name for this is <i>Inside-out Sokoban</i> so
+            if you like Sokoban try this.</p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="./new-indexw.htm">
+            <img src="_icons/icon_wriggle.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="./new-indexw.htm">Wriggle puzzles</a>: 
+          OK, I'm on a roll now. Actually it can't be a roll - I've done
+          that already, so it must a wriggle. My puzzlePresenter classes
+          are making this all very easy, but I keep adding
+          new interfaces to allow optional elements of game play. 
+          This one required the introduction of a interface to handle 
+          mouse motion.</p>
+          <p>Looks like another collection is underway here...
+          Colour-wriggle mazes added August '06, TJ-wriggle puzzles 
+          added August '07 and Extreme TJ-wriggle added December '10.
+          </p><p>
+          <a href="wrigc/new-wrigc.htm"> <img src="_icons/icon_w5b.GIF" ></a>
+          <a href="tjwrig/new-jwrig.htm"> <img src="_icons/icon_tj.gif" ></a>
+          <a href="tjwrig/new-bhwrig.htm"> <img src="_icons/icon_bh.gif" ></a>
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="./new-indexo.htm">
+            <img src="_icons/icon_ju.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="./new-indexo.htm">Oskar's collection</a>: 
+          Oskar meet java... java meet Oskar. Ignoring an early misfortunate
+          detour into the deep dead-end of Swing (all-singing, all dancing -
+          but very browser unfriendly) there's no doubt Oskar has taken
+          firm command of his very own virtual puzzle world 
+          (and a four-dimensional, parallel-universe world at that).</p>
+          <p>
+          <a href="osk2pu/new-osk2pu.htm"><img src="_icons/icon_pu.gif" ></a>
+          <a href="osk34d/new-osk34d.htm"><img src="_icons/icon_4d.gif" ></a>
+          <a href="osk1co/new-osk1co.htm"><img src="_icons/icon_co.gif" ></a>
+          <a href="ovd/new-o3some.htm"><img src="_icons/icon_ts.gif" ></a>
+          <a href="ovd/new-ovend.htm"><img src="_icons/icon_hvm.gif" ></a>
+          <a href="ovd/new-obelg.htm"><img src="_icons/icon_be.gif" ></a>
+          <a href="ovd/new-ojuke.htm"><img src="_icons/icon_ju.gif" ></a>
+          <a href="ovd.act/new-amaze.htm"><img src="_icons/icon_act.GIF" ></a>
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="polyfold/new-poly.htm">
+            <img src="_icons/icon_poly.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="polyfold/new-poly.htm">Polyfold puzzles</a>: 
+            Another Oskar creation reworked and extended out of almost all
+            recognition for the web. Initially implemented using some basic
+            trig functions, but which later proved superfluous. The biggest
+            hurdle was implementing my own version of the Line2D.intersects()
+            method. Not so much referencing the JAVA text-books here, it
+            was more back to my O-level maths notes.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="chain/new-chain.htm">
+            <img src="_icons/icon_rgb.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="chain/new-chain.htm">Chain-reaction</a>: 
+              This java was simple enough except for
+              the auto-generation feature where it took a while to fine tune
+              the algorithm such that the search for a new puzzle had an acceptably
+              low number of solutions, yet didn't take for-ever to find them.
+              Then there was the need to revisit java Threads, the first time
+              for a while. Thanks to the auto-generation feature this is the
+              first of my creations with some replay value.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="fullho/new-fullho.htm">
+            <img src="_icons/icon_fh.gif" ></a></p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="fullho/new-fullho.htm">Full-house puzzles</a>: 
+            This is where puzzlePresenter, and all that came before and after,
+            really starts to pay-off. A couple of hours tinkering with some
+            core logic is all it takes to knock out something new. 
+            My thanks to Erich Friedman for dreaming up such a clever and 
+            elegant puzzle, and for lending me a few samples to present here.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="xvi/new-xvi.htm">
+            <img src="_icons/icon_xvi.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="xvi/new-xvi.htm">XL-up maze</a>:
+            Oh to be only 40 again, it seems like so long ago now. 
+            The hardest challenge with this one was trying to write my 
+            own mini 'beasty' program to eek out the sequence as far as 
+            possible. I'm still hoping to outlive the best score.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="step123/new-step.htm"><img src="_icons/icon_step.gif" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="step123/new-step.htm">Step-over sequence mazes</a>: 
+            Another quick cookie-cut from the puzzlePresenter cake of giving. 
+            Prototyping the full-size physical walk-round version took 
+            eons longer. But 15 years later the second prototype is still 
+            going strong!</p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="quantum/new-quantum.htm">
+            <img src="_icons/icon_escape.GIF" ></a> 
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="quantum/new-quantum.htm">Quantum maze</a>: 
+            No faffing about with complicated puzzle encodings here,
+            each puzzle can be encoded in just a few bits. With this 
+            puzzle the start-state is a blank canvas, quite literally.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p><a href="sstone/new-sstone.htm"> 
+            <img src="_icons/icon_sstone.GIF" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="sstone/new-sstone.htm">Stepping-stone mazes</a>: 
+            A surprisingly accommodating maze with almost perfect connectivity 
+            and very low risk of black-holes. So much so that I called this the 
+            <i>self-wiring multi-state maze</i> 
+            when I presented a talk on it at G4G12. The 5-minute presentation 
+            took a lot longer to prepare than the java, and was a lot more
+            stressful.
+          </p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="appinfo-icon">
+          <p> <a href="puffball/new-puffball.htm"> 
+            <img src="_icons/icon_puffb.PNG" ></a>
+          </p>
+        </div>
+        <div class="appinfo-txt">
+          <p><a href="puffball/new-puffball.htm">Puff-ball puzzles</a>: 
+          Shook the dust of the beasty code again for this one, to hunt for 
+          those deepest-state goals. If the solution eludes you (as they do 
+          mostly for me!) take a peek at the HTML source for the web-page, 
+          you'll find the solution hidden there, in plain sight.
+          </p>
+        </div>
+      </div> 
+ 
+      <hr>   
+      <div class="page-credits">
+        <p>&COPY; - Andrea Gilbert 1998-2021</p>
+      </div>  
+    </div>
+  </body>
+</html>

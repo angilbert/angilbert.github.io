@@ -1,0 +1,57 @@
+P, TD, UL {
+  font-family: verdana, arial, helvetica;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.side {
+  font-family: helvetica, verdana, arial;
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-left: 10px; margin-right: 30px;
+  line-height: 1.4;
+}
+
+.table {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.links {
+  font-family: verdana, arial, helvetica;
+  font-size: 12px; font-weight: bold;
+  text-align: right;
+  margin-right: 35px;
+}
+
+H2 {
+  font-family: verdana, arial, helvetica;
+  color: #993399;
+}
+H3 {
+  font-family: verdana, arial, helvetica;
+  color: #993399;
+}
+
+FONT.title {
+  font-family: verdana, arial, helvetica;
+  font-size: 16px; font-weight: bold;
+  color: #993399;
+}
+
+FONT.note {
+  font-family: verdana, arial, helvetica;
+  font-size: 12px;
+  color: #FF3333;
+}
+
+FONT.detail {
+  font-family: verdana, arial, helvetica;
+  font-size: 12px;
+  font-style: italic;
+}
+
+A:link, A:visited {color: #993399; text-decoration: underline}
+
+A.s:link, A.s:visited {color: #FFCC00; text-decoration: none}
+A.s:hover {color: #FFFFFF; text-decoration: underline}
