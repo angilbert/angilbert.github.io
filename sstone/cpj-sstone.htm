@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>The stepping-stone mazes</h2><p>
+          Can you count to three? That's all you really need 
+          for these nifty mazes. Step, step, step, change colour, repeat. 
+          Each visit to each group of coloured stones must involve exactly 
+          three steps, no more no less. These mazes were designed during 2011 
+          in collaboration with Robert Abbott 
+          (<a href="http://www.logicmazes.com">www.logicmazes.com</a>). 
+        </p>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p>Sample puzzle<br>click below to play</p>
+          <p><img src="eg44.PNG" width="273" height="184"></p>
+          <p>
+          <cheerpj-applet archive="../jars/new-step123.jar" 
+            code="puzzlePresenter/puzzlePresenter.class" 
+            width="200" height="40">
+            <param name="class" value="step123.stepstone">
+            <param name="puzzle0" value="3640151 011220 231223 034420 034420">
+            <param name="title0"  value="4x4#1 (1 of 8)">
+            <param name="puzzle1" value="3640051 233340 011341 021140 022140">
+            <param name="title1"  value="4x4#2 (2 of 8)">
+            <param name="puzzle2" value="3750263 0122230 0123330 4150350 0155552 0666650 ">
+            <param name="title2"  value="5x5#1 (3 of 8)">
+            <param name="puzzle3" value="3750063 6211110 0222660 0443360 0453363 0455550 ">
+            <param name="title3"  value="5x5#2 (4 of 8)">
+            <param name="puzzle4" value="3860373 06662230 05562330 05522350 24444356 01114350 01222250">
+            <param name="title4"  value="6x6#1 (5 of 8)">
+            <param name="puzzle5" value="3860473 01123330 04123660 04122260 04333163 54351110 03355510">
+            <param name="title5"  value="6x6#2 (6 of 8)">
+            <param name="puzzle6" value="3970080 611114413 033224410 033022110 055566660 044530220 044431220 033331110">
+            <param name="title6"  value="7x7#1 (7 of 8)">
+            <param name="puzzle7" value="3970686 012222330 011143350 065444150 065524150 063524150 063221110 433266663">
+            <param name="title7"  value="7x7#2 (8 of 8)">
+          </cheerpj-applet> </p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Aim</h4><p>
+            Cross the grid, from left to right, visiting <i>exactly three stepping 
+            stones </i>of the <i>same colour</i> and then <i>switching colour</i>.
+            </p>
+          <h4>Controls</h4><p>
+            Use the <b>puzzle</b> drop-list to select a puzzle.<br>
+            Use <b>restart</b> (action) or the <b>space</b> key to reset.</p>
+          <h4>Movement</h4><p>
+            Use the <b>cursor keys</b> to move (or click on a stepping stone).<br>
+            Press <b>u</b> (undo) to jump back as far as the last colour-change.<br>
+            U-turns not permitted.
+            </p>
+        </div>
+      </div>   
+      <div class="std-flex-block">
+        <div class="photo-info">   
+          <p>
+            These mazes were designed an atypical way. By following 
+            a few basic ground rules (regarding the shape and size of the colour 
+            groups) it turns out that a remarkable number of grid arrangements 
+            naturally yield good mazes, requiring little or no refinement. 
+          </p><p>
+            A key underlying reason for such a high yield is the relative ease 
+            of arranging the grid such that the resulting state-diagram is fully 
+            connected (all states are both reachable and escapable) despite 
+            also being a directed graph (where moves are non-reversible). This 
+            type of state-diagram is technically known as a 
+            <a href="http://mathworld.wolfram.com/StronglyConnectedDigraph.html">
+            strongly connected digraph</a> which, perhaps not surprisingly, 
+            turns out to yield some very nice mazes. 
+          </p>
+        </div>
+        <div class="photo-area">
+          <p>A stepping stone maze featured on
+            <a href="http://www.gamesmagazine-online.com">Games Magazine</a>
+            (USA) cover - March 2012 </p>
+          <p><img src="GamesMar12.gif" width="200"></p>
+        </div>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>applet</b> - &COPY; Andrea Gilbert 2011<br>
+        <b>concept &amp; puzzle set</b> - &COPY; Andrea Gilbert &amp; Robert Abbott 2011-2012<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>
