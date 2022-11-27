@@ -1,0 +1,66 @@
+
+.ps-main-grid {
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(3, auto); 
+    column-gap: 12px;
+    row-gap: 20px;
+    padding: 10px; 
+}
+.ps-grid-center { align-self: center; }
+.ps-grid-top    { align-self: start; }
+
+.ps-main-grid ul { 
+    background-color: gainsboro;
+    list-style: none; 
+    list-style-position: inside;
+    font-size: 14px;
+    padding: 10px 20px 10px 10px;
+    margin: 2px;
+}
+
+.ps-main-grid p { font-size: 14px;  }
+.ps-main-grid a { font-size: 14px;  }
+
+/* info button */
+button {
+    background-color: transparent;
+    font-size: 14px;
+    border-width: 0px;
+    text-decoration: none;
+    padding: 0px;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1;             /* Sit on top */
+    padding-top: 200px;     /* Location of the box */
+    left: 0; top: 0;
+    width: 100%;            /* Full width  */
+    height: 100%;           /* Full height */
+    overflow: auto;         /* Enable scroll if needed */
+    background-color: rgb(0,0,0);   
+    background-color: rgba(0,0,0,0.4); /* Black opaque */
+  }
+  .ps-info-txt {
+    background-color: white;
+    margin: auto;
+    padding: 14px;
+    width: 60%;
+  }
+  .ps-info-txt p { font-size: 14px;  }
+
+  .ps-info-close {
+    color: gray;
+    float: right;
+    font-weight: bold;
+  }
+  .ps-info-close:hover,
+  .ps-info-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+

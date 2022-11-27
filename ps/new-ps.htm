@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PuzzleScript</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <link rel="stylesheet" href="./ps.css">
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>PuzzleScript collection</h2><p>
+        This page is an introduction to the wonderful world of 
+        <a href="https://www.puzzlescript.net">puzzlescript</a> (PS). An impressive
+        open-source toolkit for rapid-prototyping of simple HTML5 puzzle-apps.
+        Since its inception in 2013 PS has been embraced by dozens of indie 
+        and hobby-level developers resulting in a mind-boggling, ever-expanding 
+        collection of puzzles, allowing anyone armed with a browser and a keyboard 
+        (recommended) to explore the amazing creations of some of the world's 
+        newest and most innovative puzzle-game designers.</p>
+      </div>
+      <div>
+        <p>Most puzzles here are unashamedly biased towards the clickmazes 
+          style (2D, minimalist, compact, route-finding, multi-state). 
+          Beware however of one major distinction... a general lack of
+          instruction. Where are the rules and what is the goal? 
+          Bluntly put, it's down to you to work that out (and the first-rule of 
+          rule-discovery is that the first-rule probably isn't the last-rule).
+          The world of the PS-app is a delightful loop of exploration and 
+          discovery which I guarantee you will learn to love, just as much as I do.
+          </p>
+      </div>
+
+      <!-- hidden modal -->
+      <script type="text/javascript" src="./ps.js"></script>
+      <div id="infoModal" class="modal">
+        <div class="ps-info-txt">
+          <span class="ps-info-close" 
+              onclick="hideInfo()">&times;</span>
+          <h3 id="infoHdr">header text</h3>
+          <p id="infoPara">para text</p>
+        </div>
+      </div>
+
+      <h3>Taster-menu No.1 (January 2021)</h3>
+      <div class="page-note">
+        <p>
+        This first taster-menu is restricted to puzzles I have fully solved myself,
+        end to end (which seems only fair on my visitors). The magnifying-glass 
+        next to each link provides a short overview of the puzzle, 
+        including why I chose to include it. 
+        </p>
+      </div>
+        
+      <div class="ps-main-grid">
+        <div class="ps-grid-center"><img src="./eg1.png"></div>
+        <div class="ps-grid-top"><h4>Find your feet</h4><p>
+            Perfect for puzzlescript newbies. These puzzles are all based on 
+            familiar mechanics, with only the faintest hint of deliberate rule 
+            obfuscation. The understated yet effective graphics will help quell 
+            the panic attacks.<br>
+          </p>
+        </div>
+        <div class="ps-grid-center"><ul>
+            <li><a href="https://www.puzzlescript.net/play.html?p=9d54d405b82f9224d0b6dd98aebfb47e">GapFiller</a>
+              <button onclick="showInfo(0)">&#128269;</button> </li>
+            <li><a href="https://pedropsi.github.io/unlucky-unlock.html">Unlucky unlock</a>
+              <button onclick="showInfo(1)">&#128269;</button></li> 
+            <li><a href="https://www.puzzlescript.net/play.html?p=6642bf1b37f18bf77e75">Dotsnake</a>
+              <button onclick="showInfo(2)">&#128269;</button></li> 
+            <li><a href="https://oveahlman.itch.io/beach-jump-maze">Beach jump maze</a>
+              <button onclick="showInfo(3)">&#128269;</button></li>
+            <!-- <li><a href="https://www.puzzlescript.net/play.html?p=7718522">MazezaM</a></li>  
+            <li><a href="https://pedropsi.github.io/game-console.html?game=8450765">12345</a></li>
+            <li><a href="https://pedropsi.github.io/game-console.html?game=96608bd07725a3a105bb0027a7b73da3">Omniban</a></li>-->
+          </ul>
+        </div>
+
+        <div class="ps-grid-center"><img src="./eg2.png"></div>
+        <div class="ps-grid-top"><h4>Expand your horizons</h4><p>Good puzzles to extend your journey. 
+            Be prepared to think outside-the-box while simultaneously admiring the 
+            innovative way a single brightly-coloured 
+            pixel cleverly conveys a vital aspect of the puzzling experience... 
+            if only you could work out exactly what.</p>
+        </div>
+        <div class="ps-grid-center"><ul>
+            <li><a href="https://www.puzzlescript.net/play.html?p=6888061">Modality</a>
+              <button onclick="showInfo(4)">&#128269;</button></li> 
+            <li><a href="https://www.puzzlescript.net/play.html?p=4adc7b17c2c0449c3a8b6c730e8cbfc9">Soliquid</a>
+              <button onclick="showInfo(5)">&#128269;</button></li>
+            <li><a href="https://dario-zubovic.github.io/PuzzleScript/play.html?p=291a12b7feb72de9ba0d0280cfc4f561">Pip push paradise</a>
+              <button onclick="showInfo(6)">&#128269;</button></li>
+            <li><a href="https://www.puzzlescript.net/play.html?p=783283dd7b8c0dbb17a7b5f969e46a26">All green to blue</a>
+              <button onclick="showInfo(7)">&#128269;</button></li>
+            <!-- <li><a href="https://rosden.itch.io/path-lines">Path lines</a></li>
+            <li><a href="https://joel-fox.itch.io/line-of-sight">Line of sight</a></li>
+            <li><a href="https://jacklance.itch.io/snakeoban">Snakeoban</a></li>
+            <li><a href="https://nebu-soku.itch.io/gyoretu-puzzle">Gyoretu</a></li>
+            <li><a href="https://www.draknek.org/games/puzzlescript/spikes-n-stuff.php"> Spikes'n'stuff</a></li> -->
+          </ul>
+        </div>
+        
+        <div class="ps-grid-center"><img src="./eg3.png"></div>
+        <div class="ps-grid-top"><h4>Take a leap of faith</h4><p>
+            Be prepared to throw away the rule book from here on. Thinking 
+            outside-the-box will only help if you are mentally prepared to 
+            discover a recursive copy of the inner-box.
+            As an aside, if your brain is not yet interpreting two adjacent, 
+            tonally-similar pixels as a 3D cube then you aren't yet ready...
+          </p>
+        </div>
+        <div class="ps-grid-center"><ul>   
+            <li><a href="https://toombler.itch.io/mortar">Mortar</a>
+              <button onclick="showInfo(8)">&#128269;</button></li>  
+            <li><a href="https://skyychann.itch.io/lab-lab">Lab labyrinth</a>
+              <button onclick="showInfo(9)">&#128269;</button></li>
+            <li><a href="https://www.puzzlescript.net/play.html?p=d210a5248fa713153950">Sokoboros</a>
+              <button onclick="showInfo(10)">&#128269;</button></li>
+            <li><a href="https://www.draknek.org/games/puzzlescript/train.php">Train Braining</a>
+              <button onclick="showInfo(11)">&#128269;</button></li>
+            <!-- <li><a href="https://competor.itch.io/duplicators">Duplicators</a></li>
+            <li><a href="https://pancelor.itch.io/chickenswamp">Chicken Crocodisles</a></li>
+            <li><a href="https://le-slo.itch.io/rainwater-honey-oil">Metamorphosis</a></li>
+            <li><a href="https://what-gophers-go-for.github.io">What Gophers Go For</a></li> -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-note">
+        <h4>Links and related pages</h4>
+        <ul>
+        <li>For more puzzles visit the 
+          <a href="https://puzzlescriptgallery.tumblr.com">Puzzlescript Gallery</a></li>
+        <li>Or explore Pedro PSI's curated list of 
+          <a href="https://pedropsi.github.io/selected-puzzlescript-games.html">Selected PS games</a></li>
+        <li>Or filter at itch.io for 
+          <a href="https://itch.io/games/made-with-puzzlescript">made-with-puzzlescript</a></li>
+        <li>Clickmazes pages updated with PS related links: 
+            <a href="../punt/new-punt.htm">punt mazes</a>, 
+            <a href="../xvi/new-xvi.htm">XL-up</a>, 
+            <a href="../noleft/new-noleft.htm">no-left-turn</a> and 
+            <a href="../wriggle/new-wriggle.htm">wriggle</a></li>
+        </ul>
+      </div>
+
+      <div class="page-note">
+        <h4>Footnotes</h4>
+        <p>The puzzles I highlight above were discovered by a process of 
+        random-walk through the spreadsheets, galleries and personal recommendations 
+        that welcomed me when I joined the <i>thinky-puzzle-games</i> discord server. 
+        </p>
+        <p>My apologies to the PS community for omitting the many worthy entries 
+        that could be included here. There is a long list I explored and thoroughly 
+        enjoyed, but never quite finished. There are also some I simply forgot to 
+        bookmark and so many more yet to be discovered. 
+        This page is dedicated to the thinky-puzzle-games community and to the 
+        wonderful multiverse of new puzzles I discovered in 2020.</p>
+        <p>One day... I will write a PS app of my own.</p>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>Page content</b> - &COPY; Andrea Gilbert - 2021<br>
+        <b>PS apps</b> - &COPY; their individual designers - 2013-2021<br>
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>
