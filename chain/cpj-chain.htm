@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Chain Reaction</h2><p>
+          Cross off all the symbols and clear the board. The
+          challenge is to form a single continuous chain that visits every
+          symbol once and once only and where each link in the chain connects
+          two symbols that match either by shape or colour. You can leap
+          around the board, but not diagonally.
+        </p>
+      </div>
+      <div><p>
+          There are several pre-canned puzzles to try of increasing
+          difficulty. You can also auto-generate new puzzles using any
+          one of the pre-canned puzzles as a 'seed'. Just select your puzzle
+          and hit auto-generate. The resulting puzzle will be the same
+          size and will have a similar distribution of symbols. Auto-generated
+          puzzles are guaranteed to have between one and five solutions,
+          depending on size (smaller puzzles have less) and tend to be
+          a little easier than the pre-canned puzzles.</p>
+          <p>Chain-reaction was inspired in part by Robert Abbott's 
+        <a href="http://www.logicmazes.com/eyeball.html">eyeball
+          mazes</a> which use a similar chaining rule.
+        </p>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p>
+            <b>Sample puzzle<br>
+            Click below to play</b></p>
+          <p><img src="eg2.gif" width="95"></p>
+          <p><cheerpj-applet archive="new-chain2.jar" code="puzzlePresenter.class" width="150" height="30" align="center">
+              <param name="class" value="chain">
+              <param name="puzzle0" value="3300rBRbRbBbr;">
+              <param name="title0" value="3x3 No.1">
+              <param name="puzzle1" value="3311RgBgrgBGb;">
+              <param name="title1" value="3x3 No.2">
+              <param name="puzzle2" value="4400rbR Br BR rb BrR;">
+              <param name="title2" value="4x4 No.1">
+              <param name="puzzle3" value="4400rRgBG BgBr RrgGb;">
+              <param name="title3" value="4x4 No.2">
+              <param name="puzzle4" value="4400rgBGbRrGRggBrBGr;">
+              <param name="title4" value="4x4 No.3">
+              <param name="puzzle5" value="5522 bRG RG brg r GBb Bg rGR ;">
+              <param name="title5" value="5x5 No.1">
+            </cheerpj-applet>
+          </p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Aim</h4><p>
+            Cross off all the symbols by visiting them one a time ensuring
+            each symbol matches the last either in shape or colour (or both).
+            At each turn you can move horizontally or vertically any distance.
+            The start position is marked with a cross but the finish square
+            could be anywhere!</p>
+          <h4>Controls</h4><p>
+            Use the <b>Puzzle</b> drop-list to select a puzzle.<br>
+            Use the <b>Restart </b>(Action) or hit <b>space</b> to reset
+            the puzzle.<br>
+            Use <b>Solve</b> (Action) to sneak a peak at the solution<br>
+            Use <b>Auto-generate</b> to try a random puzzle (if the auto-generator
+            is still busy - wait a few seconds and try again).</p>
+          <h4>Movement</h4><p>
+            Click on grid to move.
+          </p>
+        </div>
+      </div>   
+      <hr>   
+      <div class="page-credits"><p>
+        <b>applet &amp; puzzle designs</b> - &COPY; Andrea Gilbert 2003-04<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>
