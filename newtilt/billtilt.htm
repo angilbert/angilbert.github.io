@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+  <TITLE>clickmazes</TITLE>
+  <LINK REL="stylesheet" HREF="../style.css" TYPE="text/css">
+</HEAD>
+<BODY MARGINWIDTH="0" MARGINHEIGHT="0" STYLE="margin: 0" BACKGROUND="../_site/site_tilethin.gif">
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+  <TR>
+    <TD VALIGN="TOP" WIDTH="90">
+    <P><IMG SRC="../_site/site_cornersmall.gif" WIDTH="90" HEIGHT="75"
+    ALIGN="BOTTOM" BORDER="0" > <IMG SRC="../_site/logo_side.gif"
+    WIDTH="57" HEIGHT="218" ALIGN="BOTTOM" BORDER="0" ></P>
+
+    <P CLASS="links"><A HREF="../index.htm" CLASS="s">home</A><BR>
+    <A HREF="../_applets.htm" CLASS="s">applets</A><BR>
+    <A HREF="../_history.htm" CLASS="s">history</A><BR>
+    <A HREF="../_links.htm" CLASS="s">links</A><BR>
+    &nbsp;</TD> 
+    <TD VALIGN="TOP">
+    <H2><BR>
+    The tilt maze console</H2>
+
+    <H2>&nbsp;</H2>
+
+    <P><CENTER><B><IMG SRC="console.jpg" WIDTH="397" HEIGHT="220"
+    ALIGN="BOTTOM" BORDER="0" ></B></CENTER></P>
+
+    <P>This device is a battery-operated, gravity driven implementation
+    of Andrea&#146;s tilt puzzles. As it is tilted, mercury switches
+    detect the tilt and, on a matrix of 10x10 cells, LEDs appear
+    to &quot;roll&quot; from cell to cell exactly as they would do
+    under gravity and according to the rules of Andrea&#146;s tilt
+    puzzles. The package measures approximately 17cm by 10cm by 4cm.</P>
+
+    <P>The LED matrix is overlaid with a grid printed on transparent
+    film, allowing walls to be positioned through which rolling LEDs
+    cannot pass. The layout of the grid is communicated via a user
+    keypad by typing a code number printed on the overlay. The unit
+    can be pre-programmed with details of up to 100 of these grids,
+    and a further 5 grids can be defined and saved using interactive
+    puzzle editors, also operated via the keypad.</P>
+
+    <P>In addition to the LEDs that represent rolling balls, one
+    or more additional flashing LEDs, representing &quot;targets&quot;,
+    may be present. These targets do not move when the device is
+    tilted, they remain in the same place. If however a ball rolls
+    over a target, the target is extinguished. The grid may also
+    have one or more cells marked so as to indicate the presence
+    of a &quot;hole&quot;. When an LED rolls over such a hole, it
+    disappears from play. An internal sounder provides audible feedback
+    by clicking as the LEDs&#146; roll from cell to cell, and bleeping
+    and chirping as targets are extinguished.</P>
+
+    <P>The usual objective is simply to extinguish all targets, but
+    puzzles with alternative objectives are equally possible, such
+    as extinguishing all &quot;rollers&quot; by dropping them through
+    holes.</P>
+
+    <P>&nbsp;</P>
+
+    <P><B>For the technically curious..</B>.</P>
+
+    <P>Internally, the device is comprised of a 4MHz PIC microcontroller
+    which contains 8K words of flash PROM and 368 bytes of RAM. The
+    100 LEDs are organised as a multiplex of 4 columns of 25 rows.
+    The 4 columns are strobed in software by a 2mS clock, providing
+    a complete repaint every 8mS, equivalent to a 125Hz refresh so
+    there is no visible flicker. The four mercury switches and the
+    the 4x3 keypad combined to form a single 4x4 matrix, polled by
+    the CPU.</P>
+
+    <P>Battery life was obviously a major design consideration. Powered
+    by four alkaline AAs, it has been found that in practice typically
+    15-20 hours play is possible without any noticeable deterioration
+    in brightness, and up to 40 hours before the LEDs become excessively
+    dim. For simplicity of operation, and to avoid the use of potentially
+    unreliable cheap mechanical switches, switching On and Off is
+    performed via keypad sequences. When &quot;off&quot;, the PIC
+    is actually placed in low-power sleep mode, drawing only a few
+    microamps, presenting a drain which is negligible compared to
+    the batteries shelf-life.</P>
+
+    <P>I experimented with the possibility of using the LED matrix
+    to provide scrolling text for user messages, with a custom character
+    generator tailored to the 10x10 display. This was not particularly
+    successful as it turned out to be a bit like trying to read a
+    newspaper through a microscope!  From longer distances (10 to
+    30 feet), the scrolling text was highly legible despite the limited
+    display size. I have not developed this aspect any further other
+    than to add a novelty feature - you can turn the unit on either
+    side, or upside down, and a scrolling banner reading &quot;Roll-Play,
+    from clickmazes.com...&quot; automatically self-rights itself
+    and so always reads horizontally.</P>
+
+    <P>Further development, if I can ever find the time, may centre
+    around some kind of animated display on the LEDs, accompanied
+    by appropriate bleeps and jingles, to provide the &quot;reward&quot;
+    when a puzzle is solved.</P>
+
+    <P><HR ALIGN=LEFT><FONT CLASS="note"><B>console design &amp;
+    implementation</B> &#150; Bill Mitchell 2001</FONT><BR>
+    &nbsp;</TD> 
+    <TD>
+    <IMG SRC="../_site/site_spacer.gif" WIDTH="15" HEIGHT="1" ALIGN="BOTTOM"
+    BORDER="0" >
+</TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>
