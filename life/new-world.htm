@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - ilife</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="./new-life.htm">life</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Maze of Life - World domination</h2><p>
+          One of the earliest yet most difficult challenges to date has
+          been that of <i>world domination</i>. From an arbitrary start,
+          such as Y-start, is it possible to clear the board leaving the
+          blue-cell the last and only cell left alive?
+          </p>
+      </div>
+
+      <div class="std-flex-block">
+        <div>
+          <p>
+            World domination is possible, but it took a computer search
+            to prove it, find out more below. Alternatively discover world
+            domination for yourself using this mini-challenge.</p>
+          <h4>Mini challenge</h4>
+            <p>
+              <b>From</b>: Y-start<br>
+              <b>After</b>: SS&lt;U&lt;D&gt;U&lt;SSSU/D<br>
+              <b>Find</b>: world-domination in 4 moves<br>
+                <!-- Solution: >\UD  -->
+            </p>
+            <p>This challenge has been pre-loaded, just
+            click on the grid to move the blue cell.</p>
+            </p>
+        </div>
+        <div class="photo-area"  style="width:300px;" >
+          <p>world domination</p>
+          <p><img src="world_i.gif" width="97" ></p>
+          <p>MAD or what?</p>
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="350" height="350">
+              <param name="start" value="2501031113142633354344455254">
+              <param name="load" value="">
+          </cheerpj-applet></p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Controls</h4><p>
+            Click on <b>Edit</b> to set up a start position.<br>
+            Click on <b>Play</b> to switch to play mode or to restart.<br>
+            Use <b>Undo/redo</b> to replay previous moves (play mode only).<br>
+            Click on <b>Load</b> to verify and rerun the move sequence in
+            the text box (play mode only).</p>
+          <h4>Movement</h4><p>
+            In <b>Edit</b> mode click on the <b>grid</b> to toggle cell status
+            (black/blue/empty).<br>
+            In <b>Play</b> mode click on the <b>grid</b> to move.<br>
+            </p>
+          <h4>Keys</h4><p>
+            <b>u</b> - undo last move</p>
+        </div>
+      </div>   
+
+      <hr>
+      <div class="page-note">
+        <h4>Findings</h4>
+        <p>For many months world domination remained an unsolved challange,
+          but in March 2001 Jacco Compier proved by computer search that
+          world domination was possible, in as little as 15 moves. A convincing
+          vindication that world domination is probably possible from almost
+          any start-state that the blue-cell can 'escape' from. Here is
+          a selection of the shortest known solutions for world-domination
+          from Y-start. <b>x,y</b> indicates the final resting place of
+          the blue-cell.</p>
+
+          <div class="table-block">
+            <table class="std-table">
+            <tr> 
+              <th>Solution</th> 
+              <th>Length</th> 
+              <th>x,y</th> 
+            </tr>
+            <tr>
+              <td>USS\D\UD/SSS&gt;SD</td>
+              <td>15</td> <td>4,3</td> 
+            </tr>
+            <tr>
+              <td>SS&lt;U&lt;D&gt;U&lt;SSSU/D&gt;\UD</td>
+              <td>19</td> <td>3,6</td> 
+            </tr>
+            <tr>
+              <td>SS&lt;U&lt;DS/D/&lt;/S&lt;UL\/R</td>
+              <td>19</td> <td>3,3</td> 
+            </tr>
+            <tr>
+              <td>SS&lt;U&lt;DURSLSRS//D\&gt;D</td>
+              <td>19</td> <td>5,5</td> 
+            </tr>
+            <tr>
+              <td>SS&lt;U&lt;DURURRD\URR/SL</td>
+              <td>19</td> <td>6,2</td> 
+            </tr>
+            <tr>
+              <td>SS&lt;U&lt;DURUR/&lt;LS&gt;\SD</td>
+              <td>18</td> <td>3,5</td> 
+            </tr>
+            </table>
+          </div>
+        <p>And here are some slightly longer solutions that all end with
+          the blue-cell back in the centre (4,4).</p>
+      
+          <p>SS&lt;U&lt;D&gt;US&gt;/UL\SUSD&lt;/&gt;U<br>
+          SS&lt;U&lt;D&gt;/D\/SSLD\&gt;/\&lt;/R<br>
+          SS&lt;U&lt;DU&gt;&gt;SUULSSS\RRLR</p>
+
+        <p>All these solutions are of course edge-dependent, which is
+          true for many of the challenges posed and solved so far, but
+          having proved world-domination is possible in as few as 15 moves,
+          it is particularly tempting to ask... is world-domination also
+          possible on an infinite board? And if so, what is the minimum
+          size board?</p>
+      
+          <p>We have shown it is possible for the blue-cell to manouvre
+          itself into the tiniest one-cell state, but one-cell is never
+          going to survive by itself. What is the smallest, indefinitely
+          survivable, state for the blue-cell? Is it those two 4-cell 
+          stable-states
+          <a href="./new-stable-early.htm">4a and 4b</a> we've already seen?
+          No. If the blue-cell is prepared to retire to an oscillator,
+          rather than a stable-state, the minimum is actually 3 cells.
+          If you a familiar with Game of Life, you probably know the 3-cell,
+          2-step, oscillator I refer too, but can the blue-cell retire
+          to it from Y-start? I feel sure the answer is yes - but I do
+          not know the shortest solution.</p>
+      
+          <p>Carl Hoff stumbled on several oscillators in his early search
+          for stable-states and we began to collect examples of a brand
+          new type of oscillator which is unique to intelligent-cell life.
+          To find out more see the page on <a href="new-flip.htm">active
+          oscillators</a>.
+        </p>
+
+      </div>
+      <hr>
+      <div class="page-note">
+        <div class="link-block">  
+          <div class="link-list"><ul>
+            <li><a href="new-life.htm">Maze of life V1</a></li> 
+            <li><a href="new-ystart.htm">The Y-start challenge</a></li> 
+            <li><a href="new-stable.htm">Stable-state goals</a></li>
+            <li><a href="new-dense.htm">Dense goals</a></li>  
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-world.htm">World domination</a></li>
+            <li><a href="new-flip.htm">Active oscillators</a></li>
+            <li><a href="new-glide.htm">Riding the glider</a></li>
+            <li><a href="new-ggun.htm">Building a glider gun</a></li>
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-gg2003d5.htm">Glider gun in 247</a></li>
+            <li><a href="new-glide3.htm">Optimal sequences</a></li>
+            <li><a href="new-life55.htm">iLife play area</a></li>
+          </ul></div>
+        </div>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>applet</b> - &COPY; Andrea Gilbert 2000-2002<br>
+        <b>material &amp; challenges</b> - Andrea, Carl Hoff, Jacco Compier<br>
+        <!-- LT -->
+        </p>
+      </div>  
+
+    </div>
+  </body>
+</html>

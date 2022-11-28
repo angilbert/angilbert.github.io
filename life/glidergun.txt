@@ -1,0 +1,89 @@
+                                               28th Jan 2002
+
+Here is a way of constructing the glider gun in 744 moves.  
+I started by finding a more efficient way of forming a blinker 
+(21 moves) which boards a glider instead of forming a loaf.  I 
+also discovered a way to form a block and board a glider in 
+only 17 moves!  These routines are clear in the following 
+construction of the glider gun.
+
+Start with the Y centered at (36,25).
+
+SS<                                          Y to loaf
+U<D>/LRUS</\LDRU/\R\/                        Form a blinker  
+/SSD>SS>SS>SS>SS>SS>SS>SS                    Reposition glider
+>R\<                                         Glider to loaf
+U<DU>>U\>/ULDD<U\                            Form a block 
+\SS\SS\SSR/SSL\SSR/SS                        Reposition glider
+/U</S                                        Glider to loaf, sync
+L/RLDLDL<LSU/DR>ULSR/>R/SLULU\D<             Fire glider to form ship
+</S>                                         Glider to loaf
+U>D<\DUR\DU\UR/L\                            Loaf to rotated glider
+D<SS<SS<SSU\SS\SS\SS\SSD<SS<SS<SS<SS<SS<SS   Reposition glider
+<L/>                                         Glider to loaf
+U>D<\RLUS>\/RDLU\/L/\                        Form a blinker
+\SS\SS\SS\SS\SS\SS\SSD
+<SS<SS<SS<SS<SS<SS<SS<SS<SS<SS               Reposition glider
+<L/<                                         Glider to loaf
+U<D>/LRUS</\LDRU/\R\/                        Form a blinker
+/SSD>SS>SS>SS>SS>SS>SS>SS                    Reposition glider
+>R\>                                         Glider to loaf
+U>DU<<U/<\URDD>U/                            Form a block
+/SS/SS/SSL\SSR/SSL\SS                        Reposition glider
+\U>\                                         Glider to loaf
+R\LRDRDR>RSU\DL<URSL\<L\SRURU/D>             Fire glider to form ship
+>\S>                                         Glider to loaf
+U>D<\DUR\DU\UR/L\                            Loaf to rotated glider
+\SS\SS\SS\SS\SS\SSD<SS<SS<SS<SS<SS<SS<SS     Reposition glider
+<L/>                                         Glider to loaf
+U>D<\RLUS>\/RDLU\/L/\                        Form last blinker
+\SS                                          Reposition glider
+\>S<                                         Glider to loaf
+R<L\/LRD/LR/RD>U/                            Loaf to rotated glider
+/SSL                                         Reposition glider
+\>S/                                         Glider to loaf
+D/UD\\D>\<DRUU/D>                            Form last block
+>SS>SS                                       Reposition glider
+>D\>                                         Glider to loaf
+L>R/\RLD\UDLSLUUUD/R>DUR>                  * Loaf to rotated glider 
+>SS>SS>SSU/SS/SS/SS/SS/SS/SS                 Reposition glider
+/R</S                                        Glider to loaf, sync
+D/UDLDLD<DSR/LU\RDSU/\U/SDRDR>L<             Fire glider & light fuse
+<L/<                                         Glider to loaf
+U<D>/DUL/DU/UL\R/                            Loaf to rotated glider
+D>SS>SS>SS>SS>SS>SS>SS>SS>SS                 
+>SS>SS>SS>SS>SS>SS>SS>SSU                    Race to the other side
+/<S/SSS                                      only 3 steps to spare!
+L/RLDLDL<LSU/DR>ULSR/>R/SLULU\D<             Fire last glider, which
+                                             strikes 5 steps after
+                                             the previous glider.
+
+At this point, the glider gun will evolve, and we used --- 744 moves.
+However, we are in the line of fire!  So there is one more thing to 
+do:
+
+</S>U>D<\DUR\DU\UR/L\\SS\SS\SS...             Get out of the way!
+
+A few comments:
+
+The biggest problem I encountered was parity.  If the grid was 
+painted in a checkerboard pattern, I would find that my glider 
+is on the wrong color to put a given object at a given location.
+Luckily, whenever I rotated the glider, I could control the parity.
+But since I wanted to avoid the extra steps of a rotation, I had to
+form the still life in a different order than I first planed.
+
+The second biggest problem was interferrence from the objects that
+I already formed.  The original plan was to have the gun fire away
+from the final position, but I had to flip the gun in order for the 
+second blinker to be accessible.
+
+The * shows a longer routine for rotating a glider.  However, this
+routine puts the glider closer to where I wanted to go, so it 
+ended up saving me 4 steps.  I discovered this savings by mistake --
+there may be other similar places where several steps can be saved.
+
+Dr. Paulsen                                       
+  
+----o00o---o00o----
+   Hang in there! 

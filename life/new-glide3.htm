@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - ilife</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="./new-life.htm">life</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>iLife - Optimal sequences</h2><p>
+          This page was kindly provided by Dr William Paulsen of Arkansas
+          State University in Jan 2003, it is a follow up to his earlier
+          findings described under the heading 
+          <a href="new-glide.htm">riding the glider</a>. 
+          This page includes several optimal iLife
+          sequences, including a sequence that builds a <i>Light
+          Weight Space Ship</i>. Together these sequences provide the
+          means of building glider guns much more efficiently than ever
+          before. Knowledge of traditional Life terminology and glider-gun
+          formation helps here, as does an understanding if the concept
+          of iLife. For an introduction to iLife see the 
+          <a href="new-life.htm">Maze of life V1</a> page.</p>
+          <p>The rest of this page is in Dr Paulsen's own words, 
+          click on any highlighted sequence to see a demonstration.
+        </p>
+      </div>
+
+      <div><p>
+        First of all, I wanted to see
+        which life-forms can easily be spawned the way that the blinker
+        and glider were spawned. I decided to examine all combinations
+        that could be produced in 20 moves, starting from the loaf position,
+        which seems to act as a gateway.</p>
+        <p>From a computer search I found there
+        are 25466828 ways of traveling from the loaf position within
+        20 moves. Of these, 13730 have the blue cell riding a glider,
+        sometimes with other debris that could potentially spawn a life-form.
+        I then went through the 13730 pictures and worked out which
+        of these produced anything interesting (this was the time consuming
+        part!). My work was rewarded with the following results.
+      </p></div>
+
+      <div class="std-flex-block-multi">
+        <div class="puzzle-area" style="width: 350px">
+
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="330" height="350">
+              <param name="size" value="20">
+              <param name="start" value="A89889B98AAA9B">
+              <param name="load" value="D/USSSSRL/SLS/LS">
+          </cheerpj-applet></p>
+          <p><b>D/USSSSRL/SLS/LS</b><br> 
+          Forms a new glider using only 16 moves
+          beating my 19 move record.</p>
+        </div>
+        <div class="puzzle-area" style="width: 350px">
+
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="330" height="350">
+              <param name="size" value="20">
+              <param name="start" value="A89889B98AAA9B">
+              <param name="load" value="D/USL/<\USS/SUSSDS/">
+          </cheerpj-applet></p>
+           <p><b>D/USL/&lt;\USS/SUSSDS/</b><br>
+           Forms a ship using only 19 moves. This is very useful in forming
+           a glider gun, since before we had to build a ship by first spawning
+           a blinker and hitting it with a glider.</p>
+        </div>
+      </div>
+
+      <div class="std-flex-block-multi">
+        <div class="puzzle-area" style="width: 350px">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="330" height="350">
+              <param name="size" value="20">
+              <param name="start" value="A89889B98AAA9B">
+              <param name="load" value="D/SR>U<DD<SUSLDSU</<">
+          </cheerpj-applet></p>
+          <p><b>D/SR&gt;U&lt;DD&lt;SUSLDSU&lt;/&lt;</b><br> 
+            Forms an eater using 20 moves, important
+            for developing complicated life structures. This is the unique
+            way of producing the eater in under 21 moves.</p>
+        </div>
+        <div class="puzzle-area" style="width: 350px">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="330" height="350">
+              <param name="size" value="20">
+              <param name="start" value="A89889B98AAA9B">
+              <param name="load" value="D/USL/SU\RRRDS>>L<S">
+          </cheerpj-applet></p>
+           <p><b>D/USL/SU\RRRDS&gt;&gt;L&lt;S</b><br>
+            Forms a Light
+            Weight Space Ship (LWSS) using 19 moves! This last example is
+            the unique way of producing the LWSS in under 21 moves. It also
+            provides a powerful tool as seen below.
+           </p>
+        </div>
+      </div>
+      <div><p>
+        Having the ability to launch LWSS as
+        well as gliders is like having both rooks and bishops in chess:
+        they can be used together to form complicated structures very
+        quickly. To demonstrate, here is a sequence that produces a 
+        <a href="new-gg2003d5.htm">glider gun in only 247 moves</a> 
+        (starting from the EEN loaf):
+      </p></div>
+
+      <div class="table-block">
+        <table class="std-table" width="700px">
+        <tr>
+          <td>L/R&gt;LS&gt;\\&gt;&lt;&lt;DS&lt;&lt;U/&lt;</td>
+          <td> Builds a formation that eventually becomes a bi-block</td> 
+        </tr>
+        <tr><td>&lt;R\LSSSLS&gt;&gt;&lt;/\D\</td>
+          <td>Spawns a block</td> 
+        </tr>
+        <tr><td>R\LSD\&gt;&lt;LSS\SLSUR\&gt;</td>
+          <td>Spawns a ship</td> 
+        </tr>
+        <tr><td>L&lt;/S&gt;U&gt;DU&lt;&lt;/</td>
+          <td>Turns</td> 
+        </tr>
+        <tr><td>R&lt;LSU&lt;/\LSS&lt;SLSDR&lt;/</td>
+          <td>Spawns another ship</td> 
+        </tr>
+        <tr><td>D\U/D&gt;SD/\/&lt;\</td>
+          <td>Spawns another block</td> 
+        </tr>
+        <tr><td>L&gt;RSU&gt;SR/DDDLS&lt;&lt;U\S</td>
+          <td>Launch the LWSS! This eventually hits the bi-block which 
+            becomes a glider aimed back toward the ship</td> 
+        </tr>
+        <tr><td>L/SUSU&lt;&lt;U&lt;D&gt;&gt;&gt;/RS&lt;R&gt;</td>
+          <td>Creates a formation which is a pure glider generator. That is,
+            it produces a glider with no debris after 63 moves. I call this
+            a <i>fused glider</i> since it gives the blue cell time to
+            produce a second, or even a third, glider which forms simultaneously.
+            In this case it merely allows the completion of the glider gun
+            early.
+          </td> 
+        </tr>
+        </table>
+      </div>
+      <p>It is interesting that the LWSS needs
+        to run into a bi-block to form a single glider going in the other
+        direction. Ironically, I came very close to throwing out the
+        &quot;pseudo-life&quot; formed during my exhaustive search, but
+        decided to leave them in.
+      </p>
+      <p><i>Dr William Paulsen - January 2003</i></p>
+      
+      <hr>
+      <div class="page-note">
+        <div class="link-block">  
+          <div class="link-list"><ul>
+            <li><a href="new-life.htm">Maze of life V1</a></li> 
+            <li><a href="new-ystart.htm">The Y-start challenge</a></li> 
+            <li><a href="new-stable.htm">Stable-state goals</a></li>
+            <li><a href="new-dense.htm">Dense goals</a></li>  
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-world.htm">World domination</a></li>
+            <li><a href="new-flip.htm">Active oscillators</a></li>
+            <li><a href="new-glide.htm">Riding the glider</a></li>
+            <li><a href="new-ggun.htm">Building a glider gun</a></li>
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-gg2003d5.htm">Glider gun in 247</a></li>
+            <li><a href="new-glide3.htm">Optimal sequences</a></li>
+            <li><a href="new-life55.htm">iLife play area</a></li>
+          </ul></div>
+        </div>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>material</b> - Dr William Paulsen 2001-2002<br>
+        <b>applet</b> - &COPY; Andrea Gilbert 2000-2002<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

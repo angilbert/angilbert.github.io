@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - ilife</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+    
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Maze of Life</h2><p>
+          The puzzles on this page and those that follow are based
+          on the well known Game of Life algorithm invented by John Conway.
+          This variation on standard Life was suggested to me by my father,
+          James Gilbert, as an interesting basis for an interactive puzzle-maze.
+          Ed Pegg (<a href="http://www.mathpuzzle.com/">www.mathpuzzle.com</a>)
+          aptly christened the blue cell the <i>intelligent </i>cell.</p>
+          <p>The basic idea is this; you have control over one cell, the
+          blue cell. Your aim is to keep the blue cell alive and reach
+          a predefined goal. At each moment in time the blue cell is permitted
+          to move to any adjacent, empty cell, or may stay where it is.
+          Traditional game-of-life rules apply, and if the blue cell dies
+          it's game over.</p>
+      </div>
+      <div>
+        <p>Here first is the original Maze of Life puzzle-set (June 2000).
+          The target here is for the blue cell to reach a nominated cell
+          location, marked in red. Undo is provided, but to make things
+          tricky is limited to one move only, so beware, you may get trapped
+          and have to start over. Simple survival is relatively easy, just
+          make sure you always pick a location that has either two or three
+          live neighbours.
+        </p>
+    </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <cheerpj-applet archive="new-life.jar" 
+              code="life.class" width="350" height="350">
+          </cheerpj-applet>
+        </div>
+        <div class="puzzle-info">
+          <h4>Goal</h4><p>
+            Naviage the blue cell to the red goal</p>
+          <h4>Controls</h4><p>
+            Click on <b>Restart</b> to load first puzzle or restart current
+            puzzle.<br>
+            Click on <b>Previous/Next</b> to switch between puzzles.<br>
+            Click on <b>Undo</b> to undo last move (one move only).</p>
+          <h4>Movement</h4><p>
+            Click on the <b>grid</b> to move. 
+            Note that, during normal play, once a move (click) has been
+            accepted the blue cell will either die immediately or life will
+            progress one instant. This allows you to clearly see why the
+            blue cell died.</p>
+            <h4>Keys</h4><p>
+              <b>n</b> - next puzzle <br>
+              <b>p</b> - previous puzzle<br>
+              <b>r</b> - restart current puzzle<br>
+              <b>u</b> - undo last move</p>
+        </div>
+      </div>   
+
+      <div class="page-note">
+        <p>An extra challenge was initially suggested by 
+        <a href="http://www.mathpuzzle.com/">Ed Pegg</a>: &quot;<i>One
+          Life maze I'm been particularly intrigued by is Maze #2. I've
+          been going from the starting position, to the goal, back to the
+          start, back to the goal. That's where I've died a number of times.
+          I'm thinking this might make a great little contest... one point
+          for each trip... what is the maximum number of points you can
+          get?&quot;</i>. Note that if you can complete a round trip and finish
+          with the exact same cell-arrangement you started with then you
+          have effectively proven that you must be able to loop indefinitely.
+          In Sept 2003 Berend Jan van der Zwaag successfully cracked this 
+          challenge! <a href="new-berend.htm">See solution</a>.</p>
+          <p>If you enjoyed Maze of Life... read on, the following pages
+          include many more challenges. I recommend you start with 
+          <a href="new-ystart.htm">the Y-start challenge</a>. Alternatively,
+          if you would like to discover just how creative the blue-cell
+          can be, jump to 
+          <a href="new-glide.htm">Riding the glider</a>.
+          </p>
+      </div>
+      <hr>
+
+      <div class="page-note">
+        <div class="link-block">  
+          <div class="link-list"><ul>
+            <li><a href="new-life.htm">Maze of life V1</a></li> 
+            <li><a href="new-ystart.htm">The Y-start challenge</a></li> 
+            <li><a href="new-stable.htm">Stable-state goals</a></li>
+            <li><a href="new-dense.htm">Dense goals</a></li>  
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-world.htm">World domination</a></li>
+            <li><a href="new-flip.htm">Active oscillators</a></li>
+            <li><a href="new-glide.htm">Riding the glider</a></li>
+            <li><a href="new-ggun.htm">Building a glider gun</a></li>
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-gg2003d5.htm">Glider gun in 247</a></li>
+            <li><a href="new-glide3.htm">Optimal sequences</a></li>
+            <li><a href="new-life55.htm">iLife play area</a></li>
+          </ul></div>
+        </div>
+      </div>
+
+      <hr>   
+      <div class="page-credits"><p>
+        <b>concept</b> - &COPY; James F. Gilbert 2000<br>
+        <b>applet &amp; puzzle designs</b> - &COPY; Andrea Gilbert 2000-2002<br>
+        with thanks to Ed Pegg, Carl Hoff, Jacco Compier, Dr. William
+        Paulsen &amp; Berend Jan van der Zwaag.<br>
+        This page was dedicated to my father on the event of his 70th birthday (May 2000).<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

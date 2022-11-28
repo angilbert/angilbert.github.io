@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - ilife</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="./new-life.htm">life</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+    
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Maze of Life - Dense goals</h2><p>
+          Out of the search for stable-state goals came the question...
+          what are the largest, most dense, stables-state cell arrangements
+          on a 7x7 grid and can these states be manufactured by the blue-cell
+          from an arbitrary start-point, such as the Y-start?
+          </p>
+      </div>
+      <div>
+
+      </div>
+      <div class="std-flex-block">
+        <div>
+          <p>
+            Dense stable-state cell arrangements are a well-explored topic in
+            standard Game of Life. However manufacturing these dense goals 
+            from Y-start is non-trivial. Read more below
+            or discover some dense stable-state goals for yourself 
+            with this mini-challenge.</p>
+          <h4>Mini challenge</h4>
+            <p>
+              <b>From</b>: Y-start<br>
+              <b>After</b>: SS&lt;U&lt;DSR&lt;S//UL/&gt;&lt;<br>
+              <b>Find</b>: a 24-cell stable-state in 4 moves, 
+                and then 26-cell in another 2 moves<br>
+                <!-- Solution: /\/D then L/  -->
+            </p>
+            <p>This challenge has been pre-loaded, just
+            click on the grid to move the blue cell.</p>
+            </p>
+        </div>
+        <div class="photo-area">
+          <p>from Y-start in 20</p>
+          <p><img src="dense-eg3.png" width="234" ></p>
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="350" height="350">
+              <param name="start" value="3402030405111216202124263031334041445255636465">
+              <param name="load" value="">
+          </cheerpj-applet></p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Controls</h4><p>
+            Click on <b>Edit</b> to set up a start position.<br>
+            Click on <b>Play</b> to switch to play mode or to restart.<br>
+            Use <b>Undo/redo</b> to replay previous moves (play mode only).<br>
+            Click on <b>Load</b> to verify and rerun the move sequence in
+            the text box (play mode only).</p>
+          <h4>Movement</h4><p>
+            In <b>Edit</b> mode click on the <b>grid</b> to toggle cell status
+            (black/blue/empty).<br>
+            In <b>Play</b> mode click on the <b>grid</b> to move.<br>
+            </p>
+          <h4>Keys</h4><p>
+            <b>u</b> - undo last move</p>
+        </div>
+      </div>   
+
+      <hr>
+      <div class="page-note">
+        <h4>Findings</h4>
+        <p>The densest stable-state cell-arrangements for a standard
+          7x7 grid are known to be
+          30 cells (edge-dependent) and
+          28 cells (edge-independent)
+          but it is far from easy to manufacture these goals from Y-start.
+          Jacco Compier's search program found only 5 arrangements with
+          20+ cells, in a complete search of all goals reachable in 20
+          moves or less. The longest, and most pleasing perhaps, is this
+          goal: <a href="new-eg24cell.htm">24 cells in 20 moves</a>.
+          However Jacco Compier did eventually prove than it is possible
+          to manufacture a 30-cell stable-state from the Y-start. Here
+          it is: <a href="new-eg30cell.htm">30 cells in 37 moves</a>.</p>
+      
+          <p>If you use undo/redo to explore the last few moves of the
+          above sequences you get a strong sense that the blue-cell is
+          carefully crafting itself a grand <i>retirement home</i>, this
+          blue-cell clearly plans to retire in good company! But what about
+          the loner blue-cell who just wants to die alone? Is this possible?
+          Find out on the <a href="new-world.htm">world domination</a>
+          page.</p>
+      </div>
+      <hr>
+      <div class="page-note">
+        <div class="link-block">  
+          <div class="link-list"><ul>
+            <li><a href="new-life.htm">Maze of life V1</a></li> 
+            <li><a href="new-ystart.htm">The Y-start challenge</a></li> 
+            <li><a href="new-stable.htm">Stable-state goals</a></li>
+            <li><a href="new-dense.htm">Dense goals</a></li>  
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-world.htm">World domination</a></li>
+            <li><a href="new-flip.htm">Active oscillators</a></li>
+            <li><a href="new-glide.htm">Riding the glider</a></li>
+            <li><a href="new-ggun.htm">Building a glider gun</a></li>
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-gg2003d5.htm">Glider gun in 247</a></li>
+            <li><a href="new-glide3.htm">Optimal sequences</a></li>
+            <li><a href="new-life55.htm">iLife play area</a></li>
+          </ul></div>
+        </div>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>applet</b> - &COPY; Andrea Gilbert 2000-2002<br>
+        <b>material &amp; challenges</b> - Andrea, Carl Hoff, Jacco Compier<br>
+        <!-- LT -->
+        </p>
+      </div>  
+
+    </div>
+  </body>
+</html>

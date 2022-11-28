@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - ilife</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="./new-life.htm">life</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>iLife - Riding the glider</h2><p>
+          We have seen in previous pages that the blue-cell can craft a
+          wide-variety of life-forms, but can it spawn independent life-forms
+          in a controlled manner? One of the simplest life-forms not explored
+          so far is the traditional <i>glider</i>, if the blue-cell could
+          craft itself a glider then it would have a means of moving through
+          its environment, will the possibility of taking occasional pit-stops
+          to spawn colonies of other life-forms. 
+          </p>
+      </div>
+      <div><p>
+          Sounds too fanciful to be true perhaps, but in October 2001 
+          Dr. William Paulsen of Arkansas State University sent me
+          the following fascinating analysis which clearly illustrates
+          the intelligent-cell can claim remarkable control over its environment.
+          The rest of this page is in Dr. Paulsen's own words and it
+          should be noted that the intelligent-cell has now been given an 
+          unbounded board to play on, thus removing any non-standard, 
+          edge-based behaviour.
+      </p></div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-info">
+          <h3>Riding the glider</h3><p>
+            The first discovery was that the intelligent cell 
+            can ride a glider. </p>
+            <p>Starting from the Y-start,
+            one first moves <b>SS&lt;</b> to get to the 'Loaf' 
+            position (since I haven't figured out how to return to 
+            the Y-start, I use this stable loaf position as my 
+            initial state).</p>
+            <p>From the loaf, move:<br>
+            <b>U&lt;D&gt;/DUL/DU/UL\R//SS/SS/SS/SS </b>
+            <p>It is interesting that when a glider is ridden, 
+            it accelerates to one third the speed of light.</p>
+          </p>
+        </div>
+        <div class="puzzle-area">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="300" height="320">
+              <param name="size" value="17">
+              <param name="start" value="6B5A7A6C">
+              <param name="load" value="SS<U<D>/DUL/DU/UL\R//SS/SS/SS/SS">
+          </cheerpj-applet></p>
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-info">
+          <h3>Steering the glider</h3><p>
+          The next step is to steer the glider.</p>
+          <p>Although the glider can be turned 90 degrees by: <br>
+          <b>/SS/SSD&gt;SS&gt;SS&gt;</b><br>
+          the glider will still move to the right and repeating this 
+          process will put it back in the original direction.
+          However, it is easy to convert the glider to a loaf by: <br>
+          <b>/SS/R&lt;\</b> or <b>/SS/R&lt;/</b><br></p>
+          <p>
+          This loaf can be in one of two orientations, both different 
+          than the original orientation, so using the above method to 
+          convert it back to a glider will turn it either 90 degrees 
+          or 180 degrees.
+          In this way, we can steer the glider anywhere in the plane.</p>
+        </div>
+        <div class="puzzle-area">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="300" height="320">
+              <param name="size" value="17">
+              <param name="start" value="6968795A7A">
+              <param name="load" value="/SS/SS/SS/SS/R</D/U\<UDR<UD<DR>L<<SS<SS<SS<SS<SS">
+          </cheerpj-applet></p>
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-info">
+          <h3>Spawning a blinker</h3><p>
+          The next phase is leaving a blinker in the trail. </p>
+          <p>From a loaf, one can move:<br>
+          <b>U&lt;SL\D&gt;RRUSUSSSSS/SU&lt;DSS</b><br>
+          <b>SSRSSSSSSLRR/\/USUDUDS&gt;</b><br>
+          which reproduces a loaf, but also leaves a blinker far enough
+          away as to not interfere with any of the above procedures. </p>
+          <p> In this way one can leave behind a trail of blinkers placed
+          at key points in the plane.
+          </p>
+        </div>
+        <div class="puzzle-area">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="300" height="320">
+              <param name="size" value="17">
+              <param name="start" value="79867797689889">
+              <param name="load" value="U<SL\D>RRUSUSSSSS/SU<DSSSSRSSSSSSLRR/\/USUDUDS>">
+          </cheerpj-applet></p>
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-info">
+          <h3>Spawning a new glider</h3><p>
+          Finally, from the loaf position one can move: <br>
+          <b>U&lt;DURURU/USL&lt;RD&gt;<br>
+          LUSD&lt;&gt;D&lt;SULUL\R/</b><br>
+          which not only fires a glider, but then boards a second glider
+          to chase down the first.</p>
+          <p>In this way, one can fire
+          as many gliders as desired, from any direction. It is well known
+          that starting with a blinker, one can fire carefully aimed gliders
+          at it to form more and more complicated Life structures. In this
+          way spaceships, glider guns, and even breeders can be formed.</p>
+          <p>It might be interesting to see if any
+          of the above procedures can be improved upon. Perhaps a computer
+          search could find the minimum moves to do each step. This makes
+          for an interesting open question</p>
+          <p><i>Dr William Paulsen - October 2001</i></p>
+        </div>
+        <div class="puzzle-area">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="330" height="370">
+              <param name="size" value="21">
+              <param name="start" value="4F5C4D6D3E6E5F">
+              <param name="load" value="U<DURURU/USL<RD>LUSD<>D<SULUL\R//SS/SS/SS/SS/SS">
+          </cheerpj-applet></p>
+        </div>
+      </div>
+      <div>
+        <h3>Footnote</h3>
+        <p>In Jan 2002 Dr Paulsen followed up this
+          work with an extensive example of how the intelligent-cell can create
+          a complete glider gun by combining and adapting these new concepts.
+          Read more here <a href="new-ggun.htm">building a glider gun</a>.
+          Further still, in Jan 2003 Dr Paulsen added to his findings
+          with <a href="new-glide3.htm">iLife optimal sequences.</p>
+      </div>
+      <hr>
+      <div class="page-note">
+        <div class="link-block">  
+          <div class="link-list"><ul>
+            <li><a href="new-life.htm">Maze of life V1</a></li> 
+            <li><a href="new-ystart.htm">The Y-start challenge</a></li> 
+            <li><a href="new-stable.htm">Stable-state goals</a></li>
+            <li><a href="new-dense.htm">Dense goals</a></li>  
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-world.htm">World domination</a></li>
+            <li><a href="new-flip.htm">Active oscillators</a></li>
+            <li><a href="new-glide.htm">Riding the glider</a></li>
+            <li><a href="new-ggun.htm">Building a glider gun</a></li>
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-gg2003d5.htm">Glider gun in 247</a></li>
+            <li><a href="new-glide3.htm">Optimal sequences</a></li>
+            <li><a href="new-life55.htm">iLife play area</a></li>
+          </ul></div>
+        </div>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>material</b> - Dr William Paulsen 2001-2003<br>
+        <b>applet</b> - &COPY; Andrea Gilbert 2000-2002<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

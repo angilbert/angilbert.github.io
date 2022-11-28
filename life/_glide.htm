@@ -1,0 +1,160 @@
+<HTML>
+<HEAD>
+  <TITLE>clickmazes</TITLE>
+  <LINK REL="stylesheet" HREF="../style.css" TYPE="text/css">
+</HEAD>
+<BODY MARGINWIDTH="0" MARGINHEIGHT="0" STYLE="margin: 0" BACKGROUND="../_site/site_tilethin.gif">
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+  <TR>
+    <TD VALIGN="TOP" WIDTH="103">
+    <P><IMG SRC="../_site/site_cornersmall.gif" WIDTH="90" HEIGHT="75"
+    ALIGN="BOTTOM" BORDER="0" > <IMG SRC="../_site/logo_side.gif"
+    WIDTH="57" HEIGHT="218" ALIGN="BOTTOM" BORDER="0" ></P>
+
+    <P CLASS="links"><A HREF="../index.htm" CLASS="s">home</A><BR>
+    <A HREF="../_applets.htm" CLASS="s">applets</A><BR>
+    <A HREF="../_history.htm" CLASS="s">history</A><BR>
+    <A HREF="../_links.htm" CLASS="s">links</A><BR>
+    <A HREF="ixlife.htm" CLASS="s">life</A><BR>
+    &nbsp;</TD>
+    <TD VALIGN="TOP">
+    <H2><!--SELECTION--><!--/SELECTION--><BR>
+    iLife - Riding the glider</H2>
+
+    <H3><TABLE WIDTH="99%" BORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR>
+        <TD WIDTH="74%">
+        We have seen in previous pages that the blue-cell can craft a
+        wide-variety of life-forms, but can it spawn independent life-forms
+        in a controlled manner? One of the simplest life-forms not explored
+        so far is the traditional <I>glider</I>, if the blue-cell could
+        craft itself a glider then it would have a means of moving through
+        its environment, will the possibility of taking occasional pit-stops
+        to spawn colonies of other life-forms. Sounds too fanciful to
+        be true perhaps, but in October 2001 <B><A HREF="http://www.csm.astate.edu/~wpaulsen">Dr.
+        William Paulsen</A></B> of Arkansas State University sent me
+        the following fascinating analysis which clearly illustrates
+        the blue-cell can claim remarkable control over its environment.</TD> 
+        <TD WIDTH="26%">
+        <P><CENTER>&nbsp;<A HREF="flip_i.gif"><IMG SRC="glide_i.gif"
+        WIDTH="112" HEIGHT="127" ALIGN="BOTTOM" BORDER="0" ></A></CENTER></TD>
+      </TR>
+    </TABLE></H3>
+
+    <P>The rest of this page is in Dr. Paulsen's own words and it
+    should be noted that the blue-cell has now been given an unbounded
+    board to play on, thus removing any non-standard, edge-based
+    behaviour.</P>
+
+    <P><FONT COLOR="#000000">&quot;The first discovery was that the
+    intelligent cell can 'ride a glider'. Starting from the Y-start,
+    one first moves SS&lt; to get to the 'Loaf' position (since I
+    haven't figured out how to return to the Y-start, I use this
+    stable loaf position as my initial state). From the loaf, move:
+    U&lt;D&gt;/DUL/DU/UL\R//SS/SS/SS/SS... </FONT><B><A HREF="wpdemo1.htm">[see
+    demo 1]</A></B><FONT COLOR="#000000">. It is interesting that
+    when a glider is ridden, it accelerates to one third the speed
+    of light.</FONT></P>
+
+    <P><FONT COLOR="#000000">The next step is to steer the glider.
+    Although the glider can be turned 90 degrees by: /SS/SSD&gt;SS&gt;SS&gt;...
+    the glider will still move to the right, and repeating this process
+    will put it back in the original direction </FONT><B><A HREF="wpdemo2.htm">[see
+    demo 2]</A></B><FONT COLOR="#000000">. However, it is easy to
+    convert the glider to a loaf by /SS/R&lt;\ or /SS/R&lt;/. This
+    loaf can be in one of two orientations, both different than the
+    original orientation, so using the above method to convert it
+    back to a glider will turn it either 90 degrees or 180 degrees
+    </FONT><B><A HREF="wpdemo3.htm">[see demo 3]</A></B><FONT COLOR="#000000">.
+    In this way, we can steer the glider anywhere in the plane.</FONT></P>
+
+    <P><FONT COLOR="#000000">The next phase is leaving a blinker
+    in the trail. From a loaf, one can move: U&lt;SL\D&gt;RRUSUSSSSS/SU&lt;DSSSSRSSSSSSLRR/\/USUDUDS&gt;
+    which reproduces a loaf, but also leaves a blinker far enough
+    away as to not interfere with any of the above procedures </FONT><B><A
+    HREF="wpdemo4.htm">[see demo 4]</A></B><FONT COLOR="#000000">.
+    In this way one can leave behind a trail of blinkers placed at
+    key points in the plane.</FONT></P>
+
+    <P><FONT COLOR="#000000">Finally, from the loaf position one
+    can move: U&lt;DURURU/USL&lt;RD&gt;LUSD&lt;&gt;D&lt;SULUL\R/
+    which not only fires a glider, but then boards a second glider
+    to chase down the first </FONT><B><A HREF="wpdemo5.htm">[see
+    demo 5]</A></B><FONT COLOR="#000000">. In this way, one can fire
+    as many gliders as desired, from any direction . It is well known
+    that starting with a blinker, one can fire carefully aimed gliders
+    at it to form more and more complicated Life structures. In this
+    way spaceships, glider guns, and even breeders can be formed.</FONT></P>
+
+    <P><FONT COLOR="#000000">It might be interesting to see if any
+    of the above procedures can be improved upon. Perhaps a computer
+    search could find the minimum moves to do each step. This makes
+    for an interesting open question&quot;.</FONT></P>
+
+    <P ALIGN=RIGHT><I>Dr William Paulsen - October 2001</I></P>
+
+    <P><B>Update 2002:</B> In Jan 2002 Dr Paulsen followed up this
+    work with an extensive example of how the blue-cell can create
+    a complete glider gun by combining and adapting these new concepts.
+    So, for a grand finale, see <B><A HREF="_ggun.htm">building a
+    glider gun</A></B></P>
+
+    <P><B>Update 2003:</B> In Jan 2003 Dr Paulsen added to his findings
+    with <B><A HREF="_glide3.htm">iLife optimal sequences</A></B></P>
+
+    <P><HR ALIGN=LEFT><TABLE WIDTH="100%" BORDER="0" CELLSPACING="1"
+    CELLPADDING="1">
+      <TR>
+        <TD WIDTH="16%">
+        <FONT CLASS="note"><B>iLife pages:</B></FONT></TD> 
+        <TD WIDTH="28%">
+        <B><A HREF="ixlife.htm">Maze of life V1</A></B></TD> 
+        <TD WIDTH="28%">
+        <B><A HREF="_world.htm">World domination</A></B></TD> 
+        <TD WIDTH="28%">
+        <B><A HREF="_glide3.htm">Optimal sequences</A></B> <B><FONT COLOR="#ff0000">(new)</FONT></B></TD> 
+      </TR>
+      <TR>
+        <TD>
+        &nbsp;</TD>
+        <TD>
+        <B><A HREF="_ystart.htm">The Y-start challenge</A></B></TD> 
+        <TD>
+        <B><A HREF="_flip.htm">Active oscillators</A></B></TD> 
+        <TD>
+        <B><A HREF="gg2003d5.htm">Glider gun in 247</A></B> <B><FONT
+         COLOR="#ff0000">(new)</FONT></B></TD> 
+      </TR>
+      <TR>
+        <TD>
+        &nbsp;</TD>
+        <TD>
+        <B><A HREF="_stable.htm">Stable-state goals</A></B></TD> 
+        <TD>
+        <B><A HREF="_glide.htm">Riding the glider</A></B></TD> 
+        <TD>
+        <B><A HREF="_life55.htm">iLife play area</A></B></TD> 
+      </TR>
+      <TR>
+        <TD>
+        &nbsp;</TD>
+        <TD>
+        <B><A HREF="_dense.htm">Dense goals</A></B>&nbsp;</TD>
+        <TD>
+        <B><A HREF="_ggun.htm">Building a glider gun</A></B></TD> 
+        <TD></TD>
+      </TR>
+    </TABLE><HR ALIGN=LEFT><FONT CLASS="note"><B>material - Dr. William
+    Paulsen 2001-2002<BR>
+    applet - &COPY; Andrea Gilbert 2000-2002</B></FONT><BR>
+    &nbsp;</TD>
+    <TD WIDTH="27">
+    <IMG SRC="../_site/site_spacer.gif" WIDTH="15" HEIGHT="1" ALIGN="BOTTOM"
+    BORDER="0" >
+</TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

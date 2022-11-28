@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - ilife</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="./new-life.htm">life</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Maze of Life - Active oscillators</h2><p>
+          A wonderful new feature of Intelligent-cell Life (ILife) is the
+        <i>active-oscillator </i>(or <i>flipper</i>). Similar to standard
+        Life oscillators, an active oscillator is a sequence of steps
+        that creates a cycle by returning to the start-state, but here
+        the blue-cell plays an active role.
+          </p>
+      </div>
+      <div><p>
+        Active oscillators are not so hard to come by, but a 7x7 play-area
+        is rather limiting, and searching for them methodically really
+        requires a specialised search program (as yet untackled). Yet
+        Jacco's stable-state search program did uncover many more for
+        the collection and, inparticular began, to find some higher-order
+        (3+) oscillators. Find out more below or discover your own 3-step
+        active-oscillator using the following mini-challenge.
+      </p></div>
+
+      <div class="std-flex-block">
+        <div>
+          <h4>Mini challenge</h4>
+            <p>
+              <b>From</b>: USS\D\UDRDRRSSLSLL&gt;/<br>
+              <b>Find</b>: A 3-step active oscillator 
+                            (ie. return here in 3 moves)<br>
+                <!-- Solution: UL> -->
+            </p>
+            <p>This challenge has been pre-loaded, just
+            click on the grid to move the blue cell.</p>
+            </p>
+        </div>
+        <div class="photo-area"  style="width:250px;" >
+          <p>example active oscillator</p>
+          <p><img src="flip-eg1.png" width="148" ></p>
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="350" height="350">
+              <param name="start" value="32213334353640435152">
+              <param name="load" value="">
+          </cheerpj-applet></p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Controls</h4><p>
+            Click on <b>Edit</b> to set up a start position.<br>
+            Click on <b>Play</b> to switch to play mode or to restart.<br>
+            Use <b>Undo/redo</b> to replay previous moves (play mode only).<br>
+            Click on <b>Load</b> to verify and rerun the move sequence in
+            the text box (play mode only).</p>
+          <h4>Movement</h4><p>
+            In <b>Edit</b> mode click on the <b>grid</b> to toggle cell status
+            (black/blue/empty).<br>
+            In <b>Play</b> mode click on the <b>grid</b> to move.<br>
+            </p>
+          <h4>Keys</h4><p>
+            <b>u</b> - undo last move</p>
+        </div>
+      </div>   
+
+      <hr>
+      <div class="page-note">
+        <h4>Findings</h4>
+        <p>Here are some early examples of 2-step active oscillators
+          (flippers) discovered by hand. All these simple oscillators consist
+          of two states that are mirror images of each other. The red arrow
+          indicates the required movement of the blue-cell.</p>
+      
+          <p><img src="lifgf.gif" width="470"></p>
+      
+          <p>Solution strings for many more active-oscillators are listed
+          <b><a href="solno.txt">here</a></b>, and the best of them are
+          illustrated below in demo form. Just click on a link to try one.
+          Each demo is pre-loaded with exactly two repeats of the oscillation,
+          just use undo/redo to explore the cycle.</p>
+      
+          <ul>
+            <li>Firstly 
+              <a href="new-egp2y.htm">the Y-start active oscillator</a>
+              - one of the simplest (see f3 above).
+            <li>And how about 
+              <a href="new-egp22ye.htm">return-to-Y</a>?
+              You can do it in 22 moves. <br>
+              (effectively a 22-step oscillator,
+              although this sequence is 7x7 (edge) dependent).
+            <li>Here's three more examples of nice two step oscillators:
+              <a href="new-egp2n1.htm">No.1</a> - 
+              <a href="new-egp2n2.htm">No.2</a> - 
+              <a href="new-egp2n3.htm">No.3</a>
+            <li>Here's an interesting 
+              <a href="new-egp4e.htm">4-step oscillator</a> 
+              (edge-dependent).
+            <li>And here's a way to make it 
+              <a href="new-egp4n.htm">non-edge dependent</a>.
+            <li>Here are three 3-step oscillators: 
+              <a href="new-egp3n1.htm">No.1</a> - 
+              <a href="new-egp3n2.htm">No.2</a> - 
+              <a href="new-egp3n3.htm">No.3</a>
+            <li>Finally a 
+              <a href="new-egp6n.htm">higher-order (6-step) 
+                non-edge based oscillator</a>
+          </ul>
+          
+          <p>Note that in the last case the blue-cell is stationary for
+          4 out of 6 moves (SSLSSR), but it is still an <i>active</i> oscillator
+          since it only takes one move of the blue-cell to break the normal
+          life sequence and create something new. If the blue-cell doesn't
+          move <i>at all</i>, then you have a traditional Life oscillator.
+          Interestingly not all traditional life oscillators are supported
+          in ILife, I believe the general rule is that ILife can only mimic
+          traditional oscillators if the oscillator contains a permanent
+          (stator) cell which can contain the blue-cell for the duration
+          of the complete cycle. If the blue-cell has to move, its transient
+          nature will destroy the normal oscillator pattern.</p>
+      
+          <p>The majority of high-order oscillators found so far are still
+          edge-dependent and I am keen to find more to add to the collection.
+          So if you find one, let me know. It is quite fun to try crafting
+          them by hand (which is how I found 
+          <a href="new-egp4n.htm">this one</a>) 
+          but I recommend you use a larger grid, such as 
+          <a href="new-life15.htm">15x15</a>.</p>
+      
+          <p>So, we have shown the blue-cell can turn itself into simple
+          (and not so simple) oscillators, but can it control its environment
+          in more exotic way, say by moving around its environment and
+          spawning isolated colonies of traditional life-forms in its path?
+          To find out just how powerful the blue-cell can be read on...
+          <a href="new-glide.htm">riding the glider</a>.</p>
+
+      </div>
+      <hr>
+      <div class="page-note">
+        <div class="link-block">  
+          <div class="link-list"><ul>
+            <li><a href="new-life.htm">Maze of life V1</a></li> 
+            <li><a href="new-ystart.htm">The Y-start challenge</a></li> 
+            <li><a href="new-stable.htm">Stable-state goals</a></li>
+            <li><a href="new-dense.htm">Dense goals</a></li>  
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-world.htm">World domination</a></li>
+            <li><a href="new-flip.htm">Active oscillators</a></li>
+            <li><a href="new-glide.htm">Riding the glider</a></li>
+            <li><a href="new-ggun.htm">Building a glider gun</a></li>
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-gg2003d5.htm">Glider gun in 247</a></li>
+            <li><a href="new-glide3.htm">Optimal sequences</a></li>
+            <li><a href="new-life55.htm">iLife play area</a></li>
+          </ul></div>
+        </div>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>applet</b> - &COPY; Andrea Gilbert 2000-2002<br>
+        <b>material &amp; challenges</b> - Andrea, Carl Hoff, Jacco Compier<br>
+        <!-- LT -->
+        </p>
+      </div>  
+
+    </div>
+  </body>
+</html>

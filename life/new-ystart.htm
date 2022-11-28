@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - ilife</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="./new-life.htm">life</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Maze of Life - The Y-start challenge</h2><p>
+          From here-on the challenge is to discover how the blue-cell
+          can <i>manufacture</i> various stable-state cell arrangements (or
+          other definable goals) from a pre-defined start position. One
+          challenge called the <i>Y-start challenge</i> is proposed here,
+          however the applet will allow you to set-up and explore your
+          own Maze of Life challenges.</p>
+      </div>
+
+      <div class="std-flex-block">
+        <div>
+          <p>Using the V2 applet (below) set up the illustrated Y-shaped
+          start position, with the blue cell in the center of the grid.
+          Then see if you can reach each of the illustrated goals. Location
+          and orientation of the goal does not matter, nor which is the
+          blue cell. 3 out of 4 of the goals are relatively easy, and one
+          of these 3 is a gateway through which you must pass, to reach
+          the missing 4th goal. But which is the gateway? 
+          And can you reach that elusive 4th goal?</p>
+        </div>
+        <div class="photo-area">
+          <p>start position</p>
+          <p><img src="ys.gif" width="98"></p>
+        </div>
+        <div class="photo-area">
+          <p>target goals</p>
+          <p><img src="ys2.gif" width="202"></p>
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <p><cheerpj-applet archive="new-life.jar" 
+              code="life2.class" width="350" height="350">
+          </cheerpj-applet></p>
+        </div>
+        <div class="puzzle-info">
+          <h4>Controls</h4><p>
+            Click on <b>Edit</b> to set up a start position.<br>
+            Click on <b>Play</b> to switch to play mode or to restart.<br>
+            Use <b>Undo/redo</b> to replay previous moves (play mode only).<br>
+            Click on <b>Load</b> to verify and rerun the move sequence in
+            the text box (play mode only).</p>
+          <h4>Movement</h4><p>
+            In <b>Edit</b> mode click on the <b>grid</b> to toggle cell status
+            (black/blue/empty).<br>
+            In <b>Play</b> mode click on the <b>grid</b> to move.<br>
+            </p>
+          <h4>Keys</h4><p>
+            <b>u</b> - undo last move</p>
+        </div>
+      </div>   
+
+      <hr>
+      <div class="page-note">
+        <p>It turned out the Y-start challenge raised
+        many more questions than answers (see below). Discover the answers
+        to many of these questions on the following pages. I recommend
+        you start with the page on 
+        <a href="new-stable.htm">stable-state goals</a>.</p>
+        <ul>
+          <li>How many other stable state goals can be achieved by the blue-cell?</li>
+          <li>What about stable-state goals containing: 5, 8, 9, 10, 11, 12,...cells?</li>
+          <li>Can you find additional stable-state goals if you chose a different start position?</li>
+          <li>What is the maximum number of cells? And is this achievable from Y-start?</li>
+          <li>Is it possible to build multi-cluster stable-states?</li>
+          <li>Which stable-states are escapable and which are inescapable?</li>
+          <li>Does escapability depend on position of the blue-cell?</li>
+          <li>Can you reach a goal, but with the blue-cell back in its start position?</li>
+          <li>Can you return to the Y-start?</li>
+          <li>Can you achieve world domination (where the blue-cell is the last cell left alive)?</li>
+          <li>What new types of oscillators can the blue-cell create?</li>
+          <li>Can the blue cell create and manipulate life-forms such as gliders?</li>
+        </ul>
+      </div> 
+      <hr>
+      <div class="page-note">
+        <div class="link-block">  
+          <div class="link-list"><ul>
+            <li><a href="new-life.htm">Maze of life V1</a></li> 
+            <li><a href="new-ystart.htm">The Y-start challenge</a></li> 
+            <li><a href="new-stable.htm">Stable-state goals</a></li>
+            <li><a href="new-dense.htm">Dense goals</a></li>  
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-world.htm">World domination</a></li>
+            <li><a href="new-flip.htm">Active oscillators</a></li>
+            <li><a href="new-glide.htm">Riding the glider</a></li>
+            <li><a href="new-ggun.htm">Building a glider gun</a></li>
+          </ul></div>
+          <div class="link-list"><ul>
+            <li><a href="new-gg2003d5.htm">Glider gun in 247</a></li>
+            <li><a href="new-glide3.htm">Optimal sequences</a></li>
+            <li><a href="new-life55.htm">iLife play area</a></li>
+          </ul></div>
+        </div>
+      </div>
+      <hr>   
+      <div class="page-credits"><p>
+        <b>applet</b> - &COPY; Andrea Gilbert 2000-2002<br>
+        <b>material &amp; challenges</b> - Andrea, Carl Hoff, Jacco Compier<br>
+        <!-- LT -->
+        </p>
+      </div>  
+
+    </div>
+  </body>
+</html>

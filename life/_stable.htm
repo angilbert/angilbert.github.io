@@ -1,0 +1,180 @@
+<HTML>
+<HEAD>
+  <TITLE>clickmazes</TITLE>
+  <LINK REL="stylesheet" HREF="../style.css" TYPE="text/css">
+</HEAD>
+<BODY MARGINWIDTH="0" MARGINHEIGHT="0" STYLE="margin: 0" BACKGROUND="../_site/site_tilethin.gif">
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+  <TR>
+    <TD VALIGN="TOP" WIDTH="90">
+    <P><IMG SRC="../_site/site_cornersmall.gif" WIDTH="90" HEIGHT="75" ALIGN="BOTTOM" BORDER="0" > <IMG SRC="../_site/logo_side.gif" WIDTH="57" HEIGHT="218" ALIGN="BOTTOM" BORDER="0" ></P>
+
+    <P CLASS="links"><A HREF="../index.htm" CLASS="s">home</A><BR>
+    <A HREF="../_applets.htm" CLASS="s">applets</A><BR>
+    <A HREF="../_history.htm" CLASS="s">history</A><BR>
+    <A HREF="../_links.htm" CLASS="s">links</A><BR>
+    <A HREF="ixlife.htm" CLASS="s">life</A><BR>
+    &nbsp;</TD>
+    <TD VALIGN="TOP">
+    <H2><BR>
+    Maze of Life - Stable-state goals</H2>
+
+    <H3><TABLE WIDTH="99%" BORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR>
+        <TD WIDTH="74%">
+        The <B><A HREF="_ystart.htm">Y-start challenge</A></B> introduced
+        the idea of using stable-state cell arrangements as an alternative
+        goal for Maze of Life. As goals go, the stable-states are certainly
+        a rather more appropriate (life-orientated) choice. The inevitable
+        question then arises... just how many stable-states can the blue-cell
+        manufacture from an arbitrary start state, such asY-start?</TD> 
+        <TD WIDTH="26%">
+        <P><CENTER><IMG SRC="stable_i.gif" WIDTH="79" HEIGHT="79" ALIGN="BOTTOM" BORDER="0" >&nbsp;</CENTER></TD>
+      </TR>
+    </TABLE></H3>
+
+    <H3>Mini-challenge</H3>
+
+    <P>It turns out that the blue-cell is really quite good at generating
+    stables-states. Find out more below or discover a stable-state
+    goal for yourself with this mini-challenge:</P>
+
+    <P><B>From</B>: <FONT FACE="Courier New">SS&lt;U&lt;D&gt;US/RS&gt;/S<BR>
+    </FONT><B>Find</B>: a 14 cell stable-state (edge-dependent) goal
+    in 4 moves<BR>
+    <B>Note:</B> this challenge has been pre-loaded for you, just
+    click on the grid to move the blue cell.</P>
+
+    <P><TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+      <TR>
+        <TD VALIGN="TOP">
+        <!--NOEDIT-->
+        <APPLET HEIGHT="320" WIDTH="250" ALIGN="LEFT" CODE="life2.class" CODEBASE="./">
+             <PARAM NAME="start" VALUE="641516232426364552556263">
+             <PARAM NAME="load" VALUE="">Sorry, this is a Java applet. 
+        </APPLET><!--/NOEDIT--> <IMG SRC="../_site/site_spacer.gif" WIDTH="15" HEIGHT="1" ALIGN="BOTTOM" BORDER="0" ></TD> 
+        <TD COLSPAN="2" VALIGN="TOP">
+        <P><FONT CLASS="title">Controls</FONT><BR>
+        Click on <B>Edit</B> to set up a start position.<BR>
+        Click on <B>Play</B> to switch to play mode or to restart.<BR>
+        Use <B>Undo/redo</B> to replay previous moves (play mode only).<BR>
+        Click on <B>Load</B> to verify and rerun the move sequence in
+        the text box (play mode only).</P>
+
+        <P><FONT CLASS="title">Movement</FONT><BR>
+        In <B>Edit</B> mode click on the <B>grid</B> to toggle cell status
+        (black/blue/empty).<BR>
+        In <B>Play</B> mode click on the <B>grid</B> to move.<BR>
+        </P>
+
+        <P><FONT CLASS="title">Keys</FONT><BR>
+        <B>u</B> &#150; undo last move.</TD>
+         
+      </TR>
+    </TABLE></P>
+
+    <HR ALIGN="LEFT">
+
+    <H3>Findings</H3>
+
+    <P>Carl Hoff illustrated early on that a good number of stables-states
+    are indeed reachable from Y-start. An early collection can be
+    seen <B><A HREF="solnc.htm">here</A></B>. It includes stable-state
+    goals with 4 through 12 cells (some free-standing, some edge-dependent)
+    along with several multi-cluster arrangements. However, due to
+    the limitations of the early V2 applet it was not easy to save
+    and load move sequences and some were lost along the way, so
+    for almost a year the collection included a number of <I>lost
+    goals</I>. Eventually in March 2001 the gaps were filled by a
+    Delphi search program written by Jacco Compier. Jacco's search
+    program rapidly proved that our hand-crafted collection of goals
+    was only a tiny subset of possible state-states reachable from
+    Y-start. The move sequences of all stables-states reached in
+    20 moves or less is listed <B><A HREF="solnj.txt">here</A></B>.</P>
+
+    <P>One of the findings that came out of the early manual searches
+    was that it was really quite easy to drop into a stable-state
+    almost by accident, and often this was bad news for the blue-cell.
+    Effectively the stable-states fall into two catagories, the <I>escapable</I>
+    and the <I>inescapable</I>. Inescapable stable-states are another
+    sort of dead-end. In effect the blue-cell doesn't have to die
+    in Maze of Life, it may simply be forced to <I>retire</I>, infact
+    Ed Pegg referred to all such states as <I>retirement-homes</I>.</P>
+
+    <P>It is worth noting that Jacco's list of stables-states (<B><A HREF="solnj.txt">from Y-start in 20 moves</A></B>) includes very
+    few high-order stable-states, only 5 results with 20 or more
+    cells. Carl Hoff once asked...&quot;How many live cells can you
+    put in a stable state on the board at once? I can put 30. Now
+    require it be non-edge based. I can put 24. My gut tells me that
+    24 is the max in this case. Note if you could put 25 then the
+    density of live cells would be above 50% and I think you can
+    prove you can't do that on an infinite board. I'm not sure if
+    30 is the max in the other case or not&quot;. Is Carl right?
+    Find out more on the <B><A HREF="_dense.htm">Dense goals</A></B>
+    page.</P>
+
+    <P>Some remaining questions relating to stable-states:</P>
+
+    <P>Are <I>all </I>stable-state goals reachable from Y-start?<BR>
+    If yes... is it provable, and is this true for any size board?<BR>
+    If not... would another start do better?</P>
+
+    <P>Another way of looking at these question is to ask... given
+    the global set of Life stable-states is it possible for the blue-cell
+    to manufacture any stable-state from at least one other stable-state?
+    Ie. is the behaviour of the blue-cell sufficiently powerful to
+    create a connected tree of all stable-states?</P>
+
+    <P><HR ALIGN="LEFT"><TABLE WIDTH="100%" BORDER="0" CELLSPACING="1" CELLPADDING="1">
+      <TR>
+        <TD WIDTH="16%">
+        <FONT CLASS="note"><B>iLife pages:</B></FONT></TD> 
+        <TD WIDTH="28%">
+        <B><A HREF="ixlife.htm">Maze of life V1</A></B></TD> 
+        <TD WIDTH="28%">
+        <B><A HREF="_world.htm">World domination</A></B></TD> 
+        <TD WIDTH="28%">
+        <B><A HREF="_glide3.htm">Optimal sequences</A></B> <B><FONT COLOR="#ff0000">(new)</FONT></B></TD> 
+      </TR>
+      <TR>
+        <TD>
+        &nbsp;</TD> 
+        <TD>
+        <B><A HREF="_ystart.htm">The Y-start challenge</A></B></TD> 
+        <TD>
+        <B><A HREF="_flip.htm">Active oscillators</A></B></TD> 
+        <TD>
+        <B><A HREF="gg2003d5.htm">Glider gun in 247</A></B> <B><FONT COLOR="#ff0000">(new)</FONT></B></TD> 
+      </TR>
+      <TR>
+        <TD>
+        &nbsp;</TD> 
+        <TD>
+        <B><A HREF="_stable.htm">Stable-state goals</A></B></TD> 
+        <TD>
+        <B><A HREF="_glide.htm">Riding the glider</A></B></TD> 
+        <TD>
+        <B><A HREF="_life55.htm">iLife play area</A></B></TD> 
+      </TR>
+      <TR>
+        <TD>
+        &nbsp;</TD> 
+        <TD>
+        <B><A HREF="_dense.htm">Dense goals</A></B>&nbsp;</TD> 
+        <TD>
+        <B><A HREF="_ggun.htm">Building a glider gun</A></B></TD> 
+        <TD></TD>
+      </TR>
+    </TABLE><HR ALIGN="LEFT"><FONT CLASS="note"><B>material - Andrea
+    Gilbert, Carl Hoff, Jacco Compier <BR>
+    applet - &COPY; Andrea Gilbert 2000-2002</B></FONT><BR>
+    &nbsp;</TD>
+    <TD WIDTH="27">
+    <IMG SRC="../_site/site_spacer.gif" WIDTH="15" HEIGHT="1" ALIGN="BOTTOM" BORDER="0" >
+</TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>
