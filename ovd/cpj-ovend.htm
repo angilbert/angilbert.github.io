@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Clickmazes - oskar</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
+    <script>cheerpjInit();</script>  
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-indexo.htm">oskar</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>The haunted vending machine</h2><p>
+          This JAVA applet is a software implementation of the
+          Vending Machine puzzle, a mechanical puzzle by Oskar van Deventer,
+          see photo below. The object is to insert the indicated amount
+          of coins. However, the machine seems haunted and keeps rejecting
+          your coins. Can you persuade the machine to accept your coins?
+        </p>
+      </div>
+      <div class="std-flex-block">
+        <div class="puzzle-area">
+          <cheerpj-applet archive="VendingMachine.jar" 
+          code="VendingMachine.class" width="300" height="485">
+          <param name="archive" value="VendingMachine.jar">
+          </cheerpj-applet>
+        </div>
+        <div class="puzzle-info">
+          <h4>Goal</h4><p>
+          Insert coins until the vending machine is completely full of coins 
+          (all switches turn red). All switches support one coin only.
+          You have an unlimited supply of coins.</p>
+          <h4>Controls</h4><p>
+            Use <b>Start</b> to start with the easiest challenge.<br>
+            Use <b>Previous</b> to go to an easier challenge.<br>
+            Use <b>Next</b> to go to a harder challenge.<br>
+            Use <b>Reset</b> to restart the current challenge.<br>
+            Use <b>Drop-list</b> to select a challenges.<br>
+            Use <b>Slider</b> to adjust the animation speed.<br></p>
+          <h4>Movement</h4><p>
+            <b>Click</b> the coin that you want to insert, or...<br>
+            <b>Press</b> the number (1, 2, 3 etc) of the required coin.</p>
+        </div>
+      </div>   
+      <div class="std-flex-block">
+        <div class="photo-info"><p>
+          Here is a photo of the original mechanical
+          Vending Machine puzzle, designed and hand-crafted by Oskar.</p>
+        </div>
+        <div class="photo-area">
+          <img src="VendingMachine.jpg" width="400">
+        </div>
+      </div>
+      <hr> 
+      <div class="page-credits"> <p>
+        <b>concept &amp; applet</b> - &COPY; Oskar van Deventer 2002-04<br>
+        hosted with permission from Oskar van Deventer<br>
+        The haunted vending machine was inspired by the MB game <i>Avalanche</i><br>
+        <!-- LT --></p>
+      </div>  
+    </div>
+  </body>
+</html>
