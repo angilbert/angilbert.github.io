@@ -1,0 +1,108 @@
+a:link, a:visited
+{
+	text-decoration : none;
+	color: color: #993399;
+	background: transparent; 
+}
+
+a:hover, a:active
+{
+	text-decoration : none;
+	color: red;
+	background: transparent; 
+}
+
+.headings
+{
+	font-family:Lucida Grande, Helvetica, sans-serif;
+	font-size:15px;
+	font-weight: bold;
+	color: black;
+}
+
+a.headings:link, a.headings:visited
+{
+	text-decoration : none;
+	color: black;
+	background: transparent; 
+}
+
+a.headings:hover 
+{
+	text-decoration : none;
+	color: #993399;
+	background: transparent; 
+}
+
+
+a.headings:active 
+{
+	text-decoration : none;
+	color: red;
+	background: transparent;  
+}
+
+body 
+{
+	margin: 16px auto 16px auto;
+	padding: 0;
+	width: 482px;
+	font-family:Lucida Grande, Helvetica, sans-serif;
+	font-size:11px;
+	color: black;
+	background-color:#4a1c52;
+}
+
+#mainbox
+{
+	width: auto;
+	padding: 0;
+	border: 1px solid #4a1c52;
+	background-color:#FFFFFF;
+	-webkit-box-shadow: 0px 4px 8px #888;
+}
+	
+#content 
+{
+	margin-left: 0px;
+}
+
+#icons 
+{
+	padding: 0px;
+	border-bottom: 1px solid #4a1c52;
+}
+
+#icons2
+{
+	padding: 0px;
+	border-bottom: 1px solid #4a1c52;
+}
+
+#text1
+{
+	padding: 6px;
+	border-bottom: 1px solid #4a1c52;
+}
+
+#text2
+{
+	padding: 0px;
+	border-bottom: 1px solid #4a1c52;
+}
+
+#text3
+{
+	padding: 6px 0px 0px 0px;
+}
+
+#header 
+{
+	padding: 0px;
+	border-bottom: 1px solid #4a1c52;
+}
+
+#footer 
+{
+	padding: 0px;
+}

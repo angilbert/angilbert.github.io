@@ -1,0 +1,150 @@
+a:link, a:visited
+{
+	text-decoration : none;
+	color: blue;
+	background: transparent; 
+}
+
+a:hover, a:active
+{
+	text-decoration : none;
+	color: red;
+	background: transparent; 
+}
+
+.headings
+{
+	font-family:Lucida Grande, Helvetica, sans-serif;
+	font-size:15px;
+	font-weight: bold;
+	color: black;
+}
+
+a.headings:link, a.headings:visited
+{
+	text-decoration : none;
+	color: black;
+	background: transparent; 
+}
+
+a.headings:hover 
+{
+	text-decoration : none;
+	color: blue;
+	background: transparent; 
+}
+
+a.headings:active 
+{
+	text-decoration : none;
+	color: red;
+	background: transparent;  
+}
+
+
+.entries
+{
+	border-top: 1px solid #CCCCCC;
+	padding: 10px 10px 0px 10px;
+}
+
+.listtop
+{
+	padding: 10px 10px 0px 10px;
+}
+
+
+
+.copyright
+{
+	font-family:Lucida Grande, Helvetica, sans-serif;
+	font-size:10px;
+	color: #7F7F7F;
+}
+
+a.copyright:link, a.copyright:visited
+{
+	text-decoration : none;
+	color: #7F7F7F;
+	background: transparent; 
+}
+
+a.copyright:hover 
+{
+	text-decoration : none;
+	color: blue;
+	background: transparent; 
+}
+
+a.copyright:active 
+{
+	text-decoration : none;
+	color: red;
+	background: transparent;  
+}
+
+body 
+{
+	margin: 8px auto 8px auto;
+	padding: 0;
+	width: 800px;
+	font-family:Lucida Grande, Helvetica, sans-serif;
+	font-size:11px;
+	color: black;
+	background-color:#CCCCCC;
+}
+
+
+#mainbox
+{
+	width: 792px;
+	padding: 0;
+	border: 1px solid #CCCCCC;
+	background-color:#FFFFFF;
+	-webkit-box-shadow: 0px 4px 8px #888;
+}
+	
+#nav 
+{
+	width: 100px;
+	float: left;
+	margin-left: -1px;
+	padding: 10px 8px 8px 10px
+}
+	
+	
+#content 
+{
+	padding: 10px;
+	margin-left: 116px;
+	border-left: 1px solid #CCCCCC;
+}
+
+#contentlist 
+{
+	padding: 0px 0px 1px 0px;
+	margin-left: 116px;
+	border-left: 1px solid #CCCCCC;
+}
+
+#header 
+{
+	margin-bottom: 0px;
+	padding: 8px;
+	border-bottom: 1px solid #CCCCCC;
+}
+	
+#footer 
+{
+	font-size: 11px;
+	text-align: right;
+	padding: 8px;
+	clear: both;
+	border-top: 1px solid #CCCCCC;
+}
+
+p 
+{
+	padding: 0;
+	margin-top: 0px;
+}
