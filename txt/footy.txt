@@ -1,0 +1,433 @@
+title football with friends
+author Andrea Gilbert
+homepage https://clickmazes.itch.io
+again_interval 0.1
+background_color #008000
+text_color white
+
+========
+OBJECTS
+========
+
+Background
+#4B4 #3A3
+00000
+00000
+00100
+00000
+00000
+
+hedge
+#007000 #008000 #087808 #087808 #088808 
+13402
+01234
+32140
+40321
+24013
+
+postL
+#007000 #008000 #087808 #087808 #088808 black darkgrey
+1555.
+05.6.
+325.6
+4035.
+24015
+
+goal
+black darkgrey
+.....
+.....
+.1.1.
+1.1.1
+00000
+
+postR
+#007000 #008000 #087808 #087808 #088808 black darkgrey
+.5552
+.6.54
+6.540
+.5321
+54013
+
+live (player)
+white
+.....
+.....
+..0..
+.....
+.....
+
+man
+blue purple
+.....
+.000.
+00000
+.111.
+.1.1.
+
+other
+#555 #777
+.....
+.000.
+11011
+.000.
+.0.0.
+
+ball
+red
+.....
+.000.
+.0.0.
+.000.
+.....
+
+deadball
+darkred green
+.....
+.101.
+.0.0.
+.101.
+.....
+
+trace
+#9E9
+.....
+.....
+..0..
+.....
+.....
+
+kick1
+#9E9
+.....
+.0.0.
+.....
+.0.0.
+.....
+
+kick2
+#9E9
+.....
+.0.0.
+.....
+.0.0.
+.....
+
+kickR
+#9E9
+.....
+.....
+.....
+.....
+...0.
+
+kickL
+#9E9
+.....
+.....
+.....
+.....
+.0...
+
+roll
+transparent
+free
+transparent
+
+=======
+LEGEND
+=======
+
+. = Background
+x = hedge
+i = postL
+j = postR
+p = man and live
+1 = man
+2 = other
+b = ball
+o = goal
+
+player = live
+
+kick = kick1 or kick2
+post = postL or postR
+obstacle = goal or post or hedge or man or other
+lost = hedge or post
+kicker = kickL or kickR
+tmpmark = kick or kicker or free or trace
+anyman = man or other
+
+=======
+SOUNDS
+=======
+
+endlevel 35598103
+sfx0 6845904  (bad move)
+sfx1 29288508 (blue kick)
+sfx2 13716102 (ball into grass)
+sfx3 219507   (intercept)
+
+================
+COLLISIONLAYERS
+================
+
+Background
+roll
+hedge
+goal, post
+kick
+man, ball, other
+kicker, trace
+live, deadball
+free
+
+======
+RULES
+======
+
+(activate moving objects)
+[ live ball | stationary roll ] -> [ > live > ball | > roll ]
+[ > live man ] -> [ > live > man ]
+[ > live man | obstacle ] -> cancel sfx0
+
+(blue player catches a ball head-on)
+[ > live > ball | man roll ] -> [ ball | live man ]
+(blue player catches a free ball side-on)
+(ball must be free or else already double-kicked)
+[ man | live free moving ball ] -> [ live man | stationary ball ] sfx3
+[ kick2 ][ man | live moving ball ] -> [ kick2 ] [ live man | stationary ball ] sfx3
+(other player kicks a rolling ball head-on)
+[ | > live > ball | other roll ] -> [ roll | live ball | other kickR ] 
+(other player kicks a rolling ball side-on)
+[ roll ] [ other | live free moving ball ] -> [] [ other | live free ball kick2 ]
+[ other | live ball free kick2 | ] -> [ other kickR | > live > ball kick2 | > roll ] sfx3
+(ball hits ball)
+[ > live > ball | ball roll | ] -> [ ball | live ball | roll ] sfx3
+(remove roll if player is now live) 
+[ live man ] [ roll ] -> [ live man ] []
+(player kicks ball)
+[ > live > man | ball | ] -> [ > live man kickR | ball kick1 | roll ] sfx1
+left [ anyman kickR | ball ] ->  [ anyman kickL | ball ]
+
+(=== engine applies movement ===)
+
+(a ball is free after the initial kick)
+late [ live ball no kick1 ] -> [ live ball free ]
+late [ free no ball ] -> []
+(ball lost)
+late [ live ball lost ] -> [ deadball lost ] sfx2
+late [ deadball post | hedge ] -> [ post trace | deadball hedge ]
+(add ball trace)
+late [ live ball ]  -> [ live ball trace ]
+(cleanup at end of roll)
+late [ live man ] [ tmpmark ] -> [ live man ] []
+(trigger again if ball is still rolling)
+late [ live ball | roll ]  -> [ live ball | roll ] again
+
+==============
+WINCONDITIONS
+==============
+
+some ball on goal
+
+=======
+LEVELS
+=======
+
+xxxxxxxxx 
+x.......x
+x..bp...x
+x.......x
+x....1..x
+x..1....x
+x.......x
+xxxiojxxx 
+xxxxxxxxx
+
+xxxxxxxxx
+x.......x
+x..1....x
+x....1..x
+x.1.....x
+x...p.b.x
+x.......x
+xxxiojxxx 
+xxxxxxxxx
+
+(---)
+
+xxxxxxxxxxx
+x.........x
+x...p.1...x
+x....b....x
+x..1......x
+x.2....1..x
+x....2....x
+x.......2.x
+x.........x
+xxxxiojxxxx 
+xxxxxxxxxxx
+
+xxxxxxxxx
+x.......x
+x....1..x
+x.pb....x
+x.....1.x
+x.1.....x
+x....2..x
+x.......x
+xxxiojxxx 
+xxxxxxxxx
+
+(---)
+
+xxxxxxxxxxxxx
+x...........x
+x.p.......1.x
+x..b.....b..x
+x...........x
+xxxxxiojxxxxx 
+xxxxxxxxxxxxx
+
+xxxxxxxxx
+x.2.b...x
+x....2.bx
+x..b....x
+xb..p.b2x
+x..b2...x
+x2.....bx
+x.b..b..x
+x.b...2.x
+xxxiojxxx 
+xxxxxxxxx
+
+(---)
+
+xxxxxxx
+x.bbb.x
+x.b1b.x
+x.xpx.x
+x.....x
+xxiojxx (3)
+xxxxxxx
+
+xxxxxxxxxxx
+x..1.x.1..x
+xpbbbbbbb1x
+x.........x
+xxxxiojxxxx (6)
+xxxxxxxxxxx
+
+xxxxxxx
+x.....x
+x.111.x
+x.bbb.x
+x.1b1.x
+x.1p1.x
+x.....x
+xxiojxx (6)
+xxxxxxx
+
+xxxxxxxxx
+x.......x
+x....2..x
+x.1.b...x
+x...p...x
+x...b.2.x
+x..2....x
+x.......x
+xxxiojxxx 
+xxxxxxxxx (8)
+
+xxxxxxxxx
+x.......x
+x1b1bb1bx
+xb1bb1b1x
+x1bbpb1bx
+xxxiojxxx (10)
+xxxxxxxxx
+
+xxxxxxx
+x.....x
+x.1p1.x
+x.bbb.x
+x.....x
+x.2...x
+x.....x
+x...2.x
+x.....x
+xxiojxx
+xxxxxxx (12)
+
+xxxxxxxxxxx
+x.........x
+x......2..x
+x....1....x
+x.2.b.b...x
+x....p....x
+x.......2.x
+x...2.....x
+x.........x
+xxxxiojxxxx
+xxxxxxxxxxx (11)
+
+xxxxxxxxx
+xx..1..xx
+xx.b.b..x
+x...x...x
+x.p.b.1xx
+xx.....xx
+xxxiojxxx (20)
+xxxxxxxxx
+
+Message Thank-you for playing! :)
+
+(xxxxxxxxxxx
+x.........x
+x..1.2....x
+x.b.....1.x
+x.....1...x
+x...2.....x
+x.p....1..x
+x.........x
+xxxxiojxxxx (5)
+xxxxxxxxxxx)
+
+(xxxxxxxxxxx
+x.........x
+x.bp...2..x
+x....1....x
+x.........x
+x..1..1...x
+x...2.....x
+x......1..x
+x..1......x
+x.........x 
+xxxxiojxxxx (13)
+xxxxxxxxxxx)
+
+(xxxxxxxxxx
+x.....x1.x
+x.p.b....x
+x....x...x
+x.....b..x
+x...x....x
+x......1.x
+x.1x.....x
+xxxxiojxxx (13)
+xxxxxxxxxx)
+
+(xxxxxxxxx
+x.......x
+x...1...x
+x.1.....x
+x...x...x
+x..b..1.x
+x...p...x
+x.1.....x
+x....1..x
+x.......x
+xxxiojxxx (33)
+xxxxxxxxx)
+
