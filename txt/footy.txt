@@ -255,8 +255,6 @@ x.......x
 xxxiojxxx 
 xxxxxxxxx
 
-(---)
-
 xxxxxxxxxxx
 x.........x
 x...p.1...x
@@ -280,8 +278,6 @@ x.......x
 xxxiojxxx 
 xxxxxxxxx
 
-(---)
-
 xxxxxxxxxxxxx
 x...........x
 x.p.......1.x
@@ -302,21 +298,19 @@ x.b...2.x
 xxxiojxxx 
 xxxxxxxxx
 
-(---)
-
 xxxxxxx
 x.bbb.x
 x.b1b.x
 x.xpx.x
 x.....x
-xxiojxx (3)
+xxiojxx 
 xxxxxxx
 
 xxxxxxxxxxx
 x..1.x.1..x
 xpbbbbbbb1x
 x.........x
-xxxxiojxxxx (6)
+xxxxiojxxxx 
 xxxxxxxxxxx
 
 xxxxxxx
@@ -326,7 +320,7 @@ x.bbb.x
 x.1b1.x
 x.1p1.x
 x.....x
-xxiojxx (6)
+xxiojxx 
 xxxxxxx
 
 xxxxxxxxx
@@ -338,14 +332,14 @@ x...b.2.x
 x..2....x
 x.......x
 xxxiojxxx 
-xxxxxxxxx (8)
+xxxxxxxxx 
 
 xxxxxxxxx
 x.......x
 x1b1bb1bx
 xb1bb1b1x
 x1bbpb1bx
-xxxiojxxx (10)
+xxxiojxxx 
 xxxxxxxxx
 
 xxxxxxx
@@ -358,7 +352,7 @@ x.....x
 x...2.x
 x.....x
 xxiojxx
-xxxxxxx (12)
+xxxxxxx 
 
 xxxxxxxxxxx
 x.........x
@@ -370,7 +364,7 @@ x.......2.x
 x...2.....x
 x.........x
 xxxxiojxxxx
-xxxxxxxxxxx (11)
+xxxxxxxxxxx 
 
 xxxxxxxxx
 xx..1..xx
@@ -378,7 +372,7 @@ xx.b.b..x
 x...x...x
 x.p.b.1xx
 xx.....xx
-xxxiojxxx (20)
+xxxiojxxx 
 xxxxxxxxx
 
 Message Thank-you for playing! :)
