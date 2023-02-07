@@ -1,0 +1,448 @@
+title Microchip Fractal Mazes
+author Andrea Gilbert
+homepage https://www.clickmazes.com
+
+========
+OBJECTS
+========
+
+Background
+black
+void
+transparent
+wallI
+darkgray
+wallO
+darkgray
+
+path1
+#228822
+00000
+00.00
+0.0.0
+00.00
+00000
+
+path2
+#333399
+00000
+0.0.0
+00.00
+0.0.0
+00000
+
+pinV
+black darkgray grey
+10201
+10001
+10201
+10001
+10201
+
+pinH
+black darkgray grey
+11111
+00000
+20202
+00000
+11111
+
+levelbar
+grey
+.....
+.....
+00.00
+.....
+.....
+
+mark
+orange
+.....
+.000.
+.0.0.
+.000.
+.....
+
+Level0
+orange
+.....
+.....
+00.00
+.....
+.....
+
+levelMax
+transparent
+levelMin
+transparent
+
+Mover
+orange
+.....
+.000.
+.000.
+.000.
+.....
+
+signalV
+black darkgray orange black
+13231
+12321
+13231
+12321
+13231
+
+signalH
+black darkgray orange black
+11111
+32323
+23232
+32323
+11111
+
+goal
+transparent
+
+goalMark
+orange
+00000
+0...0
+0...0
+0...0
+00000
+
+decor
+grey
+.....
+.....
+..0..
+.....
+.....
+
+
+bliss
+orange yellow white
+2.2.2
+.212.
+21012
+.212.
+2.2.2
+
+(track markers)
+p1
+transparent
+p2 
+transparent 
+(pin markers - inner)
+n0 
+transparent
+n1
+transparent
+n2
+transparent
+n3
+transparent
+n4
+transparent
+n5
+transparent
+n6
+transparent
+n7
+transparent
+n8
+transparent
+n9
+transparent
+nA
+transparent
+(pin markers - outer)
+n00
+transparent
+n10
+transparent
+n20
+transparent
+n30
+transparent
+n40
+transparent
+n50
+transparent
+n60
+transparent
+n70
+transparent
+n80
+transparent
+n90
+transparent
+nA0
+transparent
+
+Ld
+transparent
+Lu
+transparent
+
+=======
+LEGEND
+=======
+
+. = void
+# = wallO and decor
+@ = wallI and decor
+o = path1 
+z = path2
++ = path1 and path2
+
+! = levelbar
+w = levelbar and mark and level0
+u = levelbar and mark and level0 and levelMax
+x = levelbar and levelMin
+y = levelbar and levelMax
+
+p = mover and path1 and p1
+* = goal and goalMark and path2 
+
+path = path1 or path2
+signal = signalV or signalH
+player = mover or signal
+pX = p1 or p2
+
+pinInner = n0 or n1 or n2 or n3 or n4 or n5 or n6 or n7 or n8 or n9 or nA
+pinOuter = n00 or n10 or n20 or n30 or n40 or n50 or n60 or n70 or n80 or n90 or nA0
+
+pin = pinOuter or pinInner
+wall = wallI or wallO 
+
+0 = n00 and pinV
+1 = n10 and pinV
+2 = n20 and pinV
+3 = n30 and pinH
+4 = n40 and pinH
+5 = n50 and pinH 
+6 = n60 and pinV
+7 = n70 and pinV
+8 = n80 and pinH
+9 = n90 and pinH
+s = nA0 and pinH
+
+a = n0 and pinV
+b = n1 and pinV
+c = n2 and pinV
+d = n3 and pinH
+e = n4 and pinH
+f = n5 and pinH
+g = n6 and pinV
+h = n7 and pinV
+i = n8 and pinH
+j = n9 and pinH
+k = nA and pinH
+
+=======
+SOUNDS
+=======
+
+sfx0 1343704
+sfx1 3627103
+Endlevel 65303103
+
+================
+COLLISIONLAYERS
+================
+
+background
+levelMax, levelMin, Ld, Lu 
+void, wall, levelbar, goal, pinV, pinH
+pinInner, pinOuter, p1, p2, level0
+path1
+player
+path2
+goalMark, decor, mark
+bliss
+
+======
+RULES
+====== 
+
+(cancel various bad moves)
+[ > player | wall ] -> cancel sfx0
+[ > Mover path | void ] -> cancel sfx0
+[ > Mover p1 | path2 no path1 ] -> cancel sfx0
+[ > Mover p2 | path1 no path2 ] -> cancel sfx0
+
+[ > Mover | pinOuter ] [ mark levelMax ] -> [ Mover | pinOuter ] [ mark levelMax ] sfx0 Message Outer limit reached
+[ > Mover | pinInner ] [ mark levelMin ] -> [ Mover | pinInner ] [ mark levelMin ] sfx0 Message Inner limit reached
+
+(normal move along a path)
+[ > Mover p1 | path1 ] -> [ | Mover path1 p1 ]
+[ > Mover p2 | path2 ] -> [ | Mover path2 p2 ]
+
+(move onto a transition pin)
+vertical   [ > Mover px | pinOuter ] -> [ | signalV pinOuter Lu ] sfx1
+horizontal [ > Mover px | pinOuter ] -> [ | signalH pinOuter Lu ] sfx1
+vertical   [ > Mover px | pinInner ] -> [ | signalV pinInner Ld ] sfx1
+horizontal [ > Mover px | pinInner ] -> [ | signalH pinInner Ld ] sfx1
+(move off a transition pin)   
+[ > signal pinOuter | path1 ] -> [ pinOuter | mover path1 p1 Ld ] 
+[ > signal pinOuter | path2 ] -> [ pinOuter | mover path2 p2 Ld ] 
+[ > signal pinInner | path1 ] -> [ pinInner | mover path1 p1 Lu ] 
+[ > signal pinInner | path2 ] -> [ pinInner | mover path2 p2 Lu ] 
+
+(update the level marker)
+[ Lu ] [ Ld ] -> [][]  (transition was reversed - so no change)
+[ Lu pin ] [ Lu path ] [ mark ] -> [ pin ] [ path ] [ up mark ]
+[ Ld pin ] [ Ld path ] [ mark ] -> [ pin ] [ path ] [ down mark ] 
+
+(propogate a pin signal to its inner/outer pair)
+late [ signalH n30 ] [ n3 ] -> [ signalH n30 ] [ signalH n3 ] 
+late [ signalH n3 ] [ n30 ] -> [ signalH n3 ] [ signalH n30 ] 
+late [ signalH n40 ] [ n4 ] -> [ signalH n40 ] [ signalH n4 ] 
+late [ signalH n4 ] [ n40 ] -> [ signalH n4 ] [ signalH n40 ]
+late [ signalH n50 ] [ n5 ] -> [ signalH n50 ] [ signalH n5 ] 
+late [ signalH n5 ] [ n50 ] -> [ signalH n5 ] [ signalH n50 ] 
+late [ signalH n80 ] [ n8 ] -> [ signalH n80 ] [ signalH n8 ] 
+late [ signalH n8 ] [ n80 ] -> [ signalH n8 ] [ signalH n80 ] 
+late [ signalH n90 ] [ n9 ] -> [ signalH n90 ] [ signalH n9 ] 
+late [ signalH n9 ] [ n90 ] -> [ signalH n9 ] [ signalH n90 ] 
+late [ signalH nA0 ] [ nA ] -> [ signalH nA0 ] [ signalH nA ] 
+late [ signalH nA ] [ nA0 ] -> [ signalH nA ] [ signalH nA0 ] 
+late [ signalV n00 ] [ n0 ] -> [ signalV n00 ] [ signalV n0 ] 
+late [ signalV n0 ] [ n00 ] -> [ signalV n0 ] [ signalV n00 ] 
+late [ signalV n10 ] [ n1 ] -> [ signalV n10 ] [ signalV n1 ] 
+late [ signalV n1 ] [ n10 ] -> [ signalV n1 ] [ signalV n10 ] 
+late [ signalV n20 ] [ n2 ] -> [ signalV n20 ] [ signalV n2 ] 
+late [ signalV n2 ] [ n20 ] -> [ signalV n2 ] [ signalV n20 ] 
+late [ signalV n60 ] [ n6 ] -> [ signalV n60 ] [ signalV n6 ] 
+late [ signalV n6 ] [ n60 ] -> [ signalV n6 ] [ signalV n60 ]
+late [ signalV n70 ] [ n7 ] -> [ signalV n70 ] [ signalV n7 ]
+late [ signalV n7 ] [ n70 ] -> [ signalV n7 ] [ signalV n70 ]
+(cleanup rogue signal - after transition)
+late [ signal void ] -> [ void ] 
+
+(add/remove level0 decoration)
+late [ mark level0 ] [ goal ] -> [ mark level0 ] [ goal goalMark ]
+late [ mark level0 ] [ wall no decor ] -> [ mark level0 ] [ wall decor ]
+late [ mark no level0 ] [ goal goalMark ] -> [ mark ] [ goal ]
+late [ mark no level0 ] [ wall decor ]  -> [ mark ] [ wall ]
+late [ signal ] [ goal goalMark ] -> [ signal ] [ goal ]
+late [ signal ] [ wall decor ]  -> [ signal ] [ wall ]
+
+late [ mover goalmark ] -> [ mover bliss ]
+
+==============
+WINCONDITIONS
+==============
+
+some mover on bliss
+some mark on level0
+
+=======
+LEVELS
+=======
+
+Message Inspired by the original designs of Mark J.P.Wolf
+Message Follow blue and green to unite orange on orange
+Message The inner and outer pins connect to recursive copies of the chip 
+
+Message Training Maze
+
+.......................
+.####0####1####2####...
+.#........o........#...
+.#.oooooooo........#...
+.#.o......zzzzzzz..#...
+.s.o......z.....z..3...
+.#.o..@@a@b@c@@.z..#...
+.#.o..@.......@.z..#.y.
+.#.o..k.......d.z..#.!.
+.#.o..@.......@.z..#.!.
+.9ooooj.......ezzoo4.w.
+.#....@.......@..o.#.!.
+.#....i.......f..o.#.!.
+.#....@.......@..o.#.x.
+.#....@@h@@@g@@..o.#...
+.8......o...z....o.5...
+.#......oopo+ooooo.#...
+.#...zzzzz*zz..o...#...
+.#...z.........o...#...
+.####7#########6####...
+.......................
+
+Message Clickmazes design P11#1
+(soln - 901s0124)
+
+.......................
+.####0####1####2####...
+.#...z....z....o...#...
+.#.zzz..zzzzzzz+zz.#...
+.#.zoooo+oooo..ooz.#.y.
+.szzo...z.o.o...o+o3.!.
+.#.zo.@@a@b@c@@.oz.#.!.
+.#.zo.@.......@.oz.#.!.
+.#.zook.......dz+z.#.!.
+.#.z..@.......@.o..#.!.
+.9zzooj.......eoozz4.w.
+.#..o.@.......@..z.#.!.
+.#.z+zi.......fooz.#.!.
+.#.zo.@.......@.oz.#.!.
+.#.zo.@@h@@@g@@.oz.#.!.
+.8o+o...z...o...ozz5.!.
+.#.zoooo+opoo..ooz.#.x.
+.#.zzz..zz*zzzz+zz.#...
+.#...z.........o...#...
+.####7#########6####...
+.......................
+
+Message Clickmazes design P11#2
+(soln - 6421320s97)
+
+.......................
+.####0####1####2####...
+.#...z....z....z...#...
+.#.zzz..zzzzz..zzz.#...
+.#.z....z.oo+ooooz.#.y.
+.so+o...z.o.z...o+o3.!.
+.#.zo.@@a@b@c@@..z.#.!.
+.#.zo.@.......@..z.#.!.
+.#.z+zk.......dzzz.#.!.
+.#..o.@.......@..z.#.!.
+.9zzooj.......eoozz4.w.
+.#.z..@.......@.o..#.!.
+.#.zzzi.......foo..#.!.
+.#.z..@.......@.o..#.!.
+.#.z..@@h@@@g@@.o..#.!.
+.8o+o...z...o...ozz5.!.
+.#.zoooo+opoo..ooz.#.x.
+.#.zzz..zz*zzzz+zz.#...
+.#...z.........o...#...
+.####7#########6####...
+.......................
+
+Message Clickmazes design P11#3
+(soln - 6789532456)
+
+.......................
+.####0####1####2####...
+.#...z....z....o...#...
+.#...zzzzzz.zzz+zz.#...
+.#..ooooo.oo+ooooz.#.y.
+.szzo...o.o.z...ozz3.!.
+.#.zo.@@a@b@c@@.o..#.!.
+.#.zo.@.......@.o..#.!.
+.#.zook.......dz+z.#.!.
+.#.z..@.......@.oz.#.!.
+.9zzooj.......eoozz4.w.
+.#.zo.@.......@..z.#.!.
+.#.z+zi.......fooz.#.!.
+.#..o.@.......@.oz.#.!.
+.#..o.@@h@@@g@@.oz.#.!.
+.8zzo...z...z...ozz5.!.
+.#.zoooo+opo+oooo..#.x.
+.#.zzz..zz*zz..o...#...
+.#...z.........o...#...
+.####7#########6####...
+.......................
+
+Message Thank you for playing :)

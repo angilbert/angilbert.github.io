@@ -1,0 +1,193 @@
+title The Quantum Maze
+author Jonathon Welton       Puzzlescript by Matthieu Haller
+homepage https://www.clickmazes.com
+
+========
+OBJECTS
+========
+
+Background
+lightgrey 
+
+WallLeft
+black
+0....
+0....
+0....
+0....
+.....
+
+
+WallDown
+black
+.....
+.....
+.....
+.....
+.0000
+
+
+Player
+black
+.....
+..00.
+..00.
+.....
+.....
+
+inside
+white
+.0000
+.0000
+.0000
+.0000
+.....
+
+start
+red
+.0000
+.0..0
+.0..0
+.0000
+.....
+
+finish
+green
+.0000
+.0..0
+.0..0
+.0000
+.....
+
+corner
+blue
+.0000
+.0..0
+.0..0
+.0000
+.....
+
+Wall1
+transparent
+Wall2
+transparent
+Wall3
+transparent
+
+
+=======
+LEGEND
+=======
+
+. = Background
+WallPointer = Wall1 or Wall2 or Wall3
+(outside walls)
+N = WallDown
+E = WallLeft
+S = inside and WallDown
+W = inside and WallLeft
+(corners)
+a = WallLeft and start and Player and inside
+b = corner and WallLeft and WallDown and inside
+c = corner and WallDown and inside
+d = finish and inside
+i = inside
+
+=======
+SOUNDS
+=======
+
+sfx0 18704104
+sfx1 34991900
+endlevel 35598103
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Wall1 (left wall pointer)
+Wall2 (forward wall pointer)
+Wall3 (right wall pointer)
+WallDown
+WallLeft
+inside
+start
+finish
+Player,corner
+
+
+======
+RULES
+======
+
+UP [up Player |WallDown] -> cancel sfx0
+RIGHT [right Player|WallLeft] -> cancel sfx0
+[down Player WallDown] -> cancel sfx0
+[left Player WallLeft] -> cancel sfx0
+
+(setting wall pointers and moving player)
+[> Player||inside] -> [> Player||inside > Wall2]
+[> Player| corner]-> [|Player] sfx1
+[> Player| no corner]-> [|Player]
+[inside | ^ Wall2] -> [ < Wall1  inside| ^ Wall2]
+[^ Wall2| inside] -> [ ^ Wall2 |  > Wall3 inside]
+(converting pointers to new walls)
+right [> WallPointer|] -> [|WallLeft]
+up    [> WallPointer|] -> [|WallDown]
+[left WallPointer] -> [WallLeft]
+[down WallPointer] -> [WallDown]
+
+==============
+WINCONDITIONS
+==============
+
+No corner
+All Player On finish 
+
+=======
+LEVELS
+=======
+
+Message From red corner to green corner via both blue corners
+Message For full instructions and history click on the URL below
+
+Message 5x5 Maze 1/3
+(drrur ddrdd ulldl lruul urrur r)
+
+.NNNNN.
+.aiiidE
+.WiiiiE
+.WiiiiE
+.WiiiiE
+.bSSScE
+.......
+
+Message 8x8 Maze 2/3
+(rdldd rddld durrd ruuru ulurr urddr ddldd rluur uuluu ru)
+
+.NNNNNNNN.
+.aiiiiiidE
+.WiiiiiiiE
+.WiiiiiiiE
+.WiiiiiiiE
+.WiiiiiiiE
+.WiiiiiiiE
+.WiiiiiiiE
+.bSSSSSScE
+..........
+
+Message 12x6 Maze 3/3
+(drrur rdrrd rrurd drddr lulld llull ulldl lduru ulurr urrdr rdrru rrur)
+
+.NNNNNNNNNNNN.
+.aiiiiiiiiiidE
+.WiiiiiiiiiiiE
+.WiiiiiiiiiiiE
+.WiiiiiiiiiiiE
+.WiiiiiiiiiiiE
+.bSSSSSSSSSScE
+..............
+
+Message ******** Congratulations! ******** You solved all the mazes ********************************** Credits: Concept and maze designs by Jonathan Welton. Based on an original applet by Andrea Gilbert. **********************************
+
