@@ -213,6 +213,7 @@ iframe {
     margin: 5px;
     align-items: center;
     font-size: 10px;
+    text-align: center;
     color: red;
 }
 

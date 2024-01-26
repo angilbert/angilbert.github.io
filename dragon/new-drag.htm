@@ -41,9 +41,19 @@
       </div>
 
       <div class="std-flex-block">
-        <div class="puzzle-area">
-          <h5>Sorry - this applet is currently unavailable</h5> 
+        <div class="puzzle-area-legacy-applet">
+          <img src="TunableMaze.gif">
+          <hr>
+          <applet archive="../jars/new-dragon.jar" 
+            code="TunableMaze.class" width="150" height="40">
+            <param name="archive" value="../jars/new-dragon.jar">
+            <i><b>Sorry, this is a JAVA applet. 
+              <br>To run it you must install 
+              <br>a suitable browser extension.
+              <br>Please see the FAQ.</b></i>
+        </applet>
         </div>
+
         <div class="puzzle-info">
           <h4>Aim</h4><p>
             Manouvre the red dot from the bottom row to the right-most column</p>
@@ -73,7 +83,7 @@
             <p>For details of a much more recent, 3D printable, design
             by Oskar see this 
             <a href="https://www.shapeways.com/forum/t/fractal-maze-by-oskar.100705/">
-            forum post</a> (2020).
+            forum post</a> (2020).</p>
         </div>
         <div class="photo-area">
           <img src="FractalMaze.jpg" width="336">
