@@ -207,6 +207,15 @@ iframe {
     align-items: center;
 }
 
+.puzzle-area-legacy-applet {
+    background: gainsboro;
+    padding: 10px;
+    margin: 5px;
+    align-items: center;
+    font-size: 10px;
+    color: red;
+}
+
 .puzzle-area-stack {
     display: flex;
     flex-direction: column;
@@ -228,6 +237,7 @@ iframe {
     margin: 5px;
     align-items: center;
 }
+
 .puzzle-area p { font-size: 14px; text-align: center; }
 .puzzle-info p { font-size: 14px;  }
 .puzzle-info h4 { padding-top: 5px; }
