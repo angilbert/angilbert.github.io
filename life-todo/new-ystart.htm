@@ -5,7 +5,7 @@
     <title>Clickmazes - ilife</title>
     <link rel="stylesheet" href="../style2020.css?v=1.3">
     <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
-    <script>cheerpjInit();</script>  
+    <!-- <script>cheerpjInit();</script> -->
   </head>
   <body>
 
@@ -52,10 +52,13 @@
       </div>
 
       <div class="std-flex-block">
-        <div class="puzzle-area">
-          <p><cheerpj-applet archive="new-life.jar" 
-              code="life2.class" width="350" height="350">
-          </cheerpj-applet></p>
+        <div class="puzzle-area-legacy-applet">
+          <applet archive="../jars/new-life.jar" 
+              code="life2.class" width="350" height="360">
+              <i><b>Sorry, this is a JAVA applet. 
+                <br>To run it you must install a suitable browser extension.
+                Please see the FAQ.</b></i>
+          </applet>
         </div>
         <div class="puzzle-info">
           <h4>Controls</h4><p>
