@@ -1,0 +1,27 @@
+; Get My Goat by J I Wiley
+;
+size  4  3
+step 28
+;
+initial
+6788
+5.9G
+4321
+;
+target
+2788
+5G9.
+4361
+;
+image 0 0 images/goat/g6.jpg 1 1
+image 0 1 images/goat/g7.jpg 1 1
+image 0 2 images/goat/g8.jpg 1 2
+image 1 0 images/goat/g5.jpg 1 1
+image 1 2 images/goat/g9.jpg 1 1
+image 1 3 images/goat/goat.jpg 1 1
+image 2 0 images/goat/g4.jpg 1 1
+image 2 1 images/goat/g3.jpg 1 1
+image 2 2 images/goat/g2.jpg 1 1
+image 2 3 images/goat/g1.jpg 1 1
+;
+end
