@@ -2,8 +2,6 @@
   <head>
     <title>Clickmazes applet collection</title>
     <link rel="stylesheet" href="../style2020.css?v=1.3">
-    <script src="https://cjrtnc.leaningtech.com/2.1/loader.js"></script>
-    <script>cheerpjInit();</script>  
   </head>
   <body>
 
@@ -17,14 +15,22 @@
     </div>
 
     <div class="mainbody">
+
         <div class="page-intro">
             <h2>Lattice - test page</h2>
         </div>
-        <div><p>
-            <cheerpj-applet archive="new-lattice.jar"
+
+        <div class="std-flex-block single-item">
+          <div class="puzzle-area-legacy-applet">
+            <applet archive="../jars/new-lattice.jar"
             code="Lattice.class" width="720" height="540" >
-            </cheerpj-applet>
-        </p></div>
+            <i><b>Sorry, this is a JAVA applet. 
+              <br>To run it you must install a suitable browser extension.
+              Please see the FAQ.</b></i>
+            </applet>
+          </div>
+        </div>
+
     </div>
   </body>
 </html>
