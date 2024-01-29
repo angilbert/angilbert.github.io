@@ -1,0 +1,208 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickmazes</title>
+    <link rel="stylesheet" href="./style2020.css?v=1.4">
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="./_site/site_cornersmall.gif">
+      <p>
+        <img src="./_site/logo_white.png" height="250px">
+        <a href="./index.htm">home</a>
+        <a href="./new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+      <div class="page-intro">
+        <h2>Clickmazes applets -  introductory tour</h2><p>
+        Welcome! This page is an introductory tour of the original clickmazes applets
+        suitable for newcomers. It offers a sample set of mini-puzzles to explore 
+        but, more importantly, allows you to confirm your browser is set up  
+        run applets everywhere you might find them, both at clickmazes and beyond.
+        </p>
+      </div>
+
+      <div class="std-flex-block">
+        <p>To run these applets you will need a desktop browser with an 
+          applet-runner plug-in (extension) installed. 
+          Two such plug-ins are currently available for 
+          <a href="https://chromewebstore.google.com/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein">Chrome</a> and 
+          <a href="https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic?hl=en-US">Edge</a> browsers.
+          Enable the plugin once by clicking on its icon, in or below the 
+          extension panel near your address bar, and all five applets will launch.
+        </p>
+        <div class="photo-area">
+          <img src="./plugin3.png" width="100">
+        </div>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="puzzle-area-legacy-applet">
+          <h3>Stepover mazes</h3>
+          <p><img src="step123/eg33a.png" width="144"></p>
+          <applet width="150" height="30" 
+              archive="../jars/new-intro.jar" 
+              code="puzzlePresenter/puzzlePresenter.class">
+              <param name="class" value="step123.step123">
+              <param name="puzzle0" value="3551430 XX1 132 211 1XX XXX 232 323 XXX">
+              <param name="title0" value="3x3 No.1">
+              <param name="puzzle1" value="3551430 XX1 322 212 1XX XXX 132 313 XXX">
+              <param name="title1" value="3x3 No.2">
+              <i><b>Applet plugin required</b></i>
+            </applet>
+        </div>
+        <div class="puzzle-info">
+          <p>Step over the lines in colour order red-white-blue, red-white-blue...
+            until you can exit at the top of the maze. The largest square will 
+            remind you what colour comes next.
+          </p>
+          <h4>Controls</h4><p>
+            Use the <b>puzzle</b> drop-list to select a puzzle.<br>
+            Use <b>restart</b> or the <b>space</b> key to reset.<br>
+            Click on the grid to move or use the <b>cursor keys.</b><br>
+            Pree <b>u</b> to undo one or more moves.
+          </p>
+          <p><a href="./step123/new-step.htm">Try more Stepover mazes</a></p>
+        </div>
+      </div>  
+
+      <div class="std-flex-block">
+        <div class="puzzle-info">
+            <p>Cross the swamp from left to right using the yellow planks to
+            form bridges between then tree-stumps. The reachable tree-stumps
+            are highlighted in orange. You can pick up and reposition one 
+            plank at a time as long as you can reach it and as long as the 
+            new gap is the right size and clear of other planks.
+          </p>
+          <h4>Controls</h4><p>
+            <b>Click on a plank</b> to pick it up. <br>
+            <b>Click on a gap</b> to put down a plank. <br>
+            Click on <b>Undo/Redo</b> to replay previous moves.<br>
+            Click on <b>Restart</b> to restart.<br>
+          </p>
+          <p><a href="./planks/new-planks.htm">Try more plank puzzles</a></p>
+        </div>
+        <div class="puzzle-area-legacy-applet">
+          <h3>Plank puzzles</h3>
+          <applet archive="../jars/new-intro.jar" 
+            code="planks.class" width="300" height="250">
+            <param name="titles" value="3x3, 3x3, 3x3">
+            <param name="positions" value="64015201212131,64015301214142,640152013131332333">
+            <param name="nodes" value="0302332450,1230242143235,31242033145223">	
+            <p><img src="planks/eg53.gif"></p>
+            <i><b>Applet plugin required</b></i>
+          </applet>
+        </div>
+      </div>   
+
+      <div class="std-flex-block">
+        <div class="puzzle-area-legacy-applet">
+          <h3>BoxUp</h3>
+          <p><img src="boxup/eg.gif" width="109"></p>
+          <applet archive="../jars/new-intro.jar" 
+            code="puzzlePresenter.puzzlePresenter.class"
+            width="150" height="30">
+            <param name="class" value="boxup2011.boxup3">
+            <param name="solve" value="disable">
+            <param name="load"  value="disable">
+            <param name="puzzle0" value="330121!,,,;n,M,W,;,,,">
+            <param name="title0" value="3x3 No.1">
+            <param name="puzzle1" value="332101!,,,;N,M,w,;,,,">
+            <param name="title1" value="3x3 No.2">
+            <param name="puzzle2" value="330201!M,,,;N,,,;n,,W,">
+            <param name="title2" value="3x3 No.3">
+            <i><b>Applet plugin required</b></i>
+          </applet>
+        </div>
+        <div class="puzzle-info">
+          <p>Use the black pusher (small square) to push the small red 
+            box inside the larger blue box. You can only push boxes from the 
+            inside. Black boxes may help or hinder.</p>
+          <h4>Controls</h4><p>
+            Use the <b>Puzzle</b> drop-list to select a puzzle.<br>
+            Use the <b>Restart</b> or hit <b>space</b> to reset the puzzle.<br>
+            Use the <b>cursor keys</b> to move.<br>
+            Use the <b>u</b> key to undo one or more moves.
+          </p>
+          <p><a href="./boxup/new-boxup.htm">Try more BoxUp puzzles</a></p>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="puzzle-info">
+          <p>Fold the blue shape to match the green target shapes. 
+            Imagine the shape is made of paper straws and string, if that helps.
+            </p>
+          <h4>Controls</h4><p>
+            <b>Click on a corner</b> of the blue shape to fold it.<br>
+            Use the <b>Puzzle</b> drop-list to select a puzzle.<br>
+            Use the <b>Restart </b> or hit <b>space</b> to reset
+            the puzzle.
+          </p>
+          <p><a href="./polyfold/new-poly.htm">Try more Polyfold puzzles</a></p>
+        </div>
+        <div class="puzzle-area-legacy-applet">
+          <h3>Polyfold</h3>
+          <p><img src="polyfold/example.png" width="200"></p>
+            <applet archive="../jars/new-intro.jar" 
+                  code="puzzlePresenter/puzzlePresenter.class"
+                  width="150" height="30">
+            <param name="class" value="polyfold.polyfold">
+            <param name="puzzle0" value="
+                M+247,214:217,307:296,364:375,307:345,214+
+                S+247,120:326,177:296,84:266,177:345,120+">
+            <param name="title0" value="Pentafold challenge">
+            <param name="puzzle1" value="
+                M+262,214:219,267:234,334:296,364:358,334:373,267:330,214+
+                S+262,454:277,387:339,417:296,470:253,417:315,387:330,454+">
+            <param name="title1" value="Heptafold challenge">
+            <i><b>Applet plugin required</b></i>
+          </applet>
+        </div>
+      </div> 
+
+      <div class="std-flex-block">
+        <div class="puzzle-area-legacy-applet">
+          <h3>Wriggle</h3>
+          <p><img src="tjwrig/eg55.png"></p>
+          <applet archive="../jars/new-intro.jar" 
+                code="puzzlePresenter/puzzlePresenter.class" 
+                width="180" height="30">
+              <param name="design"   value="disable">
+              <param name="solve"  value="disable">
+              <param name="class" value="wrig09.wrig09b">
+              <param name="puzzle0" value="5742WWWWXB20B40B01B21B41B13B33B43B04B14B05B15B25B35b450">
+              <param name="title0" value="#1">
+              <param name="puzzle1" value="5734WWNX44NNWWNNEXB10B40B11B31B41B03B23B33B04B05B15B25B35b450">
+              <param name="title1" value="#2">
+              <param name="puzzle2" value="5701SSX20SX22SSXB00B10B30B40B11B31B41B12B32B13B33B05B15B25B35b450">
+              <param name="title2" value="#3">
+              <i><b>Applet plugin required</b></i>
+          </applet>
+        </div>
+        <div class="puzzle-info">
+          <p>Drag the wriggly worms around the maze until you can release the 
+            blue worm through the gap at the bottom. You can drag a worm by its
+            head or tail and it does not matter which end exits first.</p>
+          <h4>Controls</h4><p>
+            Use the <b>puzzle</b> drop-list to select a puzzle.<br>
+            Use <b>restart </b> or the <b>space</b> key to reset.<br>
+            Use the mouse to drag a wriggler by its head or tail.
+          </p>
+          <p><a href="./tjwrig/new-jwrig.htm">Try more Wriggle puzzles</a></p>
+        </div>
+      </div>
+
+      <hr>   
+      <div class="page-credits"><p>
+        <b>concepts</b> - &COPY; Andrea Gilbert, Tom Jolly &amp; Oskar van Deventer<br>
+        <b>applets</b> - &COPY; Andrea Gilbert &amp; Graham Rogers<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>

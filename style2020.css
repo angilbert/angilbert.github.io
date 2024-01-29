@@ -239,6 +239,9 @@ iframe {
     align-items: center;
 }
 
+.puzzle-area-legacy-applet p  { font-size: 14px; text-align: center; }
+.puzzle-area-legacy-applet h3 { font-size: 14px; text-align: center; padding-top: 0px; padding-bottom: 5px; }
+
 .puzzle-area p { font-size: 14px; text-align: center; }
 .puzzle-info p { font-size: 14px;  }
 .puzzle-info h4 { padding-top: 5px; }
