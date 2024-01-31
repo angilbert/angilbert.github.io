@@ -30,7 +30,7 @@ import java.util.*;
 import java.net.*;
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//	ï¿½Ó£ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	£Ó£ì£é£ä£å  £Á£ð£ð£ì£å£ô
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 public class Slide extends Applet {
@@ -38,13 +38,13 @@ public class Slide extends Applet {
 	final	int	MSG_H		=  35;
 	final	int	COPY_H	=  30;
 
-	public	Dimension  app_size;		// ï¿½ï¿½ï¿½×¥ï¿½Ã¥È¤Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
-		Board		board;			// ï¿½ï¿½
-		AudioClip	sound = null;		// ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î²ï¿½
-		String	filename;		// ï¿½Ì¥Ç¡ï¿½ï¿½ï¿½ï¿½Î¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½
-		String	nextfile;		// ï¿½ï¿½ï¿½Ë¿Ê¤ï¿½ï¿½Ì¤Î¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾
+	public	Dimension  app_size;		// ¥¢¥×¥ì¥Ã¥È¤Î¥µ¥¤¥º
+		Board		board;			// È×
+		AudioClip	sound = null;		// ¶ð¤òÆ°¤«¤¹»þ¤Î²»
+		String	filename;		// ÌÌ¥Ç¡¼¥¿¤Î¥Õ¥¡¥¤¥ë
+		String	nextfile;		// ¼¡¤Ë¿Ê¤àÌÌ¤Î¥Õ¥¡¥¤¥ëÌ¾
 	private
-		Label			stepCounter;		// stepÉ½ï¿½ï¿½
+		Label			stepCounter;		// stepÉ½¼¨
 		Label			doneMsg;
 		ControlButton	nextButton;
 		ControlButton	backButton;
@@ -63,7 +63,7 @@ public class Slide extends Applet {
 	final Color msgcolor	= Color.red;
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ½é´ü²½
 	public void init() {
 		String crMessage = "Slide Puzzle V3.7  " + 
 				"Copyright(c)1996-2001 Hirofumi Fujiwara, Nick Baxter";
@@ -163,7 +163,7 @@ public class Slide extends Applet {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É½ï¿½ï¿½
+	// ¥«¥¦¥ó¥¿É½¼¨
 	public	void showcounter() {
 		if(board.minStep==0)
 			stepCounter.setText( "   Step  "+board.step+"   " );
@@ -172,13 +172,13 @@ public class Slide extends Applet {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É½ï¿½ï¿½
+	// ¥«¥¦¥ó¥¿É½¼¨
 	public	void showMsg(String msg) {
 		doneMsg.setText( msg );
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Æ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ºÆ¥¹¥¿¡¼¥È
 	public void replay() {
 		board.setup(filename);
 		showcounter();
@@ -193,14 +193,14 @@ public class Slide extends Applet {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¤ï¿½
+	// ¼¡¤ÎÌÌ¤Ø
 	public void next() {
 		if(nextfile != null) filename = nextfile;
 		replay();
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Þ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ¥Þ¥¦¥¹Áàºî
 	public boolean mouseDown( Event evt, int x, int y ) {
 		board.mouseDown(x,y);
 		return	true;
@@ -217,7 +217,7 @@ public class Slide extends Applet {
 	}
 
 	//----------------------------------------------------------------
-	//	ï¿½Ú¥ï¿½ï¿½ï¿½ï¿½
+	//	¥Ú¥¤¥ó¥È
 	public void paint( Graphics g ) {
 		g = this.g;
 		board.paintHint(g);
@@ -232,12 +232,12 @@ public class Slide extends Applet {
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//	ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½Ü¥ï¿½ï¿½ó¥¯¥é¥¹
+//	£Ã£ï£î£ô£ò£ï£ì£Â£õ£ô£ô£ï£î	À©¸æ¥Ü¥¿¥ó¥¯¥é¥¹
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 class  ControlButton extends Button {
 	Slide		slide;
-	String		name;		// ï¿½Ü¥ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½
+	String		name;		// ¥Ü¥¿¥ó¤ÎÌ¾Á°
 
 	ControlButton( Slide s, String str, String label ) {
 		super();
@@ -247,7 +247,7 @@ class  ControlButton extends Button {
 	}
 
 	//----------------------------------------------------------------
-	//	ï¿½Ü¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//	¥Ü¥¿¥óÁàºî
 	public boolean action( Event evt, Object obj ) {
 		if(name.equals("Replay")) slide.replay();
 		if(name.equals("Back")) slide.board.backHistory();
@@ -264,35 +264,35 @@ class  ControlButton extends Button {
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//	ï¿½Â£ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½Ç¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¥¯ï¿½é¥¹
+//	£Â£ï£á£ò£ä	È×Æâ¤Ç¤ÎÁàºî¤ò´ÉÍý¤¹¤ë¥¯¥é¥¹
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 class Board extends Rectangle {
-	final	int	maxPiece = 32;		//ï¿½ï¿½ï¿½Î¥Ö¥ï¿½ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½Î¾ï¿½ï¿½
-	final	int	maxHistory = 512;	//ï¿½Ò¥ï¿½ï¿½È¥ï¿½ï¿½ï¿½
+	final	int	maxPiece = 32;		//°ì¶ð¤Î¥Ö¥í¥Ã¥¯¿ô¤Î¾å¸Â
+	final	int	maxHistory = 512;	//¥Ò¥¹¥È¥ê¾å¸Â
 
 	public
-		Block	blocks[][];		//ï¿½×¤ï¿½É½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		String	targetBlocks[][];	//ï¿½ï¿½É¸ï¿½È¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		Block	blocks[][];		//È×¤òÉ½¤¹ÇÛÎó
+		String	targetBlocks[][];	//ÌÜÉ¸¤È¤¹¤ë¾õÂÖ
 		char	hintBlocks[][];
-		int	ax,ay;			//ï¿½×¤Î¥ï¿½ï¿½ï¿½ï¿½ï¿½
-		Slide	slide;			// ï¿½Æ¤Ó½Ð¤ï¿½ï¿½ï¿½ Applet
-		int	unit;			//ï¿½ï¿½ï¿½Ö¥ï¿½ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½ç¤­ï¿½ï¿½
-		int	minStep;		//ï¿½ï¿½É¸ï¿½ï¿½ï¿½Æ¥Ã¥×¿ï¿½
-		int	step;			//ï¿½ï¿½ï¿½ß¤Î¥ï¿½ï¿½Æ¥Ã¥×¿ï¿½
+		int	ax,ay;			//È×¤Î¥µ¥¤¥º
+		Slide	slide;			// ¸Æ¤Ó½Ð¤·¤¿ Applet
+		int	unit;			//£±¥Ö¥í¥Ã¥¯¤ÎÂç¤­¤µ
+		int	minStep;		//ÌÜÉ¸¥¹¥Æ¥Ã¥×¿ô
+		int	step;			//¸½ºß¤Î¥¹¥Æ¥Ã¥×¿ô
 	private
-		Rectangle req;			//ï¿½×¤ï¿½ï¿½ç¤­ï¿½ï¿½ï¿½Î¸Â³ï¿½
-		Piece	pieces[];		//ï¿½ï¿½
-		int	piecen;			//ï¿½ï¿½Î¿ï¿½
-		Piece	currentPiece;		//ï¿½É¥ï¿½Ã¥ï¿½ï¿½ï¿½Î¶ï¿½
-		Point	dragPoint;		//ï¿½É¥ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		Point	dPoint;			//ï¿½É¥ï¿½Ã¥ï¿½ï¿½ï¿½Î°ï¿½Æ°ï¿½ï¿½Î¥
-		boolean	dragFlag;		//ï¿½É¥ï¿½Ã¥ï¿½ï¿½ï¿½
+		Rectangle req;			//È×¤ÎÂç¤­¤µ¤Î¸Â³¦
+		Piece	pieces[];		//¶ð
+		int	piecen;			//¶ð¤Î¿ô
+		Piece	currentPiece;		//¥É¥é¥Ã¥°Ãæ¤Î¶ð
+		Point	dragPoint;		//¥É¥é¥Ã¥°¸½ºßÃÏ
+		Point	dPoint;			//¥É¥é¥Ã¥°Ãæ¤Î°ÜÆ°µ÷Î¥
+		boolean	dragFlag;		//¥É¥é¥Ã¥°Ãæ
 		String	boardType = "none";
-		boolean	painting;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		Piece	pieceHistory[];		//ï¿½ï¿½Î¥Ò¥ï¿½ï¿½È¥ï¿½
-		Point	pointHistory[];		//ï¿½ï¿½ï¿½Ö¤Î¥Ò¥ï¿½ï¿½È¥ï¿½
-		int	historyCount;		//ï¿½Ò¥ï¿½ï¿½È¥ê¸½ï¿½ï¿½ï¿½ï¿½
+		boolean	painting;		//ÉÁ²èÃæ
+		Piece	pieceHistory[];		//¶ð¤Î¥Ò¥¹¥È¥ê
+		Point	pointHistory[];		//°ÌÃÖ¤Î¥Ò¥¹¥È¥ê
+		int	historyCount;		//¥Ò¥¹¥È¥ê¸½ºßÃÏ
 		int	redoLimit;
 		int	originalRedoLimit;
 		int	originalX;
@@ -300,7 +300,7 @@ class Board extends Rectangle {
 		boolean	adjusting;
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ó¥¹¥È¥é¥¯ï¿½ï¿½  s:ï¿½Æ¤Ó½Ð¤ï¿½ï¿½ï¿½Applet  r:ï¿½×¤Î°ï¿½ï¿½Ö¤ï¿½ï¿½ç¤­ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+	// ¥³¥ó¥¹¥È¥é¥¯¥¿  s:¸Æ¤Ó½Ð¤·¤¿Applet  r:È×¤Î°ÌÃÖ¤ÈÂç¤­¤µ(ºÇÂç)
 	Board(Slide s,Rectangle r){
 		pieces = new Piece[maxPiece];
 		slide = s;
@@ -313,7 +313,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½ï¿½  filename:ï¿½Ì¥Ç¡ï¿½ï¿½ï¿½ï¿½Î¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾
+	// ½é´ü²½  filename:ÌÌ¥Ç¡¼¥¿¤Î¥Õ¥¡¥¤¥ëÌ¾
 	public void setup(String filename){
 		minStep = step = 0;
 		targetBlocks = null;
@@ -347,7 +347,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Þ¥ï¿½ï¿½ï¿½ï¿½ò²¡¤ï¿½ï¿½ï¿½ï¿½ï¿½  v,w:ï¿½ï¿½É¸
+	// ¥Þ¥¦¥¹¤ò²¡¤·¤¿»þ  v,w:ºÂÉ¸
 	public void mouseDown(int v, int w){
 		if(dragFlag) return;
 		if(!this.inside(v,w)) return;
@@ -367,7 +367,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½É¥ï¿½Ã¥ï¿½ï¿½ï¿½  v,w:ï¿½ï¿½É¸
+	// ¥É¥é¥Ã¥°Ãæ  v,w:ºÂÉ¸
 	public void mouseDrag(int v, int w){
 		int radius = 5;		// radius of pieces corner 
 		if(!dragFlag || painting) return;
@@ -442,7 +442,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Þ¥ï¿½ï¿½ï¿½ï¿½ï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  v,w:ï¿½ï¿½É¸
+	// ¥Þ¥¦¥¹¤òÎ¥¤·¤¿»þ  v,w:ºÂÉ¸
 	public void mouseUp(int v, int w){
 		v-=x; w-=y;
 		if(!dragFlag) return;
@@ -541,7 +541,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// Backï¿½Ü¥ï¿½ï¿½ï¿½ò²¡¤ï¿½ï¿½ï¿½ï¿½ï¿½
+	// Back¥Ü¥¿¥ó¤ò²¡¤·¤¿»þ
 	public void backHistory(){
 		if(dragFlag) return;
 		if(historyCount <= 0) return;
@@ -562,7 +562,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// Backï¿½Ü¥ï¿½ï¿½ï¿½ò²¡¤ï¿½ï¿½ï¿½ï¿½ï¿½
+	// Back¥Ü¥¿¥ó¤ò²¡¤·¤¿»þ
 	public void forwardHistory(){
 		if(dragFlag) return;
 		if(historyCount == redoLimit) return;
@@ -583,7 +583,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Ò¥ï¿½ï¿½È¥ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ì¤¿ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½
+	// ¥Ò¥¹¥È¥ê¥Ð¥Ã¥Õ¥¡¤¬°î¤ì¤¿»þ¤Î½èÍý
 	private void reduceHistory(){
 		if(historyCount >= maxHistory){
 			System.out.println("Reduce history");
@@ -598,7 +598,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Ò¥ï¿½ï¿½È¥ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ì¤¿ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½
+	// ¥Ò¥¹¥È¥ê¥Ð¥Ã¥Õ¥¡¤¬°î¤ì¤¿»þ¤Î½èÍý
 	private boolean isSolution(){
 		char c;
 		for (int j=0;j<ay;++j) for (int i=0;i<ax;++i) {
@@ -613,34 +613,32 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Â£ï¿½ï¿½ï¿½ï¿½Î·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	public void setBlockShape(){ 
-		for(int j=ay ;--j>=0 ; ) for(int i=ax ;--i>=0 ; ) 
-		{
-			Block bkN = null, bkE = null, bkS = null, bkW = null, bk = null;
+	// £Â£ì£ï£ã£ë¤Î·Á¾õÀßÄê
+	public void setBlockShape(){
+		for(int j=ay;--j>=0;) for(int i=ax;--i>=0;) {
+			Block bk = null;
 			char c = '.';
-
-			bk = blocks[i][j];
-			if (bk != null) { 
-				// location [i][j] is occupied by a block
-				// prepare to check adjacent blocks N/E/S/W
-				c = bk.piece.cid; 
-				if (i>0)    bkW = blocks[i-1][j];
-				if (i+1<ax) bkE = blocks[i+1][j];
-				if (j+1<ay) bkS = blocks[i][j+1];
-				if (j>0)    bkN = blocks[i][j-1];
-			}
-			else { continue; }
-
-			if(bkW != null && bkW.piece.cid==c) { bk.linkW=true; }
-			if(bkE != null && bkE.piece.cid==c) { bk.linkE=true; }
-			if(bkN != null && bkN.piece.cid==c) { bk.linkN=true; }
-			if(bkS != null && bkS.piece.cid==c) { bk.linkS=true; }
+			try{
+				bk = blocks[i][j];
+				c = bk.piece.cid;
+			} catch( Exception e ){ continue; }
+			try{
+				if(blocks[i-1][j].piece.cid==c) bk.linkW=true;
+			} catch( Exception e ){}
+			try{
+				if(blocks[i+1][j].piece.cid==c) bk.linkE=true;
+			} catch( Exception e ){}
+			try{
+				if(blocks[i][j-1].piece.cid==c) bk.linkN=true;
+			} catch( Exception e ){}
+			try{
+				if(blocks[i][j+1].piece.cid==c) bk.linkS=true;
+			} catch( Exception e ){}
 		}
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½×¤ï¿½ï¿½â³°È½ï¿½ï¿½
+	// È×¤ÎÆâ³°È½Äê
 	public boolean isinside(int xx, int yy) {
 		if( xx < 0 || xx >= ax )
 			return false;
@@ -701,7 +699,7 @@ class Board extends Rectangle {
 				if (isinside(i+1,j+1)) 
 					for (int b=0;b<=thick;b++) seDelta[b] = 1-seDelta[b];
 
-				if( ! isinside(i-1,j) ) { // ï¿½ï¿½Â¦
+				if( ! isinside(i-1,j) ) { // º¸Â¦
 					for (int b=0;b<=thick;b++) {
 						if (b==0)
 							g.setColor(slide.shadowLight);
@@ -713,7 +711,7 @@ class Board extends Rectangle {
 								x0-b-1,y0+unit-1+swDelta[b]);
 					}
 				}
-				if( ! isinside(i+1,j) ) { // ï¿½ï¿½Â¦
+				if( ! isinside(i+1,j) ) { // ±¦Â¦
 					for (int b=0;b<=thick;b++) {
 						if (b==0)
 							g.setColor(slide.shadowLight);
@@ -725,7 +723,7 @@ class Board extends Rectangle {
 								x0+unit+b,y0+unit-1+seDelta[b]);
 					}
 				}
-				if( ! isinside(i,j-1) ) { // ï¿½ï¿½Â¦
+				if( ! isinside(i,j-1) ) { // ¾åÂ¦
 					for (int b=0;b<=thick;b++) {
 						if (b==0)
 							g.setColor(slide.shadowLight);
@@ -737,7 +735,7 @@ class Board extends Rectangle {
 								x0+unit-1+neDelta[b],y0-1-b);
 					}
 				}
-				if( ! isinside(i,j+1) ) { // ï¿½ï¿½Â¦
+				if( ! isinside(i,j+1) ) { // ²¼Â¦
 					for (int b=0;b<=thick;b++) {
 						if (b==0)
 							g.setColor(slide.shadowLight);
@@ -770,7 +768,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½Ú¥ï¿½ï¿½ï¿½ï¿½
+	// È×Æâ¥Ú¥¤¥ó¥È
 	public void paint(Graphics g){
 		borderpaint( g);
 
@@ -802,7 +800,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½É¸ï¿½ò¼¨¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ÌÜÉ¸¤ò¼¨¤¹Àþ¤ÎÉÁ²è
 	public void paintHint(Graphics g){
 		char c;
 		int hWidth = 4;
@@ -841,7 +839,7 @@ class Board extends Rectangle {
 
 
 	//----------------------------------------------------------------
-	//	ï¿½ï¿½ï¿½ê¡¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¤ß¹ï¿½ï¿½ï¿½ filename:ï¿½Ì¥Ç¡ï¿½ï¿½ï¿½ï¿½Î¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾
+	//	ÌäÂê¡¢²òÅú¤ÎÆÉ¤ß¹þ¤ß filename:ÌÌ¥Ç¡¼¥¿¤Î¥Õ¥¡¥¤¥ëÌ¾
 	private	void loadData(String filename){
 		URL		url;
 		DataInputStream file;
@@ -1030,7 +1028,7 @@ class Board extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¸ ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¤ß¹ï¿½ï¿½ï¿½ str:Ê¸ï¿½ï¿½ï¿½ó²½¤ï¿½ï¿½ï¿½ï¿½Ì¥Ç¡ï¿½ï¿½ï¿½
+	// ½é´üÇÛÎó¡¿ÌÜÉ¸ ¥Ç¡¼¥¿¤òÇÛÎó¤ËÆÉ¤ß¹þ¤à str:Ê¸»úÎó²½¤·¤¿ÌÌ¥Ç¡¼¥¿
 	private	void setupData(String str) {
 		int	idx = 0;
 		if(boardType.equals("initial")) {
@@ -1074,17 +1072,17 @@ class Board extends Rectangle {
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//	ï¿½Â£ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½Ã±ï¿½ï¿½
+//	£Â£ì£ï£ã£ë	¶ð¤ò¹½À®¤¹¤ëºÇ¾®¤ÎÃ±°Ì
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Block extends Rectangle {
 
-	public	Board	board;		// Â°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		Piece	piece;		// Â°ï¿½ï¿½ï¿½ï¿½ï¿½
-		boolean	outside;	// ï¿½ï¿½Â¦ï¿½Ê¶ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½
-		boolean	linkN;		//Â°ï¿½ï¿½ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½ï¿½Æ¾ï¿½È·Ò¤ï¿½ï¿½Ã¤Æ¤ï¿½ï¿½ë¤«
-		boolean	linkS;		//Â°ï¿½ï¿½ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½È·Ò¤ï¿½ï¿½Ã¤Æ¤ï¿½ï¿½ë¤«
-		boolean	linkW;		//Â°ï¿½ï¿½ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½ï¿½Æºï¿½ï¿½È·Ò¤ï¿½ï¿½Ã¤Æ¤ï¿½ï¿½ë¤«
-		boolean	linkE;		//Â°ï¿½ï¿½ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½È·Ò¤ï¿½ï¿½Ã¤Æ¤ï¿½ï¿½ë¤«
+	public	Board	board;		// Â°¤¹¤ëÈ×
+		Piece	piece;		// Â°¤¹¤ë¶ð
+		boolean	outside;	// ³°Â¦¡Ê¶ð¤ÏÃÖ¤±¤Ê¤¤¡Ë
+		boolean	linkN;		//Â°¤¹¤ë¶ð¤Ë¤ª¤¤¤Æ¾å¤È·Ò¤¬¤Ã¤Æ¤¤¤ë¤«
+		boolean	linkS;		//Â°¤¹¤ë¶ð¤Ë¤ª¤¤¤Æ²¼¤È·Ò¤¬¤Ã¤Æ¤¤¤ë¤«
+		boolean	linkW;		//Â°¤¹¤ë¶ð¤Ë¤ª¤¤¤Æº¸¤È·Ò¤¬¤Ã¤Æ¤¤¤ë¤«
+		boolean	linkE;		//Â°¤¹¤ë¶ð¤Ë¤ª¤¤¤Æ±¦¤È·Ò¤¬¤Ã¤Æ¤¤¤ë¤«
 		Image		image;
 		String	label;
 		int		labelX;
@@ -1094,7 +1092,7 @@ class Block extends Rectangle {
 		int		wFactor;
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ó¥¹¥È¥é¥¯ï¿½ï¿½  cx,cy:Blockï¿½ï¿½ï¿½ï¿½ï¿½Ç¤Î°ï¿½ï¿½ï¿½  bd:Â°ï¿½ï¿½ï¿½ï¿½Board
+	// ¥³¥ó¥¹¥È¥é¥¯¥¿  cx,cy:BlockÇÛÎó¾å¤Ç¤Î°ÌÃÖ  bd:Â°¤¹¤ëBoard
 	Block(int cx,int cy,Board bd){
 		board = bd;
 		piece = null;
@@ -1110,7 +1108,7 @@ class Block extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Ú¥ï¿½ï¿½ï¿½ï¿½  offx,offy:ï¿½ï¿½ï¿½Î°ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½ï¿½ï¿½
+	// ¥Ú¥¤¥ó¥È  offx,offy:¸µ¤Î°ÌÃÖ¤«¤é¤ÎÁêÂÐ°ÌÃÖ
 	public void paint(Graphics g){
 		paint(g,0,0);
 	}
@@ -1174,8 +1172,8 @@ class Block extends Rectangle {
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Ö¥ï¿½ï¿½Ã¥ï¿½ï¿½Ãµï¿½  offx,offy:ï¿½ï¿½ï¿½Î°ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½ï¿½ï¿½
-	//		dx,dy:ï¿½ï¿½ï¿½ï¿½ï¿½Î½ñ¤­´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½ï¿½ï¿½
+	// ¥Ö¥í¥Ã¥¯¾Ãµî  offx,offy:¸µ¤Î°ÌÃÖ¤«¤é¤ÎÁêÂÐ°ÌÃÖ
+	//		dx,dy:°ÊÁ°¤Î½ñ¤­´¹¤¨°ÌÃÖ¤«¤é¤ÎÁêÂÐ°ÌÃÖ
 	public void clear(Graphics g, int offx, int offy, int dx, int dy){
 		int unit = board.unit;
 		Slide slide = board.slide;
@@ -1215,21 +1213,21 @@ class Block extends Rectangle {
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//	ï¿½Ð£ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½Ä¤Î¶ï¿½(ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½)ï¿½Î¥ï¿½ï¿½é¥¹
+//	£Ð£é£å£ã£å	°ì¤Ä¤Î¶ð(°ÜÆ°¤µ¤»¤ë»þ¤ÎÃ±°Ì)¤Î¥¯¥é¥¹
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 class Piece{
 	final	int	maxBlocks = 36;
 	public
 		Board	board;
-		char	cid;	// ï¿½ï¿½Î¼ï¿½ï¿½ï¿½Ê¸ï¿½ï¿½
+		char	cid;	// ¶ð¤Î¼±ÊÌÊ¸»ú
 
 	private	Block	blocks[];
 		int	blockn;
 		Point	delta;
 
 	//----------------------------------------------------------------
-	//	ï¿½ï¿½ï¿½Û»Ò¡ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½	c:ï¿½ï¿½ï¿½ï¿½Ì¤ï¿½ï¿½ë¤¿ï¿½ï¿½ï¿½Ê¸ï¿½ï¿½
+	//	¹½ÃÛ»Ò¡¿ÅÐÏ¿»Ò	c:¶ð¤ò¼±ÊÌ¤¹¤ë¤¿¤á¤ÎÊ¸»ú
 	Piece( Board b, char c ) {
 		board = b;
 		blockn = 0;
@@ -1271,7 +1269,7 @@ class Piece{
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ë£Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É²ï¿½
+	// £Ð£é£å£ã£å¤Ë£Â£ì£ï£ã£ë¤òÄÉ²Ã
 	public void add(Block bk){
 		if(bk.piece!=null){
 			System.out.println("Double definition");
@@ -1282,7 +1280,7 @@ class Piece{
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½Ã¥ï¿½ x,y:ï¿½ï¿½ï¿½Î°ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½ï¿½ï¿½  dx:ï¿½ï¿½Æ°ï¿½ï¿½
+	// £ØÊý¸þ°ÜÆ°¥Á¥§¥Ã¥¯ x,y:¸µ¤Î°ÌÃÖ¤«¤é¤ÎÁêÂÐ°ÌÃÖ  dx:°ÜÆ°ÎÌ
 	public int moveX(int x,int y,int dx){
 		if(dx == 0) return 0;
 		int unit = board.unit;
@@ -1293,26 +1291,23 @@ class Piece{
 			if(dx < -adj) dx = -adj;
 			if(dx > unit-adj) dx = unit-adj;
 			return dx;
-		} else {
+		}else{
 			offx = (dx>0)? offx+1 : offx-1;
-			for(int i=blockn;--i>=0;) {
+			for(int i=blockn;--i>=0;){
 				Block bk = blocks[i];
 				Block bk2 = null;
-				try {
-					if (! board.isinside(bk.x+offx, bk.y+offy) ) 
-						{ return 0; }
+				try{
 				    bk2 = board.blocks[bk.x+offx][bk.y+offy];
-
 				    if(bk2 != null) {
-						if( bk2.outside || bk2.piece.cid != cid) 
-							{ return 0; }
+					if( bk2.outside || bk2.piece.cid != cid) {
+								return 0;
+					}
 				    }
-				    if(y%unit != 0) {
-						bk2 = board.blocks[bk.x+offx][bk.y+offy+1];
-						if(bk2 != null && bk2.piece.cid != cid) return 0;
+				    if(y%unit != 0){
+					bk2 = board.blocks[bk.x+offx][bk.y+offy+1];
+					if(bk2 != null && bk2.piece.cid != cid) return 0;
 				    }
-				} catch( NullPointerException e ) 
-					{ System.out.printf("!"); return 0; }
+				} catch( Exception e ){return 0;}
 			}
 			if(dx > unit) dx = unit;
 			if(dx <-unit) dx = -unit;
@@ -1322,7 +1317,7 @@ class Piece{
 
 
 	//----------------------------------------------------------------
-	//  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½Ã¥ï¿½ x,y:ï¿½ï¿½ï¿½Î°ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½ï¿½ï¿½  dy:ï¿½ï¿½Æ°ï¿½ï¿½
+	//  £ÙÊý¸þ°ÜÆ°¥Á¥§¥Ã¥¯ x,y:¸µ¤Î°ÌÃÖ¤«¤é¤ÎÁêÂÐ°ÌÃÖ  dy:°ÜÆ°ÎÌ
 	public int moveY(int x,int y,int dy){
 		if(dy == 0) return 0;
 		int unit = board.unit;
@@ -1338,21 +1333,18 @@ class Piece{
 			for(int i=blockn;--i>=0;){
 				Block bk = blocks[i];
 				Block bk2 = null;
-				try {
-					if (! board.isinside(bk.x+offx, bk.y+offy) )
-						{ return 0; }
+				try{
 				    bk2 = board.blocks[bk.x+offx][bk.y+offy];
-
 				    if(bk2 != null) {
-						if( bk2.outside || bk2.piece.cid != cid) 
-							{ return 0; }	
+					if( bk2.outside || bk2.piece.cid != cid) {
+								return 0;
+					}
 				    }
-				    if(x%unit !=0) {
-						bk2 = board.blocks[bk.x+offx+1][bk.y+offy];
-						if(bk2 != null && bk2.piece.cid != cid) return 0;
+				    if(x%unit !=0){
+					bk2 = board.blocks[bk.x+offx+1][bk.y+offy];
+					if(bk2 != null && bk2.piece.cid != cid) return 0;
 				    }
-				} catch( NullPointerException e )
-					{ System.out.printf("!"); return 0; }
+				} catch( Exception e ){return 0;}
 			}
 			if(dy > unit) dy = unit;
 			if(dy <-unit) dy = -unit;
@@ -1361,7 +1353,7 @@ class Piece{
 	}
 
 	//------------------------------------------------------------
-	//	ï¿½ÂºÝ¤Î°ï¿½Æ°  dx,dy:ï¿½×¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½ï¿½ï¿½
+	//	¼ÂºÝ¤Î°ÜÆ°  dx,dy:È×¤ÎÇÛÎó¾å¤ÎÁêÂÐ°ÌÃÖ
 	public void move( int dx, int dy ) {
 		int unit = board.unit;
 		int i;
@@ -1379,13 +1371,13 @@ class Piece{
 
 
 	//----------------------------------------------------------------
-	// ï¿½ï¿½ï¿½ï¿½ë¡¼ï¿½ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ï¿½ updateï¿½ï¿½È¤ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½ï¿½ï¿½Ë»È¤ï¿½
+	// ÉÁ²è¥ë¡¼¥Á¥ó¤Î½é´ü²½ update¤ò»È¤¤»Ï¤á¤ëÁ°¤Ë»È¤¦
 	public void resetAdjust(){
 		delta.x = delta.y = 0;
 	}
 
 	//----------------------------------------------------------------
-	// ï¿½É¥ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  dx,dy:ï¿½ï¿½ï¿½Î°ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½ï¿½ï¿½
+	// ¥É¥é¥Ã¥°Ãæ¤ÎÉÁ²è  dx,dy:¸µ¤Î°ÌÃÖ¤«¤é¤ÎÁêÂÐ°ÌÃÖ
 	public void update(Graphics g,int dx,int dy){
 		if(delta.x == dx && delta.y == dy) return;
 		for(int i=blockn;--i>=0;){
