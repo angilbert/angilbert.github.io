@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
     <title>Clickmazes - tilt</title>
-    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <link rel="stylesheet" href="../style2020.css?v=1.4">
   </head>
   <body>
     
@@ -19,7 +19,7 @@
 
     <div class="mainbody">
       <div class="page-intro">
-        <h2>Synchronised-tilt mazes</h2><p>
+        <h2>Synchronised-tilt mazes &#9749;</h2><p>
           These tilt puzzles each consist of a tilt maze containing two large 
           sliding blocks, one red and one blue. The challenge is to manoeuvre the 
           sliding blocks so that they simultaneously come to rest on their target 
@@ -34,9 +34,15 @@
       </div>
 
       <div class="std-flex-block">
-        <div class="puzzle-area">
-          <h5>Sorry - this applet is<br> currently unavailable</h5> 
+
+        <div class="puzzle-area-legacy-applet">
+          <applet archive="../jars/new-alltilt.jar" 
+          code="tiltpuzz.class" width="300" height="380">
+          <p><img src="tiltpuzz.png" width="200"></p>
+          <i><b>Applet-runner plugin required</b></i>
+          </applet>
         </div>
+
         <div class="puzzle-info">
           <h4>Aim</h4><p>
             The red block must reach the red target and the blue block
