@@ -3,7 +3,8 @@
   <head>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
     <title>Clickmazes - planks</title>
-    <link rel="stylesheet" href="../style2020.css?v=1.3">
+    <link rel="stylesheet" href="../style2020.css?v=1.5">
+    <script>cheerpjInit();</script>
   </head>
   <body>
 
@@ -19,7 +20,7 @@
 
     <div class="mainbody">
       <div class="page-intro">
-        <h2>The vexing hex-swamps</h2><p>
+        <h2>The vexing hex-swamps &#9749;</h2><p>
           The hex-based swamp is a variation of the plank puzzle
           concept proposed by applet-author
           <a href="http://www.henleymob.co.uk">Graham</a>.
@@ -28,31 +29,43 @@
           with, one obvious one being the choice of direction
           approaching the exit stump. Do you approach from above
           or from the left? A maze that offers a choice of exit routes
-          is probably offering a <i>white-hole</i> and only one of 
+          is probably offering a <i>white-hole</i> and only one of
           those exit routes is reachable. If you are inclined to
-          try and work a maze backwards, a white-hole is an extra 
+          try and work a maze backwards, a white-hole is an extra
           hurdle to deal with.
         </p>
       </div>
       <div>
         <p>
-          The first puzzle here is called <i>Four-by-four</i> 
-          by virtue of being the first to feature exactly four planks 
-          (lengths 1, 2, 3 and 4). There are more hex-swamps to explore at 
-          the applet's home web-site 
+          The first puzzle illustrated here is called <i>Four-by-four</i>
+          by virtue of being the first to feature exactly four planks
+          (lengths 1, 2, 3 and 4). There are more hex-swamps to explore at
+          the applet's home web-site
           (<a href="http://www.henleymob.co.uk/Planks/planks.html">Henleymob</a>).
-          Many of the hex-swamps play on the word <i>Twist</i> thanks to their 
-          unique ability to seemingly spin you on one spot.</p>
-        <h5>Sorry - this applet is currently unavailable</h5>
+          Many of the hex-swamps play on the word <i>Twist</i> thanks to their
+          unique ability to seemingly spin you on one spot.
+          For instructions please see the
+        <a href="./new-planks.htm">original planks</a> page.</p>
       </div>
-      <div class="std-flex-block single-item">
-        <div class="puzzle-area">
-          <p>Screenshot of original <i>four-by-four</i> puzzle</p>
-          <p><img src="./hex2021.png"></p>
-        </div>
-      </div>  
-      <hr>
 
+      <div class="std-flex-block single-item">
+
+        <div class="puzzle-area-legacy-applet">
+          <applet archive="../jars/new-planks.jar" code="planks.class"
+              width="560" height="430">
+              <param name="titles" value="Four-by-four, Twister">
+              <param name="positions"
+                value="97028450514565023226666,
+                    9705813276053526466">
+              <param name="nodes"
+                value="31454135630372354247831463267,
+                    4124724842367215172036124567,">
+              <p><img src="hex2021.png"></p>
+              <i><b>Applet-runner plugin required</b></i>
+          </applet>
+        </div>
+      </div>
+      <hr>
       <div class="page-note">
         <p>More to explore...</p>
           <ul>
@@ -63,12 +76,13 @@
           </ul>
       </div>
 
-      <hr>   
+      <hr>
       <div class="page-credits"><p>
         <b>concept &amp; maze designs</b> - &COPY; Andrea Gilbert 2000-2001<br>
-        <!-- LT -->
+        <b>planks applet &amp; hex-puzzle concept</b> - &COPY; Graham Rogers 2000-2003<br>
+        <b>applet hosted with permission from Graham Rogers</b><br>
         </p>
-      </div>  
+      </div>
     </div>
   </body>
 </html>
