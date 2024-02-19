@@ -1281,7 +1281,7 @@ class Piece{
 		bk.piece = this;
 	}
 
-	//----------------------------------------------------------------
+//----------------------------------------------------------------
 	// ��������ư�����å� x,y:���ΰ��֤�������а���  dx:��ư��
 	public int moveX(int x,int y,int dx){
 		if(dx == 0) return 0;
@@ -1293,27 +1293,27 @@ class Piece{
 			if(dx < -adj) dx = -adj;
 			if(dx > unit-adj) dx = unit-adj;
 			return dx;
-		}else{
+		} else {
 			offx = (dx>0)? offx+1 : offx-1;
 			for(int i=blockn;--i>=0;){
 				Block bk = blocks[i];
 				Block bk2 = null;
-				try{
-					if (! board.isinside(bk.x+offx, bk.y+offy) ) 
-						{ return 0; }
+				
+				if (! board.isinside(bk.x+offx, bk.y+offy) ) 
+					{ return 0; }
 
-				    bk2 = board.blocks[bk.x+offx][bk.y+offy];
-				    if(bk2 != null) {
-						if( bk2.outside || bk2.piece == null || bk2.piece.cid != cid) 
-							{ return 0; }
-				    }
-				    if(y%unit != 0){
-						bk2 = board.blocks[bk.x+offx][bk.y+offy+1];
-						if (bk2 != null && bk2.piece == null)    { return 0; }
-						if (bk2 != null && bk2.piece.cid != cid) { return 0; }
-				    }
-				} catch( Exception e )
-					{ System.out.printf("!"); return 0; }
+				bk2 = board.blocks[bk.x+offx][bk.y+offy];
+				if (bk2 != null && bk2.piece == null) { return 0; }
+
+				if(bk2 != null) {
+					if ( bk2.outside || bk2.piece.cid != cid) { return 0; }
+				}
+				if(y%unit != 0) {
+					bk2 = board.blocks[bk.x+offx][bk.y+offy+1];
+					if (bk2 != null && bk2.piece == null) { return 0; }
+					if (bk2 != null && bk2.piece.cid != cid) { return 0; }
+				}
+				
 			}
 			if(dx > unit) dx = unit;
 			if(dx <-unit) dx = -unit;
@@ -1334,27 +1334,26 @@ class Piece{
 			if(dy < -adj) dy = -adj;
 			if(dy > unit-adj) dy = unit-adj;
 			return dy;
-		}else{
+		} else {
 			offy = (dy>0)? offy+1 : offy-1;
 			for(int i=blockn;--i>=0;){
 				Block bk = blocks[i];
 				Block bk2 = null;
-				try{
-					if (! board.isinside(bk.x+offx, bk.y+offy) ) 
-						{ return 0; }
 
-				    bk2 = board.blocks[bk.x+offx][bk.y+offy];
-				    if(bk2 != null ) {	
-						if( bk2.outside || bk2.piece == null || bk2.piece.cid != cid) 
-							{ return 0; }
-				    }
-				    if(x%unit !=0){
-						bk2 = board.blocks[bk.x+offx+1][bk.y+offy];
-						if (bk2 != null && bk2.piece == null) 	 { return 0; }
-						if (bk2 != null && bk2.piece.cid != cid) { return 0; }
-				    }
-				} catch( Exception e )
-					{ System.out.printf("!"); return 0; }
+				if (! board.isinside(bk.x+offx, bk.y+offy) ) 
+					{ return 0; }
+
+				bk2 = board.blocks[bk.x+offx][bk.y+offy];
+				if (bk2 != null && bk2.piece == null) { return 0; }
+
+				if(bk2 != null) {
+					if( bk2.outside || bk2.piece.cid != cid) { return 0; }
+				}
+				if(x%unit !=0) {
+					bk2 = board.blocks[bk.x+offx+1][bk.y+offy];
+					if (bk2 != null && bk2.piece == null) { return 0; }
+					if (bk2 != null && bk2.piece.cid != cid) { return 0; }
+				}
 			}
 			if(dy > unit) dy = unit;
 			if(dy <-unit) dy = -unit;
