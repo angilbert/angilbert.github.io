@@ -621,7 +621,7 @@ class Board extends Rectangle {
 			char c = '.';
 
 			bk = blocks[i][j];
-			if (bk != null) { 
+			if (bk != null && bk.piece != null) { 
 				// location [i][j] is occupied by a block
 				// prepare to check adjacent blocks N/E/S/W
 				c = bk.piece.cid; 
@@ -632,10 +632,10 @@ class Board extends Rectangle {
 			}
 			else { continue; }
 
-			if(bkW != null && bkW.piece.cid==c) { bk.linkW=true; }
-			if(bkE != null && bkE.piece.cid==c) { bk.linkE=true; }
-			if(bkN != null && bkN.piece.cid==c) { bk.linkN=true; }
-			if(bkS != null && bkS.piece.cid==c) { bk.linkS=true; }
+			if(bkW != null && bkW.piece != null && bkW.piece.cid==c) { bk.linkW=true; }
+			if(bkE != null && bkE.piece != null && bkE.piece.cid==c) { bk.linkE=true; }
+			if(bkN != null && bkN.piece != null && bkN.piece.cid==c) { bk.linkN=true; }
+			if(bkS != null && bkS.piece != null && bkS.piece.cid==c) { bk.linkS=true; }
 		}
 	}
 
@@ -1293,25 +1293,26 @@ class Piece{
 			if(dx < -adj) dx = -adj;
 			if(dx > unit-adj) dx = unit-adj;
 			return dx;
-		} else {
+		}else{
 			offx = (dx>0)? offx+1 : offx-1;
-			for(int i=blockn;--i>=0;) {
+			for(int i=blockn;--i>=0;){
 				Block bk = blocks[i];
 				Block bk2 = null;
-				try {
+				try{
 					if (! board.isinside(bk.x+offx, bk.y+offy) ) 
 						{ return 0; }
-				    bk2 = board.blocks[bk.x+offx][bk.y+offy];
 
+				    bk2 = board.blocks[bk.x+offx][bk.y+offy];
 				    if(bk2 != null) {
-						if( bk2.outside || bk2.piece.cid != cid) 
+						if( bk2.outside || bk2.piece == null || bk2.piece.cid != cid) 
 							{ return 0; }
 				    }
-				    if(y%unit != 0) {
+				    if(y%unit != 0){
 						bk2 = board.blocks[bk.x+offx][bk.y+offy+1];
-						if(bk2 != null && bk2.piece.cid != cid) return 0;
+						if (bk2 != null && bk2.piece == null)    { return 0; }
+						if (bk2 != null && bk2.piece.cid != cid) { return 0; }
 				    }
-				} catch( NullPointerException e ) 
+				} catch( Exception e )
 					{ System.out.printf("!"); return 0; }
 			}
 			if(dx > unit) dx = unit;
@@ -1338,20 +1339,21 @@ class Piece{
 			for(int i=blockn;--i>=0;){
 				Block bk = blocks[i];
 				Block bk2 = null;
-				try {
-					if (! board.isinside(bk.x+offx, bk.y+offy) )
+				try{
+					if (! board.isinside(bk.x+offx, bk.y+offy) ) 
 						{ return 0; }
-				    bk2 = board.blocks[bk.x+offx][bk.y+offy];
 
-				    if(bk2 != null) {
-						if( bk2.outside || bk2.piece.cid != cid) 
-							{ return 0; }	
+				    bk2 = board.blocks[bk.x+offx][bk.y+offy];
+				    if(bk2 != null ) {	
+						if( bk2.outside || bk2.piece == null || bk2.piece.cid != cid) 
+							{ return 0; }
 				    }
-				    if(x%unit !=0) {
+				    if(x%unit !=0){
 						bk2 = board.blocks[bk.x+offx+1][bk.y+offy];
-						if(bk2 != null && bk2.piece.cid != cid) return 0;
+						if (bk2 != null && bk2.piece == null) 	 { return 0; }
+						if (bk2 != null && bk2.piece.cid != cid) { return 0; }
 				    }
-				} catch( NullPointerException e )
+				} catch( Exception e )
 					{ System.out.printf("!"); return 0; }
 			}
 			if(dy > unit) dy = unit;

@@ -1,0 +1,65 @@
+; Pink & Blue by Nob
+;
+size  22  17
+step 44
+;
+initial
+#PPPPPIIIIINNNNNKKKKK#
+#PPPPPIIIIINNNNNKKKKK#
+#PPPPPIIIIINNNNNKKKKK#
+#PPPPPIIIIINNNNNKKKKK#
+#PPPPPIIIIINNNNNKKKKK#
+######.....###########
+................xxxxxx
+................xxxxxx
+................xxxxxx
+................xxxxxx
+................xxxxxx
+###########.....######
+#BBBBBLLLLLUUUUUEEEEE#
+#BBBBBLLLLLUUUUUEEEEE#
+#BBBBBLLLLLUUUUUEEEEE#
+#BBBBBLLLLLUUUUUEEEEE#
+#BBBBBLLLLLUUUUUEEEEE#
+;
+target
+#BBBBBLLLLLUUUUUEEEEE#
+#BBBBBLLLLLUUUUUEEEEE#
+#BBBBBLLLLLUUUUUEEEEE#
+#BBBBBLLLLLUUUUUEEEEE#
+#BBBBBLLLLLUUUUUEEEEE#
+######.....###########
+................xxxxxx
+................xxxxxx
+................xxxxxx
+................xxxxxx
+................xxxxxx
+###########.....######
+#PPPPPIIIIINNNNNKKKKK#
+#PPPPPIIIIINNNNNKKKKK#
+#PPPPPIIIIINNNNNKKKKK#
+#PPPPPIIIIINNNNNKKKKK#
+#PPPPPIIIIINNNNNKKKKK#
+;
+label x Police
+;
+color B 80 145 220
+color L 80 145 220
+color U 80 145 220
+color E 80 145 220
+color P 255 60 110
+color I 255 60 110
+color N 255 60 110
+color K 255 60 110
+;
+labeloffset B 30 42
+labeloffset L 30 42
+labeloffset U 30 42
+labeloffset E 30 42
+labeloffset P 30 42
+labeloffset I 30 42
+labeloffset N 30 42
+labeloffset K 30 42
+labeloffset x 20 42
+;
+end

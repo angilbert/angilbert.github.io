@@ -1,0 +1,36 @@
+; IPP 19 by Rodolfo Kurchan
+;
+size  8  6
+step 26
+;
+initial
+199ipprr
+199ipprr
+1.9ip.r.
+#......#
+##....##
+###..###
+;
+target
+ipprr199
+ipprr199
+ip.r.1.9
+#......#
+##....##
+###..###
+;
+equiv pr
+;
+color i 0 0 255
+color p 0 0 255
+color r 0 0 255
+color 1 255 0 0
+color 9 255 0 0
+;
+label i *
+label p *
+label r *
+label 1 *
+label 9 *
+;
+end
