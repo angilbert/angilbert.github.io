@@ -19,7 +19,7 @@
 
     <div class="mainbody">
       <div class="page-intro">
-        <h2>Oskar's Belgian Maze</h2><p>
+        <h2>Oskar's Belgian Maze &#9749;</h2><p>
           A Belgian maze is a maze without any loops or forks. Maze experts
           call such maze a labyrinth. Mathematicians call it unicursal.
           English might call it Irish. 
@@ -30,16 +30,22 @@
       <div><p>
           This challenge by Oskar van Deventer shows that even
           Belgian mazes can be hard to solve. The trick is to keep track of 
-          what are the forward and backward directions. When you get confused 
-          you may inadvertently start moving backward until you discover your
-          error, or until you get confused again.
+          what are the forward and backward directions. 
+          When you get confused you may inadvertently start moving backward until 
+          you discover your error, or until you get confused again.
         </p>
       </div>
 
       <div class="std-flex-block-wide">
-        <div class="puzzle-area">
-          <h5>Sorry - this applet is currently unavailable</h5> 
+
+        <div class="puzzle-area-legacy-applet">
+          <applet archive="../jars/BelgianMaze.jar" 
+            code="BelgianMaze.class" width="600" height="290">
+              <p><img src="./begian-screenshot.png" width="500"></p>
+              <i><b>Applet-runner plugin required</b></i>
+        </applet>
         </div>
+
         <div class="puzzle-info">
           <h4>Aim</h4><p>
             Move from the blue start to the red goal. At every green &quot;confusion
@@ -51,7 +57,7 @@
           <h4>Controls</h4><p>
             Use <b>Start</b> to start with the easiest challenge<br>
             Use <b>Reset</b> to restart the current challenge<br>
-            Use <b>Drop-list</b> to select a challenge 
+            Use <b>Drop-list</b> to select a challenge
             (the level is the number of green confusion points)<br>
             Or you can use <b>Next &amp; Previous</b><br>
             Use <b>Slider</b> to adjust the animation speed<br>
@@ -62,19 +68,18 @@
             Or the left and right <b>arrow keys</b>
           </p>
         </div>
-
-      </div>  
+      </div> 
 
       <div class="std-flex-block">
         <div class="photo-info"><p>
-      The Belgian Maze puzzle is related to the
-      mechanical Mysterians puzzle by Oskar van Deventer. Mysterians is a puzzle
-      of three-layers. Each layer has a single curved groove. The three layers
-      interact with each other through two pivots. The object is to take it
-      apart. Even though the problem has no loops or forks, it is quite
-      confusing as the pivots run forward and backward through the grooves. At
-      many points moving forward feels like moving backward, so you are inclined
-      to turn around.</p>
+            The Belgian Maze puzzle is related to the
+            mechanical Mysterians puzzle by Oskar van Deventer. Mysterians is a puzzle
+            of three-layers. Each layer has a single curved groove. The three layers
+            interact with each other through two pivots. The object is to take it
+            apart. Even though the problem has no loops or forks, it is quite
+            confusing as the pivots run forward and backward through the grooves. At
+            many points moving forward feels like moving backward, so you are inclined
+            to turn around.</p>
         </div>
         <div class="photo-area">
           <img src="Mysterians.jpg" width="360">
