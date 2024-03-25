@@ -1,0 +1,63 @@
+
+Contents --------------------------------------------------------
+
+1 swamp (peg board)
+40 puzzle overlays              
+20 tree-stumps (pegs)
+2 short planks
+2 medium planks
+1 long plank
+
+The object ------------------------------------------------------
+
+The object of the puzzle is to find a route across an alligator 
+infested swamp. Lucky for you there are several tree stumps in
+the swamp, and a few old planks. Perhaps if you could reach 
+those planks and move them one at a time to bridge tree-stump
+to tree-stump you could find a route home. But beware... 
+one false step and those 'gators will eat you for breakfast! 
+So take it steady, don't jump, never carry more than one plank, 
+and make sure every plank is always firmly placed between two 
+tree-stumps.
+
+How to play -----------------------------------------------------
+
+Empty the peg board of all playing pieces and place your next
+puzzle overlay onto the board. Place a stump peg into each
+visible hole, and place a plank onto each plank start position 
+(marked in grey). Each plank should be a snug fit, between two 
+stumps. Each puzzle requires 2, 3, 4 or 5 planks.
+
+You are now ready to play. Place a finger on the start stump 
+(marked with a little man) and 'walk' the first plank by running
+your finger along to the far tree-stump. So far so good, but now 
+what? Well, if there's another plank you could walk that too, or 
+if not, then you are going to have to stand on the current tree-
+stump, pick up that first plank and put it down in a different 
+direction. If you have a choice, it's up to you. You can also 
+pick up a plank and walk with it as far as you wish along other 
+planks before putting it down again. Just remember however, if 
+you can't reach a plank you can't pick it up, and there's no 
+point trying to move a plank if there's no other gap of the 
+right size to put it down.
+
+Note, if you have to put the board down mid-challenge be sure 
+to mark your current location so you know which planks you can 
+reach.
+
+The full rules --------------------------------------------------
+
+- You can pick up and carry a plank provided you have access to 
+  one end. 
+- You can only pick-up and carry one plank at a time. 
+- You cannot move a plank if you are already carrying one. 
+- Planks must be supported both ends, and must be an exact fit. 
+- You cannot jump between stumps or planks. 
+- Planks cannot be used diagonally, only north-south or east-west. 
+- Planks cannot support other planks, and cannot be stacked. 
+- Planks cannot bridge intermediate stumps or planks. 
+
+solutions & notation --------------------------------------------
+
+TBD
+
