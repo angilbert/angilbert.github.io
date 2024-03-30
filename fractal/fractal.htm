@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Fractal mazes</title>
+    <link rel="stylesheet" href="../style2020.css?v=1.3">
+  </head>
+  <body>
+
+    <div class="sidenav">
+      <img src="../_site/site_cornersmall.gif">
+      <p>
+        <img src="../_site/logo_white.png" height="250px">
+        <a href="../index.htm">home</a>
+        <a href="../new-faq.htm">help</a>
+      </p>
+    </div>
+
+    <div class="mainbody">
+
+      <div class="page-intro">
+        <h2>Microchip fractal mazes (2024 collection)</h2>
+        <p>
+          This page offers a selection of fractal mazes inspired by the works of Mark J. P. Wolf (2003) 
+          and Ed Pegg Jr (2011). The collection starts with four hand-crafted mazes first published in 
+          early 2021, now ported to PS+ and updated for faster game play. 
+          The new set of designs for 2024 have been derived from computer-generated data provided by 
+          Erich Friedman in late 2021, adapted to demonstrate a variety of new fractal maze-forms. 
+        </p>
+      </div>
+      <div>
+        <p>Use cursor-keys to move the spark along the wires, the spark will keep moving until it 
+          reaches an unvisited goal or a decision point. Goals are indicated by orange squares and 
+          can only be harvested on the home-level of the maze. Use ESC for level select.</p>
+        <p>
+        Mazes 1-4: [2021] Bi-directional, single-goal, single-chip (the 2021 collection).<br>
+        Mazes 2-?: [2024] Bi-directional, multi-goal, single-chip.<br>
+        Mazes ?-?: [2024] Bi-directional, multi-goal, dual-chip.<br>
+        Mazes ?-?: [2024] Bi-directional, multi-goal, split-chip.<br>
+      </p>
+      </div>
+
+      <div class="std-flex-block">
+        <div class="photo-info"><p>
+          Here is an image of...
+          </p>
+        </div>
+        <div class="photo-area">
+          <img src="./something.png">        
+        </div>   
+      </div>
+
+      <div class="page-note">
+        <h4>Development notes - History</h4>
+
+        <p>The Wolfram maze (2011) is an 8-pin maze, in a 22222/33 configuration. The 8 
+          edge-connectors (pins) offer 8 inner (downward) and 8 outer (upward) termini. 
+          Of the 16 termini, 2 sets of 3 are connected to form the two decision points. 
+          The other 10 termini are plumbed in 5 pairs with no decision points.
+          In 2011 I was intrigued by the depth of the recursion required to solve 
+          such a minimal fractal design, but I also noted that if I could only
+          recurse outward from the start point I could reach the goal in a single move. 
+         </p>
+          <p>
+          In 2021 I eventually started exploring some bi-directional Wolfram-style mazes 
+          of my own. I implemented them in rudimentary puzzlescript, and shared them at 
+          itch.io. Later the same year Erich Friedman kindly started exploring other 
+          configurations of 8 and 9 pin mazes, specifically configurations 22222/33 (8-pin) 
+          through to 333333 (9-pin) with most effort spent on 22/3333 (8-pin). 
+          The data taught me a lot about what was and wasn't possible with single-chip 
+          fractal mazes. Ultimately provoking me to comment (in an email in 
+          Jan 2022) that fractal mazes are <q>endlessly fascinating in their ultimate 
+          dullness!</q>. I needed to take a breather.  
+          In Jan 2024 the dullness finally dissipated and I was tempted to take 
+          another look at Erich's data, resulting in this, the 2024 collection. 
+          </p>
+
+        <h4>Development notes - Implementation</h4>
+
+        <p>Puzzlescript is an ideal engine for implementing many grid-based logic-mazes, 
+          however for fractal mazes it poses a few challenges. With no stack, and only 
+          primitive mechanisms for counting how do you implement a potentially infinite 
+          recursive maze? The short answer is... you don't.
+          Setting a generous (but finite) recursion limit avoids one set of problems, 
+          but if a fractal shape can contain multiple copies of itself, then it is very
+          difficult to track current state without a stack. So to keep things simple 
+          I decided to side-step the latter problem completely. Each 
+          fractal chip is unique and contains a maximum of one copy of itself (or 
+          another chip) following closely the simple model of the Wolfram maze.</p>
+
+          <h4>Development notes - clickmazes variations</h4>
+
+          <p>One key benefit of non-repetition of the fractal shape is there is no 
+          ambiguity with recursing "upwards" from the start level, thus all mazes 
+          featured here allow you to explore in both directions. But given this 
+          restriction what other variations on the fractal maze are possible? Most of
+          the more complex fractal mazes you find online rely on repetition of 
+          the same fractal shape within itself. 
+          My first idea was to make the mazes multi-goal (by placing a separate 
+          target on every home-level path). Then to start redistributing the 
+          available microchip "pins" to form dual-chip and split-chip mazes.
+          Dual-chip mazes consists of two non-identical chips each containing a 
+          copy of the other (to break parity direct connections between the dual-chips
+          are also permitted). 
+          Split-chip is a further variation where the outer edge of the fractal 
+          chip is an amalgamation of several non-identical inner chips. So 4 inner 
+          chips, each with 3 outbound termini, yields an outer chip with 12 inbound 
+          termini. These fractal mazes start to feel a little "cursed" but are they
+          fundamentally harder? Let me know if you decide. 
+          </p>
+        
+      </div>
+
+      <div class="page-note">
+        <h4>Links and related pages</h4><p>
+          <a href="https://demonstrations.wolfram.com/FractalMaze/">The Wolfram maze </a>(Ed Pegg - 2011)<br>
+          <a href="https://www.mathpuzzle.com/18Nov2003.html">Mathpuzzle.com archive of the earliest fractal mazes</a> (Mark J. P. Wolf - 2003)<br>
+          <a href="https://www.puzzlescript.net/play.html?p=7c6fe7b9f6397c0006da099d7f015cea"> Clickmazes Microchip fractal mazes V1 in PS</a> (2021)<br>
+          <a href="https://freethoughtblogs.com/atrivialknot/2023/10/18/solving-fractal-mazes/">Solving Fractal mazes</a> (freethoughtsblog)<br>
+        </p>
+      </div>
+      <hr>  
+      <div class="page-credits"><p>
+        <b>concept </b> - Mark J. P. Wolf - 2003<br>
+        <b>maze designs</b> - &COPY; Andrea Gilbert and Erich Friedman 2021-24<br>
+        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2021-24<br>
+        <!-- LT -->
+        </p>
+      </div>  
+    </div>
+  </body>
+</html>
