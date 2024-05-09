@@ -19,23 +19,26 @@
     <div class="mainbody">
       <div class="page-intro">
         <h2>Marble mazes</h2><p>
-          Several red and black marbles sit on a flat tray, a red vortex indicates
-          a hole in the tray. If a marble rolls onto or over the vortex it 
-          disappears. The goal is to drop all the red marbles into the vortex, it does
-          not matter how many black marbles are lost in the process.
+          Several red and black marbles sit on a flat tray, a grey box indicates
+          a hole in the tray. If a marble rolls onto or over the box it 
+          disappears. The goal is to drop all the red marbles into the box, it does
+          not matter how many black marbles are lost in the process. 
+          Use the cursor keys to tilt the tray and start the marbles 
+          rolling, the marbles roll in a straight line until they come to rest, 
+          you can then roll again.
         </p>
       </div>
-      <div><p><b>Update November 2021</b>: The puzzlescript app below is a faithful 
-        remake of the original java applet (March 2000) containing the original 
-        15 puzzles. Use the cursor keys to tilt the tray and start the marbles 
-        rolling, the marbles roll in a straight line until they come to rest, 
-        you can then roll again.</p>
+      <div><p><b>Update May 2024</b>: Marble-tilt 
+        has been rebuilt using the PSNext fork and now includes SVG sprites. 
+        This is one of the first published PS apps to include elements of SVG, 
+        thanks to the pioneering work of Henri Manson (April 2024).
+        </p>
       </div>
 
       <div class="std-flex-block single-item"> 
         <div class="puzzle-area">
           <p><iframe frameborder="0" 
-            src="./ps-export-mtilt.htm" width="550" height="480"></iframe></p>
+            src="./ps-export-svg.html" width="600" height="470"></iframe></p>
         </div>
       </div>
 
@@ -61,11 +64,28 @@
           </a>
         </div>
       </div>
+
+      <div class="page-note">
+        <h4>Links &amp; related pages</h4>
+        <ul>
+          <li><a href="https://clickmazes.itch.io/marble-tilt-mazes">
+            Marble-tilt at itch.io</a></li>
+            <li>Hack this app in the <a href="https://david-pfx.github.io/PuzzleScriptNext/src/editor.html?hack=73a475ec02e7ec275d9a32e81aedcd90">
+            PSNext editor</a></li>
+          <li>Explore more PSNext games in the <a href="https://puzzlescriptnext.polyomino.com">
+            PSNext Gallery</a></li>
+          <li>Discover more about <a href="https://github.com/david-pfx/PuzzleScriptNext/blob/master/README.md">
+           SVG sprite support in PSNext</a></li>
+           <!-- Eventually... https://puzzlescriptnext.polyomino.com/Documentation/objects.html -->
+          </ul>
+      </div>
+
       <hr>   
       <div class="page-credits"><p>
         <b>concept &amp; maze design</b> - &COPY; Andrea Gilbert 2000<br>
-        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2021<br>
+        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2024<br>
         <b>implementation for Nokia phone</b> - &COPY; James Hutton 2004<br>
+        <b>puzzlescript next fork</b> - maintained by david-pfx<br>
         <!-- LT -->
         </p>
       </div>  

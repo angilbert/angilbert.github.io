@@ -20,22 +20,27 @@
     <div class="mainbody">
       <div class="page-intro">
         <h2>Oskar's hysteresis mazes</h2><p>
-        This puzzle is based on an original mechanical puzzle by
-        Oskar van Deventer. Navigate the maze using east/west movement only 
-        and use the sloping walls to push the ball north/south.
+        This puzzle is based on an original mechanical puzzle by Oskar van Deventer. 
+        Navigate the maze using east/west movement only and use the sloping walls to 
+        push the ball north/south.
+        Later mazes include special yellow switch points where you can choose between 
+        horizontal or vertical movement Your choice will stay in force until you 
+        reach another switch point.</p>
+      </div>
+
+      <div><p><b>Update May 2024</b>: Hysteresis Key 
+        has been rebuilt using the PSNext fork and now includes SVG sprites. 
+        This is one of the first published PS apps to include elements of SVG, 
+        thanks to the pioneering work of Henri Manson (April 2024).
         </p>
       </div>
-      <div>
-        <p>Later mazes include special yellow switch points where you
-        can choose between horizontal or vertical movement 
-        Your choice will stay in force until you reach another
-        switch point.</p>
+
+      <div class="std-flex-block single-item"> 
+        <div class="puzzle-area">
+          <p><iframe frameborder="0" 
+            src="./ps-export-svg.html" width="600" height="470"></iframe></p>
+        </div>
       </div>
-      <div>
-        <p><iframe frameborder="0" src="https://itch.io/embed/998312?linkback=true" 
-          width="552" height="167"><a href="https://clickmazes.itch.io/hysteresis-mazes">
-          Hysteresis mazes by clickmazes</a></iframe></p>
-      </div>  
 
       <div class="std-flex-block">
         <div class="photo-info"><p>
@@ -49,12 +54,28 @@
           <img src="k60.jpg" width="364">
         </div>
       </div>
+
+      <div class="page-note">
+        <h4>Links &amp; related pages</h4>
+        <ul>
+          <li><a href="https://clickmazes.itch.io/hysteresis-mazes">
+           Hysteresis Key at itch.io</a></li>
+            <li>Hack this app in the <a href="https://david-pfx.github.io/PuzzleScriptNext/src/editor.html?hack=9e9f60da34dd648eda0420b4e6196da6">
+            PSNext editor</a></li>
+          <li>Explore more PSNext games in the <a href="https://puzzlescriptnext.polyomino.com">
+            PSNext Gallery</a></li>
+          <li>Discover more about <a href="https://github.com/david-pfx/PuzzleScriptNext/blob/master/README.md">
+           SVG sprite support in PSNext</a></li>
+           <!-- Eventually... https://puzzlescriptnext.polyomino.com/Documentation/objects.html -->
+          </ul>
+      </div>
+
       <hr>  
       <div class="page-credits"><p>
         <b>concept &amp; mechanical puzzle</b> - &COPY; Oskar van Deventer 2000<br>
         <b>maze designs</b> - &COPY; Andrea Gilbert 2000<br>
-        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert 2021<br>
-        <!-- LT --></p>
+        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert 2024<br>
+        <b>puzzlescript next fork</b> - maintained by david-pfx<br>
       </div>  
     </div>
   </body>
