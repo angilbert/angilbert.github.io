@@ -25,13 +25,14 @@
           and Ed Pegg Jr (2011). The collection starts with four hand-crafted mazes first published in 
           early 2021, now ported to PS+ and updated for faster game play. 
           The new set of designs for 2024 have been derived from computer-generated data provided by 
-          Erich Friedman in late 2021, adapted to demonstrate a variety of new fractal maze-forms. 
+          Erich Friedman in late 2021, adapted to demonstrate a variety of fractal maze-forms related 
+          to Ed Pegg's Wolfram maze.          
         </p>
       </div>
       <div>
         <p>Use cursor-keys to move the spark along the wires, the spark will keep moving until it 
-          reaches an unvisited goal or a decision point. Goals are indicated by orange squares and 
-          can only be harvested on the home-level of the maze. Use ESC for level select.</p>
+          reaches a new goal or a decision point. Goals are indicated by orange squares and 
+          only exist on the home-level of the maze. Use ESC for level select.</p>
         <p>
         Mazes 1-4: [2021] Bi-directional, single-goal, single-chip (the 2021 collection).<br>
         Mazes 2-?: [2024] Bi-directional, multi-goal, single-chip.<br>
@@ -52,27 +53,32 @@
 
       <div class="page-note">
         <h4>Development notes - History</h4>
-
-        <p>The Wolfram maze (2011) is an 8-pin maze, in a 22222/33 configuration. The 8 
-          edge-connectors (pins) offer 8 inner (downward) and 8 outer (upward) termini. 
-          Of the 16 termini, 2 sets of 3 are connected to form the two decision points. 
-          The other 10 termini are plumbed in 5 pairs with no decision points.
+        <p>
+          <img src="./wolfram.png" width="200" style="float:right; padding:5px" >
+          The Wolfram maze (2011) pictured here on the right is an 8-pin maze in 
+          a 22222/33 configuration. Meaning... of the 16 edge connectors (8 inner 
+          / 8 outer), 10 are connected as 5 pairs and the remaining 6 are connected 
+          in 2 pairs of 3, forming the only two decision points. These two 
+          decision nodes can be seen connected to pins 4 and 5 in the illustration. 
+        </p><p>
           In 2011 I was intrigued by the depth of the recursion required to solve 
-          such a minimal fractal design, but I also noted that if I could only
-          recurse outward from the start point I could reach the goal in a single move. 
-         </p>
-          <p>
+          such a minimal fractal design, and wondered if more could be achieved 
+          with other pin configurations (such as 22/3333).
+          I also noted that if I could only recurse outward from the start point I 
+          could reach the goal in a single move, what if bi-directional recursion 
+          was permitted?
+         </p><p>
           In 2021 I eventually started exploring some bi-directional Wolfram-style mazes 
           of my own. I implemented them in rudimentary puzzlescript, and shared them at 
-          itch.io. Later the same year Erich Friedman kindly started exploring other 
-          configurations of 8 and 9 pin mazes, specifically configurations 22222/33 (8-pin) 
-          through to 333333 (9-pin) with most effort spent on 22/3333 (8-pin). 
+          itch.io. Later the same year Erich Friedman started exploring other 
+          configurations of 8 and 9 pin mazes, specifically configurations 
+          22222/33 (8-pin) through to 333333 (9-pin), with most effort directed at the 
+          22/3333 configuration. 
           The data taught me a lot about what was and wasn't possible with single-chip 
-          fractal mazes. Ultimately provoking me to comment (in an email in 
+          fractal mazes, ultimately provoking me to comment (in an email in 
           Jan 2022) that fractal mazes are <q>endlessly fascinating in their ultimate 
-          dullness!</q>. I needed to take a breather.  
-          In Jan 2024 the dullness finally dissipated and I was tempted to take 
-          another look at Erich's data, resulting in this, the 2024 collection. 
+          dullness!</q>. It took two years to find the enthusiasm to revisit the data 
+          and finalise a set of new mazes. 
           </p>
 
         <h4>Development notes - Implementation</h4>
@@ -80,25 +86,26 @@
         <p>Puzzlescript is an ideal engine for implementing many grid-based logic-mazes, 
           however for fractal mazes it poses a few challenges. With no stack, and only 
           primitive mechanisms for counting how do you implement a potentially infinite 
-          recursive maze? The short answer is... you don't.
-          Setting a generous (but finite) recursion limit avoids one set of problems, 
+          recursive maze? The short answer is... with some difficulty.
+          Setting a generous but finite recursion limit avoids one set of problems, 
           but if a fractal shape can contain multiple copies of itself, then it is very
-          difficult to track current state without a stack. So to keep things simple 
-          I decided to side-step the latter problem completely. Each 
-          fractal chip is unique and contains a maximum of one copy of itself (or 
-          another chip) following closely the simple model of the Wolfram maze.</p>
+          difficult to track current state without a stack. As it happens I was happy 
+          to side-step the latter problem completely, because I was focussed on
+          bi-directional recursion. Each fractal chip had to be unique and contain
+          a maximum of one copy of itself (or another chip) so that recursing upwards 
+          is never ambiguous. 
+          </p>
 
           <h4>Development notes - clickmazes variations</h4>
 
-          <p>One key benefit of non-repetition of the fractal shape is there is no 
-          ambiguity with recursing "upwards" from the start level, thus all mazes 
-          featured here allow you to explore in both directions. But given this 
-          restriction what other variations on the fractal maze are possible? Most of
-          the more complex fractal mazes you find online rely on repetition of 
-          the same fractal shape within itself. 
-          My first idea was to make the mazes multi-goal (by placing a separate 
-          target on every home-level path). Then to start redistributing the 
-          available microchip "pins" to form dual-chip and split-chip mazes.
+          <p>As mentioned above, one key benefit of non-repetition of the fractal 
+          shape is that it supports unambiguous bi-directional recursion, thus all mazes 
+          featured here allow you to explore in both directions. But without fractal 
+          repetition what variations on the traditional Wolfram maze are actually possible? 
+          </p><p>
+          One idea explored here is to make the mazes multi-goal (by placing a 
+          separate target on every home-level path). Other ideas involve redistributing 
+          the available microchip "pins" to form dual-chip and split-chip mazes.
           Dual-chip mazes consists of two non-identical chips each containing a 
           copy of the other (to break parity direct connections between the dual-chips
           are also permitted). 
@@ -113,6 +120,7 @@
 
       <div class="page-note">
         <h4>Links and related pages</h4><p>
+          <a href="./fractal223333.htm">Further analysis of the 22/3333 configuration</a><br>
           <a href="https://demonstrations.wolfram.com/FractalMaze/">The Wolfram maze </a>(Ed Pegg - 2011)<br>
           <a href="https://www.mathpuzzle.com/18Nov2003.html">Mathpuzzle.com archive of the earliest fractal mazes</a> (Mark J. P. Wolf - 2003)<br>
           <a href="https://www.puzzlescript.net/play.html?p=7c6fe7b9f6397c0006da099d7f015cea"> Clickmazes Microchip fractal mazes V1 in PS</a> (2021)<br>
@@ -124,7 +132,6 @@
         <b>concept </b> - Mark J. P. Wolf - 2003<br>
         <b>maze designs</b> - &COPY; Andrea Gilbert and Erich Friedman 2021-24<br>
         <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2021-24<br>
-        <!-- LT -->
         </p>
       </div>  
     </div>
