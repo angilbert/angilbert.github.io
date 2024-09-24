@@ -1,0 +1,148 @@
+<!doctype html>
+<! vi:set ts=50 sw=2 ai ml: >
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,initial-scale=1,
+          maximum-scale=1,user-scalable=no">
+    <title>River Crossing (2024) - Beginner collection</title>
+    <link rel="stylesheet" href="../../style2020.css">
+    <link rel="stylesheet" href="../html5/ger/Planks.css">
+</head>
+<body onresize="resize()">
+  <h2>River Crossing 2024 (40 selected puzzles from spreadsheet in order)</h2>
+  <div id="frame">
+    <div id="puzzleId" class="heading-text">Puzzle name</div>
+    <div id="topBtnsId" class="btn-group">
+      <button id="restartId" class="button"
+        onclick="fnRestart()">Restart</button>
+      <button id="prevId" class="button" onclick="fnPrev()">Prev puzzle</button>
+      <button id="nextId" class="button" onclick="fnNext()">Next puzzle</button>
+      <button id="aboutId" class="button" onclick="fnAbout()">About</button>
+    </div>
+    <div id="loadSaveId" class="loadSave">
+      <div id="loadMsgId" class="loadMsg"></div>
+      <form spellcheck="false" action="#0">
+          <textarea name="text" id="textId" rows="20" cols="50"></textarea>
+      </form>
+      <div class="btn-group">
+      <button id="doneSave" class="done" onclick="fnDoneSave()">Done</button>
+      </div>
+    </div>
+    <canvas id="planksId" class="canvas"
+      onmousedown="mouseDown(event)" onmouseup="mouseUp(event)">
+      <!-- The first param may optionally be used to define colours -->
+      <param id="colours" class="params" title="colours" name="optional"
+        value="swamp=#00ff00 swampWin=#00ffff land=#009900 grid=#000000
+          log=#707000 activeLog=#ffa500 target=#ff0000 plank=#ffff00">
+
+          <!-- Advanced [9] -->
+          <param class="params" title="a03-12"
+          name="7503605060112112320323" value="335631242133024213">
+          <param class="params" title="a05-13"
+          name="75016110205052013112142434" value="41235303621503123">
+          <param class="params" title="a11-12"
+          name="750262114111120212" value="42345214401363235225">
+          <param class="params" title="a12-12"
+          name="7503641011225222230323" value="3135314522540235246">
+          <param class="params" title="a13-10"
+          name="7501624050012123532444" value="314530243136225224">
+          <param class="params" title="a14-14"
+          name="7500630020404122241314" value="30242452233156212">
+          <param class="params" title="a15-11"
+          name="7504621020404312140414" value="312423531561440134">
+          <param class="params" title="a16-11"
+          name="750460124212140414" value="325622321422540134">
+          <param class="params" title="a18-11"
+          name="7504621131122233430424" value="23521341256234202">
+
+          <!-- Beginner [5] -->
+          <param class="params" title="b09-7"
+          name="750262405002222454" value="412450402360225">
+          <param class="params" title="b10-8"
+          name="750361325203131434" value="2242463235201213">
+          <param class="params" title="b12-9"
+          name="750164011121415153" value="050124521323541246">
+          <param class="params" title="b15-6"
+          name="750262104010120212" value="214224401360223">
+          <param class="params" title="b21-5"
+          name="75006400202021215151523252" value="2022253135214246">
+
+          <!-- Expert [11] -->
+          <param class="params" title="e01-19 (RC1 A23 close variation)"
+          name="750162204001114143" value="3124301441356143124">
+          <param class="params" title="e02-15"
+          name="75016310300111323352541444" value="2132012352363145">
+          <param class="params" title="e05-23"
+          name="7500620020203031335154" value="402343135412463134225">
+          <param class="params" title="e11-18"
+          name="7500640020203030502353" value="402352141531253136">
+          <param class="params" title="e12-19"
+          name="750262505302221424" value="413451140236153125">
+          <param class="params" title="e13-17"
+          name="75036150521112414403232324" value="2253146313530233124">
+          <param class="params" title="e14-15"
+          name="7500610020202332524344" value="40235313623531243145">
+          <param class="params" title="e15-17"
+          name="7503622023505132340323" value="312524523630243235">
+          <param class="params" title="e17-19"
+          name="750463305021230414" value="2353245213325640124">
+          <param class="params" title="e19-16"
+          name="750161203020210121" value="2234025631341541245">
+          <param class="params" title="e21-16"
+          name="750162011112142444" value="235401343156143124">
+
+          <!-- Intermediate [9] -->
+          <param class="params" title="i11b-7"
+          name="7504625153235323240424" value="21323531462253023">
+          <param class="params" title="i12-11"
+          name="7504602124121304243454" value="23622531341140235">
+          <param class="params" title="i13-7"
+          name="7501620131313312131333" value="0303441256213224">
+          <param class="params" title="i14-8"
+          name="750463112111140414" value="04124522523640134">
+          <param class="params" title="i16-8"
+          name="7504633032121332340434" value="13225313541246203">
+          <param class="params" title="i18-9"
+          name="750161505201212333" value="235402461532350">
+          <param class="params" title="i22-9"
+          name="7501620111114141432343" value="2133014236224213">
+          <param class="params" title="i23-8"
+          name="75006300202021212432342434" value="20222531353146223">
+          <param class="params" title="i24-7"
+          name="750162012151531323" value="0402354134631250">
+
+          <!-- Teaser [6] -->
+          <param class="params" title="b107-7 (RC1 B09 identical)"
+          name="750261022222322444" value="2132563023235224">
+          <param class="params" title="i102-12"
+          name="750361305003131434" value="2352563135201213">
+          <param class="params" title="e103-19"
+          name="7503624050111203232353" value="334521231363025235">
+          <param class="params" title="e104-20"
+          name="7502623151021212424243" value="21332354014631453123">
+          <param class="params" title="e108-29 (RC1 E10 identical)"
+          name="7501611030011123531434" value="31354014621322541345">
+          <param class="params" title="expert8-18"
+          name="7501612023505201113234" value="3125401462353124213">
+
+      Your browser does not support the canvas element.
+    </canvas>
+
+    <div id="aboutDiv">
+      <div id="aboutTxt" class="aboutTxt"></div>
+      <div id="okbtngrp" class="okbtngrp">
+        <button id="okBtn" class="okBtn" onclick="fnAboutDone()">OK</button>
+      </div>
+    </div>
+    <div id="btmBtnsId" class="btn-group">
+      <button id="saveId" class="button" onclick="fnSave()">Save</button>
+      <button id="undoId" class="button" onclick="fnUndo()">Undo</button>
+      <button id="redoId" class="button" onclick="fnRedo()">Redo</button>
+      <button id="replayId" class="button" onclick="fnReplay()">Replay</button>
+    </div>
+  </div>
+  <script src="../html5/ger/Planks.js" type="text/javascript"></script>
+</body>
+</html>
