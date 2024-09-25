@@ -1,0 +1,88 @@
+<!doctype html>
+<! vi:set ts=50 sw=2 ai ml: >
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,initial-scale=1,
+          maximum-scale=1,user-scalable=no">
+    <title>River Crossing 2024 Beginner (V1/draft)</title>
+    <link rel="stylesheet" href="../../style2020.css">
+    <link rel="stylesheet" href="../html5/ger/Planks.css">
+</head>
+<body onresize="resize()">
+  <h2>River Crossing 2024 Beginner (V1/draft)</h2>
+  <p>
+    <a href="./index.htm"> Home</a> / 
+    <a href="./set1.htm"> Beginner</a> /    
+    <a href="./set2.htm"> Intermediate</a> /    
+    <a href="./set3.htm"> Advanced</a> / 
+    <a href="./set4.htm">Expert</a> 
+  </p>
+
+  <div id="frame">
+    <div id="puzzleId" class="heading-text">Puzzle name</div>
+    <div id="topBtnsId" class="btn-group">
+      <button id="restartId" class="button"
+        onclick="fnRestart()">Restart</button>
+      <button id="prevId" class="button" onclick="fnPrev()">Prev puzzle</button>
+      <button id="nextId" class="button" onclick="fnNext()">Next puzzle</button>
+      <button id="aboutId" class="button" onclick="fnAbout()">About</button>
+    </div>
+    <div id="loadSaveId" class="loadSave">
+      <div id="loadMsgId" class="loadMsg"></div>
+      <form spellcheck="false" action="#0">
+          <textarea name="text" id="textId" rows="20" cols="50"></textarea>
+      </form>
+      <div class="btn-group">
+      <button id="doneSave" class="done" onclick="fnDoneSave()">Done</button>
+      </div>
+    </div>
+    <canvas id="planksId" class="canvas"
+      onmousedown="mouseDown(event)" onmouseup="mouseUp(event)">
+      <!-- The first param may optionally be used to define colours -->
+      <param id="colours" class="params" title="colours" name="optional"
+        value="swamp=#00ff00 swampWin=#00ffff land=#009900 grid=#000000
+          log=#707000 activeLog=#ffa500 target=#ff0000 plank=#ffff00">
+
+          <param class="params" title="Beginner 01 (b302-3)!"
+          name="75016101212131" value="05023460130">
+          <param class="params" title="Beginner 02 (b204-3)"
+          name="75046004343444" value="23613003034">
+          <param class="params" title="Beginner 03 (b15-6)"
+          name="750262104010120212" value="214224401360223">
+          <param class="params" title="Beginner 04 (b206-4)"
+          name="7503621030112132420323" value="21321233462020">
+          <param class="params" title="Beginner 05 (b202-6)"
+          name="750062002020235354" value="30230236312515">
+          <param class="params" title="Beginner 06 (b09-7)"
+          name="750262405002222454" value="412450402360225">
+          <param class="params" title="Beginner 07 (b12-9)"
+          name="750164011121415153" value="050124521323541246">
+          <param class="params" title="Beginner 08 (b203-6)"
+          name="750362414403232324" value="22314236202224">
+          <param class="params" title="Beginner 09 (b209-10)"
+          name="750163203001111113" value="3235301522431563134">
+          <param class="params" title="Beginner 10 (b207-6b)"
+          name="7503635154424403232333" value="023522440236245">
+
+      Your browser does not support the canvas element.
+    </canvas>
+
+    <div id="aboutDiv">
+      <div id="aboutTxt" class="aboutTxt"></div>
+      <div id="okbtngrp" class="okbtngrp">
+        <button id="okBtn" class="okBtn" onclick="fnAboutDone()">OK</button>
+      </div>
+    </div>
+    <div id="btmBtnsId" class="btn-group">
+      <button id="saveId" class="button" onclick="fnSave()">Save</button>
+      <button id="undoId" class="button" onclick="fnUndo()">Undo</button>
+      <button id="redoId" class="button" onclick="fnRedo()">Redo</button>
+      <button id="replayId" class="button" onclick="fnReplay()">Replay</button>
+    </div>
+  </div>
+  <script src="../html5/ger/Planks.js" type="text/javascript"></script>
+
+</body>
+</html>
