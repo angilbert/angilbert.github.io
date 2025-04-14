@@ -19,101 +19,86 @@
     <div class="mainbody">
       <div class="page-intro">
         <h2>Lily-pond</h2><p>
-          Explore the serene world of the lily-pond and it's surrounding water-gardens. 
-          Tiptoe across the delicate lily-pads, hunt for seed-pods, grow new lily-pads and 
-          master the natural lifecycle of the flora and fauna to delve deep into 
-          the watery wonderland. A route-finding, resource-management puzzle-game with a 
+          Explore the serene world of the lily-pond and its surrounding water-gardens. 
+          Tiptoe across the delicate lily-pads, gather seed-pods, grow new lily-pads and 
+          master the natural lifecycle of the lily to delve deep into the watery 
+          wonderland. A route-finding, resource-management puzzle-game with a 
           novel core mechanic.
         </p>
       </div>
 
-       <div><p>
-        This puzzle concept was conceived in the summer of 2024 and has been in 
-        incremental development since then. To date (March 2025) there are six 
-        chapters close to finalised and two more planned. This page currently offers 
-        the first four chapters only.</p>
+      <div class="std-flex-block">
+        <div class="photo-info">
+          <p>
+            This game makes extensive use of PSNext features, including level select, 
+          canvas sprites, smoothscreen (zoom) and checkpoints. Some familiarity with 
+          the puzzlescript UI is assumed and not repeated here. Suffice to say,  
+          PS games are best played on desk/laptop with a keyboard. If you know 
+          the PS UI well and feel brave enough to play on mobile I recommend you 
+          click "play full window" first. </p>
+        </div> 
+        <div class="photo-area">
+          <p><img src="./path.png" width="120px"></p>
+        </div>
       </div>
 
       <div class="std-flex-block single-item"> 
         <div class="puzzle-area">
           <!-- edits after PSNext export...
-           1. remove header/footer div
-           2. adjust .gamecontainer (both of them?) so all margins are 0%
-           3. reword "replay level from the start" -->
+           reword "replay level from the start" -->
           <!-- zoom is 13 sprites - so frame width/height must be a multiple (572=13x44) -->
-          <iframe frameborder="0" src="./ponds1234.html" width="572" height="572"></iframe>
-          <p><a href="./ponds1234.html">Play fullscreen</a></p>
+          <iframe frameborder="0" src="./ponds1234c.html" width="572" height="572"></iframe>
+          <p><a href="./ponds1234c.html" a target="_blank">Play full window</a></p>
         </div>
       </div>
 
       <div class="page-note">
         <h4>Development notes</h4>
         <div>
-          <!-- <img src="./sprite_defn.png" width="180" style="float:right; padding:5px" > -->
-        <p>
-           This game makes extensive use of PSNext features, including level select, 
-           canvas sprites, smoothscreen (for zoom and movement) and also checkpoints. 
-           Each chapter (level) is effectively a collection of discrete puzzles 
-           (typically 6-10) which must be tackled in the right order to fully beat 
-           the level. Each chapter introduces one new aspect of the core mechanic 
-           and methodically explores its puzzling potential.
-           </p><p>
-           The chapters (levels) are not "open-world" but different routes forward 
-           will often present themselves (especially in later chapters), part of the 
-           challenge is then deducing the correct route forward. 
-           The game is restricted to a 13x13 view centered on the player (primarily to
-           improve mobile support) so occasionally you may need to explore a little to 
-           fully scope the next goal, but the restricted view is never deliberately 
-           exploited to obfuscate the next goal.
+          <p>
+          <img src="./pads2.png" width="100" style="float:right; padding:10px" > 
+          This puzzle concept was conceived late summer 2024 and remains in 
+          active development.
+          To date (April 2025) there are six chapters close to finalised and two 
+          more planned (this page currently offers the first four chapters only). 
+          Later chapters will focus on the various "rules of five", the first of 
+          which is introduced in the chapter 4.
+        </p><p>
+            <img src="./mud.png" width="100" style="float:left; padding:10px" > 
+          Each chapter (level) has been woven together from a large collection of 
+          small discrete puzzles which were individually hand-designed to showcase 
+          different aspects of the puzzle mechanic. 
+          You beat a level by collecting at least three rare Andreana lily blooms
+          (each chapter contains five) and some are more challenging than others. 
+          The ultimate goal is to find all twenty, spread across the four 
+          available chapters.
           </p><p>
-           Checkpoints serve two purposes, firstly they allow you to revert back to a trusted
-           state on the solution path. Secondly they offer a portal to skip you forward
-           to the next checkpoint (hint: search in the reeds). 
-           At the moment you can also exit onto "the lawns" and re-enter the level near other 
-           checkpoints. You cannot carry seeds-pods through portals or across the lawns.
-
-           <!-- Checkpoints are invisible until you first 
-           reach them. That said, they also act as hints, if you need them. Simply jump 
-           through the portal (then undo) to give a clear indicator of your next goal. 
-           Note... if you hit a new checkpoint carrying seed-pods (without utilising the 
-           lawns or a portal) you have probably found "cheese". Please let me know how 
-           you did it. -->
+          <img src="./goal.png" width="100" style="float:right; padding:10px" > 
+          The game has a restricted view centered on the player (which looks better
+          on small screens). This gives the game a little bit of a dungeon-crawl 
+          feel and means you may occasionally need to explore beyond the visible 
+          boundary to deduce the correct way forward. Undo is your friend!
+          Checkpoints are provided to track progress through each chapter. They 
+          only trigger on the first visit and remain visible once triggered.
           </p>
-
-          <!-- <p>
-            The game is focussed around one core mechanic, that of collecting and throwing 
-            seed-pods to build single-use bridges of lily-pads. Early chapters explore this 
-            core mechanic in depth, avoiding edge-cases. 
-            The first exploitable edge-case you discover is how to stack lily-pads and 
-            make them flower. Stacking lily-pads makes them flower, which in turn yields 
-            new seed-pods.
-            This is the only way to recycle seed-pods and there is a natural loss of 
-            resource in this cycle, so careful resource-management is core to many puzzles. 
-            </p><p>
-            Later chapters explore the many edge-cases that arise when collections of 
-            things (lily-pads or seed-pods) hit five or more. There are several of these 
-            edge-cases to discover and master. 
-          </p> -->
-
         </div> 
       </div>
-
+<br>&nbsp;
       <div class="page-note">
         <h4>Links &amp; related pages</h4>
         <ul>
           <li>Explore more PSNext games in the <a href="https://puzzlescriptnext.polyomino.com">
             PSNext Gallery</a></li>
-          <li>Discover more about <a href="https://github.com/david-pfx/PuzzleScriptNext/blob/master/README.md">
+          <li>Discover more about <a href="https://puzzlescriptnext.polyomino.com/Documentation/objects.html">
            canvas sprite support in PSNext</a></li>
           </ul>
       </div>
 
       <hr>   
       <div class="page-credits"><p>
-        <b>concept &amp; puzzle design</b> - &COPY; Andrea Gilbert - 2024/5<br>
-        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2024/5<br>
+        <b>concept &amp; puzzle design</b> - &COPY; Andrea Gilbert - 2025<br>
+        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2025<br>
         <b>puzzlescript next</b> - maintained by david-pfx<br>
-        <!-- LT -->
         </p>
       </div>  
     </div>
