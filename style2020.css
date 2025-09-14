@@ -177,6 +177,13 @@ iframe {
     color: #FF3333;   
 }
 
+.page-note details > summary {
+    padding-top: 5px;
+    color: #993399;
+    font-weight: bold;
+}
+.page-note details > p { color: black; }
+
 /* standard flex containers ======= */
 
 .std-flex-block {
@@ -202,6 +209,12 @@ iframe {
 
 .puzzle-area {
     background: gainsboro;
+    padding: 10px;
+    margin: 5px;
+    align-items: center;
+}
+
+.puzzle-area-transparent {
     padding: 10px;
     margin: 5px;
     align-items: center;
@@ -243,8 +256,11 @@ iframe {
 .puzzle-area-legacy-applet h3 { font-size: 14px; text-align: center; padding-top: 0px; padding-bottom: 5px; }
 
 .puzzle-area p { font-size: 14px; text-align: center; }
+.puzzle-area-transparent p { font-size: 14px; text-align: center; }
 .puzzle-info p { font-size: 14px;  }
 .puzzle-info h4 { padding-top: 5px; }
+
+
 
 /* applet info sections ========= */
 
@@ -378,8 +394,6 @@ iframe {
 .photo-area p { font-size: 12px; text-align: center; }
 .photo-info p { font-size: 16px; }
 .dinky p { font-size: 12px; }
-
-
 
 
 

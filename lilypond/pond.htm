@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-    <title>Clickmazes Lilypond</title>
+    <title>Clickmazes Lilypond (pre-release)</title>
     <link rel="stylesheet" href="../style2020.css?v=1.3">
   </head>
   <body>
@@ -17,76 +17,153 @@
     </div>
 
     <div class="mainbody">
+
       <div class="page-intro">
         <h2>Lily-pond</h2><p>
           Explore the serene world of the lily-pond and its surrounding water-gardens. 
           Tiptoe across the delicate lily-pads, gather seed-pods, grow new lily-pads and 
           master the natural lifecycle of the lily to delve deep into the watery 
-          wonderland. A route-finding, resource-management puzzle-game with a 
-          novel core mechanic.
+          wonderland. How many rare Andreana lily blooms can you find along the way?
+          A route-finding, resource-management puzzle-game with simple but 
+          deep core mechanic. 
         </p>
       </div>
 
       <div class="std-flex-block">
         <div class="photo-info">
           <p>
-            This game makes extensive use of PSNext features, including level select, 
-          canvas sprites, smoothscreen (zoom) and checkpoints. Some familiarity with 
-          the puzzlescript UI is assumed and not repeated here. Suffice to say,  
-          PS games are best played on desk/laptop with a keyboard. If you know 
-          the PS UI well and feel brave enough to play on mobile I recommend you 
-          click "play full window" first. </p>
+            This puzzle concept was conceived late summer 2024 and remains in active development.
+            To date (Sept 2025) there are seven chapters close to finalised and scope for 
+            perhaps two more. 
+            The first five are now playable right here, so please consider this a pre-release, 
+            for play-test purposes. Want to see more? Let me know. Feedback welcomed.  
+          </p>
         </div> 
         <div class="photo-area">
-          <p><img src="./path.png" width="120px"></p>
+          <p><img src="./pods3.png" width="120px"></p>
         </div>
       </div>
 
       <div class="std-flex-block single-item"> 
         <div class="puzzle-area">
+          <!-- <p><i>Click below to give focus</i></p> -->
           <!-- edits after PSNext export...
-           reword "replay level from the start" -->
+           reword "replay level from the start" (if enable_pause is set) -->
           <!-- zoom is 13 sprites - so frame width/height must be a multiple (572=13x44) -->
-          <iframe frameborder="0" src="./ponds1234.html" width="572" height="572"></iframe>
-          <p><a href="./ponds1234.html" a target="_blank">Play full window</a></p>
+          <iframe frameborder="0" src="./ponds12345.html" width="572" height="572"></iframe>
+          <p><a href="./ponds12345.html">Play full window</a></p> <!-- a target="_blank" -->
         </div>
       </div>
 
+      <!-- <img src="./mud3.png"  width="120" style="float:left; padding:10px" > -->
+      <!-- <img src="./goal3.png" width="120" style="float:right; padding:10px" > -->
+      <!-- <img src="./pods3.png"  width="120" style="float:left; padding:10px" > -->
+      <!-- <img src="./path3.png"  width="120" style="float:right; padding:10px" > -->
+
       <div class="page-note">
-        <h4>Development notes</h4>
-        <div>
-          <p>
-          <img src="./pads2.png" width="100" style="float:right; padding:10px" > 
-          This puzzle concept was conceived late summer 2024 and remains in 
-          active development.
-          To date (April 2025) there are six chapters close to finalised and two 
-          more planned (this page currently offers the first four chapters only). 
-          Later chapters will focus on the various "rules of five", the first of 
-          which is introduced in the chapter 4.
+        <h3>Guidance and overview</h3>
+        <p>
+          <img src="./pads3.png"  width="120" style="float:right; padding:10px" >
+          This game comes with minimal upfront information about the puzzle mechanics, 
+          everything you need to know is discoverable as you play. If you would like some 
+          extra guidance on the mechanics see the drop lists below. 
+          For general guidance on how to navigate the puzzlescript UI see Q02 on the 
+          <a href="../new-faq.htm">help</a> page.
         </p><p>
-            <img src="./mud.png" width="100" style="float:left; padding:10px" > 
-          Each chapter (level) has been woven together from a large collection of 
-          small discrete puzzles which were individually hand-designed to showcase 
-          different aspects of the puzzle mechanic. 
-          You beat a level by collecting at least three rare Andreana lily blooms
-          (each chapter contains five) and some are more challenging than others. 
-          The ultimate goal is to find all twenty, spread across the four 
-          available chapters.
-          </p><p>
-          <img src="./goal.png" width="100" style="float:right; padding:10px" > 
-          The game has a restricted view centered on the player (which looks better
-          on small screens). This gives the game a little bit of a dungeon-crawl 
-          feel and means you may occasionally need to explore beyond the visible 
-          boundary to deduce the correct way forward. Undo is your friend!
-          Checkpoints are provided to track progress through each chapter. They 
-          only trigger on the first visit and remain visible once triggered.
+          Untypically (for a PS app) this game offers both level-select and checkpoints 
+          (within a level). The checkpoints offer you a localised restart, without having 
+          to restart the whole level (if you want to restart a chapter afresh then use the 
+          level-select menu). Checkpoints are currently invisible until you first reach them.
+        </p>
+        
+          <details>
+            <summary>Chapter 1: Mechanics and hints</summary>
+            <p>
+            Chapter 1 introduces the primary core mechanic; the ability to collect seed-pods 
+            "in hand" and throw them over water to grow temporary bridges of walkable lily-pads. 
+            For Chapter 1 you only need concern yourself with mastering how to safely 
+            navigate the water-garden optimising the use of the seed-pods you collect as you walk.
+            Here is a list of the basic mechanics:
+            </p>
+            <p><ul>
+              <li>Collect seed-pods by walking across the stepping-stones</li>
+              <li>Throw seed-pods over water by stepping towards open water</li>
+              <li>Seed-pods thrown across water grow new lily-pads</li>
+              <li>You can walk across lily-pads but they sink as you walk across them</li>
+              <li>Seed-pods that fall onto stepping-stones can be picked up again later</li>
+              <li>Seed-pods that fall into the weeds instantly perish</li>
+            </ul></p>
+          </details>
+          
+          <details>
+            <summary>Chapter 2: Mechanics and hints</summary>
+            <p>
+              Chapter 2 introduces several new facets of the core mechanic. The first is that 
+              seed-pods can be found on water (collectable if reachable) the second is that two 
+              or more lily-pads can co-exist in a stack, at the same location. The stack sinks 
+              one lily-pad at a time making it strong enough to support multiple visits and/or 
+              additional actions. 
+              Stacked lily-pads grow a flower, one for each lily-pad in the stack. The flowers 
+              are both a visual indicator of current height and a new element of the mechanic.
+              As the stack shrinks the flowers die and in turn generate new seed-pods which 
+              are revealed once the last lily-pad sinks.
+              So now you can start to recycle those seed-pods, how useful might that be?
+            </p>
+          </details>
+
+          <details>
+            <summary>Chapter 3: Mechanics and hints</summary>
+            <p>Chapter 3 builds on Chapter 2 and offers a series of mini-puzzles that require 
+              higher stacks with more flowers. Here you will discover the extra power or two, 
+              three or even more flowers. Two flowers for instance will permit three actions 
+              (step, pickup, throw) without getting your feet wet, plus the bonus of two 
+              new seed-pods! With the right configuration of lily-pads you can not only take 
+              extra actions as you walk, you can try and harvest the seed-pods you reveal 
+              in the process.
+            </p> 
+          </details>
+
+          <details>
+            <summary>Chapter 4: Mechanics and hints</summary>
+            <p>Chapter 4 introduces mud-banks. Mud-banks are an obstacle that blocks your path 
+              but can also hold seed-pods. Seed-pods on mud can be collected by reaching 
+              towards them, just like water-born seed-pods. It won't take long to discover 
+              seed-pods can be thrown over mud enabling them to be scattered and regrouped 
+              in powerful new ways. 
+            </p>
+          </details>
+
+          <details>
+            <summary>Chapter 5: Mechanics and hints</summary>
+            <p>Chapter 5 introduces the first "rule-of-five" edge-mechanic. 
+              If you collect more than five seed-pods you immediately drop (or "spill") four 
+              of them into adjacent locations. This mechanic may help or hinder progress
+              but it definitely means you can never grow a row of six or more lily-pads 
+              with a single throw, so how else might you achieve that? 
+              Note that seed-pods that spill onto water grow a new lily-pad (as if thrown) and 
+              seed-pods that spill into weeds instantly perish, so think careful where and 
+              when to trigger this effect. 
+              </p><p>
+              You might well ask at this point... how have you managed to avoid spillage before?
+              In earlier levels? It's a good question, and a puzzle in itself. A puzzle that 
+              perhaps explains why it's taken me over a year to publish the first five chapters 
+              of this game. 
           </p>
-        </div> 
+          </details>
+          <!-- 
+            <p>Chapter 6... unstable piles of seed-pods on mud/stone</p>
+            <p>Chapter 7... unstable stacks of flowering lily-pads</p>   
+            <p>Chapter 8... stable/shielded seed-pods (only possible on water)</p>
+            <p>Chapter 9... distant/stable piles of seed-pods</p> 
+            <p>Chapter 10... more? </p> 
+          -->
       </div>
-<br>&nbsp;
+
       <div class="page-note">
         <h4>Links &amp; related pages</h4>
         <ul>
+          <li>Explore more thinky games in the <a href="https://thinkygames.com/games">
+            thinky-games database</a></li>
           <li>Explore more PSNext games in the <a href="https://puzzlescriptnext.polyomino.com">
             PSNext Gallery</a></li>
           <li>Discover more about <a href="https://puzzlescriptnext.polyomino.com/Documentation/objects.html">
@@ -96,11 +173,11 @@
 
       <hr>   
       <div class="page-credits"><p>
-        <b>concept &amp; puzzle design</b> - &COPY; Andrea Gilbert - 2025<br>
-        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2025<br>
-        <b>puzzlescript next</b> - maintained by david-pfx<br>
+        <b>concept &amp; puzzle design</b> - &COPY; Andrea Gilbert - 2024/25<br>
+        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2024/25<br>
         </p>
       </div>  
+
     </div>
   </body>
 </html>
