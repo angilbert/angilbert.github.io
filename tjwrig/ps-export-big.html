@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="The Lily-pond                        (Beta: V0.10: 17/09/25)">
-<title>The Lily-pond                        (Beta: V0.10: 17/09/25)</title>
+<meta name="description" content="Big-wriggle challenge">
+<title>Big-wriggle challenge</title>
 <style>
 body {
 	background-color:black;
@@ -221,7 +221,7 @@ a {
 <style>
 
 body {
-	background-color:#030;
+	background-color:#000000;
 	font-family:"Courier New", Courier, monospace;
     touch-action: none;
 }
@@ -234,7 +234,7 @@ body {
   bottom: 0px;
   right:0px;
   border: 0px;
-  background-color: #030; 
+  background-color: #000000; 
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   image-rendering: -moz-crisp-edges;
   image-rendering: -webkit-crisp-edges;
@@ -249,7 +249,7 @@ body {
 }
 
 h1 {
-	color:#FFFFFF;
+	color:lightblue;
 	font-weight:normal;
     white-space: nowrap;
     overflow: hidden;
@@ -259,7 +259,7 @@ h1 {
     margin-bottom: 0.5em;
 }
 a {
-	color:#FFFFFF;
+	color:lightblue;
 }
 .title {	
 	background-color:none;
@@ -6995,9 +6995,7 @@ function regenSpriteImages() {
         return;
     }
     spriteImages = [];
-
-    // create sprites here because palette may have changed
-    createObjectSprites();
+    
     objectSprites.forEach((s,i) => {
         if (s) {
             spriteImages[i] =
@@ -7009,23 +7007,6 @@ function regenSpriteImages() {
 
     if (canOpenEditor) {
     	generateGlyphImages();
-    }
-}
-
-// this code used to be in the initial state setup, but needed here for palette changes
-function createObjectSprites() {
-    objectSprites = [];
-    for (const n in state.objects) {
-        if (state.objects.hasOwnProperty(n)) {
-            const object = state.objects[n];
-			objectSprites[object.id] = {
-                dat: object.spritematrix,
-                colors: object.colors.map(c => colorToHex(state.metadata.color_palette, c)), // in case we twiddled colours
-				text: object.spritetext,
-                vector: object.vector,
-				scale: object.scale,
-            };
-        }
     }
 }
 
@@ -7091,27 +7072,17 @@ function generateGlyphImages() {
 	}
 
 	if (IDE) {
-		//make highlight thingy in grid
+		//make highlight thingy
 		glyphHighlight = makeSpriteCanvas("highlight");
 		var spritectx = glyphHighlight.getContext('2d');
-		spritectx.strokeStyle = 'orange';
-		spritectx.lineWidth = 3;
-        spritectx.strokeRect(0, 0, cellwidth, cellheight);
+		spritectx.fillStyle = '#FFFFFF';
 
-        //---------------------------------------------------------------------------
-        // generate a hover highlight the size of the largest object in the level
-        // but this needs to handle negative sprite offsets
-        // const size = Object.values(state.objects).reduce((acc, obj) => {
-        //     return {
-        //         x: Math.min(acc.x, obj.spriteoffset.x),
-        //         y: Math.min(acc.y, obj.spriteoffset.y),
-        //         width: Math.max(acc.width, obj.spriteoffset.x + obj.spritematrix[0].length),
-        //         height: Math.max(acc.height, obj.spriteoffset.y + obj.spritematrix.length), 
-        //     };
-        // }, { x: 0, y: 0, width: 0, height: 0 });
-        // console.log(`size: ${JSON.stringify(size)}`);
-        // spritectx.strokeRect(0, 0, size.width * pixelSize, size.height * pixelSize);
-        //---------------------------------------------------------------------------
+        const hlwid = 3;
+        spritectx.fillRect(0, 0, cellwidth, hlwid);
+        spritectx.fillRect(0, 0, hlwid, cellheight);
+
+        spritectx.fillRect(0, cellheight - hlwid, cellwidth, hlwid);
+        spritectx.fillRect(cellwidth - hlwid, 0, hlwid, cellheight);
 
 		glyphPrintButton = textImages['editor_s'];
 
@@ -7151,10 +7122,15 @@ function generateGlyphImages() {
 		//make highlight thingy
 		glyphMouseOver = makeSpriteCanvas("glyphMouseOver");
 		var spritectx = glyphMouseOver.getContext('2d');
-        spritectx.lineWidth = 3;
-        spritectx.strokeStyle = 'yellow';
-        spritectx.strokeRect(0, 0, cellwidth, cellheight);
-        
+		spritectx.fillStyle = 'yellow';
+		const mowid = 3;  // was 2
+
+        spritectx.fillRect(0, 0, cellwidth, mowid);
+        spritectx.fillRect(0, 0, mowid, cellheight);
+
+        spritectx.fillRect(0, cellheight - mowid, cellwidth, mowid);
+        spritectx.fillRect(cellwidth - mowid, 0, mowid, cellheight);
+
         //make movement glyphs
 
         const coords = [
@@ -7910,7 +7886,6 @@ function canvasResize(level) {
         screenwidth=state.metadata.zoomscreen[0];
         screenheight=state.metadata.zoomscreen[1];
     } else if (smoothscreen) {
-        initSmoothCamera();         // need this in case smoothscreen is now enabled
         screenwidth=state.metadata.smoothscreen.screenSize.width;
         screenheight=state.metadata.smoothscreen.screenSize.height;
     }
@@ -8086,7 +8061,7 @@ function getPauseScreen(state) {
 		state.levels[curLevelNo].title || "",
 		"",
 		"resume game",
-		!state.metadata.norestart ? "resume from last checkpoint" : null,
+		!state.metadata.norestart ? "replay level from the start" : null,
 		state.metadata.level_select ? "go to level select screen" : null,
 		"exit to title screen",
 	].filter(l => l != null);
@@ -8136,7 +8111,6 @@ function doSetupTitleScreenLevelContinue(){
             if (storage_has(document.URL+'_checkpoint')) {
                 var backupStr = storage_get(document.URL+'_checkpoint');
                 curlevelTarget = JSON.parse(backupStr);
-				if (debugSwitch.includes('menu')) console.log(`doSetupTitleScreenLevelContinue `, 'curlevelTarget=', curlevelTarget);
                 
                 var arr = [];
                 for(var p in Object.keys(curlevelTarget.dat)) {
@@ -8144,7 +8118,7 @@ function doSetupTitleScreenLevelContinue(){
                 }
                 curlevelTarget.dat = new Int32Array(arr);
             }
-            curLevelNo = +storage_get(document.URL); 
+            curLevelNo = storage_get(document.URL); 
 			if (storage_has(document.URL+"_sections")) {
 				solvedSections = JSON.parse(storage_get(document.URL + "_sections"));
 			}
@@ -8164,8 +8138,8 @@ function hasStartedTheGame() {
 }
 
 function hasFinishedTheGame() {
-	return state.metadata.level_select && (solvedSections.length == state.sections.length)
-		|| curLevelNo >= state.levels.length; 
+	return state.metadata.level_select && solvedSections.length == state.sections.length
+		|| curLevelNo >= state.levels.length - 1; 
 }
 
 function hasSolvedAtLeastOneSection() {
@@ -8198,7 +8172,7 @@ function isLevelSelectOptionSelected() {
 }
 
 function generateTitleScreen(hoverLine, scrollIncrement, selectLine) {
-	if (debugSwitch.includes('menu')) console.log(`generateTitleScreen()`, 'hoverLine=', hoverLine, 'scrollIncrement=', scrollIncrement, 'selectLine=' , selectLine);
+	if (debugSwitch.includes('menu')) console.log(`generateTitleScreen()`, hoverLine, scrollIncrement, selectLine);
 	lineColorOverride = [];
   	tryLoadCustomFont();
 
@@ -8238,7 +8212,6 @@ function generateTitleScreen(hoverLine, scrollIncrement, selectLine) {
 		const select = selectLine || hoverLine;
 		titleSelection = screen.options.includes(select) ? options[screen.options.indexOf(select)] : false;  // todo: ???
 	}
-	if (debugSwitch.includes('menu')) console.log(`generateTitleScreen2`, `titleSelection=`, titleSelection, `levelSelectScrollPos=`, levelSelectScrollPos);
 
 	const setImage = (n,text) => {
 		if (!text) throw "image";
@@ -8334,7 +8307,7 @@ function selectPauseScreen(lineNo) {
 			}
 		},
 		!state.metadata.norestart ? () => {
-			DoRestart();
+			DoRestart(true);
 			textMode = false;
 			titleScreen = false;
 			canvasResize();
@@ -8416,7 +8389,7 @@ function gotoLevelSelectScreen() {
 }
 
 function generateLevelSelectScreen(hoverLine, scrollIncrement, selectLine) { 
-	if (debugSwitch.includes('menu')) console.log('generateLevelSelectScreen{ ', 'hoverLine=', hoverLine, 'scrollIncrement=', scrollIncrement, 'selectLine=', selectLine);
+	if (debugSwitch.includes('menu')) console.log('generateLevelSelectScreen()', hoverLine, scrollIncrement, selectLine);
 	lineColorOverride = [];
 
 	// set initial highlight to current level
@@ -8439,9 +8412,9 @@ function generateLevelSelectScreen(hoverLine, scrollIncrement, selectLine) {
 			}
 		}
 		if(state.metadata.level_select_unlocked_ahead !== undefined) {
-			unlockedUntil += state.metadata.level_select_unlocked_ahead;
+			unlockedUntil += Number(state.metadata.level_select_unlocked_ahead);
 		} else if (state.metadata.level_select_unlocked_rollover !== undefined) {
-			unlockedUntil = solvedSections.length + state.metadata.level_select_unlocked_rollover - 1;
+			unlockedUntil = solvedSections.length + Number(state.metadata.level_select_unlocked_rollover) - 1;
 		} else {
 			unlockedUntil += 1;
 		}
@@ -8477,7 +8450,6 @@ function generateLevelSelectScreen(hoverLine, scrollIncrement, selectLine) {
 			selectLine = -1;
 			titleSelected = false;
 			quittingTitleScreen = false;
-			//TryPlayLockedSound();
 		}
 		
 		if (selected && !locked) {
@@ -8516,7 +8488,6 @@ function gotoLevel(index) {
 		curLevel = levelAllObjects(state);
 	} else {
 		curLevelNo = (index >= 0) ? state.sections[index].firstLevel : -1 - index;
-		curlevelTarget = null; // #164
 		loadLevelFromStateOrTarget();
 	}
 	updateLocalStorage();
@@ -8709,7 +8680,6 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	suppressInput = false;
     if (leveldat===undefined) {
     	consolePrint("Trying to access a level that doesn't exist.",true);
-		curLevelNo = 0;  // bad level from storage, needs to be reset in case of skip_title_screen
 		goToTitleScreen();
     	return;
     }
@@ -8729,7 +8699,7 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 			consolePrint(`GOTO (${htmlJump(leveldat.lineNumber)})`, true, leveldat.lineNumber);
       	// This "level" is actually a goto.
       	//tryPlayGotoSound();
-      	setSectionSolved(state.levels[curLevelNo].section)
+      	setSectionSolved(state.levels[Number(curLevelNo)].section)
       	gotoLevel(leveldat.target);
     } else {
       	titleMode=0;
@@ -8804,7 +8774,7 @@ function loadLevelFromStateTarget(state,levelindex,target,randomseed) {
 }
 
 function loadLevelFromState(state,levelindex,randomseed) {  
-	if (debugSwitch.includes('load')) console.log(`loadLevelFromState(levelindex=${levelindex})`);
+	if (debugSwitch.includes('load')) console.log(`loadLevelFromState(${levelindex})`);
 	var leveldat = state.levels[levelindex];    
 	curLevelNo=levelindex;
 	curlevelTarget=null;
@@ -8988,6 +8958,7 @@ function level4Serialization() {
 		oldflickscreendat: oldflickscreendat.concat([]),
     	cameraPositionTarget: Object.assign({}, cameraPositionTarget),
 		levelNo: curLevelNo,
+		//links: Array.from(linkStack),		//@@
 	};
 	return ret;
 }
@@ -9025,6 +8996,20 @@ function setGameState(_state, command, randomseed) {
     if (command[0]!=="rebuild"){
       backups=[];
     }
+    //set sprites
+    objectSprites = [];
+    for (const n in state.objects) {
+        if (state.objects.hasOwnProperty(n)) {
+            const object = state.objects[n];
+			objectSprites[object.id] = {
+                dat: object.spritematrix,
+                colors: object.colors,
+				text: object.spritetext,
+                vector: object.vector,
+				scale: object.scale,
+            };
+        }
+    }
     if (state.metadata.realtime_interval!==undefined) {
       autotick=0;
       autotickinterval=state.metadata.realtime_interval*1000;
@@ -9051,7 +9036,6 @@ function setGameState(_state, command, randomseed) {
 		    textMode=true;
 		    titleSelection=0;
 		    titleSelected=false;
-			levelSelectScrollPos = 0;		// else level select interferes with title screen
 		    quittingMessageScreen=false;
 		    quittingTitleScreen=false;
 			titleMode = showContinueOptionOnTitleScreen() ? 1 : 0;
@@ -9060,9 +9044,9 @@ function setGameState(_state, command, randomseed) {
 			regenText();
 			tryLoadImages();
 
-			if (state.metadata.skip_title_screen) {
+			if (state.metadata.skip_title_screen!==undefined) {
 				consolePrint("Skipping title screen.")
-				if(state.metadata.continue_is_level_select) {
+				if(state.metadata["continue_is_level_select"] !== undefined) {
 					gotoLevelSelectScreen();
 				}
 				else if(titleMode <= 1) {
@@ -9324,6 +9308,7 @@ function restoreLevel(lev, snapCamera, resetTween = true, resetAutoTick = true) 
     }
 
 	statusText = lev.status || "";
+	//linkStack = lev.links;		//@@
 
     againing=false;
 	messagetext = "";  //fix for hang
@@ -10101,7 +10086,6 @@ function cellRowMatchesWildcardFunctionGenerate(direction,cellRow,i, maxk, mink)
 
 }
 
-//@@ should these go in globals? Might fix one notified problem (no repro)
 let MOV_BITS = 5;		// doc: no of bits to hold movement as mask
 let MOV_MASK = 0x1f;	// doc: bit mask to match
 var STRIDE_OBJ = 1;	    // doc: size of BitVec to hold objects, at 32 bits per
@@ -10688,7 +10672,7 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
 		var logString = `<font color="green">Rule <a onclick="jumpToLine(${rule.lineNumber});"  href="javascript:void(0);">${rule.lineNumber}</a> ${ruleDirection} applied${gapMessage}.</font>`;
 		consolePrint(logString,false,rule.lineNumber,inspect_ID);
 	}
-	if (debugSwitch.includes('perf') && perfCounters.applied % 100 == 0) console.log(`Applied ${perfCounters.applied} rules in ${Date.now() - perfCounters.start}ms.`);		
+	if (perfCounters.applied % 100 == 0) console.log(`Applied ${perfCounters.applied} rules in ${Date.now() - perfCounters.start}ms.`);		
     return result;
 };
 
@@ -10809,26 +10793,17 @@ Rule.prototype.queueCommands = function() {
 			}
 			
 			if (command[0] === "zoomscreen" || command[0] === "flickscreen") {
-				//twiddleMetaData(state, true);
-				twiddleMetaData(state, command);
+				twiddleMetaData(state, true);
 				canvasResize();
 			}
 
 			if (command[0] === "smoothscreen") {
 				if (value !== undefined) {
-					//twiddleMetaData(state, true);
-					twiddleMetaData(state, command);
+					twiddleMetaData(state, true);
 					initSmoothCamera()
 				} else {
 					smoothscreen = false;
 				}
-				canvasResize();
-			}
-
-			if (command[0] == "color_palette") {
-				//twiddleMetaData(state, true);
-				twiddleMetaData(state, command);
-				regenSpriteImages()
 				canvasResize();
 			}
 
@@ -10846,9 +10821,8 @@ Rule.prototype.queueCommands = function() {
   	}
 };
 
-// set various prelude settings from metadata, either initially or when twiddled
+// despite its name, this function exists to establish default values for prelude settings
 function twiddleMetadataExtras(resetAutoTick = true) {
-    if (debugSwitch.includes('meta')) console.log(`twiddleMetaDataExtras resetAutoTick=${resetAutoTick} metadata:`, state.metadata);
 	autotickinterval=state.metadata.realtime_interval ? state.metadata.realtime_interval*1000 : 0;
 	if (resetAutoTick || !state.metadata.realtime_interval)
     	autotick=0;
@@ -10857,7 +10831,6 @@ function twiddleMetadataExtras(resetAutoTick = true) {
 	repeatinterval = state.metadata.key_repeat_interval ? state.metadata.key_repeat_interval*1000 : 200; // was 150, makes for key bounce
 	animateinterval = state.metadata.animate_interval ? state.metadata.animate_interval*1000 : 250; // was 150, makes for key bounce
 
-	const colorPalette = state.metadata.color_palette;
 	state.bgcolor = state.metadata.background_color ? colorToHex(colorPalette,state.metadata.background_color) : "#000000";
 	state.fgcolor = state.metadata.text_color ? colorToHex(colorPalette,state.metadata.text_color) : "#FFFFFF";
     state.author_color = state.metadata.author_color ? colorToHex(colorPalette, state.metadata.author_color) : state.fgcolor;
@@ -11479,6 +11452,7 @@ function procInp(dir,dontDoWin,dontModify,bak,coord) {
 			if (!dontModify){
 	    		DoRestart(true);
 			}
+    		return true;
 		}
 		
 		if (curLevel.commandQueue.indexOf('quit')>=0 && !solving) {
@@ -11536,7 +11510,7 @@ function procInp(dir,dontDoWin,dontModify,bak,coord) {
 	    	}
 	    }
 
-		if (dontModify && curLevel.commandQueue.indexOf('win')>=0 || curLevel.commandQueue.indexOf('restart')>=0) {	
+		if (dontModify && curLevel.commandQueue.indexOf('win')>=0) {	
 	    	return true;	
 		}
 		
@@ -11807,7 +11781,7 @@ function nextLevel() {
 	againing=false;
 	messagetext="";
 	statusText = "";
-	if (state && state.levels && (curLevelNo>state.levels.length-1) ){
+	if (state && state.levels && (curLevelNo>state.levels.length) ){
 		curLevelNo=state.levels.length-1;
 	}
   
@@ -11843,11 +11817,11 @@ function nextLevel() {
 
 		if (curLevelNo<(state.levels.length-1)) {
 			var skip = false;
-			var curSection = state.levels[curLevelNo].section;
-			var nextSection = state.levels[curLevelNo+1].section;
+			var curSection = state.levels[Number(curLevelNo)].section;
+			var nextSection = state.levels[Number(curLevelNo)+1].section;
 			if(nextSection != curSection) {
-				setSectionSolved(state.levels[curLevelNo].section);
-
+				setSectionSolved(state.levels[Number(curLevelNo)].section);
+				
 				if(solvedSections.length == state.sections.length && state.winSection != undefined) {
 					curLevelNo = state.winSection.firstLevel - 1; // it's gonna be increased to match few lines below
 				} else if (nextSection == "__WIN__") {
@@ -11867,7 +11841,7 @@ function nextLevel() {
 			}
 		} else {
 			if (solvedSections.length == state.sections.length) {
-				if (!state.metadata.level_select) {
+				if (state.metadata["level_select"] === undefined) {
 					// solved all
 					try {
 						storage_remove(document.URL);
@@ -11884,8 +11858,8 @@ function nextLevel() {
 
 				tryPlayEndGameSound();
 			} else {
-				if (state.levels[curLevelNo].section != null) {
-					setSectionSolved(state.levels[curLevelNo].section);
+				if (state.levels[Number(curLevelNo)].section != null) {
+					setSectionSolved(state.levels[Number(curLevelNo)].section);
 				}
 				gotoLevelSelectScreen();
 			}
@@ -11908,7 +11882,7 @@ function loadLevelFromStateOrTarget() {
 }
 
 function goToTitleScreen(){
-	if (debugSwitch.includes('load')) console.log(`gotoTitleScreen() curlevelTarget=`, curlevelTarget, ` restartTarget=`, restartTarget);
+	if (debugSwitch.includes('load')) console.log(`gotoTitleScreen()`);
     againing=false;
 	messagetext="";
 	statusText = "";
@@ -11938,7 +11912,7 @@ function resetFlickDat() {
 function updateLocalStorage() {
 	if (linkStack.length > 0)
 		return;
-	if (debugSwitch.includes('menu')) console.log(`updateLocalStorage`, 'curlevelTarget=', curlevelTarget, 'restartTarget=', restartTarget, 'curLevelNo=', curLevelNo);
+	if (debugSwitch.includes('menu')) console.log(`updateLocalStorage`, curlevelTarget);
 	try {
 		
 		storage_set(document.URL,curLevelNo);
@@ -11999,7 +11973,6 @@ var cameraPosition = {
 };
 
 function initSmoothCamera() {
-    if (debugSwitch.includes('meta')) console.log(`initSmoothCamera metadata:`, state.metadata);
     if (state===undefined || state.metadata.smoothscreen===undefined) {
         return;
     }
@@ -12118,20 +12091,16 @@ let errorCount = 0;         //only counts errors
 let caseSensitive = false;
 
 // used here and in compiler
-const reg_commandwords = /^(afx[\w:=+-.]+|sfx\d+|cancel|checkpoint|restart|win|message|again|undo|nosave|quit|zoomscreen|flickscreen|smoothscreen|again_interval|realtime_interval|key_repeat_interval|noundo|norestart|background_color|text_color|goto|message_text_align|status|gosub|link|log|color_palette)$/i;
+const reg_commandwords = /^(afx[\w:=+-.]+|sfx\d+|cancel|checkpoint|restart|win|message|again|undo|nosave|quit|zoomscreen|flickscreen|smoothscreen|again_interval|realtime_interval|key_repeat_interval|noundo|norestart|background_color|text_color|goto|message_text_align|status|gosub|link|log)$/i;
 const reg_name = /^[\p{L}\p{N}_$]+/u;
 const reg_objectname = /^[\p{L}\p{N}_$]+(:[\p{L}\p{N}_$]+)*/u;              // object name for definition
 const reg_objectnamerel = /^[\p{L}\p{N}_$]+(:[<>v^]|:[\p{L}\p{N}_$]+)*$/u;  // object name with relative parts for use in rules
 const reg_objmodi = /^(canvas|copy|flip|rot|scale|shift|text|translate):/i;
 
 const commandwords_table = ['cancel', 'checkpoint', 'restart', 'win', 'message', 'again', 'undo', 'nosave', 'quit', 'zoomscreen', 'flickscreen', 'smoothscreen', 
-    'again_interval', 'realtime_interval', 'key_repeat_interval', 'noundo', 'norestart', 'background_color', 'text_color', 'goto', 'message_text_align', 'status', 'gosub'
-];
+    'again_interval', 'realtime_interval', 'key_repeat_interval', 'noundo', 'norestart', 'background_color', 'text_color', 'goto', 'message_text_align', 'status', 'gosub'];
 const commandargs_table = ['message', 'goto', 'status', 'gosub', 'log'];
-const twiddleable_params = [
-    'background_color', 'text_color', 'key_repeat_interval', 'realtime_interval', 'again_interval', 'flickscreen', 'zoomscreen', 'smoothscreen', 'noundo', 
-    'norestart', 'message_text_align', 'color_palette'
-];
+const twiddleable_params = ['background_color', 'text_color', 'key_repeat_interval', 'realtime_interval', 'again_interval', 'flickscreen', 'zoomscreen', 'smoothscreen', 'noundo', 'norestart', 'message_text_align'];
 const soundverbs_directional = ['move', 'cantmove'];
 const soundverbs_other = [ 'create', 'destroy' ];
 let soundverbs_movement = [ 'action' ];  // clicks to be added
@@ -12183,8 +12152,8 @@ function logErrorCacheable(str, lineNumber,urgent) {
             errorCount++;
 			if (errorCount > MAX_ERRORS_FOR_REAL){
                 TooManyErrors();
-            }
         }
+    }
     }
 }
 
@@ -12194,17 +12163,17 @@ function logError(str, lineNumber,urgent) {
             return logErrorNoLine(str,urgent);
         }
         var errorString = '<a onclick="jumpToLine(' + lineNumber.toString() + ');"  href="javascript:void(0);"><span class="errorTextLineNumber"> line ' + lineNumber.toString() + '</span></a> : ' + '<span class="errorText">' + str + '</span>';
-        if (errorStrings.indexOf(errorString) >= 0 && !urgent) {
+         if (errorStrings.indexOf(errorString) >= 0 && !urgent) {
             //do nothing, duplicate error
-        } else {
+         } else {
             consolePrint(errorString,true);
             errorStrings.push(errorString);
             errorStringsOnly.push(errorString);
             errorCount++;
 			if (errorCount > MAX_ERRORS_FOR_REAL){
                 TooManyErrors();
-            }
         }
+    }
     }
 }
 
@@ -12219,9 +12188,9 @@ function logWarning(str, lineNumber, urgent) {
          } else {
             consolePrint(errorString,true);
             errorStrings.push(errorString);
-			// if (errorStrings.length > MAX_ERRORS_FOR_REAL) {
-            //     TooManyErrors();
-            // }
+			if (errorStrings.length > MAX_ERRORS_FOR_REAL) {
+                TooManyErrors();
+            }
         }
     }
 }
@@ -12234,11 +12203,12 @@ function logWarningNoLine(str, urgent, increaseErrorCount = false) {
          } else {
             consolePrint(errorString,true);
             errorStrings.push(errorString);
-            if (increaseErrorCount)
-                errorCount++;
-			if (errorCount > MAX_ERRORS_FOR_REAL) {
+            if (errorStrings.length > MAX_ERRORS_FOR_REAL) {
                 TooManyErrors();
             }
+        }
+        if (increaseErrorCount) {
+            errorCount++;
         }
     }
 }
@@ -12314,7 +12284,7 @@ var codeMirrorFn = function() {
         'level_select_unlocked_ahead', 'level_select_unlocked_rollover', 'local_radius', 'realtime_interval', 
         'tween_length', 'tween_snap'];
     const prelude_param_single = [
-        'background_color', 'flickscreen', 'level_select_solve_symbol', 'keyhint_color', 
+        'background_color', 'color_palette', 'flickscreen', 'level_select_solve_symbol', 'keyhint_color', 
         'message_text_align', 'mouse_drag', 'mouse_left', 'mouse_rdrag', 'mouse_right', 'mouse_rup', 'mouse_up',
         'sitelock_hostname_whitelist', 'sitelock_origin_whitelist', 'sprite_size', 'text_color', 'tween_easing', 'zoomscreen',
         'author_color', 'title_color'
@@ -12322,9 +12292,7 @@ var codeMirrorFn = function() {
     const prelude_not_implemented = [
         'game_uri', 'level_title_style', 'show_level_title_in_menu', 
     ];
-    const prelude_param_multi = [
-        'smoothscreen', 'puzzlescript', 'youtube', 'load_images', 'color_palette'
-    ];
+    const prelude_param_multi = ['smoothscreen', 'puzzlescript', 'youtube', 'load_images'];
     const prelude_tables = [prelude_keywords, prelude_param_text, prelude_param_number, 
         prelude_param_single, prelude_param_multi];
     const color_names = ['black', 'white', 'darkgray', 'lightgray', 'gray', 'grey', 'darkgrey', 'lightgrey',
@@ -13018,7 +12986,6 @@ var codeMirrorFn = function() {
             delete newobj.canRedef;
             newobj.colors = [];
             newobj.spritematrix = [];
-            newobj.spriteoffset = { x: 0, y: 0 };
             newobj.transforms = [];
             delete state.objects[candname];
             state.objects[candname] = newobj;
@@ -13264,7 +13231,7 @@ var codeMirrorFn = function() {
                     lexer.pushToken(token, 'KEYWORD');
                     lexer.matchComment();
                     // P:S compat: "- and | for horizontal and vertical mirrors"
-                    symbols.transforms.push([ 'flip', token == '-' ? 'down' : 'right']);  
+                    symbols.transforms.push([ 'flip', token == '-' ? '>' : 'v']);  
 
                 } else if (token = lexer.match(/^shift:/i)) {
                     lexer.pushToken(token, 'KEYWORD');
@@ -13351,31 +13318,28 @@ var codeMirrorFn = function() {
         }
     }
 
-    // if the last object has tags, expand it, create new objects
-    // delete original name and add property
-    // then apply the transforms
+    // if the last object has tags, expand it, delete original name and add property
     function expandLastObject(state) {
         const candname = state.objects_candname;
         state.objects_candname = null;
-        const obj = candname && state.objects[candname];
-        if (!obj) return;
-        if (hasParts(candname)) {
-            const newobjects = expandObjectDef(state, candname, obj);
-            if (newobjects) {
-                // they will have been created
-                for (const [newid, newobj] of newobjects) {
-                    registerOriginalCaseName(state, newid, state.lineNumber);
-                    applyTransforms(state, newobj);
+        if (!candname || !hasParts(candname)) return;
+        const obj = state.objects[candname];
+        const newobjects = expandObjectDef(state, candname, obj);
+        if (newobjects) {
+            // they will have been created
+            for (const [newid, newvalue] of newobjects) {
+                registerOriginalCaseName(state, newid, state.lineNumber);
+                const clone = newvalue.cloneSprite;
+                if (clone && !(wordAlreadyDeclared(state, clone))) {  // should this be state.objects?
+                    logError(`You're trying to copy from "${errorCase(clone)}" but it's not defined anywhere.`, state.lineNumber)
                 }
-                const newlegend = [ candname, ...newobjects.map(n => n[0])];
-                newlegend.lineNumber = obj.lineNumber;  // bug: it's an array, isn't it?
-
-                delete state.objects[candname];
-                state.legend_properties.push(newlegend);
-                return;
             }
+            const newlegend = [ candname, ...newobjects.map(n => n[0])];
+            newlegend.lineNumber = obj.lineNumber;  // bug: it's an array, isn't it?
+
+            delete state.objects[candname];
+            state.legend_properties.push(newlegend);
         }
-        applyTransforms(state, obj);
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -14513,81 +14477,48 @@ function expandObjectRef(state, objid, usedirs = false) {
 }
 
 // expand object defined with tags/directions into new objects
-function expandObjectDef(state, objid, obj) {
+function expandObjectDef(state, objid, objvalue) {
     const expander = new TagExpander(state, objid, true);
     if (expander.keys.length == 0) return;
 
-    return expander.expansion.map((exp,index) => {
+    const newobjects = expander.expansion.map((exp,index) => {
         const newid = expander.getExpandedIdent(exp);
 
         // check if tag expansion redefines an existing object
         // if this is one expansion overlapping another then redefines is set, so use new definition (Hebird)
         // else silently ignore this redefinition, use original value
-        const oldobj = state.objects[newid];
-        if (oldobj && !oldobj.canRedef)
-            return [ newid, oldobj ];
-        const newobj = { 
-            ...deepClone(obj),
-            canRedef: true, 
+        let newvalue = state.objects[newid];
+        if (newvalue && !newvalue.canRedef)
+            return [ newid, newvalue ];
+        newvalue = { 
+            ...deepClone(objvalue),
+            canRedef: true 
         };
+        state.objects[newid] = newvalue;
 
-        newobj.cloneSprite = obj.cloneSprite && expander.getExpandedAlt(exp, obj.cloneSprite);
-
-        if (obj.transforms) {
-            const transforms = [];
-            obj.transforms.forEach(xform => {
+        if (objvalue.cloneSprite) {
+            const altspriteid = expander.getExpandedAlt(exp, objvalue.cloneSprite);
+            if (state.objects[altspriteid])
+                newvalue.cloneSprite = altspriteid;
+            // optional?
+            //else logWarning(`Sprite copy: source says ${altspriteid.toUpperCase()} but there is no such object defined.`, objvalue.lineNumber);
+        } else 
+            newvalue.spritematrix = objvalue.spritematrix.map(row => [ ...row ]);
+        
+        if (objvalue.transforms) {
+            newvalue.transforms = [];
+            objvalue.transforms.forEach(xform => {
                 const op = xform[0];
-                transforms.push([ op, 
+                newvalue.transforms.push([ op, 
                     expander.getSubstitutedIdent(exp, xform[1], index),
                     expander.getSubstitutedIdent(exp, xform[2], index) ]);
-            });
-            newobj.transforms = transforms;
+            })
         }
-
-        // if the new definition has no spritematrix then copy the old one
-        if (newobj.spritematrix.length == 0 && oldobj && oldobj.spritematrix.length > 0) {
-            newobj.spriteoffset = { ...oldobj.spriteoffset };
-            newobj.spritematrix = oldobj.spritematrix.map(row => [ ...row ]);
-        }
-
-        state.objects[newid] = newobj;
-        return [ newid, newobj ];
+        return [ newid, newvalue ];
     });
+    
+    return newobjects;
 }
-
-// apply transforms to the (possibly expanded) object
-function applyTransforms(state, obj) {
-
-    const cloneid = obj.cloneSprite;
-    if (obj.vector) 
-        setVectorSprite(obj);
-    else setSpriteMatrix(obj);
-
-    // expansion if it's a vector object
-    function setVectorSprite(obj) {
-        obj.vector.angle = 0;
-        if (cloneid) {
-            const cloneobj = state.objects[cloneid];
-            if (cloneobj && cloneobj.vector) {
-                obj.spriteoffset = { ...cloneobj.spriteoffset };
-                obj.vector = { ...cloneobj.vector };
-            } else logError(`Canvas object cannot copy from "${errorCase(obj.cloneSprite)}".`, obj.lineNumber);
-        } 
-        applyVectorTransforms(obj);
-    }
-
-    // expansion if it's a sprite object
-    function setSpriteMatrix(obj) {
-        if (cloneid) {
-            const cloneobj = state.objects[cloneid];
-            if (cloneobj && !cloneobj.vector) {
-                obj.spriteoffset = { ...cloneobj.spriteoffset };    
-                obj.spritematrix = cloneobj.spritematrix.map(row => [ ...row ]);
-            } else logError(`Sprite object cannot copy from "${errorCase(obj.cloneSprite)}".`, obj.lineNumber);
-        }
-        applySpriteTransforms(obj);
-    }
-}        
 
 // create hierarchy of properties when property contains tags
 // do it by index because names may not be unique
@@ -14761,6 +14692,7 @@ function colorToHex(palette, str) {
 }
 
 var debugMode;
+var colorPalette;
 
 function generateExtraMembers(state) {
 
@@ -14816,22 +14748,34 @@ function generateExtraMembers(state) {
     debugMode = false;
     verbose_logging = false;
     throttle_movement = false;
-    if (state.metadata.debug || defaultDebugMode) {
-        if (IDE && !unitTesting) {
-            debugMode = true;
-            cache_console_messages = true;
-        }
-    } 
-    if (state.metadata.verbose_logging || defaultVerboseLogging) {
-        if (IDE && !unitTesting) {
-            verbose_logging = true;
-            cache_console_messages = true;
+    colorPalette = colorPalettes.arnecolors;
+    for (var i = 0; i < state.metadata.length; i += 2) {
+        var key = state.metadata[i];
+        var val = state.metadata[i + 1];
+        if (key === 'color_palette') {
+            if (val in colorPalettesAliases) {
+                val = colorPalettesAliases[val];
+            }
+            if (colorPalettes[val] === undefined) {
+                logError('Palette "' + val + '" not found, defaulting to arnecolors.', 0);
+            } else {
+                colorPalette = colorPalettes[val];
+            }
+        } else if (key === 'debug' || defaultDebugMode) {
+            if (IDE && unitTesting===false){
+                debugMode = true;
+                cache_console_messages = true;
+            }
+        } else if (key === 'verbose_logging' || defaultVerboseLogging) {
+            if (IDE && unitTesting===false){
+                verbose_logging = true;
+                cache_console_messages = true;
+            }
+        } else if (key === 'throttle_movement') {
+            throttle_movement = true;
         }
     }
-    if (state.metadata.throttle_movement) {
-        throttle_movement = true;
-    }
-        
+
     // fix and convert colors to hex
     const maxColours = 36; // now 0-9 and a-z
     for (const obj of Object.values(state.objects)) {
@@ -14846,25 +14790,53 @@ function generateExtraMembers(state) {
         }
         for (let i = 0; i < obj.colors.length; i++) {
             let c = obj.colors[i];
-            if (!isColor(c)) {
+            if (isColor(c)) {
+                c = colorToHex(colorPalette, c);
+                obj.colors[i] = c;
+            } else {
                 logError(`Invalid color specified for object "${n}", namely ${obj.colors[i]}".`, obj.lineNumber + 1);
                 obj.colors[i] = '#ff00ff'; // magenta error color
             }
         }
     }
 
-    // create empty sprite matrix if there is none
+    // fix up what we can of sprite stuff here.
+    // spriteoffset is needed to handle translate with negative args
+    // transform on canvas has to be left until later
     for (const [key, obj] of Object.entries(state.objects)) {
-        if (obj.spritematrix.length == 0) {
-            obj.spritematrix = Array.from({ 
-                    length: state.cell_height || state.sprite_size 
-                },
-                () => (new Array(state.sprite_size).fill(0))
-            );
-        }
-}
+        obj.spriteoffset = { x: 0, y: 0 };
+        if (obj.vector) {
+            obj.vector.angle ||= 0;
+            if (obj.cloneSprite) {
+                const other = state.objects[obj.cloneSprite];
+                if (other && other.vector) {
+                    if (other.spriteoffset)
+                        obj.spriteoffset = { ...other.spriteoffset };
+                    obj.vector = { ...other.vector };
+                } else logError(`Canvas object cannot copy from "${errorCase(obj.cloneSprite)}".`, obj.lineNumber);
+            } 
+            applyVectorTransforms(obj);
 
-    if (debugSwitch.includes('obj')) console.log('IDS', state.idDict);
+        } else {
+            if (obj.cloneSprite) {
+                const other = state.objects[obj.cloneSprite];
+                if (other && !other.vector) {
+                    if (other.spriteoffset)
+                        obj.spriteoffset = { ...other.spriteoffset };
+                    obj.spritematrix = other.spritematrix.map(row => [...row]);
+                } else logError(`Sprite object cannot copy from "${errorCase(obj.cloneSprite)}".`, obj.lineNumber);
+            } 
+            if (obj.spritematrix.length == 0) {
+                obj.spritematrix = Array.from({ 
+                        length: state.cell_height || state.sprite_size 
+                    },
+                    () => (new Array(state.sprite_size).fill(0))
+                );
+            }
+            applySpriteTransforms(obj);
+        }
+    }
+
     if (debugSwitch.includes('obj')) console.log('Objects', state.objects);
     if (debugSwitch.includes('obj')) console.log('Properties', state.legend_properties);
     if (debugSwitch.includes('obj')) console.log('Aggregates', state.legend_aggregates);
@@ -15172,7 +15144,8 @@ function generateExtraMembersPart2(state) {
 	state.rmbupID = assignMouseObject("mouse_rup", "rmbup");
 	
 	if ("mouse_obstacle" in state.metadata) {
-		var name = state.metadata.mouse_obstacle;	
+		var name = state.metadata["mouse_obstacle"];
+		
 		if (name) {
 			state.obstacleMask = state.objectMasks[name];
 			if (!state.obstacleMask) {
@@ -15742,7 +15715,7 @@ function processRuleString(rule, state, curRules) {
                 const needarg = commandargs_table.includes(tok);
                 const twid = twiddleable_params.includes(tok);
                 if (needarg || twid) {
-                    if (twid && !state.metadata.runtime_metadata_twiddling) {
+                    if (twid && !state.metadata.includes('runtime_metadata_twiddling')) {
                         logError("You can only change a flag at runtime if you have the 'runtime_metadata_twiddling' prelude flag defined!",lineNumber)
                     } else {
                         const index = findIndexAfterToken(origLine,tokens,i);
@@ -15756,7 +15729,7 @@ function processRuleString(rule, state, curRules) {
                 }  else {
                     commands.push([tok]);
                 }
-            } else {
+                        } else {
                 logError('Error, malformed cell rule - was looking for cell contents, but found "' + token + '".  What am I supposed to do with this, eh, please tell me that.', lineNumber);
             }
         }
@@ -15955,7 +15928,7 @@ function expandRuleWithTags(state, rule) {
             for (const newident of expander.getExpandedIdents()) {
                 const newrule = deepCloneRule(r);
                 newrule.lhs[t.rowx][t.cellx][t.atomx] = newident;
-                if (rule.rhs.length > 0 && rule.rhs[t.rowx][t.cellx][t.atomx] == t.ident)
+                if (rule.rhs[t.rowx][t.cellx][t.atomx] == t.ident)
                     newrule.rhs[t.rowx][t.cellx][t.atomx] = newident;
                 temprules.push(newrule);
             }
@@ -17221,7 +17194,7 @@ function getMaskFromName(state,name) {
 		objectMask.ibitset(o.id);
 	}
 
-	if (!state.metadata.nokeyboard && objectMask.iszero()) {
+	if (!state.metadata.includes("nokeyboard") && objectMask.iszero()) {
 		logErrorNoLine("Error, didn't find any object called player, either in the objects section, or the legends section. There must be a player!");
 	}
 	return objectMask;
@@ -17327,34 +17300,25 @@ function checkObjectsAreLayered(state) {
 }
 
 function isInt(value) {
-    return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value));     //todo: something is not right here
+return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
 }
-
-// convert initial metadata to object format and validate
-// of if command is given, update the metadata with that command
-function twiddleMetaData(state, command = null) {
-    if (debugSwitch.includes('meta')) console.log(`twiddleMetaData update=${command} metadata:`, state.metadata);
+// convert metadata to object format and validate
+function twiddleMetaData(state, update = false) {
 	var newmetadata;
 
-	if (!command) {
+	if (!update) {
 		newmetadata = {};
 		for (var i=0;i<state.metadata.length;i+=2) {
 			var key = state.metadata[i];
 			var val = state.metadata[i+1];
 			newmetadata[key]=val;
 		}
-        parseTwiddle(newmetadata);
-        newmetadata.color_palette ||= colorPalettes.arnecolors;
-        state.metadata=newmetadata;
-        state.default_metadata = deepClone(newmetadata);
 	} else {
-        newmetadata = {};
-        newmetadata[command[0]] = command[1];
-        parseTwiddle(newmetadata);
-        state.metadata[command[0]] = newmetadata[command[0]];   // may be deleted but that's ok
+		newmetadata = state.metadata;
 	}
 
-    function getIntCheckedPositive(s,lineNumber) {
+
+    const getIntCheckedPositive = function(s,lineNumber){
         if (!isFinite(s) || !isInt(s)){
             logWarning(`Wasn't able to make sense of "${s}" as a (whole number) dimension.`,lineNumber);
             return NaN;
@@ -17368,152 +17332,136 @@ function twiddleMetaData(state, command = null) {
         }
         return result;
     }
-
-    function getCoords(str,lineNumber) {
-		var coords = str.split('x');
+    const getCoords = function(str,lineNumber){
+		var coords = val.split('x');
         if (coords.length!==2){
             logWarning("Dimensions must be of the form AxB.",lineNumber);
             return null;
         } else {
             var intcoords = [getIntCheckedPositive(coords[0],lineNumber), getIntCheckedPositive(coords[1],lineNumber)];
             if (!isFinite(coords[0]) || !isFinite(coords[1]) || isNaN(intcoords[0]) || isNaN(intcoords[1])) {
-                logWarning(`Couldn't understand the dimensions given to me (you gave "${str}") - should be of the form AxB.`,lineNumber);
+                logWarning(`Couldn't understand the dimensions given to me (you gave "${val}") - should be of the form AxB.`,lineNumber);
                 return null
             } else {
                 if (intcoords[0]<=0 || intcoords[1]<=0){
-                    logWarning(`The dimensions given to me (you gave "${str}") are baad - they should be > 0.`,lineNumber);
-	            }
+                    logWarning(`The dimensions given to me (you gave "${val}") are baad - they should be > 0.`,lineNumber);
+	}
                 return intcoords;
             }
         }
     }
 
-    function parseTwiddle(newmetadata) {
-        if (newmetadata.flickscreen !== undefined) {
-            var val = newmetadata.flickscreen;
-            newmetadata.flickscreen = getCoords(val,state.metadata_lines.flickscreen);
-            if (newmetadata.flickscreen===null){
-                delete newmetadata.flickscreen;
-            }
+    if (newmetadata.flickscreen !== undefined) {
+		var val = newmetadata.flickscreen;
+        newmetadata.flickscreen = getCoords(val,state.metadata_lines.flickscreen);
+        if (newmetadata.flickscreen===null){
+            delete newmetadata.flickscreen;
         }
-        if (newmetadata.zoomscreen !== undefined) {
-            var val = newmetadata.zoomscreen;
-            newmetadata.zoomscreen = getCoords(val, state.metadata_lines.zoomscreen);
-            if (newmetadata.zoomscreen === null) {
-                delete newmetadata.zoomscreen;
-            }
-        }
-        if (newmetadata.smoothscreen!==undefined) {
-            var val = newmetadata.smoothscreen;
-            var args = val.split(/\s+/);
-
-            var validArguments = true
-
-            if (args.length < 1) {
-                logErrorNoLine(`Smoothscreen given no arguments but expects at least 1: smoothscreen [flick] WxH [IxJ] [S].`)
-                validArguments = false
-            } else if (args.length > 4) {
-                logErrorNoLine(`Smoothscreen given "${args.length}" arguments but expects at most 4: smoothscreen [flick] WxH [IxJ] [S].`)
-                validArguments = false
-            }
-
-            const smoothscreen = {
-                screenSize: { width: 0, height: 0 },
-                boundarySize: { width: 1, height: 1 },
-                cameraSpeed: 0.125,
-                flick: false,
-                debug: !!newmetadata.smoothscreen_debug
-            }
-
-            if (args[0] === 'flick') {
-                smoothscreen.flick = true
-                args.shift()
-            }
-
-            const screenSizeMatch = args[0].match(/^(?<width>\d+)x(?<height>\d+)$/)
-            if (screenSizeMatch) {
-                smoothscreen.screenSize.width = parseInt(screenSizeMatch.groups.width)
-                smoothscreen.screenSize.height = parseInt(screenSizeMatch.groups.height)
-
-                if (smoothscreen.flick) {
-                    smoothscreen.boundarySize.width = smoothscreen.screenSize.width
-                    smoothscreen.boundarySize.height = smoothscreen.screenSize.height
-                }
-            } else {
-                logErrorNoLine(`Smoothscreen given first argument "${args[0]}" but must be formatted WxH where W and H are integers.`)
-                validArguments = false
-            }
-
-            if (args.length > 1) {
-                const boundarySizeMatch = args[1].match(/^(?<width>\d+)x(?<height>\d+)$/)
-                if (boundarySizeMatch) {
-                    smoothscreen.boundarySize.width = parseInt(boundarySizeMatch.groups.width)
-                    smoothscreen.boundarySize.height = parseInt(boundarySizeMatch.groups.height)
-                } else {
-                    logErrorNoLine(`Smoothscreen given second argument "${args[1]}" but must be formatted IxJ where I and J are integers.`)
-                    validArguments = false
-                }
-            }
-
-            if (args.length > 2) {
-                const cameraSpeedMatch = args[2].match(/^(?<speed>\d+(\.\d+)?)$/)
-                if (cameraSpeedMatch) {
-                    smoothscreen.cameraSpeed = clamp(parseFloat(cameraSpeedMatch.groups.speed), 0, 1)
-                } else {
-                    logErrorNoLine(`Smoothscreen given third argument "${args[2]}" but must be a number.`)
-                    validArguments = false
-                }
-            }
-
-            if (validArguments) {
-                newmetadata.smoothscreen = smoothscreen;
-            } else {
-                delete newmetadata.smoothscreen
-            }
-        }
-
-        if (newmetadata.tween_easing) {
-            let easing = newmetadata.tween_easing;
-            if (easing) {
-                easing = (!isNaN(parseInt(easing)) && easingAliases[parseInt(easing)]) ? easingAliases[parseInt(easing)] : easing.toLowerCase();
-                if (EasingFunctions[easing]) 
-                    newmetadata.tween_easing = easing;
-                else {
-                    logErrorNoLine(`Sorry, but tween easing argument "${newmetadata.tween_easing}" is not a valid number or lerp.`);
-                    delete newmetadata.tween_easing;
-                }
-            }
-        }
-
-        if (newmetadata.tween_snap) {
-            const snap = Math.max(parseInt(newmetadata.tween_snap), 1);
-            if (snap) newmetadata.tween_snap = snap;
-            else {
-                logErrorNoLine(`Sorry, but tween snap argument "${newmetadata.tween_snap}" is not a valid number.`);
-                delete newmetadata.tween_snap;
-            }
-        }
-
-        if (newmetadata.color_palette) {
-            const args = newmetadata.color_palette.split(/\s+/);
-            const palette = (args[0] in colorPalettesAliases) ? colorPalettesAliases[args[0]] : args[0];
-            if (!(palette in colorPalettes)) {
-                logError(`Palette "${palette}" not found, defaulting to arnecolors.`, 0);
-                newmetadata.color_palette = colorPalettes.arnecolors;
-            } else {
-                newmetadata.color_palette = colorPalettes[palette];
-            }
-            for (let i = 1; i < args.length; i += 2) {
-                const colorName = args[i];
-                const colorValue = args[i + 1];
-                if (!(colorName in newmetadata.color_palette))
-                    logError(`Invalid color name "${colorName}".`, 0);
-                else if (!isColor(colorValue))
-                    logError(`Invalid color value "${colorValue}".`, 0);
-                else newmetadata.color_palette[colorName] = colorValue;
-            }
-        } 
     }
+    if (newmetadata.zoomscreen !== undefined) {
+		var val = newmetadata.zoomscreen;
+        newmetadata.zoomscreen = getCoords(val, state.metadata_lines.zoomscreen);
+        if (newmetadata.zoomscreen === null) {
+            delete newmetadata.zoomscreen;
+	}
+	}
+	if (newmetadata.smoothscreen!==undefined) {
+		var val = newmetadata.smoothscreen;
+		var args = val.split(/\s+/);
+
+		var validArguments = true
+
+		if (args.length < 1) {
+			logErrorNoLine(`Smoothscreen given no arguments but expects at least 1: smoothscreen [flick] WxH [IxJ] [S].`)
+			validArguments = false
+		} else if (args.length > 4) {
+			logErrorNoLine(`Smoothscreen given "${args.length}" arguments but expects at most 4: smoothscreen [flick] WxH [IxJ] [S].`)
+			validArguments = false
+		}
+
+		const smoothscreen = {
+			screenSize: { width: 0, height: 0 },
+			boundarySize: { width: 1, height: 1 },
+			cameraSpeed: 0.125,
+			flick: false,
+			debug: !!newmetadata.smoothscreen_debug
+		}
+
+		if (args[0] === 'flick') {
+			smoothscreen.flick = true
+			args.shift()
+		}
+
+		const screenSizeMatch = args[0].match(/^(?<width>\d+)x(?<height>\d+)$/)
+		if (screenSizeMatch) {
+			smoothscreen.screenSize.width = parseInt(screenSizeMatch.groups.width)
+			smoothscreen.screenSize.height = parseInt(screenSizeMatch.groups.height)
+
+			if (smoothscreen.flick) {
+				smoothscreen.boundarySize.width = smoothscreen.screenSize.width
+				smoothscreen.boundarySize.height = smoothscreen.screenSize.height
+			}
+		} else {
+			logErrorNoLine(`Smoothscreen given first argument "${args[0]}" but must be formatted WxH where W and H are integers.`)
+			validArguments = false
+		}
+
+		if (args.length > 1) {
+			const boundarySizeMatch = args[1].match(/^(?<width>\d+)x(?<height>\d+)$/)
+			if (boundarySizeMatch) {
+				smoothscreen.boundarySize.width = parseInt(boundarySizeMatch.groups.width)
+				smoothscreen.boundarySize.height = parseInt(boundarySizeMatch.groups.height)
+			} else {
+				logErrorNoLine(`Smoothscreen given second argument "${args[1]}" but must be formatted IxJ where I and J are integers.`)
+				validArguments = false
+			}
+		}
+
+		if (args.length > 2) {
+			const cameraSpeedMatch = args[2].match(/^(?<speed>\d+(\.\d+)?)$/)
+			if (cameraSpeedMatch) {
+				smoothscreen.cameraSpeed = clamp(parseFloat(cameraSpeedMatch.groups.speed), 0, 1)
+			} else {
+				logErrorNoLine(`Smoothscreen given third argument "${args[2]}" but must be a number.`)
+				validArguments = false
+			}
+		}
+
+		if (validArguments) {
+			newmetadata.smoothscreen = smoothscreen;
+		} else {
+			delete newmetadata.smoothscreen
+		}
+	}
+
+    if (newmetadata.tween_easing) {
+        let easing = newmetadata.tween_easing;
+        if (easing) {
+            easing = (!isNaN(parseInt(easing)) && easingAliases[parseInt(easing)]) ? easingAliases[parseInt(easing)] : easing.toLowerCase();
+            //easing = (parseInt(easing) != NaN && easingAliases[parseInt(easing)]) ? easingAliases[parseInt(easing)] : easing.toLowerCase();
+            if (EasingFunctions[easing]) 
+                newmetadata.tween_easing = easing;
+            else {
+                logErrorNoLine(`Sorry, but tween easing argument "${newmetadata.tween_easing}" is not a valid number or lerp.`);
+                delete newmetadata.tween_easing;
+            }
+        }
+    }
+
+    if (newmetadata.tween_snap) {
+        const snap = Math.max(parseInt(newmetadata.tween_snap), 1);
+        if (snap) newmetadata.tween_snap = snap;
+        else {
+            logErrorNoLine(`Sorry, but tween snap argument "${newmetadata.tween_snap}" is not a valid number.`);
+            delete newmetadata.tween_snap;
+        }
+    }
+
+    state.metadata=newmetadata;
+
+	if (!update) {
+		state.default_metadata = deepClone(newmetadata);
+	}
 }
 
 function processWinConditions(state) {
@@ -17747,7 +17695,7 @@ function generateLoopPoints(state) {
                     break;
                 }
             } else {
-                if (firstRuleLine >= loop[0]) {
+                if (firstRuleLine >= loop[0]) {     //@@
                     source = i - 1;
                     // this test can fail if there are no rules between startloop and endloop, either way
                     if (source >= target)
@@ -17926,12 +17874,11 @@ function generateSoundData(state) {
 
 function formatHomePage(state) {
     // twiddle metadata doesn't set these
-    // twiddleMetadataExtras();     //::
-    state.bgcolor = ('background_color' in state.metadata) ? colorToHex(state.metadata.color_palette, state.metadata.background_color) : '#000000';
-    state.fgcolor = ('text_color' in state.metadata) ? colorToHex(state.metadata.color_palette, state.metadata.text_color) : "#FFFFFF";
-    state.author_color = ('author_color' in state.metadata) ? colorToHex(state.metadata.color_palette, state.metadata.author_color) : "#FFFFFF";
-    state.title_color = ('title_color' in state.metadata) ? colorToHex(state.metadata.color_palette, state.metadata.title_color) : "#FFFFFF";
-    state.keyhint_color = ('keyhint_color' in state.metadata) ? colorToHex(state.metadata.color_palette, state.metadata.keyhint_color) : "#FFFFFF"; // todo:
+    state.bgcolor = ('background_color' in state.metadata) ? colorToHex(colorPalette, state.metadata.background_color) : '#000000';
+    state.fgcolor = ('text_color' in state.metadata) ? colorToHex(colorPalette, state.metadata.text_color) : "#FFFFFF";
+    state.author_color = ('author_color' in state.metadata) ? colorToHex(colorPalette, state.metadata.author_color) : "#FFFFFF";
+    state.title_color = ('title_color' in state.metadata) ? colorToHex(colorPalette, state.metadata.title_color) : "#FFFFFF";
+    state.keyhint_color = ('keyhint_color' in state.metadata) ? colorToHex(colorPalette, state.metadata.keyhint_color) : "#FFFFFF"; // todo:
 
     if (canSetHTMLColors) {
         if ('background_color' in state.metadata) {
@@ -17957,10 +17904,10 @@ function formatHomePage(state) {
     }
 
     if ('homepage' in state.metadata) {
-        var url = state.metadata.homepage;
+        var url = state.metadata['homepage'];
         url = url.replace("http://", "");
         url = url.replace("https://", "");
-        state.metadata.homepage = url;
+        state.metadata['homepage'] = url;
     }
 }
 
@@ -17988,10 +17935,6 @@ function loadFile(str) {
     if (debugSwitch.includes('tag')) console.log('Mappings', state.mappings);
     if (debugSwitch.includes('layer')) console.log('Collision Layers', state.collisionLayers);
     if (debugSwitch.includes('layer')) console.log('Collision Layer Groups', state.collisionLayerGroups);
-
-    // placed here so that the parsed metadata is available
-	twiddleMetaData(state);
-
     generateExtraMembers(state);
 	generateMasks(state);
 	levelsToArray(state);
@@ -18031,7 +17974,7 @@ function loadFile(str) {
 	processWinConditions(state);
 	checkObjectsAreLayered(state);
 
-	//twiddleMetaData(state);
+	twiddleMetaData(state);
 	
 	generateExtraMembersPart2(state);
 
@@ -19193,15 +19136,12 @@ function onMouseWheel(event) {
 
 	if (!mouseInCanvas || event.ctrlKey) {return;}
 
-	const normalizedDelta = Math.sign(event.deltaY);
-	if (titleScreen && IsMouseGameInputEnabled()) {
-		if(titleMode == 1) {
-			generateTitleScreen(-1, normalizedDelta);
-		} else if(titleMode == 2) {
-			generateLevelSelectScreen(-1, normalizedDelta);
-		} else if (titleMode == 3) {
-			generatePauseScreen(-1, normalizedDelta);
-		}
+	normalizedDelta = Math.sign(event.deltaY);
+
+	if (titleScreen && titleMode == 2 && (IsMouseGameInputEnabled())) {
+		levelSelectScroll(normalizedDelta);
+
+		redraw();
 		prevent(event)
 	}
 	if (levelEditorOpened) {
@@ -19209,6 +19149,12 @@ function onMouseWheel(event) {
 		redraw();
 		prevent(event)
 	}
+}
+
+function levelSelectScroll(direction) {
+	levelSelectScrollPos = clamp(levelSelectScrollPos + direction, 0, Math.max(state.sections.length - amountOfLevelsOnScreen, 0));
+	titleSelection = clamp(titleSelection + direction, 0, state.sections.length - 1);
+	generateLevelSelectScreen();
 }
 
 function clamp(number, min, max) {
@@ -20683,6 +20629,6 @@ function Animatable(key, increment, update) {
     <img alt="unmute" id="unMuteButton" width=32px height=32px onClick="unMuteAudio()" style="display:none" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAABqElEQVRYR72XW3LDMAwDc7QerTdPRWjBoW1aedXZGUYUAIlqP9LpLbjf77+jvs3vfvgUvkDMmiPHzGxg9HTXEjNjsB6A0Nar+MxYg+UPFoH5ccLCauE+3Wmqvke+Pk5YWAl3sJuXGiSx3wfSOsMsrKRm4i6DJJAEktB+L1YW1oG4xyAJJIGUSOsMs7A2xB0GSSAJpA3Sz8xgYYnh/8R5g+ZKFG6Q9yAQ9dS3JEcEkkBqkb8K2X8EcYEkkE5RxkH6rkz7VT10uu3wwcbrcOipB+hEg62ZmlR9hbL1wEkJndgRMpVgif1+j3yH6LsSOtGALZAE0rUPwBJICfJ1D0A2ylamfDxXke8QfVfCGdak6pXpNkZBvkP0XeUl3hvkFiKfP8CwT5BPIfavD0iQBNJhEPJnDzCjr6Q31sMfI4P0/gPM6BP20ivTnSClxrZFvkP0WQ4YCQuImfzNYLfId4i+VqL0ExDfgNUi3yF6V6LkC3AsQW6R7xB9rZeHmzhrkFrkO0R/qHcZZ4Plv3sROARHv1mvImbG4GxixbucmDVHMjOauf8qY/jt9gdOODPsYZA1BAAAAABJRU5ErkJggg==" />
 </div>
 
-<script>const sourceCode="title The Lily-pond                        (Beta: V0.10: 17/09/25)\nhomepage https://www.clickmazes.com\nbackground_color  #030\ntext_color white\nexport_options notitle,nofooter,nopadding\n//;\n\nsprite_size 11\nkey_repeat_interval 0.3\nanimate_interval 0.4 \nagain_interval 0.1\nenable_pause\n\nlevel_select\nlevel_select_solve_symbol V\nlevel_select_lock\nlevel_select_unlocked_ahead 1\n\nrun_rules_on_level_start\nruntime_metadata_twiddling\nsmoothscreen 13x13\n\ntext_controls Cursor keys or WASD for movement\\n  R to restart from checkpoint\\n      Z:undo       X:action\n=====\nTAGS\n=====\n\n_X = _9 _8 _7 _6 _5 _4 _3 _2 _1 _0 \n\n=========\nMAPPINGS\n=========\n\n_X => add1\n_9 _8 _7 _6 _5 _4 _3 _2 _1 _0 -> _9 _9 _8 _7 _6 _5 _4 _3 _2 _1\n\n_X => sub1\n_9 _8 _7 _6 _5 _4 _3 _2 _1 _0 -> _8 _7 _6 _5 _4 _3 _2 _1 _0 _0\n\n========\nOBJECTS\n========\n\nBackground .\n#c3c3ff #c8c8ff #cEcEff #d2d2ff\n12012010120\n20120121012\n12001202101\n01202120120\n10210012012\n12021201201\n20210120120\n12001202102\n01202120211\n20110201020\n12021012101\n\nlawns +\n#030 #083808 #0f3f0f\ncopy:Background\n\nreedbed\n#030 #083808 #0f3f0f\ncopy:Background\n\nwater\ntransparent\n\nPlayerOK\nblack transparent transparent\n00.......00\n011.....110\n.122...221.\n..2.....2..\n...........\n...........\n...........\n..2.....2..\n.122...221.\n011.....110\n00.......00\n\nflash\nwhite transparent transparent\ncopy: playerOK\n\nplayerOut\ngrey transparent transparent\ncopy: playerOK\n\nplayerWon1\nblack transparent transparent\ncopy: playerOK\n\nplayerWon2\nblack transparent transparent\ncopy: playerOK\n\nplayerWon3\ndarkgrey transparent transparent\ncopy: playerOK\n\nplayerSink1\n#AA222233 transparent transparent\ncopy: playerOK\n\nplayerSink2\ntransparent  #AA222233 transparent\ncopy: playerOK\n\nplayerSink3\ntransparent  transparent #AA222233\ncopy: playerOK\n\nplayerSunk\ntransparent transparent #AA222233 \ncopy: playerOK\n\npado $ (use in level-editor)\ntransparent transparent #099999 transparent\n...........\n...........\n..22.1.22..\n..2000002..\n...01310...\n..1033301..\n...01310...\n..2000002..\n..22.1.22..\n...........\n...........\n\nxpoint\ntransparent transparent transparent #8888\ncopy: pado\n\nrattle\ntransparent #fff8 transparent transparent\ncopy: pado\n\nGoalX\ntransparent transparent transparent lightgrey\ncopy: pado\n\nlawnEdge:directions \n#030 #083808 #0f3f0f\n12012010120\n20120121012\n12001202101\n01202120120\n...........\n...........\n...........\n...........\n...........\n...........\n...........\nrot:up:>\n\nlawnCorner:directions \n#030 #083808 #0f3f0f\n1201.......\n2012.......\n120........\n01.........\n...........\n...........\n...........\n...........\n...........\n...........\n...........\nrot:up:>\n\nalert canvas:\n{\"beginPath\":[]} \n{\"font\":\"0.6px serif\"} \n{\"textAlign\":\"center\"} {\"fillStyle\":\"forestgreen\"} \n{\"fillText\":[\"\\u002A\",0.5,0.76]}\n\ngridI canvas:\n{\"beginPath\":[]} {\"lineWidth\":\"0.04\"}\n{\"rect\":[0.05,0.05,0.9,0.9]}\n\ngrid canvas:\n{\"beginPath\":[]}\n{\"strokeStyle\":\"#ffffff33\"} \n{\"!include\":\"gridI\"} {\"stroke\":[]}\n\ncircI canvas:\n{\"beginPath\":[]} {\"lineWidth\":\"0.02\"}\n{\"arc\":[0.5,0.5,0.45,0,7]}\n\npath o canvas:\n{\"beginPath\":[]}\n{\"fillStyle\":\"#AAA\"} {\"strokeStyle\":\"#888\"} {\"lineWidth\":\"0.04\"}\n{\"moveTo\":[0.2,0.05]} {\"lineTo\":[0.8,0.05]} {\"lineTo\":[0.95,0.2]} {\"lineTo\":[0.95,0.8]}\n{\"lineTo\":[0.8,0.95]} {\"lineTo\":[0.2,0.95]} {\"lineTo\":[0.05,0.8]} {\"lineTo\":[0.05,0.2]} \n{\"closePath\":[]} {\"stroke\":[]} {\"clip\":[]}\n{\"lineWidth\":\"0.02\"}\n{\"beginPath\":[]} {\"rect\":[0,0,1,1]} {\"fill\":[]}\n{\"beginPath\":[]}\n{\"moveTo\":[0.2,0]} {\"lineTo\":[0.8,1]} {\"moveTo\":[0.4,0]} {\"lineTo\":[0.6,1]} \n{\"moveTo\":[0.6,0]} {\"lineTo\":[0.4,1]} {\"moveTo\":[0.8,0]} {\"lineTo\":[0.2,1]} \n{\"moveTo\":[1,0.2]} {\"lineTo\":[0,0.8]} {\"moveTo\":[1,0.4]} {\"lineTo\":[0,0.6]} \n{\"moveTo\":[1,0.6]} {\"lineTo\":[0,0.4]} {\"moveTo\":[1,0.8]} {\"lineTo\":[0,0.2]} \n{\"stroke\":[]}\n{\"beginPath\":[]}\n{\"arc\":[0.5,0.5,0.33,0,7]} {\"fill\":[]} {\"stroke\":[]}\n\nmask canvas: copy: path\n\npadI canvas:\n{\"beginPath\":[]} {\"lineWidth\":\"0.02\"}\n{\"moveTo\":[0.1,0]} {\"lineTo\":[0.45,0]}\n{\"arc\":[0,0,0.45,0,6]}\n{\"closePath\":[]}\n\npad:directions canvas:\n{\"translate\":[0.5,0.5]}\n{\"fillStyle\":\"#008080\"} {\"strokeStyle\":\"#006060\"}\n{\"!include\":\"padI\"} {\"fill\":[]} {\"stroke\":[]}\nrot:up:>\n\nstack:directions canvas:\n{\"translate\":[0.5,0.5]} {\"scale\":[0.85,0.85]}\n{\"fillStyle\":\"#006060\"} {\"strokeStyle\":\"#005050\"}\n{\"!include\":\"padI\"} {\"fill\":[]} {\"stroke\":[]}\nrot:up:>\n\npadF:directions canvas: (xrayed)\n{\"translate\":[0.5,0.5]}\n{\"fillStyle\":\"#00808044\"} {\"strokeStyle\":\"#00808044\"}\n{\"!include\":\"padI\"} {\"fill\":[]} {\"stroke\":[]}\n{\"strokeStyle\":\"lightseagreen\"} \nrot:up:>\n\npadG:directions canvas: (gone/sunk)\n{\"translate\":[0.5,0.5]} {\"scale\":[0.5,0.5]}\n{\"fillStyle\":\"#00808044\"}\n{\"!include\":\"padI\"} {\"fill\":[]}\nrot:up:>\n\npadZ:directions canvas: (permanent)\ncopy: pad:directions\n\ndustI canvas:\n{\"beginPath\":[]} {\"lineWidth\":\"0.03\"}\n{\"moveTo\":[ 0.04 ,-0.04]} {\"lineTo\":[ 0.2 ,-0.2]}\n{\"moveTo\":[ 0.04 , 0.04]} {\"lineTo\":[ 0.2 , 0.2]}\n{\"moveTo\":[-0.04 , 0.04]} {\"lineTo\":[-0.2 , 0.2]}\n{\"moveTo\":[-0.04 ,-0.04]} {\"lineTo\":[-0.2 ,-0.2]}\n{\"moveTo\":[ 0    ,-0.05]} {\"lineTo\":[ 0   ,-0.3]}\n{\"moveTo\":[-0.05 , 0   ]} {\"lineTo\":[-0.3 , 0  ]}\n{\"moveTo\":[ 0    , 0.05]} {\"lineTo\":[ 0   , 0.3]}\n\ndustG:directions canvas:\n{\"translate\":[0.5,0.5]}\n{\"strokeStyle\":\"lightseagreen\"} \n{\"setLineDash\":[[0.04,0.04]]}\n{\"!include\":\"dustI\"} {\"stroke\":[]}\nrot:up:>\n\ndustP:directions canvas:\n{\"translate\":[0.5,0.5]}\n{\"rotate\":[-0.4]}\n{\"strokeStyle\":\"burlywood\"} \n{\"setLineDash\":[[0.04,0.04]]}\n{\"!include\":\"dustI\"} {\"stroke\":[]}\nrot:up:>\n\nstackF:directions; transparent\nspill:directions;  transparent\n\ngrow canvas: \ncopy: padG:up\n\nmudI canvas:\n{\"beginPath\":[]} {\"arc\":[-0.2,-0.15, 0.4,0,7]} {\"fill\":[]}\n{\"beginPath\":[]} {\"arc\":[0.1,-0.3,  0.38,0,7]} {\"fill\":[]}\n{\"beginPath\":[]} {\"arc\":[0.2, 0.1,  0.45,0,7]} {\"fill\":[]}\n{\"beginPath\":[]} {\"arc\":[-0.1,0.2,  0.45,0,7]} {\"fill\":[]}\n\nmud # canvas:\n{\"translate\":[0.5,0.5]}\n{\"beginPath\":[]} {\"fillStyle\":\"#5f4f4f\"} {\"scale\":[0.8,0.8]} \n{\"rotate\":[0.4]} {\"!include\":\"mudI\"}\n{\"beginPath\":[]} {\"fillStyle\":\"#504040\"} {\"scale\":[0.9,0.9]} \n{\"rotate\":[0.4]} {\"!include\":\"mudI\"}\n{\"beginPath\":[]} {\"fillStyle\":\"#584848\"} {\"scale\":[0.8,0.8]} \n{\"rotate\":[0.4]} {\"!include\":\"mudI\"}\n{\"beginPath\":[]} {\"fillStyle\":\"#5f4f4f\"} {\"scale\":[0.8,0.8]} \n{\"rotate\":[0.4]} {\"!include\":\"mudI\"}\n{\"beginPath\":[]} {\"fillStyle\":\"#584848\"} {\"scale\":[0.7,0.7]} \n{\"rotate\":[0.4]} {\"!include\":\"mudI\"}\n\nreedI canvas:\n{\"beginPath\":[]} {\"fillStyle\":\"darkgreen\"} \n{\"moveTo\":[-0.5,-0.5]} \n{\"quadraticCurveTo\":[0,-0.1, 0.5,0.5]}\n{\"quadraticCurveTo\":[0.1,-0.3, -0.5,-0.5]} {\"fill\":[]} \n{\"beginPath\":[]} {\"fillStyle\":\"forestgreen\"} \n{\"moveTo\":[-0.3,-0.5]} \n{\"quadraticCurveTo\":[0,-0.1, 0.3,0.5]}\n{\"quadraticCurveTo\":[0.1,-0.3, -0.3,-0.5]} {\"fill\":[]} \n{\"beginPath\":[]} {\"fillStyle\":\"olive\"} \n{\"moveTo\":[-0.1,-0.5]} \n{\"quadraticCurveTo\":[0,-0.1, 0.1,0.5]}\n{\"quadraticCurveTo\":[0.1,-0.3, -0.1,-0.5]} {\"fill\":[]} \n\nreeds % canvas:\n{\"beginPath\":[]} {\"translate\":[0.5,0.5]}\n{\"!include\":\"reedI\"} {\"rotate\":[0.76]} {\"!include\":\"reedI\"} {\"rotate\":[0.76]} \n{\"!include\":\"reedI\"} {\"rotate\":[0.76]} {\"!include\":\"reedI\"} {\"rotate\":[0.76]} \n{\"!include\":\"reedI\"} {\"rotate\":[0.76]} {\"!include\":\"reedI\"} {\"rotate\":[0.76]} \n{\"!include\":\"reedI\"} {\"rotate\":[0.76]} {\"!include\":\"reedI\"} {\"rotate\":[0.76]} \n\ntopper:directions canvas: (reed topper)\n{\"beginPath\":[]} {\"scale\":[0.7,0.7]} {\"translate\":[0.2,0.2]} \n{\"!include\":\"reeds\"}\nrot:up:>\n\nmuddy:directions canvas: copy: mud\ntranslate:directions:4\n\nreedy:directions canvas: copy: reeds\ntranslate:directions:2\n\nsmudge:directions canvas: copy: mud\ntranslate:>:3\ntranslate:^:3\n\npetalI canvas:\n{\"lineWidth\":\"0.01\"}\n{\"moveTo\":[-0.1,-0.1]} \n{\"quadraticCurveTo\":[0.07,-0.07, 0.1,0.1]}\n{\"quadraticCurveTo\":[-0.07,0.07, -0.1,-0.1]} \n{\"rotate\":[0.76]} \n{\"fill\":[]} {\"stroke\":[]}\n\nlilyI canvas:\n{\"beginPath\":[]} \n{\"fillStyle\":\"pink\"} {\"strokeStyle\":\"hotpink\"} \n{\"!include\":\"petalI\"} {\"!include\":\"petalI\"}\n{\"!include\":\"petalI\"} {\"!include\":\"petalI\"}\n{\"beginPath\":[]} {\"fillStyle\":\"white\"}\n{\"arc\":[0,0,0.05,0,7]} {\"rotate\":[3.24]} \n{\"fill\":[]} {\"stroke\":[]}\n\nandreana canvas:\n{\"translate\":[0.5,0.5]}  {\"scale\":[2,2]}\n{\"beginPath\":[]} \n{\"fillStyle\":\"red\"} {\"strokeStyle\":\"hotpink\"}\n{\"!include\":\"petalI\"} {\"!include\":\"petalI\"}\n{\"!include\":\"petalI\"} {\"!include\":\"petalI\"}\n{\"beginPath\":[]} {\"fillStyle\":\"orange\"}\n{\"arc\":[0,0,0.05,0,7]} {\"rotate\":[3.24]} \n{\"fill\":[]} {\"stroke\":[]}\n\ndaisy canvas:\n{\"translate\":[0.5,0.5]}  {\"scale\":[1,1]}\n{\"beginPath\":[]} \n{\"fillStyle\":\"white\"} {\"strokeStyle\":\"yellow\"}\n{\"!include\":\"petalI\"} {\"!include\":\"petalI\"}\n{\"!include\":\"petalI\"} {\"!include\":\"petalI\"}\n{\"beginPath\":[]} {\"fillStyle\":\"orange\"}\n{\"arc\":[0,0,0.05,0,7]} {\"rotate\":[3.24]} \n{\"fill\":[]} {\"stroke\":[]}\n\nwinOne canvas:\n{\"translate\":[0.5,0.5]}  {\"scale\":[2,2]}\n{\"beginPath\":[]} \n{\"fillStyle\":\"lavender\"} {\"strokeStyle\":\"#EEE\"}\n{\"!include\":\"petalI\"} {\"!include\":\"petalI\"}\n{\"!include\":\"petalI\"} {\"!include\":\"petalI\"}\n{\"beginPath\":[]} {\"fillStyle\":\"lavender\"}\n{\"arc\":[0,0,0.05,0,7]} {\"rotate\":[3.24]} \n{\"fill\":[]} {\"stroke\":[]}\n\nF:_0; transparent \n\nF:_1 canvas:\n{\"translate\":[0.5,0.5]} {\"!include\":\"lilyI\"}\n\nF:_2 canvas:\n{\"translate\":[0.45,0.35]} {\"!include\":\"lilyI\"} \n{\"translate\":[0.1,0.28]}  {\"!include\":\"lilyI\"} \n\nF:_3 canvas:\n{\"translate\":[0.5,0.35]}   {\"!include\":\"lilyI\"} \n{\"translate\":[-0.15,0.3]} {\"!include\":\"lilyI\"} \n{\"translate\":[0.3,0]}     {\"!include\":\"lilyI\"} \n\nF:_4 canvas:\n{\"translate\":[0.35,0.35]} {\"!include\":\"lilyI\"} \n{\"translate\":[0.3,0]}     {\"!include\":\"lilyI\"} \n{\"translate\":[-0.3,0.3]}  {\"!include\":\"lilyI\"} \n{\"translate\":[0.3,0]}     {\"!include\":\"lilyI\"} \n\nF:_5 canvas:\n{\"translate\":[0.35,0.35]}   {\"!include\":\"lilyI\"} \n{\"translate\":[0.3,0]}       {\"!include\":\"lilyI\"} \n{\"translate\":[-0.3,0.3]}    {\"!include\":\"lilyI\"} \n{\"translate\":[0.3,0]}       {\"!include\":\"lilyI\"} \n{\"translate\":[-0.15,-0.15]} {\"!include\":\"lilyI\"} \n\nF:_6 canvas: copy: F:_5\n\nF:_7 canvas: copy: F:_5\n\nF:_8 canvas: copy: F:_5\n\nF:_9 canvas: copy: F:_5\n\npodI canvas:\n{\"beginPath\":[]}\n{\"moveTo\":[0,0]} {\"lineTo\":[0.05,0]}\n{\"arc\":[0,0,0.08,0,5.5]}\n{\"closePath\":[]} {\"fill\":[]} \n\nI:_0; transparent \n\nI:_1 canvas:\n{\"translate\":[0.5,0.5]} {\"!include\":\"podI\"}  {\"fill\":[]} \n\nI:_2 canvas:\n{\"translate\":[0.42,0.42]} {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.16,0.16]} {\"!include\":\"podI\"}  {\"fill\":[]} \n\nI:_3 canvas:\n{\"translate\":[0.5,0.4]}  {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[-0.1,0.2]} {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n\nI:_4 canvas:\n{\"translate\":[0.4,0.4]}  {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[-0.2,0.2]} {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n\nI:_5 canvas:\n{\"translate\":[0.4,0.37]} {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[-0.3,0.2]} {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]}\n\nI:_6 canvas:\n{\"translate\":[0.4,0.3]}  {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[-0.3,0.2]} {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]}\n{\"translate\":[-0.2,0.2]} {\"!include\":\"podI\"}  {\"fill\":[]}\n\nI:_7 canvas:\n{\"translate\":[0.4,0.3]}  {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[-0.3,0.2]} {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]}\n{\"translate\":[-0.3,0.2]} {\"!include\":\"podI\"}  {\"fill\":[]}\n{\"translate\":[0.2,0]}    {\"!include\":\"podI\"}  {\"fill\":[]} \n\nI:_8 canvas: copy: I:_7\n\nI:_9 canvas: copy: I:_7\n\nW:_0; transparent\n\nW:_1 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_1\"}\n\nW:_2 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_2\"}\n\nW:_3 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_3\"}\n\nW:_4 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_4\"}\n\nW:_5 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_5\"}\n\nW:_6 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_6\"}\n\nW:_7 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_7\"}\n\nW:_8 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_8\"}\n\nW:_9 canvas: ; {\"fillStyle\":\"olive\"} {\"!include\":\"I:_9\"}\n\nS:_0; transparent\n\nS:_1 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_1\"}\n\nS:_2 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_2\"}\n\nS:_3 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_3\"}\n\nS:_4 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_4\"}\n\nS:_5 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_5\"}\n\nS:_6 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_6\"}\n\nS:_7 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_7\"}\n\nS:_8 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_8\"}\n\nS:_9 canvas: ; {\"fillStyle\":\"chocolate\"} {\"!include\":\"I:_9\"}\n\nH:_0; transparent\n\nH:_1 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_1\"}\n\nH:_2 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_2\"}\n\nH:_3 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_3\"}\n\nH:_4 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_4\"}\n\nH:_5 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_5\"}\n\nH:_6 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_6\"}\n\nH:_7 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_7\"}\n\nH:_8 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_8\"}\n\nH:_9 canvas: ; {\"fillStyle\":\"black\"} {\"!include\":\"I:_9\"}\n\n//spareOne canvas: copy: S:_3\n\nT1:_X; transparent (temporary/transparent replacement set of _X objects)\nT2:_X; transparent (temporary/transparent replacement set of _X objects)\nD:_X;  transparent (pods dropped during throw)\nC:_X;  transparent (pods ready for collection)\nO:_X;  transparent (pods out of reach)\nL:_X;  transparent (levels)\nA:_X;  transparent (andreana - collected)\nGA:_X;  transparent (goals - andreana)\nGH:_X;  transparent (goals - held-pods (dev))\n//U:_X;   transparent (used spare pods)\n\nsink   ; transparent\nthrow  ; transparent\npickup ; transparent\ndrop   ; transparent\nplus1  ; transparent\nperish ; transparent\nwobble1    ; transparent\nwobble2    ; transparent\nwobble3    ; transparent\nwobble4    ; transparent\ncollapsing ; transparent\nflop   ; transparent\nxray   ; transparent\nnoxray ; transparent\nfin1   ; transparent\nmsg1   ; transparent\nmsg2   ; transparent\nmsg3   ; transparent\nrescue ; transparent\npause  ; transparent\nfinale ; transparent\nstart  ; transparent\ncost1  ; transparent\nflag1  ; transparent\ncheese ; transparent\nfullscreen ; transparent\n\n=======\nLEGEND\n=======\n\np = playerOK and path and start\nq = playerOK and path and GH:_5 //dev\n\n! = lawns and andreana\n? = path and andreana \n£ = path and xpoint\nâ = water and andreana\næ = water and andreana and pado\nā = mud and andreana\nù = water and fin1 and winOne\ně = path and lawns\nw = path and daisy\n\nå = lawns and msg1\nã = lawns and msg2\nǎ = lawns and msg3\n@ = lawns and noxray\n\na = water and W:_1\nb = water and W:_2\nc = water and W:_3\ns = water and W:_4\nd = water and pado and F:_1\ne = water and pado and F:_2\nh = water and pado and F:_3\ni = water and pado and F:_4\nl = water and pado and W:_1\nm = water and pado and W:_2\nn = water and pado and W:_3\nu = water and pado and W:_4\nt = water and W:_5\nf = mud and S:_1\ng = mud and S:_2\nj = mud and S:_3\nk = mud and S:_4\n1 = path and S:_1\n2 = path and S:_2\n3 = path and S:_3\n4 = path and S:_4\n\n5 = path and S:_5 \n6 = mud  and S:_5\n7 = water and pado and F:_5\n8 = path and padz:up and S:_6\n9 = water and pad:up and W:_7\n& = path and playerOK and H:_6\n\nW_X = W:_X\nS_X = S:_X\nH_X = H:_X\nD_X = D:_X\nF_X = F:_X\nC_X = C:_X\nO_X = O:_X\nA_X = A:_X\nL_X = L:_X\nGA_X = GA:_X\nGH_X = GH:_X\nT1_X = T1:_X\nT2_X = T2:_X\n\ngameGoal = path and GA:_2 and A:_0\n\nì = L:_1 and gameGoal\ní = L:_2 and gameGoal\nî = L:_3 and gameGoal\nï = L:_4 and gameGoal\nǐ = L:_5 and gameGoal\nĩ = L:_6 and gameGoal\nī = L:_7 and gameGoal\nı = L:_8 and gameGoal\nį = water and cheese\n\n* = path and GA:_0 and A:_0\nò = path and GA:_1 and A:_0\nó = path and GA:_2 and A:_0\nô = path and GA:_3 and A:_0\nö = path and GA:_4 and A:_0\nǒ = path and GA:_5 and A:_0\nœ = path and GH:_4\nø = path and GH:_5 \n\nreedyX  = reedy:directions\nmuddyX  = muddy:directions\nspillX = spill:directions\nreedyAll = reedy:up and reedy:down and reedy:left and reedy:right\nmuddyAll = muddy:up and muddy:down and muddy:left and muddy:right\ntrim = water or path\n\npods = W_X or S_X \npadX = pad:directions\npadZX = padZ:directions (permanent)\npadFX = padF:directions (faded)\npadGX = padG:directions (gone/sunk)\ndustGX = dustG:directions\ndustPX = dustP:directions\nstackX = stack:directions\ndustAny = dustGX or dustPX\nlawnEdgeX = lawnEdge:directions\nlawnCornerX = lawnCorner:directions\ntopperX = topper:directions\n\nbank = mud or reeds\n\npadVisible = padX or padZX\nshield     = padVisible or padFX\ncollectable = pods or andreana\nplayerSinkX = playerSink1 or playerSink2 or playerSink3\nplayerWon = playerWon1 or playerWon2 or playerWon3\nplayer    = playerOK or playerSinkX or playerOut or playerWon\n\nsafe     = path or padX or padZ:directions or padF:directions or lawns\nobstacle = mud or reeds\nwalkable = path or padZ:directions\nsolid    = mud or walkable\ndry      = solid or reeds or lawns\nperishable = pods or padX or grow or F_X\n\nwobble    = wobble1 or wobble2 or wobble3 or wobble4\neventHere = throw or drop or collapsing or wobble3 or wobble4\nongoing   = eventHere or sink or grow or flop or wobble or perish or rescue or spillX\ndiscard   = H_X or padGX\n\nA3up = A:_3 or A:_4 or A:_5 or A:_6 \nA1up = A3up or A:_1 or A:_2\nH6o  = H:_6 or H:_7 or H:_8 or H:_9\nS5o  = S:_5 or S:_6 or S:_7 or S:_8 or S:_9\nW5o  = W:_5 or W:_6 or W:_7 or W:_8 or W:_9\nF5o  = F:_5 or F:_6 or F:_7 or F:_8 or F:_9\nSW5   = W:_5 or S:_5\nSW6   = W:_6 or S:_6\nSW7   = W:_7 or S:_7\nSW8   = W:_8 or S:_8\nSW9   = W:_9 or S:_9\nSW5o = SW5 or SW6 or SW7 or SW8 or SW9\nSWF5  = SW5 or F:_5\nSWF6  = SW6 or F:_6\nSWF7  = SW7 or F:_7\nSWF8  = SW8 or F:_8\nSWF9  = SW9 or F:_9\nSWF5o   = SWF5 or SWF6 or SWF7 or SWF8 or SWF9\noverload = H6o or SWF5o\n\nany0 = D:_0 or F:_0 or S:_0 or W:_0 or C:_0 or O:_0 or H:_0 or T1:_0 or T2:_0 // not A:_0\nanyGoal = GA_X or GH_X\n\n=======\nSOUNDS\n=======\n\nsfx0 35659103 (win)\nsfx1 87983108 (sinking)\nsfx2 40995902 (player sunk)\nsfx3 78966108 (new lily pad)\nsfx4 94118900 (pick up seeds)\nsfx5 41107309 (drop onto path/mud)\nsfx6 99463709 (flower)\nsfx8 56461104 (bump)\nsfx9 34796907 (bip)\n\nsfx10 45081109 (collapse/scatter)\nsfx11 44420109 (flop - not used)\nsfx12 82987509 (lost pods)\nsfx13 80964100 (new pod)\nsfx14 12852909 (checkpoint)\nsfx15 60489900 (andreana)\nsfx16 23650303 (rescue)\nsfx17 55825307 (daisy)\n\n(sfx20 53030309 (spill)\nsfx21 43719103 (bubble)\nsfx22 85901703 (finale1)\nsfx23 53637508 (drums)\nsfx24 45081109 (wobble))\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\ncircI padI petalI reedI mudI podI I:_X lilyI gridI dustI\nsink msg1 msg2 msg3\nthrow pickup finale\nplus1\ndrop \nwater reedbed\ngrid\n---\nsmudge:right\nsmudge:left\nsmudge:up\nsmudge:down\n---\nmud\nmuddy:right\nmuddy:left\nmuddy:up\nmuddy:down\n---\nlawnEdge:right lawnEdge:left\nlawnEdge:up    lawnEdge:down\nlawnCorner:right \nlawnCorner:left \nlawnCorner:up\nlawnCorner:down\nlawns\n---\nreeds path\n---\nreedy:right\nreedy:left\nreedy:up\nreedy:down\n---\ntopper:directions\nspill:directions\nxpoint\nmask\nflop \npadZ:directions padF:directions padG:directions\ngoalX\nW:_X (seed-pods on/over water)\nS:_X (seed-pods on/over solid surface)\nC:_X (seed-pods in the process of being collected)\nD:_X (seed-pods in the process of being thrown/dropped)\nO:_X (seed-pods covered by padZ - out of reach!)\nT1:_X (temporary/transparent set of anything)\nT2:_X (temporary/transparent set of anything)\nA:_X (andreana)\nGA:_X (A_X goals)\nL:_X (level markers)\nwinOne daisy\nandreana cost1 flag1 alert\npado (edit mode)\npadX\nstackX stackF:directions\ndustPX\ndustGX\ngrow perish\nrescue fullscreen\nF_X GH_X \nrattle\npause\nplayerOK playerSinkX playerSunk playerOut playerWon\nwobble\nH:_X (seed-pods in hand)\ncollapsing\nxray noxray\nstart fin1 cheese\nflash\n\n======\nRULES     \n======  \n(init)\n[ no dry no water ]  -> [ water ] \n[ pado no padX ]     -> [ pado random padX ]\n[ water no grid ]    -> [ water grid ]\n[ reeds no topperX ] -> [ reeds reedyAll reedbed random topper:directions ]\n[ reedbed | trim ]   -> [ | trim ]\n[ reedy:> | trim ]   -> [ | trim ]\n[ mud no muddy:> | mud ]   -> [ mud muddy:> | muddy:< mud ]\n[ mud no muddy:> | reeds ] -> [ mud muddy:> | muddy:< reeds ]\n[ reedbed no muddy:> | reeds muddyX ] -> [ reedbed muddy:> | reeds muddyX ]\ndirections [ mud muddy:^ muddy:> no smudge:> ] -> [ mud muddy:^ muddy:> smudge:> ]\n[ lawns | no lawns no lawnEdge:< ] -> [ lawns | lawnEdge:< ]\ndirections [ no lawns no lawnCorner:> | lawnEdge:^ ] -> [ lawnCorner:> | lawnEdge:^ ]\n[ > player start ][ path xpoint no mask ] -> [ > player start ][ path xpoint mask ]\n[ anyGoal no goalX ] -> [ anyGoal goalX ]\n(end init)\n\n([ > player no H_X no W:_5 | water no safe no W_X ] -> cancel (***))\n\n//[ > playerWon ][cheese alert] -> [ playerWon fullscreen][cheese alert]\n[ > playerWon ] -> cancel \n\n(XRAY ACTION EVENT - not currently used)\n[ action playerWon3 ] -> win\n[ action playerOK no goalX ] [ noxray ] -> cancel\n[ action playerOK no goalX no xray ] -> [ playerOK xray ]\n[ playerOK xray ] [ pad:directions ]   -> [ playerOK xray ] [ padF:directions ]\n[ playerOK xray ] [ stack:directions ] -> [ playerOK xray ] [ stackF:directions ]\n[ playerOK xray ] [ F:_X ] -> [ playerOK xray ] [  T1:_X ]\n[ playerOK xray H:_X ] -> [ playerOK xray T2:_X ]\n[ action playerOK xray ] -> [ playerOK ] \n[ > playerOK xray ] -> [ > playerOK ]\n[ playerOK no xray ] [ padF:directions ]   -> [ playerOK ] [ pad:directions ]\n[ playerOK no xray ] [ stackF:directions ] -> [ playerOK ] [ stack:directions ]\n[ playerOK no xray ] [ T1:_X ] -> [ playerOK ] [ F:_X ]\n[ playerOK no xray T2:_X ] -> [ playerOK H:_X ]\n\n(PERISH EVENT)\n[ H:_X reeds ] -> [ reeds ] \n[ perish ] -> [] sfx12\n[ S:_X reeds no eventHere ]       -> [ H:_X perish reeds ]\n[ perishable reeds no eventHere ] -> [ perish reeds ]\n\n(GROW EVENT)\n[ padGX ] -> [] \n[ grow no padX ]      -> [ random padX ]\n[ grow padX no F:_X ] -> [ grow padX F:_0 ] \n[ grow F:_X ]         -> [ F:add1 wobble1 ] sfx6\n\n(SINK EVENT)\n(flowers indicate a stack of lily pads\nonly the bottom of the stack sinks\neach sink event consumes a flower and adds a seed-pod\nthis is the only way to create new seed-pods)\n[ sink water pad:directions no F_X ] -> [ water padG:directions ] sfx1\n[ sink F:_X no plus1 ] -> [ F:sub1 plus1 ] sfx1\n\n(SPILL EVENT)\n[ player pause ][ H6o wobble2 ] -> [ player ] [ H6o wobble2 ] // UNLOCK\n[ H6o wobble2 no spillX ] -> [ H6o spill:up ]\nleft  [ H:_X spill:left  | no drop ] -> [ H:sub1 | drop ]\ndown  [ H:_X spill:down  | no drop ] -> [ H:sub1 spill:left | drop ]\nright [ H:_X spill:right | no drop ] -> [ H:sub1 spill:down | drop ]\nup    [ H:_X spill:up    | no drop ] -> [ H:sub1 spill:right | drop ]\n[ drop padGX ] -> [ drop ] \n\n(COLLAPSE EVENT - C6+)\n(TODO: rework to align with spill behaviour)\n[ F5o collapsing | flop path ]  -> [ F5o collapsing | random padZX path perish ] \n[ F5o collapsing | flop mud ]   -> [ F5o collapsing | random padZX mud perish ] \n[ F5o collapsing | flop reeds ] -> [ F5o collapsing | pad:up reeds perish ]\n[ SW5o collapsing | flop path ]  -> [ SW5o collapsing | drop path ] \n[ SW5o collapsing | flop mud ]   -> [ SW5o collapsing | drop mud ] \n[ SW5o collapsing | flop reeds ] -> [ SW5o collapsing | drop reeds ] \n[ SWF5o collapsing | flop water] -> [ SWF5o collapsing | grow water ] // must be last\n[ collapsing | S:_X perish ] -> [ collapsing | O:_X ] \n[ F:_5 collapsing ] -> [ F:_1 ] \n[ W:_5 collapsing ] -> [ W:_1 ] \n[ S:_5 collapsing ] -> [ S:_1 ] \n[ F:_6 collapsing ] -> [ F:_2 ] \n[ W:_6 collapsing ] -> [ W:_2 ] \n[ S:_6 collapsing ] -> [ S:_2 ] \n[ F:_7 collapsing ] -> [ F:_3 ] \n[ W:_7 collapsing ] -> [ W:_3 ] \n[ S:_7 collapsing ] -> [ S:_3 ] \n(ignore higher cases)\n[ player pause ][ wobble4 ] -> [ player ] [ wobble4 ] // UNLOCK\n[ wobble4 | no flop ] -> [ wobble4 | flop wobble1 ]\n[ wobble4 | flop ]    -> [ collapsing | flop ] sfx10\n\n(ignore movement towards an obstacle if there are no pods to pick-up or throw)\n[ player no H_X ][ > player | obstacle no pods no padZX ] -> cancel sfx8\n\n(halt player if pick-up is detected)\n[ > player | mud collectable no padZX ]  -> [ player | mud collectable pickup ] \n[ > player | water collectable no padX ] -> [ player | water collectable pickup ] \n\n(detect seed-pod throw attempt)\n[ > player H_X | no safe ] -> [ player pause > H_X > throw | ]\n([ player > throw | reedX ] -> cancel) (***)\n[ > throw > H:_X ] -> [ > throw > D:_X ] \n[ player | ... | throw D_X no reeds ] -> [ player | ... | > throw > D_X ]\n\n(any movement or activity on a lily-pad will trigger a sink event)\n(does not apply to padZ lily-pads that have flopped onto solid ground)\n[ > player padX ]        -> [ > player padX sink ] \n[ player padX throw ]    -> [ player padX throw sink ] \n[ player padX | pickup ] -> [ player padX sink | pickup ] \n\n(held pods move with player)\n(but are left behind when entering the lawns)\n[ H:_X path no playerOK ]  -> [ S:_X path ] sfx5\n[ H:_X water no playerOK ] -> [ W:_X water ] sfx5 // might happen at finale\n[ > playerOK H:_X | no lawns ] -> [ > playerOK > H:_X | ]\n\n(== engine movement phase ==)\n\nlate [msg1][ player xPoint no mask ] -> [][ player xPoint no mask ] Message Checkpoint!\\n\\n[ R to return ]\nlate [msg2][ player andreana ] -> [][ player andreana ] Message A rare Andreana lily bloom!\\n\\nCollect at least two\\nto open the exit grotto and\\nto unlock to the next garden\nlate [msg3][ player lawns ] -> [][ player lawns ] Message Welcome to the lawns\\nEntry cost: one Andreana\\n\\n[ Seed-pods prohibited ]\n\nlate [ playerOK lawns ]      -> [ playerOut lawns ]\t\nlate [ playerOut no lawns ]  -> [ playerOK ]\t\nlate [ playerOut ][GA_X A_X] -> [ playerOut ][GA_X A_X cost1]\n\n(checkpoint)\nlate [ player xpoint flash ] -> [ player xpoint ] checkpoint sfx14\nlate [ player xPoint mask ]  -> [ player xpoint flash ] again\n\n(collect andreana)\nlate [ player andreana no shield ] -> [ player andreana pickup ] sfx15\nlate [ pickup andreana ] [ goalX A:_X ] -> [] [ goalX A:add1 ] sfx15\n\n(convert used flowers into new seed-pods)\nlate [ water plus1 no W_X ] -> [ water plus1 W:_0 ] \nlate [ water plus1 W:_X ] -> [ water W:add1 ] \n\n(prepare to collect seed-pods)\nlate [ playerOK no pause S:_X ] -> [ playerOK C:_X ] sfx4\nlate [ pickup W:_X ] -> [ C:_X ] sfx4\nlate [ pickup S:_X ] -> [ C:_X ] sfx4\n(convert \"collected\" to \"held\" - one pod at a time)\nlate [ playerOK no H:_X ] [ C_X ] -> [ playerOK H:_0 ][ C_X ] \nstartloop\nlate [ playerOK no plus1 ] [ C:_X ] -> [ playerOK plus1 ][ C:sub1 ] \nlate [ playerOK H:_X plus1 ] -> [ playerOK H:add1 ]\nlate [ C:_0 ] -> [] \nendloop \nlate [ player H6o no wobble ] -> [ player H6o wobble1 ]\n\n(trigger drop event from throw)\nlate [ D:_X throw no drop ] -> [ D:sub1 throw drop ]\nlate [ player pause ][ D:_0 throw ] -> [ player ][] // UNLOCK\n\nlate [ drop water ]      -> [ grow water ] sfx3\nlate [ drop no S:_X ]    -> [ drop S:_0 ]     \nlate [ drop path S:_X ]  -> [ path  S:add1 wobble1 ] sfx5\nlate [ drop mud S:_X ]   -> [ mud   S:add1 wobble1 ] sfx5\nlate [ drop reeds S:_X ] -> [ reeds S:add1 ] sfx1\nlate [ drop ] -> [] sfx1 // other/void/lawn\nlate [ pods reeds ]  -> [ pods reeds perish ] sfx1\n\n(start/progress wobble - C5 onwards)\nlate [ SWF5o rattle wobble3 ] -> [ SWF5o wobble4 ] // about to collapse\nlate [ SWF5o wobble2 ] -> [ SWF5o rattle wobble3 ] sfx11\nlate [ player no pause | F5o no ongoing ] -> [ player pause | F5o wobble1 ] \nlate [ player no pause | S5o no ongoing ] -> [ player pause | S5o wobble1 ] \nlate [ player no pause | W5o no ongoing ] -> [ player pause | W5o wobble1 ]\nlate [ player no pause H6o wobble1 ]      -> [ player pause H6o wobble2 ] \nlate [ W5o shield wobble1 ] -> [ W5o shield ]\nlate [ SWF5o wobble1 ] -> [ SWF5o wobble2 ] \nlate [ eventHere ][ wobble2 ] -> [ eventHere ][ wobble1 ] // delay\n\n(dev goals)\n(late [ player GA:_0 ]     -> win \nlate [ player GA:_1 A:_1 ] -> win \nlate [ player GA:_2 A:_2 ] -> win \nlate [ player GA:_3 A:_3 ] -> win \nlate [ player GA:_4 A:_4 ] -> win \nlate [ player GA:_5 A:_5 ] -> win \nlate [ player GH:_4 H:_4 ] -> win \nlate [ player GH:_5 H:_5 ] -> win)\n\n(check for win)\n// win phase4\n//late [ fullscreen ] -> [ fullscreen ] Message Screenshot please!\n//late [ fullscreen ] -> [ fullscreen ] realtime_interval 0\n//late [ fullscreen ] -> [] smoothscreen off \n// win phase3 - flash until action\nlate [ playerWon3 A:_0 cost1 ][ fin1 andreana ] -> [ playerWon3 A:_0 ][ fin1 ] sfx1\nlate [ playerWon3 finale ]        -> [ playerWon3 flash pado ] realtime_interval 0.2\nlate [ playerWon3 flash no pado ] -> [ playerWon3 flag1 pado ] \nlate [ playerWon3 flag1 no pado ] -> [ playerWon3 flash pado ] sfx9\n// win phase2 - drop andreana one at a time\n// flag cheese if all 5 andreana collected and no visit to lawns\n// AND either... pods-in-hand or checkpoints not visited\nlate [ playerWon2 A:_5 no cost1 ][cheese][mask] -> [ playerWon2 A:_5 ][cheese alert][] \nlate [ playerWon2 A:_5 no cost1 S:_X ][cheese]  -> [ playerWon2 A:_5 S:_X ][cheese alert]\nlate [ path | playerWon2 S:_X ] -> [ path S:_X | playerWon2 ]\nlate [ playerWon2 no drop ] -> [ playerWon2 drop ] \nlate [ playerWon2 drop A:_X ] [ fin1 no andreana ] -> [ playerWon2 A:sub1 ] [ fin1 andreana ] sfx3 \nlate [ playerWon2 A:_0 ] -> [ playerWon3 A:_0 ]\n// win phase1 - display message\n//late [ playerWon1 O:_5 no cost1 ] -> [ playerWon1 O:_5 ] Message High Five!\nlate [ playerWon1 finale ] -> [ playerWon2 finale ] smoothscreen 7x7 \n// check andreana - trigger finale\n// a cost1 marker indicates the lawns were used\nlate [ playerOK finale ] -> [ playerWon1 finale ] sfx0 \nlate [ playerOK GA:_2 A:_2 no finale ] -> [ playerOK GA:_2 A:_2 O:_2 finale ]\nlate [ playerOK GA:_2 A:_3 no finale ] -> [ playerOK GA:_2 A:_3 O:_3 finale ]\nlate [ playerOK GA:_2 A:_4 no finale ] -> [ playerOK GA:_2 A:_4 O:_4 finale ] \nlate [ playerOK GA:_2 A:_5 no finale ] -> [ playerOK GA:_2 A:_5 O:_5 finale ] \nlate [ playerOK GA:_2 no finale ] -> Message Two or more Andreana required\\nfor entry to the exit grotto\n\n(add stack marker)\nlate [ padX F_X dustAny no stackX ] -> [ padX F_X ] // remove dust marks\nlate [ padX F_X no stackX ]         -> [ padX F_X random stack:directions ] \n\n(tidy up)\nlate [ any0 ] -> []\nlate [ pado no padX ]-> []\nlate [ wobble1 no SWF5o ] -> []\nlate [ pause no player ] -> []\nlate [ padX stackX dustAny no F_X ] -> [ padX stackX ]\nlate [ padX stackX no F_X ] -> [ padX ]\n//late [ xpoint flash no player ] -> [ xpoint ]\n\nlate directions [ stack:directions no dustGX ] -> [ stack:directions dustG:directions ]\nlate directions [ pad:directions   no dustGX ] -> [ pad:directions   dustG:directions ]\nlate directions [ padZ:directions  no dustGX ] -> [ padZ:directions  dustG:directions ]\nlate directions [ W_X dustG:directions no dustPX ] -> [ W_X dustG:directions dustP:directions ]\nlate [ dustAny no padVisible ] -> []\n\n(player sink/rescue)\nlate [ ongoing ] [ playerSink3 no safe ] -> [ ongoing ] [ playerSink3 drop ] \nlate [ ongoing ] [ playerSink2 no safe ] -> [ ongoing ] [ playerSink3 drop ] \nlate [ ongoing ] [ playerSink1 no safe ] -> [ ongoing ] [ playerSink2 drop ] \nlate [ ongoing ] [ playerOK    no safe ] -> [ ongoing ] [ playerSink1 drop ] \nlate [ player no safe no drop ] -> [ playerSunk ] \nlate [ player drop ] -> [ player ]\nlate [ playerSinkX safe ] -> [ playerSinkX rescue safe ] \nlate [ playerSinkX rescue ] -> [ playerOK ] sfx16\nlate [ playerSunk discard ] -> [ playerSunk ]\nlate [ playerSunk ] -> [ playerSunk ] sfx2\n\nlate [ H:_X path no playerOK ] -> again\nlate [ playerSinkX ] -> again \nlate [ pods reeds ] -> again\nlate [ ongoing ] -> again\nlate [ finale ] -> again\n\n==============\nWINCONDITIONS\n==============\n\n=======     \nLEVELS\n=======\n\n(@åãǎ++++++++++++++++\n++++++++++++++++++++\n++++++++++++++++++++\n++++++++++++++++++++\n+%%%o%%+++++++++++++\n+%##£#%+++++++++++++\n+%#â?â%o%%%%++++++++\n%%%âoâ.$įùù%++++++++\nopoooooooîù%++++++++\n%%##£.s#.ùù%++++++++\n+%%%o%###%%%++++++++\n+++++%%%%%++++++++++\n++++++++++++++++++++\n++++++++++++++++++++\n++++++++++++++++++++\n++++++++++++++++++++)\n\nSection Garden 1: Grow\nMessage Garden No.1\\n\\nWalk - Collect - Grow\n@åãǎ++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++%%%%%++++++++++++++++++++\n++++++++++++++++++%%.$.%%++++++++%%%++++++++\n+++++++++++++++++%%$o$$.%%++++++%%?%%+++++++\n+++%%%%%%%++++++%%$$..$o$%%++++%%$o$%%++++++\n++%%.....%%++++%%.o.$$$..$%o%++%.1%1.%++++++\n%%%.......%%%%%%$$$..$.$o$%$%%%%%.1.%%++++++\nopo$1$1..oooo£ooo$.$$?.$.£o1.$.1%%1%%+++++++\n%%%.......%%%%%%$.o$.$$$$.%%%$%1£o1.o+++++++\n++%%.....%%++++%%$$.$..o.$%1.1%%.%%%%%++++++\n+++%%%%%%%++++++%%$$?$.$$%%$%%%o.%1$1%++++++\n+++++++++++++++++%%..$o.%%.1$.£1o.$1$%%+++++\n++++++++++++++++++%%$..%%$.%.%.o%..$1.%+++++\n++++++++++++++++++%o$$o1111$o%.%%.%%%.%+++++\n++++++++++++++++++o.%..%%%$%%%.£o.o$1.%+++++\n+++++++++%%%%%++++%...%.$.1%...o%%1%$.%+++++\n+++++++++%ùùį%%o%%%%.%.$1.$$£%%$.1$1$%%+++++\n+++++++++%ùìoo$o$o£.o..1%.%.$%$$1%%..%++++++\n+++++++++%ùù.%%o%%%%.$%.1.%%o%o%%%$o%%++++++\n+++++++++%%%%%+++++%.1$11%%+++++%1?%%+++++++\n+++++++++++++++++++%%.?.%%++++++%11%++++++++\n++++++++++++++++++++%%%%%+++++++%%%%++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n\nSection Garden 2: Stack\nMessage Garden No.2\\n\\nStack - Flower - Harvest\n@+++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++%o%%%%%+++++++++++++++++\n++++++++++++++++++%%%$%...%%%%++++++++++++++\n+++++++++++++++++%%bo$$$%b%.b%o%%%%+++++++++\n+++++++++++++++++%o$c$âo%oa.oa£$b£%%%+++++++\n+++%%%%%%%+++++%%%.s%o£%%b%%%.%.%oc.%+++++++\n++%%$...$%%++++%.a.%%%.a..%.a.%...%b%%++++++\n%%%.......%%o%%%$oao.%$oa.%$oa%o%o.oo%++++++\nopo3.$oa..oooo£oaa.%o.$a.o.$a$$$%o%%â%++++++\n%%%.......%%o%%%%%.%%%.%%%.%%%%$$.$$o%++++++\n++%%$...$%%+++oooo£o%bob.o$%$...o%.%%%%%++++\n+++%%%%%%%++++%.aoa...%%%%$%$%%%%%.%įùù%++++\n++++++++++++++%a%a%a%âdo.$d$d$$o.$£ooíù%++++\n++++++++++++++%oaoao%$d%%%$â$%%%.%$%.ùù%++++\n++++++++++++++%.%a%%%o.$$$d$d$$$.%$%%%%%++++\n++++++++++++++%.o%$$$.%o%%$%$%%.o%$%++++++++\n++++++++++++++%%.%$ddo%$.o$%$£%%$%oo++++++++\n+++++++++++++++%.£odd.%.$%%%%b.%$%%%++++++++\n+++++++++++++++%%o%%%.b.dd%$$$o.â.o%++++++++\n++++++++++++++++++++%%o.ad%ob$%%a%d%++++++++\n+++++++++++++++++++++%$o.o.$$$..odd%++++++++\n+++++++++++++++++++++%%%%%%%%%%o%%%%++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n\nSection Garden 3: Double-up\nMessage Garden No.3\\n\\nDouble-up\n@+++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++%%%o%%%%%%o%+++++++++++\n+++++++++++++++++%o%%%$$£.%.$1%o%%%%%%++++++\n+++++++++++++++++%.â.$dd%.%$1$%$.%įùù%++++++\n+++%%%%%%%++++++%%od.$dd%$o$...$£ooîù%++++++\n++%%.....%%+++%%%bbd%$$d%..$$1%.%%.ùù%++++++\n%%%.a.....%%o%%o.$%o%%%..s%$â$%b.%%%%%++++++\nopocdd....ooo$£ooo%.%$db%o%$$1%o$$o%++++++++\n%%%.a.....%%o%%b%%%.o.$%%.%%.%%%%.â%++++++++\n++%%.....%%+++%da.$$£oo%b£%ddd%1.$%%%+++++++\n+++%%%%%%%++++%%%%.$%b%%.%%$.$%aa$1a%+++++++\n++++++++++++++o$$$£%%d..de%o%.%a1$aa%+++++++\n++++++++++++++%%%%$$%%%%.d..b£.%a$%%%+++++++\n++++++++++++++++%1$$1$%âoo%b.b.%ao£oo+++++++\n++++++++++++++++%$%1$$..%%%$.%$%%%$%%+++++++\n++++++++++++++++%$1%$$%$h.$$o%o$$..%++++++++\n++++++++++++++++%%$$$1%bd$..%%£%ea%%++++++++\n+++++++++++++++++%$..%%£%%%o..$%ea%+++++++++\n+++++++++++++++++%â$o.$$%+%%%%o%eo%+++++++++\n+++++++++++++++++%%%%%%o%++++%o%%%%+++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++++\n\nSection Garden 4: Mud\nMessage Garden No.4\\n\\nMud!\n//Message Xray vision now enabled\\n(action)\n@++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++%%%%%o%%%+++++++\n+++++++++++++++++++++%o%%%%o%%##oaod$%+++++++\n++++++++++++++++++%%%%o###$£o##%.%£de%+++++++\n+++++++++++++++++%%$$£o#%.$%2#oo...%#%%++++++\n+++%%%%%%%+++++%%%oâ.%of#.%%3#.%.%%%##%++++++\n++%%....#%%+++%%$$$$.%oo#o%..$$%.$1$%#%o%++++\n%%%.$$.###%%o%%$o%##...co...%%%%$1$1$1%.%++++\nopoogoo##ooooo£$%%g%bb%%%%âo.%...$$$1$$o%++++\n%%%###.$$$%%o%%$%$o%oo##j%.bo..##$o#ooo.%++++\n++%%###..%%+++%o.o.%o##oo%£%%o##..%#%##.%++++\n+++%%%%%%%++++%o..%%£#%o..3%..o$o%#%$$.â%++++\n++++++++++++++%g...$$#%%.%%%c%o..#$a£%%%%++++\n++++++++++++++%#go..#$$de#o.d%$oao$goo$%+++++\n++++++++++++++%%##.f#o%o##.#.%%%%%%#g%o%+++++\n++++++++++++++%$dd$o#.%.#..#.$$o£o$$$%+++++++\n++++++++++++++%$â$$$#.%.#oo#$.%%o%%%o%+++++++\n++++++++++++++%.%dg£o..$dd.%oâ%įo.%++++++++++\n++++++++++++++%od$#o.%%%%%o%%%%ùïù%++++++++++\n++++++++++++++%%%%%o%%++++++++%ùùù%++++++++++\n++++++++++++++++++++++++++++++%%%%%++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n\nSection Garden 5: Spill\nMessage Garden No.5\\n\\nSpill\n@++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++%%%%%o%+++++++++++\n++++++++++++++++++%%%%o%%%+%.ob.$%%++++++++++\n+++++++++++++++++%%...$â$%%%.%.%$$%++++++++++\n++++++++++++++++%%##.#$.$o.....%%£%%+++++++++\n+++++++++++++++%%f3o.%$.##%#a%£%ooo%%%+++++++\n+++++++++++++++%#$3f%#£boo#$o$$%ok..o%%++++++\n+++++++++++++++%#$#%#.$bcb%$a#%##..%o.o++++++\n+++++++++++++++o$£$$%.#oco%$o$#o..%%o#%++++++\n+++%%%%%%%++++%%%%#$.o#%%%..a$%.%%%dog%++++++\n++%%..$##%%+++%o2#%â%$%ooob%o$#$$£%og#%++++++\n%%%.$...##%%o%%$$....$%bbb.%fo%%%c%oo$%++++++\nopo33.....ooo$£22%.%#o%...#%fo%.....fo%%+++++\n%%%##...$.%%o%%%%%.#%$$$%.%#odâ.%c%%%â.%+++++\n++%%##$..%%+++++%oo$%.%£#.%#f.%%oo$$%%.%%++++\n+++%%%%%%%++++++%2o2c£%j#.$$$.%joo$$%.$$o++++\n++++++++++++++++%$oo%...g.%%o%%#$j$$..%£%++++\n++++++++++++++++%%%%%.%o2£o+++%###%%%%%o%%+++\n++++++++++++++++++++%..b2%%+++%%%%%++%įo.%+++\n++++++++++++++++++++%%oâ%%+++++++++++%ùǐù%+++\n+++++++++++++++++++++%%%%++++++++++++%ùùù%+++\n+++++++++++++++++++++++++++++++++++++%%%%%+++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++++++++++++++\n\nMessage To be continued...\\n\\nPlease send feedback to\\nandrea at clickmazes.com\\n\\nThank-you for playing!\n\n";compile(["restart"],sourceCode);</script>
+<script>const sourceCode="Title Big-wriggle challenge\nAuthor Andrea Gilbert\nHomepage https://www.clickmazes.com\nnorepeat_action\nagain_interval 1\nsprite_size 10\n\nexport_options notitle,nofooter,nopadding\nrun_rules_on_level_start\nbackground_color black\nnokeyboard\n\nmouse_left xClick\nmouse_drag xDrag\nmouse_up xUp\n//;\n\n========\nTAGS\n========\n\nWX = W1 W2 W3 W4 W5 W6 W7\n\n========\nOBJECTS\n========\n\nbackground .\nblack\n\ncirc canvas:\n{\"beginPath\":[]} {\"arc\":[1,1,0.8,0,7]}\n\nrect canvas:\n{\"beginPath\":[]} {\"rect\":[0.01,0.01,1.98,1.98]}\n\ngrid + canvas:2,2 \n{\"!include\":\"rect\"} {\"fillStyle\":\"white\"} {\"fill\":[]}\ntranslate:left:5 translate:down:5\n\nWall x canvas:2,2 translate:left:5 translate:down:5\n{\"!include\":\"rect\"} {\"fillStyle\":\"#333\"} {\"fill\":[]}\n\nLive:W1 1 canvas:2,2 translate:left:5 translate:down:5\n{\"!include\":\"circ\"} {\"fillStyle\":\"blue\"} {\"fill\":[]}\n\nLive:W2 2 canvas:2,2 translate:left:5 translate:down:5\n{\"!include\":\"circ\"} {\"fillStyle\":\"red\"} {\"fill\":[]}\n\nLive:W3 3 canvas:2,2 translate:left:5 translate:down:5\n{\"!include\":\"circ\"} {\"fillStyle\":\"limegreen\"} {\"fill\":[]}\n\nLive:W4 4 canvas:2,2 translate:left:5 translate:down:5\n{\"!include\":\"circ\"} {\"fillStyle\":\"darkorange\"} {\"fill\":[]}\n\nLive:W5 5 canvas:2,2 translate:left:5 translate:down:5\n{\"!include\":\"circ\"} {\"fillStyle\":\"fuchsia\"} {\"fill\":[]}\n\nLive:W6 6 canvas:2,2 translate:left:5 translate:down:5\n{\"!include\":\"circ\"} {\"fillStyle\":\"turquoise\"} {\"fill\":[]}\n\nLive:W7 7 canvas:2,2 translate:left:5 translate:down:5\n{\"!include\":\"circ\"} {\"fillStyle\":\"gold\"} {\"fill\":[]}\n\nBody:W1 canvas: copy:Live:W1\n\nBody:W2 canvas: copy:Live:W2\n\nBody:W3 canvas: copy:Live:W3\n\nBody:W4 canvas: copy:Live:W4\n\nBody:W5 canvas: copy:Live:W5\n\nBody:W6 canvas: copy:Live:W6\n\nBody:W7 canvas: copy:Live:W7\n\neyes:directions canvas:\n{\"beginPath\":[]} {\"arc\":[0.2, 0.2,  0.2,0,7]} {\"fillStyle\":\"white\"} {\"fill\":[]}\n{\"beginPath\":[]} {\"arc\":[0.25,0.15, 0.1,0,7]} {\"fillStyle\":\"black\"} {\"fill\":[]}\n{\"beginPath\":[]} {\"arc\":[0.8, 0.2,  0.2,0,7]} {\"fillStyle\":\"white\"} {\"fill\":[]}\n{\"beginPath\":[]} {\"arc\":[0.75,0.15, 0.1,0,7]} {\"fillStyle\":\"black\"} {\"fill\":[]}\nrot:up:>\n\ncursor canvas:\n{\"beginPath\":[]} \n{\"lineWidth\":\"0.05\"}\n{\"moveTo\":[0.1,0.3]} {\"lineTo\":[0.1,0.1]} {\"lineTo\":[0.3,0.1]}\n{\"moveTo\":[0.7,0.1]} {\"lineTo\":[0.9,0.1]} {\"lineTo\":[0.9,0.3]}\n{\"moveTo\":[0.1,0.7]} {\"lineTo\":[0.1,0.9]} {\"lineTo\":[0.3,0.9]}\n{\"moveTo\":[0.7,0.9]} {\"lineTo\":[0.9,0.9]} {\"lineTo\":[0.9,0.7]}\n{\"strokeStyle\":\"#aaaaaa88\"} {\"stroke\":[]}\n\ngoal * canvas:2,2 translate:left:5 translate:down:5\n{\"beginPath\":[]} \n{\"moveTo\":[0.6,0.2]} {\"lineTo\":[1.4,0.2]} {\"lineTo\":[1.4,1.0]}\n{\"lineTo\":[1.8,1.0]} {\"lineTo\":[1.0,1.8]} {\"lineTo\":[0.2,1.0]}\n{\"lineTo\":[0.6,1.0]} {\"closepath\":[]}\n{\"fillStyle\":\"#0000ff44\"} {\"fill\":[]}\n\no canvas:\n{\"beginPath\":[]} \n{\"rect\":[0.2,0.2,0.6,0.6]}\n{\"fillStyle\":\"grey\"} {\"fill\":[]}\n\ne canvas:\n{\"!include\":\"o\"} \n{\"fillStyle\":\"pink\"} {\"fill\":[]}\n\nplayer\ntransparent\n\ntail \ntransparent\n\nxClick \ntransparent\n\nxDrag \ntransparent\n\nxUp \ntransparent\n\ngrown\ntransparent\n\nshrink\ntransparent\n\npin\ntransparent\n\ntrace\ntransparent\n\n=======\nLEGEND\n=======\n\nliveX = Live:WX\nbodyX = Body:WX\neyesX = eyes:directions or e\n\ninit = e\nendX = tail or eyesX\nxAny = xClick or xDrag or xUp\nobj = wall or liveX or o\n\na = eyes:up\nb = eyes:down\nc = eyes:right\nd = eyes:left\n\n=======\nSOUNDS\n=======\n\nEndLevel 8178103\nsfx0 33281904\nsfx1 27451109\nsfx2 6742507\n\n================\nCOLLISIONLAYERS\n================\n\nbackground circ rect\no e\nxClick\nxUp\nxDrag\ntail\n--\ngrid\ngoal\nplayer\ngrown shrink \npin\n--\ntrace\ncursor\n--\nWall\n--\nliveX\nbodyX \n--\neyes:directions\n\n======\nRULES\n======\n(init)\n[ e | liveX ]      -> [ | eyes:up liveX ]\n[ liveX no eyesX ] -> [ liveX tail ]\n(draw the mock double-size grid)\n[ grid | | no Wall no grid ] -> [ grid | | grid ] \n[ wall | wall | wall ] -> [ wall | | wall ] \n\n(mouse down - add player and pin)\n[ xClick liveX no player ] -> [ pin liveX player ] // sfx2\n[ xClick | liveX no player ] -> [ | pin liveX player ]\n\n(mouse up - remove player and pin)\n[ xUp ] [ pin ] [ player ] -> [ xUp ][][] nosave\n\n(mouse-drag)\n(grid is double-size so detect drag up to two cells ahead)\n[ player live:WX endX | no obj | xDrag no obj ] -> [ o|o| player live:WX endX grown ] sfx1\n[ player live:WX endX | xDrag no obj | no obj ] -> [ o|o| player live:WX endX grown ] sfx1\n\n[ player goal no Live:W1 ] -> cancel sfx0\n\nWX [ live:WX grown ] [ live:WX no grown ] -> [ live:WX ] [ live:WX shrink ] \nWX [ live:WX endX shrink |o|o ] -> [ trace | trace | trace live:WX endX ]\n\n(=== all movement complete ===)\n\nlate WX [ live:WX no bodyX ]     -> [ live:WX body:WX ]\nlate WX [ body:WX | o no bodyX ] -> [ body:WX | o body:WX ]\nlate [ bodyX no o ] -> []\n\n(re-orientate eyes)\nlate [ bodyX | liveX eyesX ] -> [ bodyX | liveX eyes:> ]\n\n(display cursor to aid drag)\nlate [ cursor no xDrag ] -> []\nlate [pin][ xDrag grid no cursor ] -> [pin][ grid cursor ]\n\n(tidy-up)\nlate [ xUp ] [ trace ] -> [ xUp ] [] \nlate [ xAny ] -> []\n\n(don't save state while a wriggle is in progress)\n(this means undo will rewind the whole wriggle)\nlate [ trace ] -> [ trace ] nosave\n\n==============\nWINCONDITIONS\n==============\n\nsome player on goal\n\n=======\nLEVELS\n=======\n\n...................................\n.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.\n...................................\n.x.x.x.ooooo.x.x.x.oo6.7.+.x.x.x.x.\n.......o...o.e.....o...o...........\n.x.+.+.o.ooo.3.oo4eo.x.o.ooooo.x.x.\n...e...o.o...o.o...o.e.o.o...o.....\n.x.1.x.o.ooo.o.o.x.o.6.o.o.x.o.x.x.\n...o...o...o.o.o...o.o.o.o...o.....\n.x.o.x.5.1.5.o.o.4.ooo.o.oe2oo.x.x.\n...o.....o.e.o.o.o.....o.o.........\n.x.o.ooo.o.x.o.ooo.x.x.o.oooo2.+.x.\n...o.o.o.o...o.........o...........\n.x.ooo.ooo.x.3.x.x.x.x.oooo7e+.+.x.\n...................................\n.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.*.x.\n...................................\n.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.\n...................................\n\n\nMessage Thanks for playing :)";compile(["restart"],sourceCode);</script>
 </body>
 </html>
