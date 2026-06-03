@@ -59,21 +59,81 @@
         the next challenge.
         </p>
         <p>
-        Explore the puzzle below in interactive form. Use the cursor keys to both 
-        circumnavigate the box and to push/pull the paper-loops. Here you will be 
-        given a random goal for the original 4x4 puzzle from 2003. 
-        There is also a bonus puzzle designed in May 2026, where you can choose 
-        your own goal.
+        Explore the puzzle below in interactive form
+        (or <a href="https://puzzlescriptnext.polyomino.com/play.html?p=7ad4e4edda8549be91d793fd55bffb5f">
+            play direct from source</a>).
+        Use the cursor keys to both circumnavigate the box and to push/pull the 
+        paper-loops. Here you will be given a random goal for the original 4x4 
+        puzzle. There is also a 6x6 bonus puzzle to celebrate its online debut.
         </p>
       </div>
 
       <div class="std-flex-block single-item"> 
         <div class="puzzle-area-transparent">
-          <p><i>This puzzle area is interactive - click to activate</i></p>
+          <p><i>This puzzle area is interactive<br>
+            click to give it focus then use keyboard to play</i></p>
           <iframe frameborder="0" src="ps-export.html" width="600" height="600"></iframe>
-          <p><a href="https://puzzlescriptnext.polyomino.com/play.html?p=7ad4e4edda8549be91d793fd55bffb5f">
-            Launch fullscreen</a></p>
         </div>
+      </div>
+
+      <div class="page-note">
+        <h4>Development notes (May 2026)</h4>
+        <p>
+          The original physical puzzle (2003) was designed with the help of a java solver, 
+          to explore different starting configurations and verify all three solves were 
+          possible. What little I understood of the state-space in 2003 I had completely
+          lost by 2026 (along with the java program). 
+          However, by the time I had the puzzlescript ruleset fully working, and had 
+          manually solved the 4x4 puzzle many times, clarity was restored.  
+          I could see there is one fairly simple primary condition (for all three 
+          objectives to be solvable) plus one secondary condition. 
+        </p><p>
+          Consider first the primary condition... since the paper-loops are fixed in 
+          their row or column each cell in the grid is ultimately occupied by exactly 
+          one of two symbols, then the primary requirement is these two symbols must 
+          differ. This is trivial to verify by eye, you really don't need a solver to 
+          help.
+          The secondary condition is that the solution path must not involve a 
+          cyclic dependency, where the lead-end of four or more loops each demand to 
+          "wrap" the next loop in the cycle. Since pushes are never impeded, it's 
+          hard to imagine what this soft-lock would actually look like, during the 
+          solve process. But in reverse it is relatively easy to visualise the 
+          leading-ends of four loops snaring each other such that none of the loops 
+          can be fully extracted. If the solution sits on the far side of that 
+          snared four-way knot, it won't be reachable from the start-state.
+</p><p>
+          The question I couldn't quite answer was how often that soft-lock might
+          occur, especially on a 4x4 grid, but intuitively it felt more likely on 
+          larger grids. So I quickly hacked together a new 6x6 puzzle, randomly 
+          sprinkling the requisite 72 symbols across the 12 paper-loops.
+          The primary condition could be easily satisfied with a few visual checks
+          but I had no idea how to check for the soft-lock, so that was going to 
+          come down to manual testing. So I had to solve the thing, three times... 
+          would all three puzzles solve? How would I know for sure the solve was 
+          blocked? It took me perhaps an hour to refine my solving process to the 
+          point I had a convincing answer. Two solved, one soft-locked; 
+          and that was a very pleasing outcome. The 6x6 box was right there in 
+          the "tricky but mostly solvable" goldilocks zone. 
+ </p><p>
+          And at this point another realisation hit me. My experience solidly backed up 
+          my intuition... any goal that wasn't actually soft-locked could be reached 
+          with the right sequence of incremental "push" actions (no pull required).
+          And while one of my three solves was most definitely impossible I was 
+          reasonably convinced I could fix it by permitting a little bit of "over
+          push" (which would be later reversed).
+          Something easy to test with a few tweaks to the puzzlescript ruleset, 
+          along with my new and improved solving skills. And yes, it solved. 
+          I was delighted that my randomly configured 6x6 puzzle could remain in 
+          place, as the new bonus challenge for 2026.
+          <p>
+          This short journey of (re)discovery reinforces a theory I've always had 
+          about "good" puzzle mechanics. Whether you are talking logic-mazes, 
+          crate-pushing or pen-and-paper puzzles. If randomly configured grids turn 
+          out to be "tricky but mostly solvable" then you've struck gold.
+          There's really no greater dopamine hit for a puzzle designer than to 
+          discover you've nailed that sweet-spot.
+          </p>
+        </p>  
       </div>
 
       <hr>   
