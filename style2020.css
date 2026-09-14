@@ -178,7 +178,7 @@ iframe {
 }
 
 .page-note details > summary {
-    padding-top: 5px;
+    padding-top: 10px;
     color: #993399;
     font-weight: bold;
 }

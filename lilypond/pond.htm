@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-    <title>Clickmazes Lilypond (pre-release)</title>
+    <title>Clickmazes Lilypond</title>
     <link rel="stylesheet" href="../style2020.css?v=1.3">
   </head>
   <body>
@@ -32,167 +32,170 @@
       <div class="std-flex-block">
         <div class="photo-info">
           <p>
-            This puzzle concept was conceived late summer 2024 and remains in active development.
-            To date (Sept 2025) there are seven chapters close to finalised and perhaps two more 
-            in the pipe-line. When will this project be complete? I have no idea! But with a 
-            site update long overdue, and no end in sight, it's high time to share some progress. 
-            Thus here are the first five gardens.
-            Please consider this a pre-release for play-testing. Feedback welcomed!
+            This puzzle concept was conceived late summer 2024 and was a labour of 
+            love for over two years. Early on I decided to break standard 
+            <a href="https://thinkygames.com/games">thinky-game</a> protocol and 
+            squish multiple puzzles together into dense gardens, obfuscating
+            both the immediate goal and sense of boundary. 
+            A contentious decision for sure, but one that ultimately drove much of 
+            the creative process (read more below). As a result 
+            Lily-pond is gloriously rambling and maze-like, just as nature intended. 
           </p>
         </div> 
         <div class="photo-area">
-          <p><img src="./pods3.png" width="120px"></p>
+          <p><img src="./pngs/G1a.png" width="120px"></p>
         </div>
       </div>
 
       <div class="std-flex-block single-item"> 
         <div class="puzzle-area">
-          <!-- <p><i>Click below to give focus</i></p> -->
+          <p><i>This puzzle area is interactive<br>
+            click to give it focus then use keyboard to play</i></p>
           <!-- edits after PSNext export...
            reword "replay level from the start" (if enable_pause is set) -->
           <!-- zoom is 13 sprites - so frame width/height must be a multiple (572=13x44) -->
-          <iframe frameborder="0" src="./ponds12345.html" width="572" height="572"></iframe>
-          <p><a href="./ponds12345.html">Play full window</a></p> <!-- a target="_blank" -->
+          <iframe frameborder="0" src="./pondsV1.00.html" width="572" height="572"></iframe>
+          <p><a href="./pondsV1.00.html">Play in new window (full-screen)</a></p>
+          <!-- <p><a href="https://puzzlescriptnext.polyomino.com/play.html?p=549562235de8b7c5e5577fe56cf961da">
+            Play from source-GIST</a></p> -->
         </div>
       </div>
 
-      <!-- <img src="./mud3.png"  width="120" style="float:left; padding:10px" > -->
-      <!-- <img src="./goal3.png" width="120" style="float:right; padding:10px" > -->
-      <!-- <img src="./pods3.png"  width="120" style="float:left; padding:10px" > -->
-      <!-- <img src="./path3.png"  width="120" style="float:right; padding:10px" > -->
-
       <div class="page-note">
-         <h3>Updates</h3>
-         <p><b>28/09/2025: V0.15:</b>
-          <a href="https://mikanhako.itch.io">MikanHako</a> 
-          kindly playtested V0.12, provided some great feedback and found a major bug!
-          You can watch the full 
-          <a href="https://www.youtube.com/watch?v=Zurl-Jv89sM">play-through</a> on YouTube. 
-          V0.15 addresses the bug and clarifies the purpose of lawns (it is no longer 
-          possible to re-enter the garden from the surrounding lawns, the lawns provide a 
-          short-cut to the exit grotto only). Access to gardens 6/7 (which I hadn't 
-          intended to publish) has also been removed. 
+         <h3>Recent updates</h3>
+         <p><b>14/09/2026: V1.0:</b>
+          The final cut. The full eight gardens. Job done. 
+          I predict V1.x will follow shortly. 
         </p>
       </div>
 
       <div class="page-note">
         <h3>Guidance and overview</h3>
         <p>
-          <img src="./pads3.png"  width="120" style="float:right; padding:10px" >
+          <img src="./pngs/G6c.png"  width="120" style="float:right; padding:10px" >
           This game comes with minimal upfront information about the puzzle mechanics, 
-          everything you need to know is discoverable as you play. If you would like some 
-          extra guidance on the mechanics see the drop lists below. 
+          everything you need to know is discoverable as you play. 
+          But if a little help is needed I also offer a <a href="./pondinfo.htm">
+          detailed breakdown of all mechanics</a> which includes some strategic 
+          advice and hints.
           For general guidance on how to navigate the puzzlescript UI see Q02 on the 
-          <a href="../new-faq.htm">help</a> page.
+          <a href="../new-faq.htm">help</a> page. 
         </p><p>
-          Untypically (for a PS-app) this game offers both level-select and checkpoints 
-          (within a level). The checkpoints offer you a localised restart, without having 
-          to restart the whole level (if you want to restart a chapter afresh then use the 
-          level-select menu). Checkpoints are currently invisible until you first reach them.
+          Untypically (for a PS-app) this game offers both level-select (in this case 
+          chapter/garden select) and checkpoints (within a chapter). 
+          The checkpoints offer you a localised restart, without having to restart the 
+          whole garden. Be warned, in the later gardens, it will be possible to hit 
+          checkpoints in the wrong order. Rewinding through multiple checkpoints (using 
+          undo) is one way to right this wrong. 
+          Here are some other UI features that may be useful:
         </p>
-        
-          <details>
-            <summary>Chapter 1: Mechanics and hints</summary>
+        <p><ul>
+        <li><b>Sneak-peek</b>: Double action (or click/tap) at a checkpoint to briefly 
+          zoom out to a full garden overview (move to cancel).</li>
+        <li><b>Zoom-out mode</b>: Nudge-up twice at the first checkpoint to 
+          flip into permanent overview mode. This mode is only suitable for full/large 
+          screen play.
+        </li>
+        <li><b>Reveal checkpoints</b>: Nudge-down twice from the first check-point to 
+          reveal all checkpoints in the garden.</li>
+        <li><b>Garden restart</b>:  
+          To replay a garden from scratch go to the level-select menu and reload it.</li>
+        </ul></p>
+    </div>
+      
+      <div class="page-note">
+        <h3>Development notes - puzzle design</h3>
+        <p>
+          <img src="./pngs/G5b.png" width="120" style="float:right; padding:10px" >
+          All puzzles in this game are hand-designed. I occasionally gave the 
+          <a href="https://puzzlescriptnext.polyomino.com/Documentation/solver.html">PSNext solver</a>
+          a spin to test if a small configuration of objects would permit (or block) a 
+          specific goal but it didn't prove useful beyond that. 
+          No procedural generation was involved at any stage. 
+          Patrick Traynor's excellent document 
+          <a href="https://cwpat.me/misc/puzzle-level-idea-strategies/">
+          Puzzle Level Idea Strategies</a> helped guide me when I needed new inspiration for 
+          level design. However the (not so) simple act of trying to weave puzzles into their 
+          respective gardens proved to be a powerfully creative process. 
+          Some examples of landscaping activities that led to new puzzles:
+        <p><ul>
+          <li>Looking for ways to fill awkward corners or narrow corridors.</li>
+          <li>Looking for ways to reach and recycle resources left behind in earlier puzzle areas.</li>
+          <li>Trying to squeeze a set-piece puzzle into a new shape to fit with its neighbours.</li>
+          <li>Designing ways to allow the true-path to criss-cross itself around the garden.</li>
+          <li>Discovering ways for the Andreana to play an active role in a puzzle solution.</li>
+          <li>Discovering and fixing unintended short-cuts between puzzle-areas.</li>
+          <li>Trying to fix unintended reveals of late-game mechanics.</li>
+        </ul></p>
+      </p>
+      </div>
+
+      <div class="page-note">
+        <h3>A nod to Wanderer (1988)</h3>
+            <img src="./wanderer.png" width="220" style="float:right; padding:8px" >
             <p>
-            Chapter 1 introduces the primary core mechanic; the ability to collect seed-pods 
-            <i>in-hand</i> and throw them over water to grow temporary bridges of walkable 
-            lily-pads. For Chapter 1 you only need concern yourself with mastering how to safely 
-            navigate the water-garden optimising the use of the seed-pods you collect as you walk.
-            Here is a list of the basic mechanics:
-            </p>
-            <p><ul>
-              <li>Collect seed-pods by walking across the stepping-stones</li>
-              <li>Throw seed-pods over water by stepping towards open water</li>
-              <li>Seed-pods thrown across water grow new lily-pads</li>
-              <li>You can walk across lily-pads but they sink as you walk across them</li>
-              <li>Seed-pods that fall onto stepping-stones can be picked up again later</li>
-              <li>Seed-pods that fall into the weeds instantly perish</li>
-            </ul></p>
-          </details>
-          
-          <details>
-            <summary>Chapter 2: Mechanics and hints</summary>
-            <p>
-              Chapter 2 introduces several new facets of the core mechanic. The first is that 
-              seed-pods can be found on water (collectable if reachable) the second is that two 
-              or more lily-pads can co-exist in a stack, at the same location. The stack sinks 
-              one lily-pad at a time making it strong enough to support multiple visits or 
-              additional actions. 
-              Stacked lily-pads grow a flower, one for each lily-pad in the stack. The flowers 
-              are both a visual indicator of current height and a new element of the mechanic.
-              As the stack shrinks the flowers die and in turn generate new seed-pods which 
-              are only revealed once the last lily-pad sinks.
-              So now you can start to recycle those seed-pods, how useful might that be?
-            </p>
-          </details>
-
-          <details>
-            <summary>Chapter 3: Mechanics and hints</summary>
-            <p>Chapter 3 builds on Chapter 2 offering trickier puzzles that require higher 
-              stacks of lily-pad (indicated by more flowers). Here you will discover the extra 
-              power or two, three or even more flowers. 
-              Two flowers for example will permit three actions (step, pickup, throw) 
-              without getting your feet wet, plus the bonus of two new seed-pods! 
-              Stack carefully, in order to facilitate the right sequence of actions 
-              including the option of harvesting the new seed-pods that are revealed as 
-              you walk.  
-            </p> 
-          </details>
-
-          <details>
-            <summary>Chapter 4: Mechanics and hints</summary>
-            <p>Chapter 4 introduces mud-banks. Mud-banks are an obstacle that blocks your path 
-              but can also hold seed-pods. Seed-pods on mud can be collected by reaching 
-              towards them, just like water-born seed-pods. It won't take long to discover 
-              seed-pods can be thrown over mud enabling them to be scattered and regrouped 
-              in powerful new ways. 
-            </p>
-          </details>
-
-          <details>
-            <summary>Chapter 5: Mechanics and hints</summary>
-            <p>Chapter 5 introduces the first <i>rule-of-five</i> edge-mechanic. 
-              If you collect more than five seed-pods you immediately drop (i.e. <i>spill</i>) four 
-              of them into adjacent locations. This mechanic may help or hinder progress
-              but it definitely means you can never grow a row of six or more lily-pads 
-              with a single throw, so how else might you achieve that? 
-              Note that seed-pods that spill onto water grow a new lily-pad (as if thrown) and 
-              seed-pods that spill into weeds instantly perish, so think careful where and 
-              when to trigger this effect. 
+              When I first started experimenting with the garden format, I was strongly reminded 
+              of the game
+              <a href="https://www.steveshipway.org/software/wanderer/f_wanderer.html">Wanderer</a>
+              (by Steven Shipway) that I first played circa 1989 on (probably) SCO Unix. 
+              Each "level" was a relatively large fixed size (40x16) and often contained 
+              multiple mini-puzzles that had to be solved in the right order.
+              Played in its default, restricted-view mode (a window of 11x7) each sprite was a 
+              3x2 array of ascii characters. Exploration of the space was vital, to work out 
+              how the various puzzle areas interacted. 
+              The game could switch to full-view (each sprite now a single ascii character) 
+              but the levels still had a rambling maze-like feel that required a fair amount 
+              of exploration. 
               </p><p>
-              You might well ask at this point... how have you managed to avoid spillage before?
-              In earlier levels? It's a good question, and a puzzle in itself. A puzzle that 
-              perhaps explains why it's taken me over a year to publish the first five chapters 
-              of this game. 
-          </p>
-          </details>
+              Circa 1992 I designed one intricate wanderer level of my own (I remember 
+              only that it was called "one man and his dog" and involved a solitary wall-hugging 
+              monster). Together the player and monster solved a sequence of compact, tightly 
+              intertwined puzzles that completely filled the 40x16 play-area. 
+              Individual puzzles had no clear boundary and were multi-connected, to encourage 
+              the monster (or player) to wander off in the wrong direction. A maze-like puzzle 
+              where the true-path and many false-paths shared the same space. Lily-pond sits 
+              snug in the same design-space. Both can be viewed as logic-mazes built from 
+              atomic components that are individual puzzles in their own right. 
+              </p><p>
+              The challenge to good design is to give the illusion of chaos without overwhelming
+              the player. Boundaries and sub-goals need to be deducible with a little extra 
+              thought or exploration. False paths and fake exits should yield to logic the same way. 
+              The aim is to give a thin sugar-coating of bonus AHA as each checkpoint is reached. 
+              Have I got the balance right? Feel free to let me know. 
+              Modern puzzle games treat space and level boundaries with a little more respect. 
+              Watch 
+              <a href="https://www.youtube.com/watch?v=WH5Uysa5gOg">a journey into space</a> 
+              by Dom Camus, to discover why thinky-games generally don't do things this way. 
+            </p>
 
-          <!-- 
-            <p>Chapter 6... unstable piles of seed-pods on mud/stone</p>
-            <p>Chapter 7... unstable stacks of flowering lily-pads</p>   
-            <p>Chapter 8... distant/shielded piles of seed-pods?</p>
-            <p>Chapter 9... bonus stuff</p> 
-          -->
       </div>
 
       <div class="page-note">
         <h4>Links &amp; related pages</h4>
         <ul>
-          <li>Explore more thinky games in the <a href="https://thinkygames.com/games">
+          <li>A lengthy and <a href="./pondinfo.htm">detailed breakdown of all mechanics</a></li>
+          <li>Play direct from <a href="https://puzzlescriptnext.polyomino.com/play.html?p=549562235de8b7c5e5577fe56cf961da">
+            GIST source</a> (hackable)</li>
+          <li><a href="https://www.steveshipway.org/software/wanderer/f_wanderer.html">Wanderer</a> by Steven Shipway 
+           (<a href="https://yjlv.blogspot.com/2015/12/wanderer-boulder-dash-like-game.html">as I remember it</a>)
+          </li> 
+          <li>Explore more thinky-games in the <a href="https://thinkygames.com/games">
             thinky-games database</a></li>
-          <li>A <a href="https://www.youtube.com/watch?v=Zurl-Jv89sM">walk-through of V0.12</a> 
-            shared by <a href="https://mikanhako.itch.io">MikanHako</a></li>
-          <li>Explore more PSNext games in the <a href="https://puzzlescriptnext.polyomino.com">
-            PSNext Gallery</a></li>
-          <li>Discover more about <a href="https://puzzlescriptnext.polyomino.com/Documentation/objects.html">
-           canvas sprite support in PSNext</a></li>
-          </ul>
+          <li>A <a href="https://www.youtube.com/watch?v=Zurl-Jv89sM">
+            walk-through of V0.12</a> (Sept 25) shared by <a href="https://mikanhako.itch.io">MikanHako</a></li>
+          <li>A <a href="https://drive.google.com/drive/folders/1Px7T2dKjckISuyF-6DJ9FVM7FKOm_JNw?usp=sharing">
+              walk-through of V1.0</a> (Sept 26) recorded by myself.</li>
+          <li><a href="https://cwpat.me/misc/puzzle-level-idea-strategies/">
+            Puzzle Level Idea Strategies</a> by Patrick Traynor</li>  
+          <li><a href="https://www.youtube.com/watch?v=WH5Uysa5gOg">
+           A journey into space</a> by Dom Camus</li> 
+        </ul>
       </div>
 
       <hr>   
       <div class="page-credits"><p>
-        <b>concept &amp; puzzle design</b> - &COPY; Andrea Gilbert - 2025<br>
-        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2025<br>
+        <b>concept &amp; puzzle design</b> - &COPY; Andrea Gilbert - 2024-26<br>
+        <b>puzzlescript implementation</b> - &COPY; Andrea Gilbert - 2024-26<br>
         </p>
       </div>  
 
