@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D Hex Wriggle - Level Designer & Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    canvas {
+      touch-action: none;
+    }
+  </style>
+</head>
+
+<body class="relative h-screen w-screen overflow-hidden select-none flex flex-col md:flex-row">
+
+  <!-- Left Panel / Tools Sidebar -->
+  <div id="sidebar" class="z-20 w-full md:w-96 bg-slate-900/95 backdrop-blur-md p-4 border-b md:border-b-0 md:border-r 
+    border-slate-700/60 flex flex-col justify-between max-h-screen overflow-y-auto custom-scrollbar shadow-2xl">
+    <div>
+      <!-- Header & Mode Selector -->
+      <div class="flex justify-between items-center mb-3">
+        <div>
+          <h1 class="text-xl font-bold text-cyan-400 flex items-center gap-2">
+            <span>🐍</span> Hex Wriggle
+          </h1>
+          <p class="text-[11px] text-slate-400">2D Hexagonal Wriggle Logic Studio</p>
+        </div>
+        <div class="flex bg-slate-800 p-1 rounded-lg border border-slate-700">
+          <button id="btn-mode-play" onclick="setAppMode('play')"
+            class="px-3 py-1 rounded-md text-xs font-bold transition bg-cyan-600 text-white shadow">
+            ▶ Play
+          </button>
+          <button id="btn-mode-edit" onclick="setAppMode('edit')"
+            class="px-3 py-1 rounded-md text-xs font-bold transition text-slate-400 hover:text-white">
+            ✏️ Edit
+          </button>
+        </div>
+      </div>
+
+      <!-- Play Mode Instructions & Controls -->
+      <div id="play-controls" class="space-y-3">
+        <div class="p-3 bg-slate-800/80 border border-slate-700 rounded-xl text-xs space-y-1 text-slate-300">
+          <p class="font-semibold text-cyan-300"><b>Wriggle Rule (2D Hex):</b></p>
+          <p>• Click wriggler head or tail to activate.</p>
+          <p>• Click an adjacent highlighted cell to wriggle.</p>
+          <p>• Sharp turns not permitted!</p>
+        </div>
+
+        <!-- Status & Stats -->
+        <div class="flex justify-between items-center bg-slate-950 p-3 rounded-xl border border-slate-800">
+          <div>
+            <div class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Moves</div>
+            <div id="move-counter" class="text-xl font-bold text-cyan-400">0</div>
+          </div>
+          <div>
+            <div class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Status</div>
+            <div id="game-status" class="text-xs font-semibold text-amber-400">Select Head/Tail</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="undoMove()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs py-2 rounded-lg 
+            border border-slate-700 transition active:scale-95">
+            ↩️ Undo
+          </button>
+          <button onclick="redoMove()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs py-2 rounded-lg 
+            border border-slate-700 transition active:scale-95">
+            ↪️ Redo
+          </button>
+          <button onclick="resetCurrentLevel()" class="bg-amber-600/80 hover:bg-amber-500 text-white font-bold text-xs py-2 rounded-lg 
+            transition active:scale-95 shadow">
+            🔄 Restart
+          </button>
+          <button onclick="exportCurrentLevelCompact()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-2 rounded-lg 
+            transition active:scale-95 shadow" title="Export Compact JSON">
+            📤 Export
+          </button>
+        </div>
+
+        <!-- Solver & State Analyzer Panel -->
+        <div class="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-3 space-y-2 mt-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
+              <span>🧠</span> BFS Solver
+            </span>
+            <button onclick="solveCurrentLevel()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-2.5 py-1 
+              rounded-md transition shadow active:scale-95">
+              🔍 Analyze & Solve
+            </button>
+          </div>
+
+          <!-- Solver Results Output -->
+          <div id="solver-results" class="hidden bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1.5 
+            font-mono text-slate-300">
+            <div class="flex justify-between text-slate-400">
+              <span>Reachable States:</span>
+              <span id="stat-states" class="text-amber-400 font-bold">-</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>Step count:</span>
+              <span id="stat-steps" class="text-cyan-400 font-bold">-</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>Wriggle count:</span>
+              <span id="stat-macromoves" class="text-emerald-400 font-bold">-</span>
+            </div>
+
+            <!-- Solution Step Playback Controls -->
+            <div id="solver-playback"
+              class="hidden pt-2 border-t border-slate-800 flex items-center justify-between gap-1">
+              <button onclick="stepSolution(-1)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[10px] px-2 py-1 
+                rounded border border-slate-700">
+                ◀ Prev
+              </button>
+              <span id="playback-step-text" class="text-[10px] font-semibold text-slate-300">Step 0/0</span>
+              <button onclick="stepSolution(1)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[10px] px-2 py-1 
+                rounded border border-slate-700">
+                Next ▶
+              </button>
+              <button id="btn-toggle-play-sol" onclick="toggleSolutionAutoPlay()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] px-2 py-1 
+                rounded shadow">
+                ▶ Auto
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Mode Tools Palette -->
+      <div id="edit-controls" class="hidden space-y-3">
+
+        <div class="p-3 bg-slate-800/80 border border-slate-700 rounded-xl text-xs space-y-1 text-slate-300">
+          <p class="font-semibold text-emerald-400"><b>Level Designer Tools:</b></p>
+          <p>• Select a tool button to start.</p>
+          <p>• All edits are saved immediately.</p>
+          <p>• Click Play to test new level design.</p>
+        </div>
+
+        <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50 space-y-2">
+          <label class="text-xs font-semibold text-slate-300 block">Active Edit Tool:</label>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button id="tool-wall" onclick="setEditTool('wall')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
+              border border-slate-700 font-medium text-left flex items-center gap-1.5">
+              🧱 Toggle Wall
+            </button>
+            <button id="tool-goal" onclick="setEditTool('goal')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
+              border border-slate-700 font-medium text-left flex items-center gap-1.5">
+              🎯 Toggle Goal
+            </button>
+            <button id="tool-extend" onclick="setEditTool('extend_wriggle')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
+              border border-slate-700 font-medium text-left flex items-center gap-1.5">
+              ➕ Extend Body (+1 Cell)
+            </button>
+            <button id="tool-trim" onclick="setEditTool('trim_wriggle')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
+              border border-slate-700 font-medium text-left flex items-center gap-1.5">
+              ➖ Trim Body (-1 Cell)
+            </button>
+            <button id="tool-recolor" onclick="setEditTool('recolor_wriggle')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
+              border border-slate-700 font-medium text-left flex items-center gap-1.5">
+              🎨 Recolor Wriggler
+            </button>
+            <button id="tool-wriggle" onclick="setEditTool('wriggle')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
+              border border-slate-700 font-medium text-left flex items-center gap-1.5">
+              🐍 Draw New Wriggler
+            </button>
+            <button id="tool-delete-wriggle" onclick="setEditTool('delete_wriggle')" class="bg-red-950/60 hover:bg-red-900/60 text-red-300 text-xs py-1.5 px-2 rounded-lg 
+              border border-red-800/50 font-medium text-left flex items-center gap-1.5 col-span-2">
+              🗑️ Delete Wriggler
+            </button>
+          </div>
+        </div>
+
+        <!-- Wriggle Color Picker for New / Recolor Wriggles -->
+        <div id="color-picker-box" class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50 space-y-1.5">
+          <label class="text-xs font-semibold text-slate-300 block">Active Color Palette:</label>
+          <div class="flex gap-2" id="wriggle-color-options">
+            <!-- Dynamic color choices -->
+          </div>
+        </div>
+
+        <!-- Board Radius Control -->
+        <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50 flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-300">Board Radius:</span>
+          <div class="flex items-center gap-2">
+            <span id="radius-indicator" class="text-xs font-bold text-cyan-400">Radius 2</span>
+            <button id="btn-toggle-radius" onclick="toggleBoardRadius()" class="bg-cyan-900/60 hover:bg-cyan-800/60 text-cyan-200 text-xs px-2.5 py-1 rounded-lg 
+              border border-cyan-700/50 font-semibold transition active:scale-95">
+              Set Radius 3
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="createNewBlankLevel()"
+            class="bg-indigo-900/60 hover:bg-indigo-800/60 
+            text-indigo-200 text-xs py-2 rounded-lg border border-indigo-700/50 font-semibold transition active:scale-95">
+            ✨ New Blank Level
+          </button>
+          <button onclick="duplicateCurrentLevel()" class="bg-cyan-900/60 hover:bg-cyan-800/60 
+            text-cyan-200 text-xs py-2 rounded-lg border border-cyan-700/50 font-semibold transition active:scale-95">
+            📄 Duplicate Level
+          </button>
+          <button onclick="clearAllWriggles()"
+            class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-1.5 rounded-lg border border-slate-700">
+            Clear Wrigglers
+          </button>
+          <button onclick="clearAllWalls()"
+            class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs py-1.5 rounded-lg border border-slate-700">
+            Clear Walls
+          </button>
+        </div>
+      </div>
+
+      <!-- Level Dropdown Selector -->
+      <div class="mt-4 bg-slate-800/40 p-3 rounded-xl border border-slate-700/50 space-y-2">
+        <label class="text-xs font-semibold text-slate-300 block flex justify-between">
+          <span>Select Level:</span>
+          <span id="level-count-badge" class="text-[10px] text-cyan-400">4 levels</span>
+        </label>
+        <div class="flex gap-2">
+          <select id="level-select" onchange="onLevelSelectChange()" class="flex-1 bg-slate-950 
+            text-slate-100 text-xs rounded-lg px-2.5 py-2 border border-slate-700 
+            focus:outline-none focus:border-cyan-500 cursor-pointer">
+          </select>
+        </div>
+      </div>
+
+      <!-- All-levels Import/Export -->
+      <div class="mt-3">
+        <button onclick="toggleJsonDrawer()" class="w-full bg-slate-800 hover:bg-slate-700 
+          text-slate-300 font-semibold text-xs py-2 px-3 
+          rounded-xl border border-slate-700 transition flex items-center justify-between">
+          <span>📜 All Levels Import/Export</span>
+          <span id="json-arrow">▼</span>
+        </button>
+
+        <div id="json-drawer" class="hidden mt-2 pt-2 border-t border-slate-800 space-y-2">
+          <textarea id="json-editor" class="w-full h-32 bg-slate-950 text-emerald-400 font-mono 
+          text-[10px] p-2 rounded-lg border 
+            border-slate-800 focus:outline-none focus:border-cyan-500 custom-scrollbar resize-y"
+            placeholder="JSON Level Array"></textarea>
+          <div class="flex gap-2">
+            <button onclick="importJsonLevels()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 
+              text-white font-bold text-xs py-1.5 rounded-lg transition shadow">
+              📥 Apply JSON
+            </button>
+            <button onclick="copyJsonToClipboard()" class="bg-slate-800 hover:bg-slate-700 
+              text-slate-200 font-bold text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition">
+              📋 Copy
+            </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Footer info -->
+    <div class="mt-4 pt-3 border-t border-slate-800 text-[10px] text-slate-500 flex justify-between items-center">
+      <span>Wriggle Mechanics © Andrea Gilbert</span>
+      <span>Hex Grid 2D Engine</span>
+    </div>
+  </div>
+
+  <!-- Main Canvas Playground -->
+  <div class="flex-1 relative h-full bg-slate-950 flex items-center justify-center overflow-hidden">
+    <canvas id="hex-canvas" class="cursor-pointer"></canvas>
+
+    <!-- Victory Banner -->
+    <div id="victory-banner" class="hidden absolute top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 bg-slate-900/95 
+      border-2 border-emerald-500 text-white px-5 py-3 rounded-2xl shadow-2xl backdrop-blur-md transition-all">
+      <div class="text-2xl">🎉</div>
+      <div>
+        <h2 class="text-sm font-bold text-emerald-400 leading-tight">PUZZLE SOLVED!</h2>
+        <p class="text-[11px] text-slate-300" id="win-message">All wriggle goals satisfied!</p>
+      </div>
+      <div class="flex gap-2 ml-2">
+        <button onclick="resetCurrentLevel()" class="bg-slate-800 hover:bg-slate-700 
+          text-slate-200 font-bold text-xs py-1.5 px-3 rounded-lg border border-slate-700 transition active:scale-95">
+          Replay
+        </button>
+        <button onclick="loadNextLevel()" class="bg-emerald-600 hover:bg-emerald-500 
+          text-white font-bold text-xs py-1.5 px-3 rounded-lg transition active:scale-95 shadow">
+          Next ➔
+        </button>
+      </div>
+    </div>
+
+    <!-- Puzzle Info Header -->
+    <div id="puzzle-info-header"
+      class="absolute z-10 -translate-x-1/2 bg-slate-900/80 border border-slate-700/60 
+    backdrop-blur-md px-3.5 py-1.5 rounded-xl shadow-lg pointer-events-none flex items-center gap-2 transition-all duration-75">
+      <span id="puzzle-header-id"
+        class="text-[10px] font-mono font-bold text-cyan-400 bg-cyan-950/80 px-1.5 py-0.5 rounded border border-cyan-800/50">ID</span>
+      <span id="puzzle-header-name" class="text-xs font-semibold text-slate-200">Level Name</span>
+    </div>
+
+  </div>
+
+  <script>
+    // Axial Hex Direction Vectors
+    const HEX_DIRECTIONS = [
+      { q: 1, r: 0 },
+      { q: 1, r: -1 },
+      { q: 0, r: -1 },
+      { q: -1, r: 0 },
+      { q: -1, r: 1 },
+      { q: 0, r: 1 }
+    ];
+
+    // Color Palette Definitions
+    const WRIGGLE_COLORS = [
+      { id: 'blue', name: 'Blue', hex: '#38bdf8', dark: '#0284c7' },
+      { id: 'red', name: 'Red', hex: '#f87171', dark: '#dc2626' },
+      { id: 'yellow', name: 'Yellow', hex: '#facc15', dark: '#ca8a04' },
+      { id: 'green', name: 'Green', hex: '#4ade80', dark: '#16a34a' },
+      { id: 'purple', name: 'Purple', hex: '#c084fc', dark: '#9333ea' },
+      { id: 'orange', name: 'Orange', hex: '#fb923c', dark: '#ea580c' }
+    ];
+
+    // Default Preset Levels (Includes BobH 2011 as Level 4)
+    const PRESET_LEVELS = [
+      {
+        "id": "B1", 
+        "name": "Hello-hex",
+        "radius": 2,
+        "walls": [
+          { "q": -2, "r": 2 }, { "q": -2, "r": 0 }, { "q": 0, "r": -1 }, { "q": 1, "r": -2 },
+          { "q": 2, "r": -1 }, { "q": -1, "r": 1 }, { "q": 0, "r": 2 }, { "q": 1, "r": 0 }, { "q": -1, "r": 2 }
+        ],
+        "goals": [
+          { "q": 2, "r": 0, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790244689721", "colorKey": "blue", "body": [{ "q": 1, "r": -1 }, { "q": 0, "r": 0 }, { "q": -1, "r": 0 }, { "q": -2, "r": 1 }] }
+        ]
+      },
+      {
+        "id": "B2",
+        "name": "Dot-to-dot",
+        "radius": 2,
+        "walls": [
+          { "q": -2, "r": 2 }, { "q": -2, "r": 0 }, { "q": 0, "r": -1 }, { "q": -1, "r": 1 }, { "q": 0, "r": 2 }, { "q": 1, "r": 0 }, { "q": 2, "r": -2 }, { "q": 1, "r": -1 }
+        ],
+        "goals": [
+          { "q": 2, "r": 0, "colorKey": "blue", "endType": "any" },
+          { "q": -1, "r": 2, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790264612892", "colorKey": "blue", "body": [{ "q": -2, "r": 1 }, { "q": -1, "r": 0 }, { "q": -1, "r": -1 }, { "q": 0, "r": -2 }] }
+        ]
+      },
+      {
+        "id": "B3",
+        "name": "Duet",
+        "radius": 2,
+        "walls": [
+          { "q": -2, "r": 2 }, { "q": -2, "r": 0 }, { "q": 0, "r": -1 }, { "q": 2, "r": -1 },
+          { "q": -1, "r": 1 }, { "q": 0, "r": 2 }, { "q": 1, "r": 0 }, { "q": -1, "r": 2 }, { "q": 2, "r": -2 }
+        ],
+        "goals": [
+          { "q": 2, "r": 0, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790244689721", "colorKey": "blue", "body": [{ "q": 1, "r": -1 }, { "q": 0, "r": 0 }, { "q": -1, "r": 0 }, { "q": -2, "r": 1 }] },
+          { "id": "w_1790264216408", "colorKey": "red", "body": [{ "q": 0, "r": 1 }, { "q": 1, "r": 1 }] }
+        ]
+      },
+      {
+        "id": "B4",
+        "name": "Loopy",
+        "radius": 2,
+        "walls": [
+          { "q": -2, "r": 2 }, { "q": -1, "r": 2 }, { "q": 0, "r": 2 }, { "q": -2, "r": 1 }, { "q": -2, "r": 0 }, { "q": 2, "r": -2 }, { "q": 0, "r": 0 }
+        ],
+        "goals": [
+          { "q": 1, "r": -1, "colorKey": "blue", "endType": "any" },
+          { "q": 2, "r": -1, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790263354167", "colorKey": "blue", "body": [{ "q": 1, "r": -1 }, { "q": 1, "r": 0 }, { "q": 0, "r": 1 }, { "q": -1, "r": 1 }, { "q": -1, "r": 0 }, { "q": 0, "r": -1 }, { "q": 1, "r": -2 }] }
+        ]
+      },
+      {
+        "id": "A1",
+        "name": "Two-by-two",
+        "radius": 2,
+        "walls": [
+          { "q": 0, "r": -1 }, { "q": -2, "r": 1 }, { "q": 0, "r": 1 }, { "q": 2, "r": -1 }, { "q": 1, "r": -2 }, { "q": -1, "r": 2 }
+        ],
+        "goals": [
+          { "q": 0, "r": 2, "colorKey": "yellow", "endType": "any" },
+          { "q": 0, "r": -2, "colorKey": "blue", "endType": "any" },
+          { "q": 2, "r": -2, "colorKey": "red", "endType": "any" },
+          { "q": -2, "r": 2, "colorKey": "green", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790437097460", "colorKey": "red", "body": [{ "q": -1, "r": 0 }, { "q": -1, "r": 1 }] },
+          { "id": "w_1790437100689", "colorKey": "blue", "body": [{ "q": 2, "r": 0 }, { "q": 1, "r": 1 }] },
+          { "id": "w_1790437110026", "colorKey": "yellow", "body": [{ "q": -1, "r": -1 }, { "q": -2, "r": 0 }] },
+          { "id": "w_1790437409413", "colorKey": "green", "body": [{ "q": 1, "r": -1 }, { "q": 1, "r": 0 }] }
+        ]
+      },
+      {
+        "id": "A2",
+        "name": "Rabbit-hole",
+        "radius": 2,
+        "walls": [
+          { "q": -1, "r": 0 }, { "q": 1, "r": 0 }, { "q": -2, "r": 1 }, { "q": 2, "r": 0 }, { "q": 0, "r": 1 }, { "q": -2, "r": 2 }
+        ],
+        "goals": [
+          { "q": 1, "r": 1, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790418226729", "colorKey": "blue", "body": [{ "q": 2, "r": -2 }, { "q": 1, "r": -2 }, { "q": 0, "r": -2 }] },
+          { "id": "w_1790418230284", "colorKey": "red", "body": [{ "q": 1, "r": -1 }, { "q": 0, "r": -1 }, { "q": -1, "r": -1 }] },
+          { "id": "w_1790419379940", "colorKey": "yellow", "body": [{ "q": 0, "r": 2 }, { "q": -1, "r": 2 }] }
+        ]
+      },
+
+      {
+        "id": "A2",
+        "name": "Eye-spy",
+        "radius": 2,
+        "walls": [
+          { "q": 0, "r": -2 }, { "q": 2, "r": -2 }, { "q": 1, "r": -2 }
+        ],
+        "goals": [
+          { "q": -1, "r": 0, "colorKey": "red", "endType": "any" },
+          { "q": 1, "r": 0, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790435254184", "colorKey": "red", "body": [{ "q": -1, "r": 1 }, { "q": -2, "r": 1 }, { "q": -2, "r": 0 }, { "q": -1, "r": -1 }, { "q": 0, "r": -1 }, { "q": 0, "r": 0 }] },
+          { "id": "w_1790435266446", "colorKey": "blue", "body": [{ "q": 0, "r": 1 }, { "q": 1, "r": 1 }, { "q": 2, "r": 0 }, { "q": 2, "r": -1 }, { "q": 1, "r": -1 }] }
+        ]
+      },
+      {
+        "id": "E1",
+        "name": "Trio",
+        "radius": 2,
+        "walls": [
+          { "q": 2, "r": -1 }, { "q": 0, "r": 2 }, { "q": 1, "r": 0 }, { "q": -1, "r": 1 }, { "q": 1, "r": -2 }, { "q": -2, "r": 0 }
+        ],
+        "goals": [
+          { "q": 2, "r": 0, "colorKey": "blue", "endType": "any" },
+          { "q": 0, "r": -2, "colorKey": "yellow", "endType": "any" },
+          { "q": 0, "r": 0, "colorKey": "red", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790357046820", "colorKey": "red", "body": [{ "q": -2, "r": 1 }, { "q": -2, "r": 2 }, { "q": -1, "r": 2 }] },
+          { "id": "w_1790357055842", "colorKey": "blue", "body": [{ "q": -1, "r": 0 }, { "q": 0, "r": -1 }, { "q": 1, "r": -1 }, { "q": 2, "r": -2 }] },
+          { "id": "w_1790357199061", "colorKey": "yellow", "body": [{ "q": 0, "r": 1 }, { "q": 1, "r": 1 }] }
+        ]
+      },
+      {
+        "id": "E2",
+        "name": "Pinwheel",
+        "radius": 2,
+        "walls": [
+          { "q": 1, "r": 0 }, { "q": -1, "r": 1 }
+        ],
+        "goals": [
+          { "q": 0, "r": -1, "colorKey": "red", "endType": "any" },
+          { "q": -1, "r": 0, "colorKey": "green", "endType": "any" },
+          { "q": 0, "r": 0, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790421482472", "colorKey": "red", "body": [{ "q": -2, "r": 0 }, { "q": -1, "r": -1 }, { "q": 0, "r": -2 }, { "q": 1, "r": -2 }, { "q": 1, "r": -1 }] },
+          { "id": "w_1790421488288", "colorKey": "blue", "body": [{ "q": 2, "r": -2 }, { "q": 2, "r": -1 }, { "q": 2, "r": 0 }, { "q": 1, "r": 1 }, { "q": 0, "r": 1 }] },
+          { "id": "w_1790421492867", "colorKey": "green", "body": [{ "q": 0, "r": 2 }, { "q": -1, "r": 2 }, { "q": -2, "r": 2 }, { "q": -2, "r": 1 }] }
+        ]
+      },
+      {
+        "id": "E4",
+        "name": "BobH 2011",
+        "radius": 2,
+        "walls": [
+          { "q": 2, "r": -2 }, { "q": -1, "r": 1 }, { "q": -2, "r": 2 }
+        ],
+        "goals": [
+          { "q": 0, "r": 2, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1789977758248", "colorKey": "blue", "body": [{ "q": 0, "r": -1 }, { "q": 1, "r": -1 }, { "q": 2, "r": -1 }, { "q": 2, "r": 0 }] },
+          { "id": "w_1789977770959", "colorKey": "red", "body": [{ "q": 1, "r": -2 }, { "q": 0, "r": -2 }, { "q": -1, "r": -1 }, { "q": -1, "r": 0 }] },
+          { "id": "w_1789977779768", "colorKey": "yellow", "body": [{ "q": -2, "r": 0 }, { "q": -2, "r": 1 }] },
+          { "id": "w_1789977787834", "colorKey": "green", "body": [{ "q": 1, "r": 1 }, { "q": 0, "r": 1 }, { "q": -1, "r": 2 }] }
+        ]
+      }
+    ];
+
+    let appMode = 'play'; // 'play' or 'edit'
+    let activeEditTool = 'wall';
+    let selectedWriggleColor = 'blue';
+
+    let customLevels = JSON.parse(JSON.stringify(PRESET_LEVELS));
+    let currentLevelIdx = 0;
+    let boardRadius = 2;
+
+    let walls = [];
+    let goals = [];
+    let wriggles = [];
+
+    // Play State
+    let selectedWriggleId = null;
+    let selectedEnd = null;
+    let moveHistory = [];
+    let redoStack = [];
+    let moveCount = 0;
+    let isLevelSolved = false;
+
+    // Edit Drawing & Extension State
+    let drawingWrigglePath = [];
+    let selectedEditWriggleId = null;
+    let selectedEditEnd = null;
+
+    // Solver Playback State
+    let currentSolutionPath = null;
+    let playbackStepIndex = 0;
+    let playbackInterval = null;
+
+    // Canvas Setup
+    const canvas = document.getElementById('hex-canvas');
+    const ctx = canvas.getContext('2d');
+    let hexSize = 40;
+    let originX = 0;
+    let originY = 0;
+
+    function hexToPixel(q, r) {
+      const x = hexSize * (Math.sqrt(3) * q + Math.sqrt(3) / 2 * r);
+      const y = hexSize * (3 / 2 * r);
+      return { x: originX + x, y: originY + y };
+    }
+
+    function pixelToHex(px, py) {
+      const x = (px - originX) / hexSize;
+      const y = (py - originY) / hexSize;
+      const q = (Math.sqrt(3) / 3 * x - 1 / 3 * y);
+      const r = (2 / 3 * y);
+
+      let rx = Math.round(q);
+      let ry = Math.round(-q - r);
+      let rz = Math.round(r);
+
+      const xDiff = Math.abs(rx - q);
+      const yDiff = Math.abs(ry - (-q - r));
+      const zDiff = Math.abs(rz - r);
+
+      if (xDiff > yDiff && xDiff > zDiff) {
+        rx = -ry - rz;
+      } else if (yDiff > zDiff) {
+        ry = -rx - rz;
+      } else {
+        rz = -rx - ry;
+      }
+
+      return { q: rx, r: rz };
+    }
+
+    function isSameHex(a, b) {
+      return a && b && a.q === b.q && a.r === b.r;
+    }
+
+    function isAdjacentHex(a, b) {
+      const dq = a.q - b.q;
+      const dr = a.r - b.r;
+      return HEX_DIRECTIONS.some(d => d.q === dq && d.r === dr);
+    }
+
+    function isHexInBounds(q, r, radius) {
+      return (Math.abs(q) <= radius && Math.abs(r) <= radius && Math.abs(q + r) <= radius);
+    }
+
+    function getAllHexesInRadius(radius) {
+      const hexes = [];
+      for (let q = -radius; q <= radius; q++) {
+        const r1 = Math.max(-radius, -q - radius);
+        const r2 = Math.min(radius, -q + radius);
+        for (let r = r1; r <= r2; r++) {
+          hexes.push({ q, r });
+        }
+      }
+      return hexes;
+    }
+
+    function toggleBoardRadius() {
+      // Toggle between radius 2 and 3
+      boardRadius = (boardRadius === 2) ? 3 : 2;
+
+      // Filter out any walls, goals, or wriggle segments that fall out of bounds if shrinking
+      walls = walls.filter(w => isHexInBounds(w.q, w.r, boardRadius));
+      goals = goals.filter(g => isHexInBounds(g.q, g.r, boardRadius));
+
+      // Remove entire wriggle if any body segment falls out of bounds
+      wriggles = wriggles.filter(w =>
+        w.body.every(seg => isHexInBounds(seg.q, seg.r, boardRadius))
+      );
+
+      updateRadiusUI();
+      syncActiveLevelState();
+      resizeCanvas();
+    }
+
+    function updateRadiusUI() {
+      const indicator = document.getElementById('radius-indicator');
+      const btn = document.getElementById('btn-toggle-radius');
+
+      if (indicator) indicator.innerText = `Radius ${boardRadius}`;
+      if (btn) {
+        btn.innerText = (boardRadius === 2) ? 'Set Radius 3' : 'Set Radius 2';
+      }
+    }
+
+    function loadLevel(idx) {
+      if (idx < 0 || idx >= customLevels.length) return;
+      currentLevelIdx = idx;
+
+      const lvl = customLevels[idx];
+      boardRadius = lvl.radius || 2;
+      updateRadiusUI();
+      walls = JSON.parse(JSON.stringify(lvl.walls || []));
+      goals = JSON.parse(JSON.stringify(lvl.goals || []));
+      wriggles = JSON.parse(JSON.stringify(lvl.wriggles || []));
+
+      selectedWriggleId = null;
+      selectedEnd = null;
+      selectedEditWriggleId = null;
+      selectedEditEnd = null;
+      moveHistory = [];
+      redoStack = [];
+      moveCount = 0;
+      isLevelSolved = false;
+      drawingWrigglePath = [];
+      stopSolutionAutoPlay();
+      currentSolutionPath = null;
+
+      document.getElementById('move-counter').innerText = '0';
+      document.getElementById('game-status').innerText = 'Select Head/Tail';
+      document.getElementById('game-status').className = 'text-xs font-semibold text-amber-400';
+      document.getElementById('victory-banner').classList.add('hidden');
+      document.getElementById('solver-results').classList.add('hidden');
+
+      updateLevelDropdownUI();
+      updatePuzzleInfoHeader();
+      render();
+    }
+
+    function syncActiveLevelState() {
+      if (currentLevelIdx < 0 || currentLevelIdx >= customLevels.length) return;
+      customLevels[currentLevelIdx].walls = JSON.parse(JSON.stringify(walls));
+      customLevels[currentLevelIdx].goals = JSON.parse(JSON.stringify(goals));
+      customLevels[currentLevelIdx].wriggles = JSON.parse(JSON.stringify(wriggles));
+      customLevels[currentLevelIdx].radius = boardRadius;
+      updateLevelDropdownUI();
+    }
+
+    function hexDistance(a, b) {
+      return (Math.abs(a.q - b.q) + Math.abs(a.r - b.r) + Math.abs((a.q + a.r) - (b.q + b.r))) / 2;
+    }
+
+    function isValidWriggleBody(body) {
+      if (body.length < 2) return false;
+
+      // 1. Ensure all cells in the body are unique (no self-overlapping)
+      const set = new Set();
+      for (const cell of body) {
+        const key = `${cell.q},${cell.r}`;
+        if (set.has(key)) return false;
+        set.add(key);
+      }
+
+      // 2. Ensure consecutive segments are adjacent
+      for (let i = 0; i < body.length - 1; i++) {
+        if (hexDistance(body[i], body[i + 1]) !== 1) return false;
+      }
+
+      // 3. TABOO: Disallow 60° sharp bends across 3 consecutive segments
+      for (let i = 0; i < body.length - 2; i++) {
+        if (hexDistance(body[i], body[i + 2]) === 1) return false;
+      }
+
+      return true;
+    }
+
+    function getValidMoveTargets(wriggleId, endType) {
+      const wriggle = wriggles.find(w => w.id === wriggleId);
+      if (!wriggle) return [];
+
+      const isHead = (endType === 'head');
+      const currentCell = isHead ? wriggle.body[0] : wriggle.body[wriggle.body.length - 1];
+      const oppositeEndCell = isHead ? wriggle.body[wriggle.body.length - 1] : wriggle.body[0];
+      const targets = [];
+
+      HEX_DIRECTIONS.forEach(dir => {
+        const target = { q: currentCell.q + dir.q, r: currentCell.r + dir.r };
+
+        // 1. Check board boundaries
+        if (!isHexInBounds(target.q, target.r, boardRadius)) return;
+
+        // 2. Disallow head-to-tail / tail-to-head swap on 2-cell wriggles
+        if (wriggle.body.length === 2 && isSameHex(target, oppositeEndCell)) return;
+
+        // 3. Check wall collisions
+        if (walls.some(w => isSameHex(w, target))) return;
+
+        // 4. Simulate slither candidate body
+        const candidateBody = JSON.parse(JSON.stringify(wriggle.body));
+        if (isHead) {
+          candidateBody.unshift(target);
+          candidateBody.pop();
+        } else {
+          candidateBody.push(target);
+          candidateBody.shift();
+        }
+
+        // 5. Check collisions with other wriggles (ignoring vacating end cell)
+        let collision = false;
+        wriggles.forEach(other => {
+          other.body.forEach((cell, cIdx) => {
+            if (other.id === wriggleId && ((isHead && cIdx === wriggle.body.length - 1) || (!isHead && cIdx === 0))) return;
+            if (isSameHex(cell, target)) collision = true;
+          });
+        });
+
+        // 5. Validate against non-overlapping + taboo 60° bend rules
+        if (!collision && isValidWriggleBody(candidateBody)) {
+          targets.push(target);
+        }
+      });
+
+      return targets;
+    }
+
+    function executeSlitherMove(wriggleId, endType, targetHex) {
+      moveHistory.push({
+        wriggles: JSON.parse(JSON.stringify(wriggles)),
+        moveCount: moveCount
+      });
+      redoStack = [];
+
+      const w = wriggles.find(item => item.id === wriggleId);
+      if (!w) return;
+
+      if (endType === 'head') {
+        const newBody = [targetHex];
+        for (let i = 0; i < w.body.length - 1; i++) {
+          newBody.push(w.body[i]);
+        }
+        w.body = newBody;
+      } else {
+        const newBody = [];
+        for (let i = 1; i < w.body.length; i++) {
+          newBody.push(w.body[i]);
+        }
+        newBody.push(targetHex);
+        w.body = newBody;
+      }
+
+      moveCount++;
+      document.getElementById('move-counter').innerText = moveCount;
+
+      checkWinCondition();
+      render();
+    }
+
+    function undoMove() {
+      if (moveHistory.length === 0) return;
+      redoStack.push({
+        wriggles: JSON.parse(JSON.stringify(wriggles)),
+        moveCount: moveCount
+      });
+
+      const previous = moveHistory.pop();
+      wriggles = previous.wriggles;
+      moveCount = previous.moveCount;
+      document.getElementById('move-counter').innerText = moveCount;
+
+      isLevelSolved = false;
+      document.getElementById('victory-banner').classList.add('hidden');
+      document.getElementById('game-status').innerText = 'Select Head/Tail';
+      document.getElementById('game-status').className = 'text-xs font-semibold text-amber-400';
+
+      render();
+    }
+
+    function redoMove() {
+      if (redoStack.length === 0) return;
+      moveHistory.push({
+        wriggles: JSON.parse(JSON.stringify(wriggles)),
+        moveCount: moveCount
+      });
+
+      const nextState = redoStack.pop();
+      wriggles = nextState.wriggles;
+      moveCount = nextState.moveCount;
+      document.getElementById('move-counter').innerText = moveCount;
+
+      checkWinCondition();
+      render();
+    }
+
+    function resetCurrentLevel() {
+      loadLevel(currentLevelIdx);
+    }
+
+    function loadNextLevel() {
+      const nextIdx = (currentLevelIdx + 1) % customLevels.length;
+      loadLevel(nextIdx);
+    }
+
+    function checkWinCondition() {
+      if (checkGoalsSatisfied(wriggles, goals)) {
+        isLevelSolved = true;
+        document.getElementById('game-status').innerText = '🎉 Solved!';
+        document.getElementById('game-status').className = 'text-xs font-bold text-emerald-400';
+        document.getElementById('win-message').innerText = `Completed in ${moveCount} moves`;
+        document.getElementById('victory-banner').classList.remove('hidden');
+      }
+    }
+
+    function positionPuzzleInfoHeader() {
+      // Fixed DOM element ID lookup
+      const headerEl = document.getElementById('puzzle-info-header');
+      if (!headerEl) return;
+
+      // Center Y of bottom-most hex (q: 0, r: boardRadius) + offset to clear hex tip
+      const bottomHexPix = hexToPixel(0, boardRadius);
+      const bottomY = bottomHexPix.y + (hexSize * 1.5) + 16;
+
+      headerEl.style.left = `${originX}px`;
+      headerEl.style.top = `${bottomY}px`;
+    }
+
+    // UPDATED FUNCTION
+    function updatePuzzleInfoHeader() {
+      const current = customLevels[currentLevelIdx];
+      if (!current) return;
+
+      const idEl = document.getElementById('puzzle-header-id');
+      const nameEl = document.getElementById('puzzle-header-name');
+
+      if (idEl) idEl.innerText = current.id || `Slot-${currentLevelIdx}`;
+      if (nameEl) nameEl.innerText = current.name || `Level ${currentLevelIdx + 1}`;
+
+      // Re-position header whenever level data updates
+      positionPuzzleInfoHeader();
+    }
+
+    function findDistinctSolutions(initialWriggleList, targetGoals, maxSolutions = 3) {
+      const startKey = getCanonicalStateKey(initialWriggleList);
+      const visited = new Set([startKey]);
+
+      // Queue stores: { state, path }
+      const queue = [{ state: initialWriggleList, path: [] }];
+
+      const foundSolutions = [];
+      const foundEndKeys = new Set();
+
+      while (queue.length > 0) {
+        const { state, path } = queue.shift();
+
+        // Check if current state meets win condition
+        if (isWinState(state, targetGoals)) {
+          const endKey = getCanonicalStateKey(state);
+
+          // Only store if this produces a non-identical final configuration
+          if (!foundEndKeys.has(endKey)) {
+            foundEndKeys.add(endKey);
+            foundSolutions.push({
+              depth: path.length,
+              endState: state,
+              path: path
+            });
+
+            // Stop early if we reached the requested count of distinct solutions
+            if (foundSolutions.length >= maxSolutions) {
+              break;
+            }
+          }
+        }
+
+        // Expand next valid slither moves
+        const nextStates = getValidNextStates(state);
+        for (const nextState of nextStates) {
+          const key = getCanonicalStateKey(nextState);
+          if (!visited.has(key)) {
+            visited.add(key);
+            queue.push({
+              state: nextState,
+              path: [...path, nextState]
+            });
+          }
+        }
+      }
+      return foundSolutions;
+    }
+
+    //function getCanonicalStateKey(wriggleList) {
+    //  return wriggleList
+    //    .map(w => `${w.id}:${w.body.map(b => `${b.q},${b.r}`).join(';')}`)
+    //    .sort()
+    //   .join('|');
+    //}
+
+    function getCanonicalStateKey(wriggleList) {
+      return wriggleList
+        .map(w => {
+          const head = w.body[0];
+          const tail = w.body[w.body.length - 1];
+
+          // O(1) Endpoint Check: Compare q first, then r as tie-breaker
+          const needsReverse = (head.q > tail.q) || (head.q === tail.q && head.r > tail.r);
+
+          // Only slice/reverse if out of order; otherwise use original array
+          const bodyCoords = needsReverse ? w.body.slice().reverse() : w.body;
+          const bodyStr = bodyCoords.map(b => `${b.q},${b.r}`).join(';');
+
+          return `${w.id}:${bodyStr}`;
+        })
+        .sort()
+        .join('|');
+    }
+
+    function checkGoalsSatisfied(wriggleList, goalList) {
+      if (!goalList || goalList.length === 0) return false;
+
+      for (let goal of goalList) {
+        let satisfied = false;
+        for (let w of wriggleList) {
+          if (w.colorKey === goal.colorKey) {
+            const head = w.body[0];
+            const tail = w.body[w.body.length - 1];
+            if (goal.endType === 'head') {
+              if (isSameHex(head, goal)) satisfied = true;
+            } else if (goal.endType === 'tail') {
+              if (isSameHex(tail, goal)) satisfied = true;
+            } else {
+              if (isSameHex(head, goal) || isSameHex(tail, goal)) satisfied = true;
+            }
+          }
+        }
+        if (!satisfied) return false;
+      }
+      return true;
+    }
+
+    function solveCurrentLevel() {
+      stopSolutionAutoPlay();
+      const startTime = performance.now();
+
+      const resultsBox = document.getElementById('solver-results');
+      resultsBox.classList.remove('hidden');
+      document.getElementById('stat-states').innerText = 'Searching...';
+      document.getElementById('stat-steps').innerText = '-';
+      document.getElementById('stat-macromoves').innerText = '-';
+      document.getElementById('solver-playback').classList.add('hidden');
+
+      const initialKey = getCanonicalStateKey(wriggles);
+      const queue = [{ key: initialKey, wriggles: JSON.parse(JSON.stringify(wriggles)), path: [] }];
+      const visited = new Map();
+      visited.set(initialKey, { parent: null, move: null });
+
+      let solutionState = null;
+      let totalStatesExplored = 0;
+      let lastVisitedState = null;
+
+      while (queue.length > 0) {
+        const { key, wriggles: currentWriggles, path } = queue.shift();
+        totalStatesExplored++;
+
+        if (checkGoalsSatisfied(currentWriggles, goals)) {
+          solutionState = { wriggles: currentWriggles, path };
+          break;
+        }
+
+        const stateOccupied = new Set();
+        walls.forEach(w => stateOccupied.add(`${w.q},${w.r}`));
+        currentWriggles.forEach(w => {
+          w.body.forEach(seg => stateOccupied.add(`${seg.q},${seg.r}`));
+        });
+
+        currentWriggles.forEach(w => {
+          ['head', 'tail'].forEach(endType => {
+            const body = w.body;
+            const head = body[0];
+            const tail = body[body.length - 1];
+            const endHex = (endType === 'head') ? head : tail;
+            const oppositeTailHex = (endType === 'head') ? tail : head;
+
+            const adjacentSeg = (endType === 'head') ? body[1] : body[body.length - 2];
+            let prevDirIdx = -1;
+            if (adjacentSeg) {
+              const dqPrev = endHex.q - adjacentSeg.q;
+              const drPrev = endHex.r - adjacentSeg.r;
+              prevDirIdx = HEX_DIRECTIONS.findIndex(d => d.q === dqPrev && d.r === drPrev);
+            }
+
+            HEX_DIRECTIONS.forEach(dir => {
+              const neighbor = { q: endHex.q + dir.q, r: endHex.r + dir.r };
+
+              // 1. Board boundary check
+              if (!isHexInBounds(neighbor.q, neighbor.r, boardRadius)) return;
+
+              // 2. Disallow head-to-tail swap on 2-cell wriggle
+              if (body.length === 2 && isSameHex(neighbor, oppositeTailHex)) return;
+
+              // 3. Wall collision check
+              if (walls.some(w => isSameHex(w, neighbor))) return;
+
+              // 4. Check collisions with other wriggles (ignoring vacating end cell)
+              let collision = false;
+              currentWriggles.forEach(other => {
+                other.body.forEach((cell, cIdx) => {
+                  if (other.id === w.id && ((endType === 'head' && cIdx === body.length - 1) || (endType === 'tail' && cIdx === 0))) return;
+                  if (isSameHex(cell, neighbor)) collision = true;
+                });
+              });
+
+              if (collision) return;
+
+              // 5. Build candidate body
+              const candidateBody = JSON.parse(JSON.stringify(body));
+              if (endType === 'head') {
+                candidateBody.unshift(neighbor);
+                candidateBody.pop();
+              } else {
+                candidateBody.push(neighbor);
+                candidateBody.shift();
+              }
+
+              // 6. Validate against non-overlapping + taboo 60° bend rules
+              if (isValidWriggleBody(candidateBody)) {
+                const nextWriggles = JSON.parse(JSON.stringify(currentWriggles));
+                const targetWriggle = nextWriggles.find(nw => nw.id === w.id);
+                targetWriggle.body = candidateBody;
+                lastVisitedState = nextWriggles;
+
+                const nextKey = getCanonicalStateKey(nextWriggles);
+                if (!visited.has(nextKey)) {
+                  const moveInfo = { wriggleId: w.id, colorKey: w.colorKey, endType, targetHex: neighbor };
+                  visited.set(nextKey, { parent: key, move: moveInfo });
+                  queue.push({
+                    key: nextKey,
+                    wriggles: nextWriggles,
+                    path: [...path, { wriggles: nextWriggles, move: moveInfo }]
+                  });
+                }
+              }
+            });
+          });
+        });
+      }
+
+      const elapsed = (performance.now() - startTime).toFixed(1);
+      document.getElementById('stat-states').innerText = `${totalStatesExplored} (${elapsed}ms)`;
+
+      if (solutionState) {
+        const fullPath = [{ wriggles: JSON.parse(JSON.stringify(wriggles)), move: null }, ...solutionState.path];
+        currentSolutionPath = fullPath;
+
+        let macroMoveCount = 0;
+        let lastMove = null;
+        solutionState.path.forEach(step => {
+          if (!lastMove || lastMove.wriggleId !== step.move.wriggleId || lastMove.endType !== step.move.endType) {
+            macroMoveCount++;
+          }
+          lastMove = step.move;
+        });
+
+        document.getElementById('stat-steps').innerText = `${solutionState.path.length} steps`;
+        document.getElementById('stat-macromoves').innerText = `${macroMoveCount} wriggles`;
+
+        playbackStepIndex = 0;
+        updatePlaybackUI();
+        document.getElementById('solver-playback').classList.remove('hidden');
+      }
+      else {
+        document.getElementById('stat-steps').innerText = 'Unsolvable!';
+        document.getElementById('stat-macromoves').innerText = 'N/A';
+
+        if (lastVisitedState) {
+          wriggles = JSON.parse(JSON.stringify(lastVisitedState)); // Restore board to last attempted state
+          render(); // Redraw grid with the furthest state
+        }
+      }
+    }
+
+    function updatePlaybackUI() {
+      if (!currentSolutionPath) return;
+      document.getElementById('playback-step-text').innerText = `Step ${playbackStepIndex} / ${currentSolutionPath.length - 1}`;
+
+      const frame = currentSolutionPath[playbackStepIndex];
+      wriggles = JSON.parse(JSON.stringify(frame.wriggles));
+      moveCount = playbackStepIndex;
+      document.getElementById('move-counter').innerText = moveCount;
+
+      if (frame.move) {
+        selectedWriggleId = frame.move.wriggleId;
+        selectedEnd = frame.move.endType;
+        document.getElementById('game-status').innerText = `Step ${playbackStepIndex}: ${frame.move.colorKey} (${frame.move.endType})`;
+      } else {
+        selectedWriggleId = null;
+        selectedEnd = null;
+        document.getElementById('game-status').innerText = 'Start State';
+      }
+
+      render();
+    }
+
+    function stepSolution(delta) {
+      if (!currentSolutionPath) return;
+      playbackStepIndex = Math.max(0, Math.min(currentSolutionPath.length - 1, playbackStepIndex + delta));
+      updatePlaybackUI();
+    }
+
+    function toggleSolutionAutoPlay() {
+      if (playbackInterval) {
+        stopSolutionAutoPlay();
+      } else {
+        if (!currentSolutionPath) return;
+        document.getElementById('btn-toggle-play-sol').innerText = '⏸ Pause';
+        document.getElementById('btn-toggle-play-sol').className = 'bg-amber-600 hover:bg-amber-500 text-white font-bold text-[10px] px-2 py-1 rounded shadow';
+
+        playbackInterval = setInterval(() => {
+          if (playbackStepIndex < currentSolutionPath.length - 1) {
+            playbackStepIndex++;
+            updatePlaybackUI();
+          } else {
+            stopSolutionAutoPlay();
+          }
+        }, 250);
+      }
+    }
+
+    function stopSolutionAutoPlay() {
+      if (playbackInterval) {
+        clearInterval(playbackInterval);
+        playbackInterval = null;
+      }
+      const btn = document.getElementById('btn-toggle-play-sol');
+      if (btn) {
+        btn.innerText = '▶ Auto';
+        btn.className = 'bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] px-2 py-1 rounded shadow';
+      }
+    }
+
+    function resizeCanvas() {
+      const container = canvas.parentElement;
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+
+      originX = canvas.width / 2;
+      originY = canvas.height / 2;
+
+      const minDim = Math.min(canvas.width, canvas.height);
+      hexSize = Math.max(24, Math.min(48, minDim / ((boardRadius * 2 + 1) * 2.2)));
+
+      positionPuzzleInfoHeader();
+      render();
+    }
+
+    function drawHexagon(ctx, x, y, size, fillColor, strokeColor, lineWidth = 2) {
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i - Math.PI / 6;
+        const hx = x + size * Math.cos(angle);
+        const hy = y + size * Math.sin(angle);
+        if (i === 0) ctx.moveTo(hx, hy);
+        else ctx.lineTo(hx, hy);
+      }
+      ctx.closePath();
+
+      if (fillColor) {
+        ctx.fillStyle = fillColor;
+        ctx.fill();
+      }
+      if (strokeColor) {
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = lineWidth;
+        ctx.stroke();
+      }
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const allHexes = getAllHexesInRadius(boardRadius);
+
+      // 1. Render Hex Base Cells
+      allHexes.forEach(h => {
+        const pix = hexToPixel(h.q, h.r);
+        const isWall = walls.some(w => isSameHex(w, h));
+
+        if (isWall) {
+          drawHexagon(ctx, pix.x, pix.y, hexSize * 0.94, '#333', '#777', 3);
+        } else {
+          drawHexagon(ctx, pix.x, pix.y, hexSize * 0.94, '#666', '#AAA', 3);
+        }
+        // Coordinate labels
+        ctx.fillStyle = '#888';
+        ctx.font = '10px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`${h.q},${h.r}`, pix.x, pix.y);
+      });
+
+      // 2. Render Goals / Targets
+      goals.forEach(goal => {
+        const pix = hexToPixel(goal.q, goal.r);
+        const colorDef = WRIGGLE_COLORS.find(c => c.id === goal.colorKey) || WRIGGLE_COLORS[0];
+
+        drawHexagon(ctx, pix.x, pix.y, hexSize * 0.85, null, colorDef.hex, 3);
+
+        ctx.fillStyle = colorDef.hex;
+        ctx.globalAlpha = 0.25;
+        drawHexagon(ctx, pix.x, pix.y, hexSize * 0.85, colorDef.hex, null);
+        ctx.globalAlpha = 1.0;
+
+        ctx.fillStyle = colorDef.hex;
+        ctx.beginPath();
+        ctx.arc(pix.x, pix.y, hexSize * 0.25, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 3. Render Active Valid Move Highlights
+      if (appMode === 'play' && selectedWriggleId && selectedEnd) {
+        const validTargets = getValidMoveTargets(selectedWriggleId, selectedEnd);
+        validTargets.forEach(tHex => {
+          const pix = hexToPixel(tHex.q, tHex.r);
+          ctx.fillStyle = 'rgba(74, 222, 128, 0.35)';
+          drawHexagon(ctx, pix.x, pix.y, hexSize * 0.94, '#FFF2', '#FFF', 3);
+        });
+      }
+
+      // 4. Render Wriggles
+      wriggles.forEach(wriggle => {
+        const colorDef = WRIGGLE_COLORS.find(c => c.id === wriggle.colorKey) || WRIGGLE_COLORS[0];
+        const isSelected = (wriggle.id === selectedWriggleId);
+
+        for (let i = 0; i < wriggle.body.length - 1; i++) {
+          const p1 = hexToPixel(wriggle.body[i].q, wriggle.body[i].r);
+          const p2 = hexToPixel(wriggle.body[i + 1].q, wriggle.body[i + 1].r);
+
+          ctx.strokeStyle = colorDef.dark;
+          ctx.lineWidth = hexSize * 0.65;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+
+          ctx.strokeStyle = colorDef.hex;
+          ctx.lineWidth = hexSize * 0.5;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+
+        wriggle.body.forEach((seg, idx) => {
+          const pix = hexToPixel(seg.q, seg.r);
+          const isHead = (idx === 0);
+          const isTail = (idx === wriggle.body.length - 1);
+
+          ctx.fillStyle = colorDef.dark;
+          ctx.beginPath();
+          ctx.arc(pix.x, pix.y, hexSize * 0.36, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = colorDef.hex;
+          ctx.beginPath();
+          ctx.arc(pix.x, pix.y, hexSize * 0.28, 0, Math.PI * 2);
+          ctx.fill();
+
+          if (isSelected) {
+            if ((isHead && selectedEnd === 'head') || (isTail && selectedEnd === 'tail')) {
+              ctx.strokeStyle = '#ffffff';
+              ctx.lineWidth = 3;
+              ctx.beginPath();
+              ctx.arc(pix.x, pix.y, hexSize * 0.42, 0, Math.PI * 2);
+              ctx.stroke();
+            }
+          }
+
+          if (appMode === 'edit' && activeEditTool === 'extend_wriggle' && wriggle.id === selectedEditWriggleId) {
+            if ((isHead && selectedEditEnd === 'head') || (isTail && selectedEditEnd === 'tail')) {
+              ctx.strokeStyle = '#38bdf8';
+              ctx.lineWidth = 3;
+              ctx.setLineDash([4, 4]);
+              ctx.beginPath();
+              ctx.arc(pix.x, pix.y, hexSize * 0.45, 0, Math.PI * 2);
+              ctx.stroke();
+              ctx.setLineDash([]);
+            }
+          }
+
+          if (isHead) {
+            ctx.fillStyle = '#0f172a';
+            ctx.beginPath();
+            ctx.arc(pix.x - 4, pix.y - 3, 3, 0, Math.PI * 2);
+            ctx.arc(pix.x + 4, pix.y - 3, 3, 0, Math.PI * 2);
+            ctx.fill();
+          } else if (isTail) {
+            ctx.strokeStyle = '#0f172a';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(pix.x, pix.y, 5, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        });
+      });
+
+      // 5. Render Edit Mode Temp Path
+      if (appMode === 'edit' && drawingWrigglePath.length > 0) {
+        const colorDef = WRIGGLE_COLORS.find(c => c.id === selectedWriggleColor) || WRIGGLE_COLORS[0];
+
+        drawingWrigglePath.forEach((h, idx) => {
+          const pix = hexToPixel(h.q, h.r);
+          ctx.fillStyle = colorDef.hex;
+          ctx.globalAlpha = 0.7;
+          ctx.beginPath();
+          ctx.arc(pix.x, pix.y, hexSize * 0.3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1.0;
+
+          ctx.fillStyle = '#0f172a';
+          ctx.font = 'bold 12px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText((idx + 1).toString(), pix.x, pix.y);
+        });
+      }
+    }
+
+    function onPointerDown(e) {
+      const rect = canvas.getBoundingClientRect();
+      const px = e.clientX - rect.left;
+      const py = e.clientY - rect.top;
+
+      const clickedHex = pixelToHex(px, py);
+      if (!isHexInBounds(clickedHex.q, clickedHex.r, boardRadius)) return;
+
+      if (appMode === 'play') {
+        handlePlayPointerDown(clickedHex);
+      } else {
+        handleEditPointerDown(clickedHex);
+      }
+    }
+
+    function handlePlayPointerDown(clickedHex) {
+      if (isLevelSolved) return;
+
+      // 1. If a wriggle end is already selected, attempt to execute a slither move onto a valid target
+      if (selectedWriggleId && selectedEnd) {
+        const validTargets = getValidMoveTargets(selectedWriggleId, selectedEnd);
+        const targetMatch = validTargets.find(t => isSameHex(t, clickedHex));
+
+        if (targetMatch) {
+          executeSlitherMove(selectedWriggleId, selectedEnd, targetMatch);
+          const movedWriggle = wriggles.find(w => w.id === selectedWriggleId);
+          if (movedWriggle) {
+            document.getElementById('game-status').innerText = `Active: ${movedWriggle.colorKey} (${selectedEnd})`;
+          }
+          return;
+        }
+      }
+
+      // 2. Otherwise, check if the clicked hex corresponds to a head or tail
+      let clickedWriggle = null;
+      let clickedEnd = null;
+
+      wriggles.forEach(w => {
+        const head = w.body[0];
+        const tail = w.body[w.body.length - 1];
+
+        if (isSameHex(head, clickedHex)) {
+          clickedWriggle = w;
+          clickedEnd = 'head';
+        } else if (isSameHex(tail, clickedHex)) {
+          clickedWriggle = w;
+          clickedEnd = 'tail';
+        }
+      });
+
+      // 3. Process selection / auto-move behavior
+      if (clickedWriggle) {
+        const validTargets = getValidMoveTargets(clickedWriggle.id, clickedEnd);
+
+        // AUTO-MOVE: If exactly one move option exists, execute it immediately
+        if (validTargets.length === 99) { // was 1 - but currently disabled
+          executeSlitherMove(clickedWriggle.id, clickedEnd, validTargets[0]);
+          selectedWriggleId = clickedWriggle.id;
+          selectedEnd = clickedEnd;
+          document.getElementById('game-status').innerText = `Active: ${clickedWriggle.colorKey} (${clickedEnd})`;
+          document.getElementById('game-status').className = 'text-xs font-semibold text-cyan-400';
+        } else {
+          // Normal selection highlight when 0 or 2+ options exist
+          selectedWriggleId = clickedWriggle.id;
+          selectedEnd = clickedEnd;
+          document.getElementById('game-status').innerText = `Active: ${clickedWriggle.colorKey} (${clickedEnd})`;
+          document.getElementById('game-status').className = 'text-xs font-semibold text-cyan-400';
+        }
+      } else {
+        selectedWriggleId = null;
+        selectedEnd = null;
+        document.getElementById('game-status').innerText = 'Select Head/Tail';
+        document.getElementById('game-status').className = 'text-xs font-semibold text-amber-400';
+      }
+
+      render();
+    }
+
+    function handleEditPointerDown(clickedHex) {
+
+      const WallIdx = walls.findIndex(w => isSameHex(w, clickedHex));
+      const GoalIdx = goals.findIndex(w => isSameHex(w, clickedHex));
+      const Occupied = wriggles.some(w => w.body.some(b => isSameHex(b, clickedHex)));
+
+      if (activeEditTool === 'wall') {
+        if (WallIdx >= 0) {
+          walls.splice(WallIdx, 1);  // toggle off wall
+        } else {
+          if (!Occupied) {
+            removeGoalAt(clickedHex);
+            walls.push({ q: clickedHex.q, r: clickedHex.r });
+          }
+        }
+      }
+      else if (activeEditTool === 'goal') {
+        if (WallIdx >= 0) {
+          walls.splice(WallIdx, 1);   // toggle off wall
+        }
+        if (GoalIdx >= 0) {
+          goals.splice(GoalIdx, 1);   // toggle off goal
+        } else {
+          goals.push({
+            q: clickedHex.q,
+            r: clickedHex.r,
+            colorKey: selectedWriggleColor,
+            endType: 'any'
+          });
+        }
+
+      } else if (activeEditTool === 'extend_wriggle') {
+        handleExtendWriggleClick(clickedHex);
+      } else if (activeEditTool === 'trim_wriggle') {
+        handleTrimWriggleClick(clickedHex);
+      } else if (activeEditTool === 'recolor_wriggle') {
+        handleRecolorWriggleClick(clickedHex);
+      } else if (activeEditTool === 'wriggle') {
+        if (drawingWrigglePath.length === 0) {
+          removeWallAt(clickedHex);
+          drawingWrigglePath.push(clickedHex);
+        } else {
+          const lastHex = drawingWrigglePath[drawingWrigglePath.length - 1];
+          const isAlreadyInPath = drawingWrigglePath.some(h => isSameHex(h, clickedHex));
+
+          if (isSameHex(lastHex, clickedHex)) {
+            finalizeDrawnWriggle();
+          } else if (isAdjacentHex(lastHex, clickedHex) && !isAlreadyInPath) {
+            removeWallAt(clickedHex);
+            drawingWrigglePath.push(clickedHex);
+          }
+        }
+      } else if (activeEditTool === 'delete_wriggle') {
+        removeWriggleAt(clickedHex);
+      }
+      syncActiveLevelState();
+      render();
+    }
+
+    function handleExtendWriggleClick(clickedHex) {
+      if (selectedEditWriggleId && selectedEditEnd) {
+        const targetWriggle = wriggles.find(w => w.id === selectedEditWriggleId);
+        if (targetWriggle) {
+          const endHex = (selectedEditEnd === 'head') ? targetWriggle.body[0] : targetWriggle.body[targetWriggle.body.length - 1];
+          if (isAdjacentHex(endHex, clickedHex)) {
+            const isOccupied = walls.some(w => isSameHex(w, clickedHex)) ||
+              wriggles.some(w => w.body.some(b => isSameHex(b, clickedHex)));
+
+            if (!isOccupied) {
+              if (selectedEditEnd === 'head') {
+                targetWriggle.body.unshift({ q: clickedHex.q, r: clickedHex.r });
+              } else {
+                targetWriggle.body.push({ q: clickedHex.q, r: clickedHex.r });
+              }
+              syncActiveLevelState();
+              return;
+            }
+          }
+        }
+      }
+
+      let matchedWriggle = null;
+      let matchedEnd = null;
+
+      wriggles.forEach(w => {
+        const head = w.body[0];
+        const tail = w.body[w.body.length - 1];
+        if (isSameHex(head, clickedHex)) {
+          matchedWriggle = w;
+          matchedEnd = 'head';
+        } else if (isSameHex(tail, clickedHex)) {
+          matchedWriggle = w;
+          matchedEnd = 'tail';
+        }
+      });
+
+      if (matchedWriggle) {
+        selectedEditWriggleId = matchedWriggle.id;
+        selectedEditEnd = matchedEnd;
+      } else {
+        selectedEditWriggleId = null;
+        selectedEditEnd = null;
+      }
+    }
+
+    function handleTrimWriggleClick(clickedHex) {
+      let matchedWriggle = null;
+      let matchedEnd = null;
+
+      wriggles.forEach(w => {
+        const head = w.body[0];
+        const tail = w.body[w.body.length - 1];
+        if (isSameHex(head, clickedHex)) {
+          matchedWriggle = w;
+          matchedEnd = 'head';
+        } else if (isSameHex(tail, clickedHex)) {
+          matchedWriggle = w;
+          matchedEnd = 'tail';
+        }
+      });
+
+      if (matchedWriggle) {
+        if (matchedWriggle.body.length <= 2) return;
+        if (matchedEnd === 'head') {
+          matchedWriggle.body.shift();
+        } else {
+          matchedWriggle.body.pop();
+        }
+        syncActiveLevelState();
+      }
+    }
+
+    function handleRecolorWriggleClick(clickedHex) {
+      const w = wriggles.find(item => item.body.some(b => isSameHex(b, clickedHex)));
+      if (w) {
+        w.colorKey = selectedWriggleColor;
+        syncActiveLevelState();
+      }
+    }
+
+    function removeWallAt(hex) {
+      walls = walls.filter(w => !isSameHex(w, hex));
+      syncActiveLevelState();
+    }
+
+    function removeGoalAt(hex) {
+      goals = goals.filter(g => !isSameHex(g, hex));
+      syncActiveLevelState();
+    }
+
+    function removeWriggleAt(hex) {
+      wriggles = wriggles.filter(w => !w.body.some(seg => isSameHex(seg, hex)));
+      syncActiveLevelState();
+    }
+
+    function finalizeDrawnWriggle() {
+      if (drawingWrigglePath.length < 2) {
+        drawingWrigglePath = [];
+        render();
+        return;
+      }
+
+      const newId = 'w_' + Date.now();
+      wriggles.push({
+        id: newId,
+        colorKey: selectedWriggleColor,
+        body: [...drawingWrigglePath]
+      });
+
+      drawingWrigglePath = [];
+      syncActiveLevelState();
+      render();
+    }
+
+    function setAppMode(mode) {
+      if (appMode === 'edit' && mode === 'play') {
+        const current = customLevels[currentLevelIdx];
+        if (current) {
+          current.walls = JSON.parse(JSON.stringify(walls));
+          current.goals = JSON.parse(JSON.stringify(goals));
+          current.wriggles = JSON.parse(JSON.stringify(wriggles));
+          current.radius = boardRadius;
+
+          if (!current.name.includes('[*]')) {
+            current.name = `${current.name} [*]`;
+          }
+          updateLevelDropdownUI();
+        }
+      }
+
+      appMode = mode;
+      const btnPlay = document.getElementById('btn-mode-play');
+      const btnEdit = document.getElementById('btn-mode-edit');
+
+      if (mode === 'play') {
+        btnPlay.className = 'px-3 py-1 rounded-md text-xs font-bold transition bg-cyan-600 text-white shadow';
+        btnEdit.className = 'px-3 py-1 rounded-md text-xs font-bold transition text-slate-400 hover:text-white';
+        document.getElementById('play-controls').classList.remove('hidden');
+        document.getElementById('edit-controls').classList.add('hidden');
+
+        moveHistory = [];
+        redoStack = [];
+        moveCount = 0;
+        isLevelSolved = false;
+        selectedWriggleId = null;
+        selectedEnd = null;
+        document.getElementById('move-counter').innerText = '0';
+        document.getElementById('game-status').innerText = 'Select Wriggle Head/Tail';
+        document.getElementById('game-status').className = 'text-xs font-semibold text-amber-400';
+        document.getElementById('victory-banner').classList.add('hidden');
+      }
+      else { // mode === 'edit'
+        selectedWriggleId = null;
+        selectedEnd = null;
+        updateRadiusUI();
+        btnEdit.className = 'px-3 py-1 rounded-md text-xs font-bold transition bg-emerald-600 text-white shadow';
+        btnPlay.className = 'px-3 py-1 rounded-md text-xs font-bold transition text-slate-400 hover:text-white';
+        document.getElementById('play-controls').classList.add('hidden');
+        document.getElementById('edit-controls').classList.remove('hidden');
+      }
+
+      selectedEditWriggleId = null;
+      selectedEditEnd = null;
+      drawingWrigglePath = [];
+      render();
+    }
+
+    function setEditTool(tool) {
+      activeEditTool = tool;
+      drawingWrigglePath = [];
+      selectedEditWriggleId = null;
+      selectedEditEnd = null;
+
+      ['wall', 'goal', 'extend', 'trim', 'recolor', 'wriggle', 'delete-wriggle'].forEach(t => {
+        let toolKey = t;
+        if (t === 'extend') toolKey = 'extend_wriggle';
+        if (t === 'trim') toolKey = 'trim_wriggle';
+        if (t === 'recolor') toolKey = 'recolor_wriggle';
+        if (t === 'delete-wriggle') toolKey = 'delete_wriggle';
+
+        const btn = document.getElementById(`tool-${t}`);
+        if (btn) {
+          if (toolKey === tool) {
+            btn.classList.add('border-cyan-400', 'bg-slate-700');
+          } else {
+            btn.classList.remove('border-cyan-400', 'bg-slate-700');
+          }
+        }
+      });
+      render();
+    }
+
+    function setupColorPickerUI() {
+      const container = document.getElementById('wriggle-color-options');
+      container.innerHTML = '';
+
+      WRIGGLE_COLORS.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = `w-7 h-7 rounded-full border-2 transition transform active:scale-95 ${selectedWriggleColor === c.id ? 'border-white scale-110' : 'border-transparent'}`;
+        btn.style.backgroundColor = c.hex;
+        btn.onclick = () => {
+          selectedWriggleColor = c.id;
+          setupColorPickerUI();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function clearAllWriggles() {
+      wriggles = [];
+      drawingWrigglePath = [];
+      syncActiveLevelState();
+      render();
+    }
+
+    function clearAllWalls() {
+      walls = [];
+      syncActiveLevelState();
+      render();
+    }
+
+    function createNewBlankLevel() {
+      const newLvl = {
+        id: 'hex-custom-' + Date.now(),
+        name: `Custom Level ${customLevels.length + 1}`,
+        radius: boardRadius,
+        walls: [],
+        goals: [],
+        wriggles: []
+      };
+      customLevels.push(newLvl);
+      currentLevelIdx = customLevels.length - 1;
+      loadLevel(currentLevelIdx);
+      setAppMode('edit');
+    }
+
+    function duplicateCurrentLevel() {
+      const current = customLevels[currentLevelIdx];
+      const copy = JSON.parse(JSON.stringify(current));
+      copy.id = 'hex-custom-' + Date.now();
+      copy.name = (current.name || 'Level') + ' (Copy)';
+      customLevels.push(copy);
+      currentLevelIdx = customLevels.length - 1;
+      loadLevel(currentLevelIdx);
+      setAppMode('edit');
+    }
+
+    function updateLevelDropdownUI() {
+      const select = document.getElementById('level-select');
+      select.innerHTML = '';
+
+      customLevels.forEach((lvl, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.innerText = lvl.name || `Level ${idx + 1}`;
+        if (idx === currentLevelIdx) opt.selected = true;
+        select.appendChild(opt);
+      });
+
+      document.getElementById('level-count-badge').innerText = `${customLevels.length} level(s)`;
+      document.getElementById('json-editor').value = JSON.stringify(customLevels, null, 2);
+      updatePuzzleInfoHeader();
+    }
+
+    function onLevelSelectChange() {
+      const select = document.getElementById('level-select');
+      const idx = parseInt(select.value, 10);
+      if (!isNaN(idx)) loadLevel(idx);
+    }
+
+    function toggleJsonDrawer() {
+      const drawer = document.getElementById('json-drawer');
+      const arrow = document.getElementById('json-arrow');
+      drawer.classList.toggle('hidden');
+      arrow.innerText = drawer.classList.contains('hidden') ? '▼' : '▲';
+    }
+
+    function importJsonLevels() {
+      const text = document.getElementById('json-editor').value.trim();
+      if (!text) return;
+
+      try {
+        const parsed = JSON.parse(text);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          customLevels = parsed;
+          loadLevel(0);
+        }
+      } catch (e) {
+        console.error("Invalid JSON format!", e);
+      }
+    }
+
+    function copyJsonToClipboard() {
+      const text = document.getElementById('json-editor').value;
+      if (!text) return;
+
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) { }
+      document.body.removeChild(textArea);
+    }
+
+    function getCompactLevelJSON(levelData) {
+      const formattedWalls = levelData.walls.map(w => JSON.stringify(w)).join(', ');
+      const formattedGoals = levelData.goals.map(g => JSON.stringify(g)).join(',\n ');
+      const formattedWriggles = levelData.wriggles.map(w => JSON.stringify(w)).join(',\n ');
+
+      return `{\n` +
+        `  "id": ${JSON.stringify(levelData.id)},\n` +
+        `  "name": ${JSON.stringify(levelData.name || "Exported Level")},\n` +
+        `  "radius": ${levelData.radius},\n` +
+        `  "walls": [\n ${formattedWalls}\n ],\n` +
+        `  "goals": [\n ${formattedGoals}\n ],\n` +
+        `  "wriggles": [\n ${formattedWriggles}\n ]\n` +
+        `}`;
+    }
+
+    function exportCurrentLevelCompact() {
+      const currentLvl = {
+        id: customLevels[currentLevelIdx].id || `hex-level-${Date.now()}`,
+        name: customLevels[currentLevelIdx].name || `Level ${currentLevelIdx + 1}`,
+        radius: boardRadius,
+        walls: walls,
+        goals: goals,
+        wriggles: wriggles
+      };
+
+      const compactJSON = getCompactLevelJSON(currentLvl);
+
+      // Copy directly to clipboard
+      const textArea = document.createElement("textarea");
+      textArea.value = compactJSON;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        alert("Copied compact level JSON to clipboard!");
+      } catch (err) {
+        console.log(compactJSON);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    canvas.addEventListener('pointerdown', onPointerDown);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'z' || e.key === 'Z') undoMove();
+      if (e.key === 'r' || e.key === 'R') resetCurrentLevel();
+    });
+
+    window.onload = function () {
+      setupColorPickerUI();
+      loadLevel(0);
+      resizeCanvas();
+      positionPuzzleInfoHeader();
+    };
+  </script>
+</body>
+
+</html>
