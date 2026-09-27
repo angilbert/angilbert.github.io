@@ -275,7 +275,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
 
     <!-- Footer info -->
@@ -344,8 +344,22 @@
     // Default Preset Levels (Includes BobH 2011 as Level 4)
     const PRESET_LEVELS = [
       {
-        "id": "B1", 
-        "name": "Hello-hex",
+        "id": "B1",
+        "name": "Slither",
+        "radius": 2,
+        "walls": [
+          { "q": -1, "r": -1 }, { "q": 0, "r": -1 }, { "q": 1, "r": -1 }, { "q": -1, "r": 1 }, { "q": 0, "r": 1 }, { "q": 1, "r": 1 }, { "q": 2, "r": 0 }, { "q": -2, "r": 0 }
+        ],
+        "goals": [
+          { "q": 0, "r": 2, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790505655873", "colorKey": "blue", "body": [{ "q": 2, "r": -1 }, { "q": 2, "r": -2 }, { "q": 1, "r": -2 }, { "q": 0, "r": -2 }] }
+        ]
+      },
+      {
+        "id": "B2",
+        "name": "Shuffle",
         "radius": 2,
         "walls": [
           { "q": -2, "r": 2 }, { "q": -2, "r": 0 }, { "q": 0, "r": -1 }, { "q": 1, "r": -2 },
@@ -359,7 +373,7 @@
         ]
       },
       {
-        "id": "B2",
+        "id": "B3",
         "name": "Dot-to-dot",
         "radius": 2,
         "walls": [
@@ -374,7 +388,7 @@
         ]
       },
       {
-        "id": "B3",
+        "id": "B4",
         "name": "Duet",
         "radius": 2,
         "walls": [
@@ -390,7 +404,7 @@
         ]
       },
       {
-        "id": "B4",
+        "id": "I1",
         "name": "Loopy",
         "radius": 2,
         "walls": [
@@ -405,7 +419,7 @@
         ]
       },
       {
-        "id": "A1",
+        "id": "I2",
         "name": "Two-by-two",
         "radius": 2,
         "walls": [
@@ -425,7 +439,25 @@
         ]
       },
       {
-        "id": "A2",
+        "id": "I3",
+        "name": "Rotary",
+        "radius": 2,
+        "walls": [
+          { "q": 0, "r": -1 }, { "q": -1, "r": 1 }, { "q": 1, "r": 0 }
+        ],
+        "goals": [
+          { "q": 1, "r": -2, "colorKey": "blue", "endType": "any" },
+          { "q": -1, "r": 2, "colorKey": "blue", "endType": "any" },
+          { "q": -1, "r": 0, "colorKey": "red", "endType": "any" },
+          { "q": 0, "r": 2, "colorKey": "red", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790510106928", "colorKey": "red", "body": [{ "q": -1, "r": 0 }, { "q": 0, "r": 0 }, { "q": 1, "r": -1 }, { "q": 2, "r": -2 }] },
+          { "id": "w_1790510567571", "colorKey": "blue", "body": [{ "q": 1, "r": -2 }, { "q": 0, "r": -2 }, { "q": -1, "r": -1 }, { "q": -2, "r": 0 }, { "q": -2, "r": 1 }, { "q": -2, "r": 2 }, { "q": -1, "r": 2 }] }
+        ]
+      },
+      {
+        "id": "I4",
         "name": "Rabbit-hole",
         "radius": 2,
         "walls": [
@@ -440,7 +472,24 @@
           { "id": "w_1790419379940", "colorKey": "yellow", "body": [{ "q": 0, "r": 2 }, { "q": -1, "r": 2 }] }
         ]
       },
-
+      {
+        "id": "A1",
+        "name": "Mismatch",
+        "radius": 2,
+        "walls": [
+          { "q": -1, "r": 0 }, { "q": -2, "r": 1 }, { "q": 1, "r": -2 }, { "q": 2, "r": -2 }, { "q": 0, "r": -2 }, { "q": -2, "r": 0 }
+        ],
+        "goals": [
+          { "q": -2, "r": 2, "colorKey": "yellow", "endType": "any" },
+          { "q": -1, "r": 2, "colorKey": "red", "endType": "any" },
+          { "q": 0, "r": 2, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790507702152", "colorKey": "blue", "body": [{ "q": -2, "r": 2 }, { "q": -1, "r": 1 }, { "q": 0, "r": 0 }] },
+          { "id": "w_1790507705110", "colorKey": "red", "body": [{ "q": 0, "r": 2 }, { "q": 1, "r": 1 }, { "q": 2, "r": 0 }] },
+          { "id": "w_1790507707743", "colorKey": "yellow", "body": [{ "q": -1, "r": 2 }, { "q": 0, "r": 1 }, { "q": 1, "r": 0 }] }
+        ]
+      },
       {
         "id": "A2",
         "name": "Eye-spy",
@@ -455,6 +504,24 @@
         "wriggles": [
           { "id": "w_1790435254184", "colorKey": "red", "body": [{ "q": -1, "r": 1 }, { "q": -2, "r": 1 }, { "q": -2, "r": 0 }, { "q": -1, "r": -1 }, { "q": 0, "r": -1 }, { "q": 0, "r": 0 }] },
           { "id": "w_1790435266446", "colorKey": "blue", "body": [{ "q": 0, "r": 1 }, { "q": 1, "r": 1 }, { "q": 2, "r": 0 }, { "q": 2, "r": -1 }, { "q": 1, "r": -1 }] }
+        ]
+      },
+      {
+        "id": "A3",
+        "name": "Switch",
+        "radius": 2,
+        "walls": [
+          { "q": 1, "r": -1 }
+        ],
+        "goals": [
+          { "q": 1, "r": -2, "colorKey": "red", "endType": "any" },
+          { "q": 2, "r": -2, "colorKey": "blue", "endType": "any" },
+          { "q": -2, "r": 2, "colorKey": "red", "endType": "any" },
+          { "q": -1, "r": 2, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790507138459", "colorKey": "blue", "body": [{ "q": 1, "r": -2 }, { "q": 0, "r": -2 }, { "q": -1, "r": -1 }, { "q": -2, "r": 0 }, { "q": -2, "r": 1 }, { "q": -2, "r": 2 }] },
+          { "id": "w_1790507143070", "colorKey": "red", "body": [{ "q": 2, "r": -2 }, { "q": 2, "r": -1 }, { "q": 2, "r": 0 }, { "q": 1, "r": 1 }, { "q": 0, "r": 2 }, { "q": -1, "r": 2 }] }
         ]
       },
       {
