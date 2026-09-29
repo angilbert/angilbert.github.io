@@ -173,11 +173,11 @@
             </button>
             <button id="tool-extend" onclick="setEditTool('extend_wriggle')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
               border border-slate-700 font-medium text-left flex items-center gap-1.5">
-              ➕ Extend Body (+1 Cell)
+              ➕ Extend Body
             </button>
             <button id="tool-trim" onclick="setEditTool('trim_wriggle')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
               border border-slate-700 font-medium text-left flex items-center gap-1.5">
-              ➖ Trim Body (-1 Cell)
+              ➖ Trim Body
             </button>
             <button id="tool-recolor" onclick="setEditTool('recolor_wriggle')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-1.5 px-2 rounded-lg 
               border border-slate-700 font-medium text-left flex items-center gap-1.5">
@@ -345,7 +345,7 @@
     const PRESET_LEVELS = [
       {
         "id": "B1",
-        "name": "Slither",
+        "name": "Wriggle",
         "radius": 2,
         "walls": [
           { "q": -1, "r": -1 }, { "q": 0, "r": -1 }, { "q": 1, "r": -1 }, { "q": -1, "r": 1 }, { "q": 0, "r": 1 }, { "q": 1, "r": 1 }, { "q": 2, "r": 0 }, { "q": -2, "r": 0 }
@@ -385,6 +385,21 @@
         ],
         "wriggles": [
           { "id": "w_1790264612892", "colorKey": "blue", "body": [{ "q": -2, "r": 1 }, { "q": -1, "r": 0 }, { "q": -1, "r": -1 }, { "q": 0, "r": -2 }] }
+        ]
+      },
+      {
+        "id": "B3a",
+        "name": "Dot-to-dot V2",
+        "radius": 2,
+        "walls": [
+          { "q": -2, "r": 2 }, { "q": -2, "r": 0 }, { "q": 0, "r": -1 }, { "q": 1, "r": -2 }, { "q": 2, "r": -1 }, { "q": -1, "r": 1 }, { "q": 0, "r": 2 }, { "q": 1, "r": 0 }
+        ],
+        "goals": [
+          { "q": -1, "r": 2, "colorKey": "blue", "endType": "any" },
+          { "q": 1, "r": -1, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790244689721", "colorKey": "blue", "body": [{ "q": 1, "r": -1 }, { "q": 0, "r": 0 }, { "q": -1, "r": 0 }, { "q": -2, "r": 1 }] }
         ]
       },
       {
@@ -525,6 +540,24 @@
         ]
       },
       {
+        "id": "A4",
+        "name": "Line-dance",
+        "radius": 2,
+        "walls": [
+          { "q": 0, "r": -1 }, { "q": 1, "r": 0 }, { "q": -1, "r": 1 }, { "q": 1, "r": 1 }, { "q": -2, "r": 0 }
+        ],
+        "goals": [
+          { "q": 2, "r": -2, "colorKey": "blue", "endType": "any" },
+          { "q": 0, "r": -2, "colorKey": "yellow", "endType": "any" },
+          { "q": 1, "r": -2, "colorKey": "red", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790606771085", "colorKey": "red", "body": [{ "q": -1, "r": 0 }, { "q": 0, "r": 0 }, { "q": 0, "r": 1 }, { "q": 0, "r": 2 }] },
+          { "id": "w_1790607881466", "colorKey": "blue", "body": [{ "q": -1, "r": 2 }, { "q": -2, "r": 2 }, { "q": -2, "r": 1 }] },
+          { "id": "w_1790607885032", "colorKey": "yellow", "body": [{ "q": 1, "r": -1 }, { "q": 2, "r": -1 }, { "q": 2, "r": 0 }] }
+        ]
+      },
+      {
         "id": "E1",
         "name": "Trio",
         "radius": 2,
@@ -561,7 +594,90 @@
         ]
       },
       {
-        "id": "E4",
+        "id": "S1",
+        "name": "Synchronized",
+        "radius": 2,
+        "walls": [
+          { "q": 0, "r": 0 }
+        ],
+        "goals": [
+          { "q": 0, "r": -2, "colorKey": "blue", "endType": "any" },
+          { "q": 2, "r": -2, "colorKey": "blue", "endType": "any" },
+          { "q": -1, "r": -1, "colorKey": "blue", "endType": "any" },
+          { "q": -2, "r": 1, "colorKey": "blue", "endType": "any" },
+          { "q": -2, "r": 2, "colorKey": "blue", "endType": "any" },
+          { "q": 0, "r": 2, "colorKey": "blue", "endType": "any" },
+          { "q": 1, "r": 1, "colorKey": "blue", "endType": "any" },
+          { "q": 2, "r": -1, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790671087770", "colorKey": "blue", "body": [{ "q": -1, "r": 2 }, { "q": -1, "r": 1 }, { "q": -1, "r": 0 }, { "q": -1, "r": -1 }] },
+          { "id": "w_1790671089401", "colorKey": "blue", "body": [{ "q": 2, "r": 0 }, { "q": 2, "r": -1 }, { "q": 2, "r": -2 }] },
+          { "id": "w_1790671366275", "colorKey": "blue", "body": [{ "q": 1, "r": 1 }, { "q": 1, "r": 0 }, { "q": 1, "r": -1 }, { "q": 1, "r": -2 }] },
+          { "id": "w_1790671470975", "colorKey": "blue", "body": [{ "q": -2, "r": 2 }, { "q": -2, "r": 1 }, { "q": -2, "r": 0 }] }
+        ]
+      },
+      {
+        "id": "S2",
+        "name": "True blue",
+        "radius": 2,
+        "walls": [],
+        "goals": [
+          { "q": -2, "r": 0, "colorKey": "blue", "endType": "any" },
+          { "q": -1, "r": 0, "colorKey": "blue", "endType": "any" },
+          { "q": 0, "r": -1, "colorKey": "blue", "endType": "any" },
+          { "q": 1, "r": -1, "colorKey": "blue", "endType": "any" },
+          { "q": 1, "r": 0, "colorKey": "blue", "endType": "any" },
+          { "q": 0, "r": 1, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790671837666", "colorKey": "blue", "body": [{ "q": 2, "r": -2 }, { "q": 1, "r": -1 }, { "q": 0, "r": -1 }, { "q": -1, "r": -1 }, { "q": -2, "r": 0 }, { "q": -2, "r": 1 }, { "q": -2, "r": 2 }] },
+          { "id": "w_1790671841266", "colorKey": "blue", "body": [{ "q": 2, "r": -1 }, { "q": 2, "r": 0 }, { "q": 1, "r": 1 }, { "q": 0, "r": 1 }, { "q": -1, "r": 1 }] },
+          { "id": "w_1790671843617", "colorKey": "blue", "body": [{ "q": 1, "r": 0 }, { "q": 0, "r": 0 }, { "q": -1, "r": 0 }] }
+        ]
+      },
+      {
+        "id": "S3",
+        "name": "Maypole",
+        "radius": 2,
+        "walls": [
+          { "q": -1, "r": 2 }, { "q": 1, "r": -2 }, { "q": 0, "r": 0 }
+        ],
+        "goals": [
+          { "q": 0, "r": -2, "colorKey": "blue", "endType": "any" },
+          { "q": 2, "r": -2, "colorKey": "red", "endType": "any" },
+          { "q": -2, "r": 2, "colorKey": "yellow", "endType": "any" },
+          { "q": 0, "r": 2, "colorKey": "green", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790685898140", "colorKey": "blue", "body": [{ "q": 1, "r": 0 }, { "q": 1, "r": -1 }, { "q": 0, "r": -1 }] },
+          { "id": "w_1790685907511", "colorKey": "green", "body": [{ "q": -1, "r": 0 }, { "q": -1, "r": 1 }, { "q": 0, "r": 1 }] },
+          { "id": "w_1790686033430", "colorKey": "red", "body": [{ "q": -2, "r": 1 }, { "q": -2, "r": 0 }, { "q": -1, "r": -1 }] },
+          { "id": "w_1790686036726", "colorKey": "yellow", "body": [{ "q": 2, "r": -1 }, { "q": 2, "r": 0 }, { "q": 1, "r": 1 }] }
+        ]
+      },
+      {
+        "id": "S4",
+        "name": "Ambiguity",
+        "radius": 2,
+        "walls": [
+          { "q": -1, "r": 1 }, { "q": 0, "r": 1 }
+        ],
+        "goals": [
+          { "q": -2, "r": 0, "colorKey": "blue", "endType": "any" },
+          { "q": -1, "r": -1, "colorKey": "blue", "endType": "any" },
+          { "q": 2, "r": -2, "colorKey": "blue", "endType": "any" },
+          { "q": 2, "r": -1, "colorKey": "blue", "endType": "any" },
+          { "q": 2, "r": 0, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790697974554", "colorKey": "blue", "body": [{ "q": -2, "r": 0 }, { "q": -1, "r": -1 }, { "q": 0, "r": -2 }, { "q": 1, "r": -2 }, { "q": 2, "r": -2 }] },
+          { "id": "w_1790697991867", "colorKey": "blue", "body": [{ "q": 0, "r": 0 }, { "q": 1, "r": 0 }, { "q": 2, "r": 0 }] },
+          { "id": "w_1790698151681", "colorKey": "blue", "body": [{ "q": -1, "r": 0 }, { "q": 0, "r": -1 }, { "q": 1, "r": -1 }, { "q": 2, "r": -1 }] }
+        ]
+      },
+      {
+        "id": "Z1",
         "name": "BobH 2011",
         "radius": 2,
         "walls": [
@@ -576,7 +692,7 @@
           { "id": "w_1789977779768", "colorKey": "yellow", "body": [{ "q": -2, "r": 0 }, { "q": -2, "r": 1 }] },
           { "id": "w_1789977787834", "colorKey": "green", "body": [{ "q": 1, "r": 1 }, { "q": 0, "r": 1 }, { "q": -1, "r": 2 }] }
         ]
-      }
+      },
     ];
 
     let appMode = 'play'; // 'play' or 'edit'
