@@ -248,34 +248,6 @@
           </select>
         </div>
       </div>
-
-      <!-- All-levels Import/Export -->
-      <div class="mt-3">
-        <button onclick="toggleJsonDrawer()" class="w-full bg-slate-800 hover:bg-slate-700 
-          text-slate-300 font-semibold text-xs py-2 px-3 
-          rounded-xl border border-slate-700 transition flex items-center justify-between">
-          <span>📜 All Levels Import/Export</span>
-          <span id="json-arrow">▼</span>
-        </button>
-
-        <div id="json-drawer" class="hidden mt-2 pt-2 border-t border-slate-800 space-y-2">
-          <textarea id="json-editor" class="w-full h-32 bg-slate-950 text-emerald-400 font-mono 
-          text-[10px] p-2 rounded-lg border 
-            border-slate-800 focus:outline-none focus:border-cyan-500 custom-scrollbar resize-y"
-            placeholder="JSON Level Array"></textarea>
-          <div class="flex gap-2">
-            <button onclick="importJsonLevels()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 
-              text-white font-bold text-xs py-1.5 rounded-lg transition shadow">
-              📥 Apply JSON
-            </button>
-            <button onclick="copyJsonToClipboard()" class="bg-slate-800 hover:bg-slate-700 
-              text-slate-200 font-bold text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition">
-              📋 Copy
-            </button>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <!-- Footer info -->
@@ -404,7 +376,7 @@
       },
       {
         "id": "B4",
-        "name": "Duet",
+        "name": "Duet 1*",
         "radius": 2,
         "walls": [
           { "q": -2, "r": 2 }, { "q": -2, "r": 0 }, { "q": 0, "r": -1 }, { "q": 2, "r": -1 },
@@ -419,8 +391,55 @@
         ]
       },
       {
+        "id": "B6",
+        "name": "Duet V2 2*",
+        "radius": 2,
+        "walls": [
+          { "q": 0, "r": -1 }, { "q": 1, "r": 0 }, { "q": 0, "r": 2 }, { "q": -1, "r": 1 }, { "q": -2, "r": 0 }, { "q": 2, "r": -2 }, { "q": -2, "r": 2 }
+        ],
+        "goals": [
+          { "q": -1, "r": 2, "colorKey": "blue", "endType": "any" },
+          { "q": -2, "r": 1, "colorKey": "red", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790827698534", "colorKey": "blue", "body": [{ "q": -2, "r": 1 }, { "q": -1, "r": 0 }, { "q": 0, "r": 0 }, { "q": 1, "r": -1 }] },
+          { "id": "w_1790827702467", "colorKey": "red", "body": [{ "q": -1, "r": 2 }, { "q": 0, "r": 1 }, { "q": 1, "r": 1 }, { "q": 2, "r": 0 }] }
+        ]
+      },
+      {
+        "id": "B5",
+        "name": "Duet V3 3*",
+        "radius": 2,
+        "walls": [
+          { "q": 0, "r": 1 }, { "q": 1, "r": 1 }, { "q": -2, "r": 2 }, { "q": 2, "r": -2 }, { "q": 1, "r": -2 }, { "q": 0, "r": -2 }
+        ],
+        "goals": [
+          { "q": 0, "r": 2, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790826167399", "colorKey": "red", "body": [{ "q": -2, "r": 0 }, { "q": -2, "r": 1 }, { "q": -1, "r": 1 }, { "q": 0, "r": 0 }] },
+          { "id": "w_1790826172031", "colorKey": "blue", "body": [{ "q": -1, "r": 0 }, { "q": 0, "r": -1 }, { "q": 1, "r": -1 }, { "q": 1, "r": 0 }] }
+        ]
+      },
+      {
+        "id": "B7",
+        "name": "Congestion (123/21) 2*",
+        "radius": 2,
+        "walls": [
+          { "q": 1, "r": -2 }, { "q": 0, "r": -1 }, { "q": 2, "r": -1 }, { "q": 2, "r": 0 }, { "q": 0, "r": 1 }, { "q": 0, "r": 2 }, { "q": -1, "r": 1 }, { "q": -2, "r": 0 }
+        ],
+        "goals": [
+          { "q": -1, "r": 2, "colorKey": "blue", "endType": "any" }
+        ],
+        "wriggles": [
+          { "id": "w_1790768418944", "colorKey": "green", "body": [{ "q": -1, "r": 0 }, { "q": -1, "r": -1 }] },
+          { "id": "w_1790768422397", "colorKey": "red", "body": [{ "q": 0, "r": 0 }, { "q": 1, "r": -1 }, { "q": 2, "r": -2 }] },
+          { "id": "w_1790768425278", "colorKey": "blue", "body": [{ "q": 1, "r": 0 }, { "q": 1, "r": 1 }] }
+        ]
+      },
+      {
         "id": "I1",
-        "name": "Loopy",
+        "name": "Loopy (44/16) 1*",
         "radius": 2,
         "walls": [
           { "q": -2, "r": 2 }, { "q": -1, "r": 2 }, { "q": 0, "r": 2 }, { "q": -2, "r": 1 }, { "q": -2, "r": 0 }, { "q": 2, "r": -2 }, { "q": 0, "r": 0 }
@@ -435,7 +454,7 @@
       },
       {
         "id": "I2",
-        "name": "Two-by-two",
+        "name": "Two-by-two (4.6K/28) 2*",
         "radius": 2,
         "walls": [
           { "q": 0, "r": -1 }, { "q": -2, "r": 1 }, { "q": 0, "r": 1 }, { "q": 2, "r": -1 }, { "q": 1, "r": -2 }, { "q": -1, "r": 2 }
@@ -455,7 +474,7 @@
       },
       {
         "id": "I3",
-        "name": "Rotary",
+        "name": "Rotary (755/18) 2*",
         "radius": 2,
         "walls": [
           { "q": 0, "r": -1 }, { "q": -1, "r": 1 }, { "q": 1, "r": 0 }
@@ -473,7 +492,7 @@
       },
       {
         "id": "I4",
-        "name": "Rabbit-hole",
+        "name": "Rabbit-hole (477/17) 3*",
         "radius": 2,
         "walls": [
           { "q": -1, "r": 0 }, { "q": 1, "r": 0 }, { "q": -2, "r": 1 }, { "q": 2, "r": 0 }, { "q": 0, "r": 1 }, { "q": -2, "r": 2 }
@@ -489,7 +508,7 @@
       },
       {
         "id": "A1",
-        "name": "Mismatch",
+        "name": "Mismatch (1K/20) 3*",
         "radius": 2,
         "walls": [
           { "q": -1, "r": 0 }, { "q": -2, "r": 1 }, { "q": 1, "r": -2 }, { "q": 2, "r": -2 }, { "q": 0, "r": -2 }, { "q": -2, "r": 0 }
@@ -507,7 +526,7 @@
       },
       {
         "id": "A2",
-        "name": "Eye-spy",
+        "name": "Eye-spy (634/16) 2*",
         "radius": 2,
         "walls": [
           { "q": 0, "r": -2 }, { "q": 2, "r": -2 }, { "q": 1, "r": -2 }
@@ -523,10 +542,10 @@
       },
       {
         "id": "A3",
-        "name": "Switch",
+        "name": "Switch (1.2K/40) 2*",
         "radius": 2,
         "walls": [
-          { "q": 1, "r": -1 }
+          { "q": 1, "r": -1 }, { "q": 0, "r": 1 }
         ],
         "goals": [
           { "q": 1, "r": -2, "colorKey": "red", "endType": "any" },
@@ -541,7 +560,7 @@
       },
       {
         "id": "A4",
-        "name": "Line-dance",
+        "name": "Line-dance (783/37) 2*",
         "radius": 2,
         "walls": [
           { "q": 0, "r": -1 }, { "q": 1, "r": 0 }, { "q": -1, "r": 1 }, { "q": 1, "r": 1 }, { "q": -2, "r": 0 }
@@ -559,7 +578,7 @@
       },
       {
         "id": "E1",
-        "name": "Trio",
+        "name": "Trio (297/44) 1*",
         "radius": 2,
         "walls": [
           { "q": 2, "r": -1 }, { "q": 0, "r": 2 }, { "q": 1, "r": 0 }, { "q": -1, "r": 1 }, { "q": 1, "r": -2 }, { "q": -2, "r": 0 }
@@ -577,7 +596,7 @@
       },
       {
         "id": "E2",
-        "name": "Pinwheel",
+        "name": "Pinwheel (1.8K/64) 2*",
         "radius": 2,
         "walls": [
           { "q": 1, "r": 0 }, { "q": -1, "r": 1 }
@@ -595,7 +614,7 @@
       },
       {
         "id": "S1",
-        "name": "Synchronized",
+        "name": "Synchronized (7.8K/16) 1*",
         "radius": 2,
         "walls": [
           { "q": 0, "r": 0 }
@@ -619,26 +638,28 @@
       },
       {
         "id": "S2",
-        "name": "True blue",
+        "name": "Hex (1.6K/23) 3*",
         "radius": 2,
-        "walls": [],
+        "walls": [
+          { "q": 0, "r": -2 }, { "q": 0, "r": 2 }
+        ],
         "goals": [
-          { "q": -2, "r": 0, "colorKey": "blue", "endType": "any" },
-          { "q": -1, "r": 0, "colorKey": "blue", "endType": "any" },
           { "q": 0, "r": -1, "colorKey": "blue", "endType": "any" },
           { "q": 1, "r": -1, "colorKey": "blue", "endType": "any" },
           { "q": 1, "r": 0, "colorKey": "blue", "endType": "any" },
-          { "q": 0, "r": 1, "colorKey": "blue", "endType": "any" }
+          { "q": 0, "r": 1, "colorKey": "blue", "endType": "any" },
+          { "q": -1, "r": 1, "colorKey": "blue", "endType": "any" },
+          { "q": -1, "r": 0, "colorKey": "blue", "endType": "any" }
         ],
         "wriggles": [
-          { "id": "w_1790671837666", "colorKey": "blue", "body": [{ "q": 2, "r": -2 }, { "q": 1, "r": -1 }, { "q": 0, "r": -1 }, { "q": -1, "r": -1 }, { "q": -2, "r": 0 }, { "q": -2, "r": 1 }, { "q": -2, "r": 2 }] },
-          { "id": "w_1790671841266", "colorKey": "blue", "body": [{ "q": 2, "r": -1 }, { "q": 2, "r": 0 }, { "q": 1, "r": 1 }, { "q": 0, "r": 1 }, { "q": -1, "r": 1 }] },
-          { "id": "w_1790671843617", "colorKey": "blue", "body": [{ "q": 1, "r": 0 }, { "q": 0, "r": 0 }, { "q": -1, "r": 0 }] }
+          { "id": "w_1790761988199", "colorKey": "blue", "body": [{ "q": -1, "r": 0 }, { "q": 0, "r": 0 }, { "q": 1, "r": 0 }, { "q": 2, "r": -1 }, { "q": 2, "r": -2 }] },
+          { "id": "w_1790761993385", "colorKey": "blue", "body": [{ "q": 1, "r": 1 }, { "q": 0, "r": 1 }, { "q": -1, "r": 1 }] },
+          { "id": "w_1790762175764", "colorKey": "blue", "body": [{ "q": 1, "r": -1 }, { "q": 0, "r": -1 }, { "q": -1, "r": -1 }, { "q": -2, "r": 0 }, { "q": -2, "r": 1 }] }
         ]
       },
       {
         "id": "S3",
-        "name": "Maypole",
+        "name": "Maypole (8.6K/51) 3*",
         "radius": 2,
         "walls": [
           { "q": -1, "r": 2 }, { "q": 1, "r": -2 }, { "q": 0, "r": 0 }
@@ -658,7 +679,7 @@
       },
       {
         "id": "S4",
-        "name": "Ambiguity",
+        "name": "SNAYSF (6.5K/18) 3*",
         "radius": 2,
         "walls": [
           { "q": -1, "r": 1 }, { "q": 0, "r": 1 }
@@ -671,14 +692,14 @@
           { "q": 2, "r": 0, "colorKey": "blue", "endType": "any" }
         ],
         "wriggles": [
-          { "id": "w_1790697974554", "colorKey": "blue", "body": [{ "q": -2, "r": 0 }, { "q": -1, "r": -1 }, { "q": 0, "r": -2 }, { "q": 1, "r": -2 }, { "q": 2, "r": -2 }] },
-          { "id": "w_1790697991867", "colorKey": "blue", "body": [{ "q": 0, "r": 0 }, { "q": 1, "r": 0 }, { "q": 2, "r": 0 }] },
-          { "id": "w_1790698151681", "colorKey": "blue", "body": [{ "q": -1, "r": 0 }, { "q": 0, "r": -1 }, { "q": 1, "r": -1 }, { "q": 2, "r": -1 }] }
+          { "id": "w_1790697974554", "colorKey": "blue", "body": [{ "q": 1, "r": 1 }, { "q": 0, "r": 2 }, { "q": -1, "r": 2 }, { "q": -2, "r": 2 }, { "q": -2, "r": 1 }] },
+          { "id": "w_1790697991867", "colorKey": "blue", "body": [{ "q": 2, "r": -2 }, { "q": 1, "r": -2 }, { "q": 0, "r": -2 }] },
+          { "id": "w_1790760935264", "colorKey": "blue", "body": [{ "q": 2, "r": -1 }, { "q": 1, "r": -1 }, { "q": 0, "r": -1 }, { "q": -1, "r": -1 }] }
         ]
       },
       {
         "id": "Z1",
-        "name": "BobH 2011",
+        "name": "BobH 2011 (1.8K/130) 3*",
         "radius": 2,
         "walls": [
           { "q": 2, "r": -2 }, { "q": -1, "r": 1 }, { "q": -2, "r": 2 }
@@ -847,7 +868,7 @@
       document.getElementById('solver-results').classList.add('hidden');
 
       updateLevelDropdownUI();
-      updatePuzzleInfoHeader();
+      updatePuzzleTitle();
       render();
     }
 
@@ -1037,8 +1058,7 @@
       headerEl.style.top = `${bottomY}px`;
     }
 
-    // UPDATED FUNCTION
-    function updatePuzzleInfoHeader() {
+    function updatePuzzleTitle() {
       const current = customLevels[currentLevelIdx];
       if (!current) return;
 
@@ -1936,50 +1956,13 @@
       });
 
       document.getElementById('level-count-badge').innerText = `${customLevels.length} level(s)`;
-      document.getElementById('json-editor').value = JSON.stringify(customLevels, null, 2);
-      updatePuzzleInfoHeader();
+      updatePuzzleTitle();
     }
 
     function onLevelSelectChange() {
       const select = document.getElementById('level-select');
       const idx = parseInt(select.value, 10);
       if (!isNaN(idx)) loadLevel(idx);
-    }
-
-    function toggleJsonDrawer() {
-      const drawer = document.getElementById('json-drawer');
-      const arrow = document.getElementById('json-arrow');
-      drawer.classList.toggle('hidden');
-      arrow.innerText = drawer.classList.contains('hidden') ? '▼' : '▲';
-    }
-
-    function importJsonLevels() {
-      const text = document.getElementById('json-editor').value.trim();
-      if (!text) return;
-
-      try {
-        const parsed = JSON.parse(text);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          customLevels = parsed;
-          loadLevel(0);
-        }
-      } catch (e) {
-        console.error("Invalid JSON format!", e);
-      }
-    }
-
-    function copyJsonToClipboard() {
-      const text = document.getElementById('json-editor').value;
-      if (!text) return;
-
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      try {
-        document.execCommand('copy');
-      } catch (err) { }
-      document.body.removeChild(textArea);
     }
 
     function getCompactLevelJSON(levelData) {
